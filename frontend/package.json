@@ -7,6 +7,9 @@
 		"name": "YOUR NAME",
 		"url": "http://link-to-your-website.com"
 	},
+	"scripts": {
+		"build": "gulp"
+	},
 	"license": "MIT",
 	"repository": {
 		"type": "git",
