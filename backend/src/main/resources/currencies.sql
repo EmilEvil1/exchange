@@ -1,4 +1,12 @@
-TRUNCATE TABLE currencies;
+DROP TABLE if exists currencies;
+
+create table if not exists currencies
+(
+	ticker varchar(7) not null
+		primary key,
+	rub float null,
+	uah float null
+);
 
 INSERT INTO currencies VALUES ("BTC", 511665.68456210656, 211298.22603978924);
 INSERT INTO currencies VALUES ("ETH", 16414.782178023637, 6636.385305424678);

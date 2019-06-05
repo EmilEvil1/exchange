@@ -1,13 +1,15 @@
-CREATE TABLE applications
+create table if not exists applications
 (
-    id varchar(35) PRIMARY KEY,
-    `from` varchar(10),
-    `to` varchar(10),
-    amount_from float,
-    amount_to float,
-    from_document_payment varchar(50),
-    to_document_payment varchar(50),
-    create_date DATE,
-    email varchar(20),
-    phone varchar(20)
+	id varchar(35) not null
+		primary key,
+	from_currency varchar(10) null,
+	to_currency varchar(10) null,
+	amount_from float null,
+	amount_to float null,
+	from_document_payment varchar(50) null,
+	to_document_payment varchar(50) null,
+	create_date date null,
+	email varchar(50) null,
+	phone varchar(20) null
 );
+
