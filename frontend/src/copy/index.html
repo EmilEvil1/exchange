@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Copy Me</title>
+	<title>Fare Pay</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-<body>
-	<h1>Copy Me</h1>
-
-	<p>Anything you put in the <code>copy</code> directory gets copied as-is into the <code>dist</code> directory.</p>
-
-	<p><button id="click-me">Click Me</button></p>
-
-	<!-- Scripts -->
-	<script src="js/detects.js"></script>
-	<script src="js/another-file.js"></script>
-	<script src="js/main.polyfills.js"></script>
+<body class="main-content">
+	<header class="top-content">
+		<section class="info-company">
+			<div class="info-company__social-links">
+				<a class="social-link telegram" href="">tg@test.com</a>
+				<a class="social-link e-mail" href="">test@crypt.com</a>
+				<a class="social-link number" href="">+1(222)333-44-55</a>
+			</div>
+		</section>
+		<section class="personable-block">
+			<canvas class="cursor-pointer" style="width: 100%; height:100%;"></canvas>
+			<div class="container logo-wrapper" id="cursorPointer">
+				<div class="logo-block__wrapper">
+					<img class="main-logo" src="../svg/icon.svg" alt="Логотип">
+				</div>
+			</div>
+		</section>
+		<section class="menu-bar">	
+			<div class="container menu-wrapper">
+				<nav class="navigation-menu">
+					<ul class="navigation-menu__menu-items list-unstyled">
+						<li class="navigation-menu__menu-item">Главная страница</li>
+						<li class="navigation-menu__menu-item">Информация о проекте</li>
+						<li class="navigation-menu__menu-item">Правила</li>
+						<li class="navigation-menu__menu-item">Гарантии</li>
+						<li class="navigation-menu__menu-item">F.A.Q.</li>
+						<li class="navigation-menu__menu-item">Контакты</li>
+					</ul>
+				</nav>
+			</div>	
+		</section>
+	</header>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>
