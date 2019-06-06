@@ -19,7 +19,7 @@
     </parent>
 
     <properties>
-        <main.basedir>/Users/daniilsorokin/projects</main.basedir>
+        <main.basedir>/Users/daniilsorokin/projects/fairpay</main.basedir>
 
         <!-- Analysis Tools for CI -->
     </properties>

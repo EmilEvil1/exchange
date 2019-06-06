@@ -72,7 +72,7 @@
                             <overwrite>true</overwrite>
                             <resources>
                                 <resource>
-                                    <directory>${main.basedir}/fairpay/frontend/dist</directory>
+                                    <directory>${main.basedir}/frontend/dist</directory>
                                 </resource>
                             </resources>
                         </configuration>
