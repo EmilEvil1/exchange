@@ -72,12 +72,7 @@
                             <overwrite>true</overwrite>
                             <resources>
                                 <resource>
-                                    <directory>/Users/daniilsorokin/projects/fairpay/frontend/dist</directory>
-                                    <includes>
-                                        <include>static/</include>
-                                        <include>index.html</include>
-                                        <include>favicon.ico</include>
-                                    </includes>
+                                    <directory>${main.basedir}/fairpay/frontend/dist</directory>
                                 </resource>
                             </resources>
                         </configuration>
