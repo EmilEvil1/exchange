@@ -1,3 +1,6 @@
+@import '../../node_modules/bootstrap/scss/bootstrap-grid.scss';
+@import 'calculator';
+
 .main-content {
     margin: 0;
     padding: 0;
@@ -69,10 +72,6 @@
     align-items: center;
     position: relative;
 }
-.container {
-    width: 1200px;
-    margin: 0 auto;
-}
 .logo-block__wrapper {
     display: flex;
     justify-content: center;
@@ -124,6 +123,12 @@
     align-items: center;
     text-align: center;
     font-weight: bold;
+    margin-right: 25px;
+
+    & a{
+        color: #231f20;
+        text-decoration: none;
+    }
     
 }
 .navigation-menu__menu-item:hover{
@@ -134,4 +139,3 @@
     position: absolute;
     background: gray;
 }
-

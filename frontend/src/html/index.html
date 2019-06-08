@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Fare Pay</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body class="main-content">
+	<header class="top-content">
+		<section class="info-company">
+			<div class="info-company__social-links">
+				<a class="social-link telegram" href="">tg@test.com</a>
+				<a class="social-link e-mail" href="">test@crypt.com</a>
+				<a class="social-link number" href="">+1(222)333-44-55</a>
+			</div>
+		</section>
+		<section class="personable-block">
+			<canvas class="cursor-pointer" style="width: 100%; height:100%;"></canvas>
+			<div class="container logo-wrapper" id="cursorPointer">
+				<div class="logo-block__wrapper">
+					<img class="main-logo" src="../svg/icon.svg" alt="Логотип">
+				</div>
+			</div>
+		</section>
+		<section class="menu-bar">
+			<div class="container menu-wrapper">
+				<nav class="navigation-menu">
+					<ul class="navigation-menu__menu-items list-unstyled">
+						<li class="navigation-menu__menu-item"><a href="#main">Главная страница</a></li>
+						<li class="navigation-menu__menu-item"><a href="#info">Информация о проекте</a></li>
+						<li class="navigation-menu__menu-item"><a href="#rules">Правила</a></li>
+						<li class="navigation-menu__menu-item"><a href="#garanties">Гарантии</a></li>
+						<li class="navigation-menu__menu-item"><a href="#faq">F.A.Q.</a></li>
+						<li class="navigation-menu__menu-item"><a href="#contacts">Контакты</a></li>
+					</ul>
+				</nav>
+			</div>
+		</section>
+	</header>
+
+
+	<section>
+		<div class="container calculator-wrapper">
+			<div class="corner-left-top"></div>
+			<div class="calculator-wrapper__title">
+				Укажите валюту которую хотите обменять
+			</div>
+
+			<div class="row">
+				<div class="calculator col-lg-9 col-md-9">
+					<div class="row">
+						<div class="from calculator__from col-lg-6 col-md-6">
+							<div class="calculator__title">
+								<i class="arrow-up"></i>
+								Отдам
+							</div>
+							<div class="calculcator__selector selector-currency">
+								<div class="selector-currency__icon"></div>
+								<div class="selector-currency__name"></div>
+								
+							</div>
+							<div class="from__list"></div>
+						</div>
+						<div class="to calculator__to col-lg-6 col-md-6">
+							<div class="calculator__title">
+								Получу
+							</div>
+						</div>
+						<div class="calculcator__btn input">
+
+						</div>
+						<div class="to__list"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+	<script src="../js/main.js"></script>
+</body>
+
+</html>
