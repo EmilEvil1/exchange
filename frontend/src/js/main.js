@@ -17,12 +17,12 @@ document.body.appendChild(stats.domElement);
 			defaults = {
 				star: {
 					color: 'rgba(234, 186, 72, .5)',
-					width: 3,
+					width: 1,
 					randomWidth: true
 				},
 				line: {
 					color: 'rgba(234, 186, 72, .5)',
-					width: 0.5
+					width: 1
 				},
 				position: {
 					x: 0,
@@ -210,7 +210,7 @@ document.body.appendChild(stats.domElement);
 // Init plugin
 $('canvas').constellation({
 	star: {
-		width: 4
+		width: 1
 	},
 	line: {
 		color: 'rgba(234, 186, 72, .5)'

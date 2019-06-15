@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name=”description” content="">
+	<meta name="keywords" content="">
 	<title>Fare Pay</title>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/main.min.css">
 </head>
-<body class="main-content">
-	<header class="top-content">
+<body class="body-content">
+	<header class="header-content">
 		<section class="info-company">
 			<div class="info-company__social-links">
 				<a class="social-link telegram" href="">tg@test.com</a>
@@ -36,8 +41,30 @@
 			</div>	
 		</section>
 	</header>
+	<main class="main-content">
+		<section class="crawl-line">
+			<div id="slickVertical" class="crawl-line__slider">
+				<p class="slider-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				<p class="slider-text">Test Test Test Test Test Test Test Test Test Test</p>
+				<p class="slider-text">Hello World Hello World Hello World Hello World</p>
+				<p class="slider-text">Got it Got it Got it Got it</p>
+			</div>
+		</section>
+	</main>
+	<footer></footer>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
 <script src="../js/main.js"></script>
+<script src="../js/slick.min.js"></script>
+<script>
+	  $(function(){
+            $('#slickVertical').slick({
+                vertical: true,
+                verticalSwiping: true,
+                slidesToShow: 1,
+                // autoplay: true,
+            });
+        });
+</script>>
 </body>
 </html>
