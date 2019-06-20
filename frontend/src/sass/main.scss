@@ -4,17 +4,13 @@
 @import "./slick-theme";
 @import "./slick";
 
-.main-content {}
-
-
-.body-content {
+.main-content {
     margin: 0;
     padding: 0;
 }
 
 // header
 .info-company {
-    width: 100%;
     height: 50px;
     background-color: #eaba48;
     display: flex;
@@ -22,15 +18,15 @@
 
 }
 .info-company__social-links {
-    width: 35%;
     height: 100%;
-    padding: 0 30px;
+    padding: 0 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 .social-link {
     color: #453f37;
+    margin: 0 15px;
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
@@ -73,7 +69,7 @@
 }
 .personable-block {
     width: 100%;
-    height: 200px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -152,9 +148,41 @@
     width: 100%;
     height: 70px;
     background-color: #474b4a;
-    margin: 30px 0;
+    margin-top: 30px;
+    position: relative;
 }
 .slider-text {
     display: none;
     text-align: center;
+    font-size: 36px;
 }
+.slider-text.slick-slide{
+    display: flex;
+    justify-content: center;
+    height: 70px;
+    align-items: center;
+    color: white;
+}
+.crawl-line__speaker {
+    position: absolute;
+    position: absolute;
+    top: 15px;
+    left: 14%;
+}
+.rules-info {
+    margin: 10px 0 40px;
+}
+.rules-info__block {
+    background-color: lightgrey;
+    border-radius: 5px;
+}
+.rules-info__text {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+.currency-exchange {
+    margin: 40px 0;
+}
+
+

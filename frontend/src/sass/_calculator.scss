@@ -27,8 +27,7 @@
     position: relative;
 
     &__title {
-        padding-top: 20px;
-        padding-bottom: 40px;
+        padding: 35px 0;
 
         font-size: 30px;
         text-align: center;
@@ -56,4 +55,8 @@
     &__btn {
         
     }
+
+}
+.currency-exchange__calculators {
+    justify-content: space-around;
 }
