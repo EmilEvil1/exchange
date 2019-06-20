@@ -1,5 +1,8 @@
 package com.fairpay.currency.service;
 
+import com.fairpay.currency.CurrencyDTO;
+import com.fairpay.currency.dao.CurrencyDao;
+import com.fairpay.currency.model.CurrencyEntity;
 import com.fairpay.currency.vo.CoinmarketCurrenciesResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +13,11 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CurrencyServiceImpl implements CurrencyService {
@@ -34,6 +42,13 @@ public class CurrencyServiceImpl implements CurrencyService {
   @Autowired
   private Environment environment;
 
+  private CurrencyDao currencyDao;
+
+  @Autowired
+  public void setCurrencyDao(CurrencyDao currencyDao) {
+    this.currencyDao = currencyDao;
+  }
+
   public CoinmarketCurrenciesResponse getCryptoRatesAgainstCurrency(String currency) {
     HttpHeaders headers = new HttpHeaders();
     headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
@@ -53,5 +68,25 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     return null;
+  }
+
+  public List<CurrencyDTO> getCurrenciesByPriority() {
+    List<CurrencyEntity> currencyEntities = new ArrayList<>();
+    for (CurrencyEntity currencyEntity : currencyDao.findAll()) {
+      currencyEntities.add(currencyEntity);
+    }
+
+
+
+    return currencyEntities.stream()
+      .sorted(Comparator.comparingInt(CurrencyEntity::getPriority))
+      .map(currencyEntity -> {
+        CurrencyDTO currencyDTO = new CurrencyDTO();
+        currencyDTO.setName(currencyEntity.getName());
+        currencyDTO.setRub(currencyEntity.getRub());
+        currencyDTO.setUah(currencyEntity.getUah());
+        currencyDTO.setTicker(currencyEntity.getTicker());
+        return currencyDTO;
+      }).collect(Collectors.toList());
   }
 }

@@ -12,7 +12,7 @@ import java.util.UUID;
 @RestController
 public class ApplicationController {
 
-  @PostMapping("/application")
+  @PostMapping("/api/application")
   public void createApplication(@RequestBody ApplicationRequestDTO request) {
 
   }

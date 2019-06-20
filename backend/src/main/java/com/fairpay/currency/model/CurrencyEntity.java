@@ -21,6 +21,10 @@ public class CurrencyEntity {
 
   private float uah;
 
+  private Integer priority;
+
+  private String name;
+
   @Id
   @NotEmpty
   public String getTicker() {
@@ -47,6 +51,24 @@ public class CurrencyEntity {
 
   public void setUah(float uah) {
     this.uah = uah;
+  }
+
+  @Column
+  public Integer getPriority() {
+    return priority;
+  }
+
+  public void setPriority(Integer priority) {
+    this.priority = priority;
+  }
+
+  @Column
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override

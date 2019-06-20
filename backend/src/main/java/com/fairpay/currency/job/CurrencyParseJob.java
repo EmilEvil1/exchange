@@ -33,11 +33,7 @@ public class CurrencyParseJob {
     this.currencyDao = currencyDao;
   }
 
-  //  public CurrencyParseJob() {
-//    currentCurrencyEntities = currencyDao.fetchAll();
-//  }
-
-  @Scheduled(fixedRate = 1000000)
+  @Scheduled(fixedRate = 10000000)
   public void updateCurrencyRates() {
     List<CurrencyEntity> updatedCurrenciesList = new ArrayList<>();
     CoinmarketCurrenciesResponse currenciesToRub = currencyService.getCryptoRatesAgainstCurrency(CurrencyParseJob.RUBLE_CODE);
@@ -45,7 +41,10 @@ public class CurrencyParseJob {
     updateCurrenciesList(currenciesToRub, updatedCurrenciesList);
     updateCurrenciesList(currenciesToUah, updatedCurrenciesList);
 
-    currencyDao.saveAll(updatedCurrenciesList);
+    for (CurrencyEntity currencyEntity : updatedCurrenciesList) {
+      currencyDao.updateRubRate(currencyEntity.getRub(), currencyEntity.getTicker());
+      currencyDao.updateUahRate(currencyEntity.getUah(), currencyEntity.getTicker());
+    }
   }
 
   private void updateCurrenciesList(CoinmarketCurrenciesResponse fromResponse, List<CurrencyEntity> toList) {

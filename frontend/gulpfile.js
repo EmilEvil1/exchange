@@ -95,6 +95,8 @@ var svgmin = require('gulp-svgmin');
 
 // BrowserSync
 var browserSync = require('browser-sync');
+var proxy = require('proxy-middleware');
+var url = require('url');
 
 
 /**
@@ -248,10 +250,14 @@ var startServer = function (done) {
 	// Make sure this feature is activated before running
 	if (!settings.reload) return done();
 
+	const routeOptions = url.parse('http://localhost:8080/');
+	routeOptions.route = '/api';
+
 	// Initialize BrowserSync
 	browserSync.init({
 		server: {
-			baseDir: paths.reload
+			baseDir: paths.reload,
+			middleware: [proxy(routeOptions)]
 		}
 	});
 

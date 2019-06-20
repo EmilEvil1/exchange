@@ -53,7 +53,15 @@
 
 .calculator {
     &__btn {
-        
+        display:inline-block;
+        width: 100px;
+        height: 25px;
+
+        border: 2px solid black;
+    }
+
+    &__selector {
+        display: none;
     }
 
 }
