@@ -89,26 +89,82 @@
         font-size: 20px;
         margin: 10px 0 25px;
     }
-
-    &__sum {
-        margin-top: 20px;
+    &__btn.client-info {
+        width: 70%;
     }
+}
+.currency-exchange__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
+}
+.currency-exchange__input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .currency-exchange__calculators {
     justify-content: space-around;
 }
 .reserse__btn {
     color: #f2b92b;
+    font-weight: bold;
 }
 .payment-method {
     display: flex;
     align-items: center;
     height: 100%;
 
-    &__icon-bank.btc {
-        width: 20px;
-        height: 20px;
-        background: url("../svg/btc.png") no-repeat 100%;
+    &__icon-bank {
+        width: 27px;
+        height: 75%;
+        background-size: cover;
+        margin: 0 10px 0 5px;
+    }
+    &__payment-name {
+        font-size: 23px;
+        font-weight: 400;
+    }
+}
+.btc {
+    background-image: url(../icons/btc.png);
+}
+.sberbank {
+    background-image: url(../icons/sber.png);
+}
+.arrow-icon {
+    background: url(../svg/arrow-down.svg) no-repeat 100%;
+    width: 20px;
+    margin-right: 15px;
+}
+.client-pre_tittle {
+    color: #282828;
+    font-weight: bold;
+}
+.confirmation-block{
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__course {
+        text-transform: uppercase;
+        color: #282828;
+        font-weight: bold;
+        font-size: 32px;
+    }
+    &__exchange-button {
+        background-color: #f2b92b;
+        border: none;
+        width: 150px;
+        height: 50px;
+        border-radius: 25px;
+        font-size: 20px;
+        text-align: center;
+        color: #282828;
     }
 }
 
