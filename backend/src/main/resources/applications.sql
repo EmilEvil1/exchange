@@ -1,6 +1,6 @@
 create table if not exists applications
 (
-	id varchar(35) not null
+	id varchar(100) not null
 		primary key,
 	from_currency varchar(10) null,
 	to_currency varchar(10) null,
