@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Fare Pay</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
 </head>
 
 <body class="main-content">
@@ -23,7 +24,7 @@
 			<canvas class="cursor-pointer" style="width: 100%; height:100%;"></canvas>
 			<div class="container logo-wrapper" id="cursorPointer">
 				<div class="logo-block__wrapper">
-					<img class="main-logo" src="../svg/icon.svg" alt="Логотип">
+					<img class="main-logo" src="../svg/main-logo.svg" alt="Логотип">
 				</div>
 			</div>
 		</div>
@@ -76,7 +77,13 @@
 											<i class="arrow-up"></i>
 											<span class="calculator__got-massage">Отдам</span>
 										</div>
-										<div class="calculator__btn calculator__btn--from"></div>
+										<div class="calculator__btn calculator__btn--from">
+											<div class="payment-method">
+												<i class="payment-method__icon-bank sberbank"></i>
+												<span class="payment-method__payment-name">СбербанкRU</span>
+											</div>
+											<i class="arrow-icon"></i>
+										</div>
 										<p class="calculator__direction">Выберете направление</p>
 									</div>
 									<div class="calculator__selector selector-currency col-lg-4 col-md-4">
@@ -93,7 +100,13 @@
 											<i class="arrow-up"></i>
 											<span class="calculator__got-massage">Получу</span>
 										</div>
-										<div class="calculator__btn calculator__btn--to"></div>
+										<div class="calculator__btn calculator__btn--to">
+											<div class="payment-method">
+												<i class="payment-method__icon-bank btc"></i>
+												<span class="payment-method__payment-name">BitcoinBTC</span>
+											</div>
+											<i class="arrow-icon"></i>
+										</div>
 										<p class="calculator__reserve">Резерв: <span class="reserse__btn">3.58339</span> BTC</p>
 									</div>
 									<div class="calculator__selector selector-currency col-lg-4 col-md-4"></div>
@@ -125,7 +138,7 @@
 			verticalSwiping: true,
 			slidesToShow: 1,
 			arrows : false,
-			autoplay: true,
+			// autoplay: true,
 			});
 				});
 </script>

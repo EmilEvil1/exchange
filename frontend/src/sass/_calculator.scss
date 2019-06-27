@@ -53,10 +53,11 @@
 
 .calculator {
     &__btn {
-        display:inline-block;
+        display: flex;
+        justify-content: space-between;
         height: 40px;
         border: 2px solid lightgrey;
-        border-radius: 5px;
+        border-radius: 20px;
         width: 100%;
     }
     
@@ -98,6 +99,17 @@
 }
 .reserse__btn {
     color: #f2b92b;
+}
+.payment-method {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    &__icon-bank.btc {
+        width: 20px;
+        height: 20px;
+        background: url("../svg/btc.png") no-repeat 100%;
+    }
 }
 
 

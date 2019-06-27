@@ -1,12 +1,13 @@
 @import '../../node_modules/bootstrap/scss/bootstrap-grid.scss';
-@import 'calculator';
-
+@import './calculator';
 @import "./slick-theme";
 @import "./slick";
 
 .main-content {
     margin: 0;
     padding: 0;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
 }
 
 // header
