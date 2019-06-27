@@ -38,6 +38,10 @@ var paths = {
 		input: 'src/html/**/*',
 		output: 'dist/'
 	},
+	copyIcons: {
+		input: 'src/icons/*.png',
+		output: 'dist/icons'
+	},
 	reload: './dist/',
 	
 };
@@ -245,6 +249,17 @@ var copyFiles = function (done) {
 
 };
 
+var copyIcons = function (done) {
+
+    // Make sure this feature is activated before running
+    if (!settings.copy) return done();
+
+    // Copy static files
+    return src(paths.copyIcons.input)
+        .pipe(dest(paths.copyIcons.output));
+
+};
+
 // Watch for changes to the src directory
 var startServer = function (done) {
 
@@ -294,7 +309,8 @@ exports.default = series(
 		lintScripts,
 		buildStyles,
 		buildSVGs,
-		copyFiles
+		copyFiles,
+        copyIcons
 	)
 );
 
