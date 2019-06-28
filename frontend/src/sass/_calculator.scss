@@ -163,6 +163,7 @@
         color: #282828;
         font-weight: bold;
         font-size: 26px;
+        
     }
     &__exchange-button {
         background-color: #f2b92b;
@@ -177,6 +178,9 @@
     &__ruls-link {
         text-decoration: none;
         color: #f2b92b;
+    }
+    &__exchange-button {
+        outline: none;
     }
 }
 input[type="text"]::-moz-placeholder {color: #5b5b5b;}

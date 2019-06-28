@@ -1,0 +1,40 @@
+.our-guarantees {
+    &__tittle {
+        text-align: center;
+        border-top: 2px solid #f2b92b;
+        border-bottom: 2px solid #f2b92b;
+        padding: 20px 0;
+    }
+    &__text {
+        font-weight: bold;
+        padding-left: 20px;
+    }
+    &__list-item {
+        height: 100px;
+        display: flex;
+        align-items: center;
+    }
+    &__icon {
+        width: 80px;
+        height: 80px;
+        background-size: cover;
+    }
+}
+.eye {
+    background-image: url("../icons/eye.png");
+}
+.transfer {
+    background-image: url("../icons/transfer.png");
+}
+.g-and-ya {
+    background-image: url("../icons/g-and-ya.png");
+}
+.ssl {
+    background-image: url("../icons/ssl.png"); 
+}
+.money {
+    background-image: url("../icons/money.png");
+}
+.dialog {
+    background-image: url("../icons/dialog.png");
+}
