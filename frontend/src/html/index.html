@@ -90,7 +90,7 @@
 									</div>
 									<div class="from__list"></div>
 									<div class="calculator__sum">
-										<input class="calculator__btn calculator__btn--sum" type="text" placeholder="Введите сумму">
+										<input class="calculator__btn calculator__input--from calculator__btn--sum" type="text" placeholder="Введите сумму">
 										<p class="calculator__reserve">Min: <span class="reserse__btn">1000</span> RUB</p>
 									</div>
 								</div>
@@ -112,7 +112,7 @@
 									<div class="calculator__selector selector-currency col-lg-4 col-md-4"></div>
 									<div class="to__list"></div>
 									<div class="calculator__sum">
-										<input class="calculator__btn calculator__btn--discount" type="text" placeholder="Введите сумму">
+										<input class="calculator__btn calculator__input--to calculator__btn--discount" type="text" placeholder="Введите сумму">
 										<p class="calculator__reserve">Скидка <span class="reserse__btn">0</span> %</p>
 									</div>
 								</div>
@@ -128,8 +128,13 @@
 						<div class="currency-exchange__client-info col-lg-4 col-md-4">
 							<div class="currency-exchange__wrapper">
 								<div class="currency-exchange__input">
+<<<<<<< HEAD
 									<div class="calculator__pre-tittle field-info"><span class="calculator__got-massage client-pre_tittle">Номер карты для оплаты</span></div>
 									<input class="calculator__btn client-info" type="text" placeholder="Номер карты">
+=======
+									<div class="calculator__pre-tittle"><span class="calculator__got-massage client-pre_tittle">Номер карты для оплаты</span></div>
+									<input id="card_number" class="calculator__btn client-info" type="text" placeholder="Номер карты">
+>>>>>>> 49f451ecc50867b2253b316656f0f770eef35a4c
 								</div>
 								<div class="currency-exchange__input">
 									<div class="calculator__pre-tittle field-info"><span class="calculator__got-massage client-pre_tittle">Ф.И.О. отправителя</span></div>
@@ -137,7 +142,7 @@
 								</div>
 								<div class="currency-exchange__input">
 									<div class="calculator__pre-tittle field-info"><span class="calculator__got-massage client-pre_tittle">Bitcoin кошелек для получения</span></div>
-									<input class="calculator__btn client-info" type="text" placeholder="Bitcoin кошелек">
+									<input id="crypto_address" class="calculator__btn client-info" type="text" placeholder="Bitcoin кошелек">
 								</div>
 								<div class="currency-exchange__input">
 									<div class="calculator__pre-tittle field-info"><span class="calculator__got-massage client-pre_tittle">Ваш E-mail</span></div>
@@ -156,6 +161,10 @@
 		</main>
 		<footer></footer>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="../js/createNumberMask.js"></script>
+	<script type="text/javascript" src="../js/vanillaTextMask.js"></script>
+	<script type="text/javascript" src="../js/jquery.creditCardValidator.js"></script>
+	<script type="text/javascript" src="../js/wallet-address-validator.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
 <script src="../js/main.js"></script>
 	<script src="../js/calclulator.js"></script>
