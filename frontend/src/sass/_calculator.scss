@@ -1,26 +1,26 @@
 .corner-common {
     border: 10px solid #f2b92b;
-
     width: 371px;
     height: 175px;
 }
 
 .corner-left-top {
     @extend .corner-common;
-
     position: absolute;
     top: 0;
     left: 0;
-
     border-right: none;
     border-bottom: none;
 }
 
 .corner-right-bottom {
     @extend .corner-common;
-
+    position: absolute;
+    right: 0;
+    bottom: 0;
     border-left: none;
     border-top: none;
+    z-index: 0;
 }
 
 .calculator-wrapper {
@@ -28,18 +28,19 @@
 
     &__title {
         padding: 35px 0;
-
         font-size: 30px;
         text-align: center;
     }
 }
 
 .arrow-up {
-    display: inline-block;
-    width: 27px;
+    width: 10%;
     height: 25px;
     background: url('../svg/arrow-up.svg') no-repeat;
 
+}
+.arrow-up.reversed {
+    transform: rotate(180deg);
 }
 
 .input {
@@ -59,6 +60,8 @@
         border: 2px solid lightgrey;
         border-radius: 20px;
         width: 100%;
+        font-size: 16px;
+        padding-left: 10px;
     }
     
     &__selector {
@@ -67,11 +70,12 @@
 
     &__got-massage {
         font-size: 20px;
+        margin-left: 10px;
     }
 
     &__title {
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
     }
 
     &__pre-tittle {
@@ -82,12 +86,12 @@
 
     &__direction {
         font-size: 20px;
-        margin: 10px 0 25px;
+        margin: 10px 0 20px;
     }
 
     &__reserve {
         font-size: 20px;
-        margin: 10px 0 25px;
+        margin: 10px 0 20px;
     }
     &__btn.client-info {
         width: 70%;
@@ -98,7 +102,11 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    height: 400px;
+    height: 85%;
+    
+}
+.currency-exchange__client-info {
+    z-index: 1;
 }
 .currency-exchange__input {
     width: 100%;
@@ -130,10 +138,10 @@
     }
 }
 .btc {
-    background-image: url(../icons/btc.png);
+    background-image: url(../svg/btc.svg);
 }
 .sberbank {
-    background-image: url(../icons/sber.png);
+    background-image: url(../svg/sber.svg);
 }
 .arrow-icon {
     background: url(../svg/arrow-down.svg) no-repeat 100%;
@@ -154,7 +162,7 @@
         text-transform: uppercase;
         color: #282828;
         font-weight: bold;
-        font-size: 32px;
+        font-size: 26px;
     }
     &__exchange-button {
         background-color: #f2b92b;
@@ -166,6 +174,17 @@
         text-align: center;
         color: #282828;
     }
+    &__ruls-link {
+        text-decoration: none;
+        color: #f2b92b;
+    }
 }
+input[type="text"]::-moz-placeholder {color: #5b5b5b;}
+input[type="text"]::-webkit-input-placeholder { color: #5b5b5b;}
+input[type="text"]:-ms-input-placeholder { color: #5b5b5b;}
+input[type="text"]::-ms-input-placeholder { color: #5b5b5b;}
+input[type="text"]::placeholder { color: #5b5b5b;} 
+input[type="text"]:focus{outline: none;}
+.field-info {width: 65%;}
 
 
