@@ -66,6 +66,10 @@
     
     &__selector {
         display: none;
+
+        position: absolute;
+        width: 40px;
+        background-color: white;
     }
 
     &__got-massage {
@@ -97,6 +101,24 @@
         width: 70%;
     }
 }
+
+.selector-currency {
+
+    &__icon {
+        width: 27px;
+        height: 27px;
+        background-repeat: none;
+    }
+
+    &__name {
+
+    }
+}
+
+.currencyItem {
+}
+
+
 .currency-exchange__wrapper {
     display: flex;
     justify-content: space-between;

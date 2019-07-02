@@ -9,7 +9,7 @@
         currencies = response;
         currencies.forEach(function(currency) {
             var templateCurrency = $("<div class='currencyItem' data-name='" + currency.name + "' data-ticker='" + currency.ticker + "' data-rub-rate='" + currency.rub + "'>" +
-                "<div class=\"selector-currency__icon\"></div>" +
+                "<div style='background-image: url(./svg/" + currency.ticker + ".svg)' class=\"selector-currency__icon\"></div>" +
             "<div class=\"selector-currency__name\">"+ currency.name + "</div>" +
                 "</div>'");
 
@@ -25,7 +25,7 @@
             var name = $(this).data('name');
             var ticker = $(this).data('ticker');
 
-            $calcBtn.text(name);
+            $calcBtn.html("<span class='payment-method__payment-name'>" + name + "</span>");
             $calcBtn.attr('data-ticker', ticker);
 
             $(this).closest('.direction').find('.calculator__selector').toggle();
@@ -61,14 +61,25 @@
         })
     });
 
-    $("#card_number").validateCreditCard(function(res) {
+    $("#card_number").blur(function() {
+        var result = $(this).validateCreditCard();
 
+        if (!result.valid) {
+            $(this).addClass("field-error")
+        }
+    });
+
+    $("#card_number, #crypto_address").focus(function() {
+        $(this).removeClass("field-error");
     })
 
     $("#crypto_address").blur(function() {
         var ticker = $('.calculator__btn--from').data('ticker');
         var address = $(this).val();
         var valid = WAValidator.validate(address, ticker);
+        if (!valid) {
+            $(this).addClass("field-error");
+        }
     })
 
     $("")
