@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <title>Fare Pay</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+</head>
+
+<body class="main-content">
+<header class="top-content">
+    <div class="info-company container-fluid">
+        <div class="row">
+            <div class="info-company__social-links">
+                <a class="social-link telegram" href="">tg@test.com</a>
+                <a class="social-link e-mail" href="">test@crypt.com</a>
+                <a class="social-link number" href="">+1(222)333-44-55</a>
+            </div>
+        </div>
+    </div>
+    <div class="personable-block container-fluid">
+        <canvas class="cursor-pointer" style="width: 100%; height:100%;"></canvas>
+        <div class="container logo-wrapper" id="cursorPointer">
+            <div class="logo-block__wrapper">
+                <img class="main-logo" src="../svg/main-logo.svg" alt="Логотип">
+            </div>
+        </div>
+    </div>
+    <div class="menu-bar">
+        <div class="container menu-wrapper">
+            <nav class="navigation-menu">
+                <ul class="navigation-menu__menu-items list-unstyled">
+                    <li class="navigation-menu__menu-item"><a href="#main">Главная страница</a></li>
+                    <li class="navigation-menu__menu-item"><a href="#info">Информация о проекте</a></li>
+                    <li class="navigation-menu__menu-item"><a href="#rules">Правила</a></li>
+                    <li class="navigation-menu__menu-item"><a href="#garanties">Гарантии</a></li>
+                    <li class="navigation-menu__menu-item"><a href="#faq">F.A.Q.</a></li>
+                    <li class="navigation-menu__menu-item"><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<main class="main-content">
+    <section class="crawl-line">
+        <img class="crawl-line__speaker" src="../svg/speaker.svg" alt="Бегущая строка">
+        <div id="slickVertical" class="crawl-line__slider">
+            <span class="slider-text">...Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
+            <span class="slider-text">...Test Test Test Test Test Test Test Test Test Test</span>
+            <span class="slider-text">...Hello World Hello World Hello World Hello World</span>
+            <span class="slider-text">...Got it Got it Got it Got it</span>
+        </div>
+    </section>
+    <section class="rules-info">
+        <div class="rules-info__wrapper container">
+            <div class="rules-info__block row">
+                <p class="rules-info__text col-lg-12 col-md-12">Обмен во всех направлениях проходит в автоматическом режиме (без участия оператора) и 5-10 минут после оплаты!</p>
+                <p class="rules-info__text col-lg-12 col-md-12">Часы работы оператора с 9:00-01:00 по МСК ежедневно.</p>
+                <p class="rules-info__text col-lg-12 col-md-12">Минимальная сумма покупки криптовалюты - 1000 рублей.</p>
+                <p class="rules-info__text col-lg-12 col-md-12">Возможен обмен крупных сумм, до 500 т.р по всем предложенным банкам за одну операция.</p>
+                <p class="rules-info__text col-lg-12 col-md-12">Для создания заявки на обмен заполните все необходимые данные и перейдите в окно оплаты, система сделает перевод<br>автоматически после поступления вашего платежа</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+<footer></footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../js/createNumberMask.js"></script>
+<script type="text/javascript" src="../js/vanillaTextMask.js"></script>
+<script type="text/javascript" src="../js/jquery.creditCardValidator.js"></script>
+<script type="text/javascript" src="../js/wallet-address-validator.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/calclulator.js"></script>
+<script src="../js/slick.min.js"></script>
+<script>
+    $(function(){
+        $('#slickVertical').slick({
+            vertical: true,
+            verticalSwiping: true,
+            slidesToShow: 1,
+            arrows : false,
+            autoplay: true,
+        });
+    });
+</script>
+</body>
+
+</html>
