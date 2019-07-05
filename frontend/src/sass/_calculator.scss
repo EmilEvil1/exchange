@@ -62,13 +62,14 @@
         width: 100%;
         font-size: 16px;
         padding-left: 10px;
+        transition: .18s;
+        cursor: pointer;
     }
     
     &__selector {
         display: none;
-
         position: absolute;
-        width: 40px;
+        width: 100%;
         background-color: white;
     }
 
@@ -99,8 +100,17 @@
     }
     &__btn.client-info {
         width: 70%;
-    }
+    }   
 }
+.calculator__btn--from:hover,
+.calculator__btn--to:hover {
+    background-color: #E6E6E6;
+}
+// .calculator__btn--from:visited,
+// .calculator__btn--to:visited {
+//     background-color: #E6E6E6;
+// }
+
 
 .selector-currency {
 
@@ -109,15 +119,15 @@
         height: 27px;
         background-repeat: none;
     }
-
-    &__name {
-
+    &__dropdown-list{
+        // display: flex;
+        // flex-direction: row;
     }
 }
-
 .currencyItem {
+    display: flex;
+    flex-direction: row;
 }
-
 
 .currency-exchange__wrapper {
     display: flex;

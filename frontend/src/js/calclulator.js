@@ -152,7 +152,7 @@
         ];
         currencies.forEach(function(currency) {
             var templateCurrency = $("<div class='currencyItem' data-name='" + currency.name + "' data-ticker='" + currency.ticker + "' data-rub-rate='" + currency.rub + "'>" +
-                "<div style='background-image: url(./svg/" + currency.ticker + ".svg)' class=\"selector-currency__icon\"></div>" +
+                "<div style='background-image: url(./svg/" + currency.ticker.toLowerCase() + ".svg)' class=\"selector-currency__icon\"></div>" +
                 "<div class=\"selector-currency__name\">"+ currency.name + "</div>" +
                 "</div>'");
 
