@@ -17,6 +17,8 @@ public class ApplicationEntity {
   private String fromDocumentPayment;
   private String toDocumentPayment;
   private String systemDocumentPayment;
+  private String fromCurrencyName;
+  private String toCurrencyName;
   private Date createDate;
   private String email;
   private String phone;
@@ -64,6 +66,24 @@ public class ApplicationEntity {
 
   public void setSystemDocumentPayment(String systemDocumentPayment) {
     this.systemDocumentPayment = systemDocumentPayment;
+  }
+
+  @Column(name = "from_currency_name")
+  public String getFromCurrencyName() {
+    return fromCurrencyName;
+  }
+
+  public void setFromCurrencyName(String fromCurrencyName) {
+    this.fromCurrencyName = fromCurrencyName;
+  }
+
+  @Column(name = "to_currency_name")
+  public String getToCurrencyName() {
+    return toCurrencyName;
+  }
+
+  public void setToCurrencyName(String toCurrencyName) {
+    this.toCurrencyName = toCurrencyName;
   }
 
   @Column(name = "create_date")

@@ -133,7 +133,7 @@
 										<span class="confirmation-block__from-name">RUB</span> =
 										<span class="confirmation-block__rate">0.00000179</span>
 										<span class="confirmation-block__to-name">BTC</span></div>
-									<button class="confirmation-block__exchange-button">Обменять</button>
+									<button id="btn-exchange" class="confirmation-block__exchange-button">Обменять</button>
 									<p class="confirmation-block__agreement">Нажимая кнопку «обменять», Вы соглашаетесь с <a href="#" class="confirmation-block__ruls-link">правилами</a> обмена.</p>
 								</div>
 							</div>
@@ -152,7 +152,7 @@
 									<input class="calculator__btn client-info" type="text" placeholder="Ф.И.О. владельца">
 								</div>
 								<div class="currency-exchange__input">
-									<div class="calculator__pre-tittle field-info">
+									<div class="calculator__pre-tittle field-info" data-ticker="BTC">
 										<span class="calculator__got-massage client-pre_tittle">
 											<span class="client-pre-currency">Bitcoin</span>
 											кошелек для получения
@@ -252,7 +252,7 @@
 	<div class="error-msg">Карта введена неправильно</div>
 </script>
 <script id="crypto_address_template" type="text/template">
-	<div class="calculator__pre-tittle field-info">
+	<div class="calculator__pre-tittle field-info" data-ticker="<%= ticker %>">
 			<span class="calculator__got-massage client-pre_tittle">
 				<span class="client-pre-currency"><%= name %></span>
 				кошелек для получения

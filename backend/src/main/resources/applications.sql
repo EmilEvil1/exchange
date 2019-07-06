@@ -12,5 +12,7 @@ create table if not exists applications
 	email varchar(50) null,
 	phone varchar(20) null,
 	system_document_payment varchar(100) null,
+	from_currency_name varchar(20) null,
+	to_currency_name varchar(20) null
 );
 

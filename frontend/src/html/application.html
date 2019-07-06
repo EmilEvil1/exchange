@@ -65,9 +65,14 @@
                                             <i class="arrow-up"></i>
                                         </div>
                                         <div class="payment-method">
-                                            <i class="payment-method__icon-bank sberbank"></i>
-                                            <span class="payment-method__payment-name">СбербанкRU</span>
-                                            <p class="calculator__reserve">Сумма: 1000 RUB</p>
+                                            <i class="payment-method__icon-bank--from payment-method__icon-bank sberbank"></i>
+                                            <span class="payment-method--from payment-method__payment-name">СбербанкRU</span>
+                                            <p class="calculator__reserve">Сумма:
+                                                <span class="payment-method__amount--from">
+                                                </span>
+                                                <span class="payment-method__ticker--from">
+                                                </span>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -77,9 +82,14 @@
                                             <span class="calculator__got-massage">Получу:</span>
                                         </div>
                                         <div class="payment-method">
-											<i class="payment-method__icon-bank btc"></i>
-                                            <span class="payment-method__payment-name">BitcoinBTC</span>
-                                            <p class="calculator__reserve">Сумма: 0.00177633 BTC</p>
+											<i class="payment-method__icon-bank--to payment-method__icon-bank btc"></i>
+                                            <span class="payment-method--to payment-method__payment-name">BitcoinBTC</span>
+                                            <p class="calculator__reserve">Сумма:
+                                                <span class="payment-method__amount--to">
+                                                </span>
+                                                <span class="payment-method__ticker--to">
+                                                </span>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -131,10 +141,10 @@
 <script type="text/javascript" src="../js/vanillaTextMask.js"></script>
 <script type="text/javascript" src="../js/jquery.creditCardValidator.js"></script>
 <script type="text/javascript" src="../js/wallet-address-validator.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
-<script src="../js/main.js"></script>
-<script src="../js/calclulator.js"></script>
-<script src="../js/slick.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+<script type="text/javascript" src="../js/application.js"></script>
+<script type="text/javascript" src="../js/slick.min.js"></script>
 <script>
     $(function(){
         $('#slickVertical').slick({

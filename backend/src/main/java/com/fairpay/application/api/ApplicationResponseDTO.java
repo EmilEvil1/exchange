@@ -5,6 +5,8 @@ import java.util.Date;
 public class ApplicationResponseDTO {
   private String from;
   private String to;
+  private String fromName;
+  private String toName;
   private Double amountFrom;
   private Double amountTo;
   private String documentToPayment;
@@ -24,6 +26,22 @@ public class ApplicationResponseDTO {
 
   public void setTo(String to) {
     this.to = to;
+  }
+
+  public String getFromName() {
+    return fromName;
+  }
+
+  public void setFromName(String fromName) {
+    this.fromName = fromName;
+  }
+
+  public String getToName() {
+    return toName;
+  }
+
+  public void setToName(String toName) {
+    this.toName = toName;
   }
 
   public Double getAmountFrom() {
