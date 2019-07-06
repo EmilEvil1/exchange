@@ -1,3 +1,5 @@
+@import "./colors";
+
 .corner-common {
     border: 10px solid #f2b92b;
     width: 371px;
@@ -68,8 +70,13 @@
     
     &__selector {
         display: none;
+
         position: absolute;
-        width: 100%;
+        z-index: 10;
+        top: 80px;
+
+        width: 450px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
         background-color: white;
     }
 
@@ -104,14 +111,12 @@
 }
 .calculator__btn--from:hover,
 .calculator__btn--to:hover {
-    background-color: #E6E6E6;
+    background-color: $grey-hover;
 }
 // .calculator__btn--from:visited,
 // .calculator__btn--to:visited {
 //     background-color: #E6E6E6;
 // }
-
-
 .selector-currency {
 
     &__icon {
@@ -119,14 +124,27 @@
         height: 27px;
         background-repeat: none;
     }
+    &__name {
+        margin-left: 7px;
+        font-size: 18px;
+    }
     &__dropdown-list{
         // display: flex;
         // flex-direction: row;
     }
 }
+
 .currencyItem {
     display: flex;
     flex-direction: row;
+
+    cursor: pointer;
+    padding: 10px;
+
+    &:hover {
+        background-color: $grey-hover;
+        transition: 0.18s;
+    }
 }
 
 .currency-exchange__wrapper {
@@ -137,18 +155,28 @@
     height: 85%;
     
 }
-.currency-exchange__client-info {
-    z-index: 1;
+.currency-exchange {
+    &__client-info {
+        z-index: 1;
+    }
+
+    &__input {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__calculators {
+        justify-content: space-around;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: flex-start;
+    }
 }
-.currency-exchange__input {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.currency-exchange__calculators {
-    justify-content: space-around;
-}
+
 .reserse__btn {
     color: #f2b92b;
     font-weight: bold;
@@ -206,6 +234,7 @@
         font-size: 20px;
         text-align: center;
         color: #282828;
+        cursor:pointer;
     }
     &__ruls-link {
         text-decoration: none;
