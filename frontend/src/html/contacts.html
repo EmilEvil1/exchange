@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta charset="utf-8">
+	<title>Контакты</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
-    <title>Контакты</title>
 </head>
-<body>
-    <header class="top-content">
+<body class="main-content">
+	<header class="top-content">
 		<div class="info-company container-fluid">
 			<div class="row">
 				<div class="info-company__social-links">
@@ -42,5 +42,31 @@
 			</div>
 		</div>
 	</header>
+	<main class="main-content">
+		<section class="crawl-line">
+			<img class="crawl-line__speaker" src="../svg/speaker.svg" alt="Бегущая строка">
+			<div id="slickVertical" class="crawl-line__slider">
+				<span class="slider-text">...Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
+				<span class="slider-text">...Test Test Test Test Test Test Test Test Test Test</span>
+				<span class="slider-text">...Hello World Hello World Hello World Hello World</span>
+				<span class="slider-text">...Got it Got it Got it Got it</span>
+			</div>
+		</section>
+	</main>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/slick.min.js"></script>
+<script>
+	$(function(){
+		$('#slickVertical').slick({
+			vertical: true,
+			verticalSwiping: true,
+			slidesToShow: 1,
+			arrows : false,
+			autoplay: true,
+			});
+	});
+	</script>
 </body>
 </html>
