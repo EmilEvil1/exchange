@@ -1,3 +1,5 @@
+DROP TABLE if exists applications;
+
 create table if not exists applications
 (
 	id varchar(100) not null
