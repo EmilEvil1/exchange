@@ -1,0 +1,135 @@
+.currency-exchange {
+    
+    &__block.row {
+        height: 100%;
+    }
+}
+.calculator-wrapper {
+    height: 100%;
+}
+.trade-info {
+    width: 100%;
+    margin-top: 30px;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        background-color: dimgray;
+    }
+    &__tittle {
+        margin-bottom: 0;
+        font-size: 32px;
+    }
+}
+.steps {
+    height: 100%;
+
+    &__give-away {
+        display: flex;
+        flex-direction: column;
+    }
+    &__give-get {
+        border-right: 2px solid #f2b92b;;
+    }
+}
+
+.steps-info {
+    height: 100%;
+    padding: 30px;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 100%;
+    }
+    &__tittle-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+.calculator__got-massage {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0;
+}
+.steps-block {
+    margin: 10px 0;
+}
+.payment-method {
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.payment-method__icon-bank {
+    height: 27px;
+    margin: 0 10px 0 0;
+}
+.arrow-up {
+    transform: rotate(90deg);
+}
+.payment-method__payment-name,
+.steps__status-text {
+    font-weight: bold;
+}
+.urgency-information {
+    &__tittle {
+        text-align: center;
+        border-bottom: 3px solid #f2b92b;;
+        padding-bottom: 20px;
+        width: 50%;
+    }
+    &__detail-information {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__detail-info {
+        align-self: flex-start;
+    }
+    &__text {
+        margin: 0;
+    }
+    &__detail-text {
+        margin: 20px 0;
+        font-weight: bold;
+    }
+    &__text-number {
+        color: #f2b92b;
+        margin-right: 5px;
+    }
+}
+.text-row {
+    padding: 0 20px;
+}
+.necessarily-block {
+    &__wrapper {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    &__text{
+        margin: 0;
+        font-size: 25px;
+        font-weight: bold;
+    }
+    &__btn {
+        border: none;
+        background-color: gold;
+        padding: 10px 30px;
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 15px;
+        margin-top: 40px;
+    }
+    &__btn:focus {
+        outline: none;
+    }
+}
+.urgency-information__tittle.necessarily-tittle {
+    width: 20%;
+}
