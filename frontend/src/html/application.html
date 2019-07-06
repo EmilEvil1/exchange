@@ -45,27 +45,85 @@
     </div>
 </header>
 <main class="main-content">
-    <section class="crawl-line">
-        <img class="crawl-line__speaker" src="../svg/speaker.svg" alt="Бегущая строка">
-        <div id="slickVertical" class="crawl-line__slider">
-            <span class="slider-text">...Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-            <span class="slider-text">...Test Test Test Test Test Test Test Test Test Test</span>
-            <span class="slider-text">...Hello World Hello World Hello World Hello World</span>
-            <span class="slider-text">...Got it Got it Got it Got it</span>
+    <section class="trade-info">
+        <div class="trade-info__wrapper">
+            <h2 class="trade-info__tittle">Обмен № 6969</h2>
+            <p class="trade-info__caution-text">Пожалуйста, проверьте введенные Вами данные и следуйте по шагам указанным ниже.</p>
         </div>
     </section>
-    <section class="rules-info">
-        <div class="rules-info__wrapper container">
-            <div class="rules-info__block row">
-                <p class="rules-info__text col-lg-12 col-md-12">Обмен во всех направлениях проходит в автоматическом режиме (без участия оператора) и 5-10 минут после оплаты!</p>
-                <p class="rules-info__text col-lg-12 col-md-12">Часы работы оператора с 9:00-01:00 по МСК ежедневно.</p>
-                <p class="rules-info__text col-lg-12 col-md-12">Минимальная сумма покупки криптовалюты - 1000 рублей.</p>
-                <p class="rules-info__text col-lg-12 col-md-12">Возможен обмен крупных сумм, до 500 т.р по всем предложенным банкам за одну операция.</p>
-                <p class="rules-info__text col-lg-12 col-md-12">Для создания заявки на обмен заполните все необходимые данные и перейдите в окно оплаты, система сделает перевод<br>автоматически после поступления вашего платежа</p>
+    <section class="currency-exchange">
+        <div class="container calculator-wrapper">
+            <div class="corner-left-top"></div>
+                <div class="currency-exchange__block row">
+                    <div class="currency-exchange__give-get col-lg-12 col-md-12">
+                        <div class="currency-exchange__calculators steps row">
+                            <div class="steps__give-get steps-block col-lg-6 col-md-6 row">
+                                <div class="steps__give-away steps-info col-lg-6 col-md-6">
+                                    <div class="steps-info__wrapper">
+                                        <div class="steps-info__tittle-wrapper">
+                                            <span class="calculator__got-massage">Отдам:</span>
+                                            <i class="arrow-up"></i>
+                                        </div>
+                                        <div class="payment-method">
+                                            <i class="payment-method__icon-bank sberbank"></i>
+                                            <span class="payment-method__payment-name">СбербанкRU</span>
+                                            <p class="calculator__reserve">Сумма: 1000 RUB</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="steps__will-get steps-info col-lg-6 col-md-6">
+                                    <div class="steps-info__wrapper">
+                                        <div class="steps-info__tittle-wrapper">
+                                            <span class="calculator__got-massage">Получу:</span>
+                                        </div>
+                                        <div class="payment-method">
+											<i class="payment-method__icon-bank btc"></i>
+                                            <span class="payment-method__payment-name">BitcoinBTC</span>
+                                            <p class="calculator__reserve">Сумма: 0.00177633 BTC</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="steps__status steps-block col-lg-6 col-md-6 row">
+                            <div class="steps__status-info steps-info col-lg-6 col-md-6">
+                                <p class="calculator__got-massage">Статус:</p>
+                                <p class="steps__status-text">Ожидается оплата</p>
+                            </div>
+                            <div class="steps__status-info steps-info col-lg-6 col-md-6">
+                                <p class="calculator__got-massage">Осталось:</p>
+                                <p class="steps__status-text">16 мин. 23 сек.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="corner-right-bottom"></div>
+        </div>
+    </section>
+    <section class="urgency-information">
+        <div class="urgency-information__wrapper container">
+            <div class="urgency-information__detail-information container row">
+                <h2 class="urgency-information__tittle">Для завершения создания заказа Вам необходимо:</h2>
+                <div class="urgency-information__detail-info col-lg-6 col-md-6">
+                    <div class="urgency-information__detail-text">
+                        <p class="urgency-information__text"><span class="urgency-information__text-number">1.</span> Сделать перевод по реквезитам:</p>
+                        <p class="urgency-information__text text-row">Номер карты: <span class="urgency-information__card-number">111111111111111</span></p>
+                        <p class="urgency-information__text text-row">На сумму <span class="urgency-information__money">1000 RUB</span></p>
+                    </div>
+                    <div class="urgency-information__detail-text">
+                        <p class="urgency-information__text"><span class="urgency-information__text-number">2.</span>Нажать кнопку "Я оплатил" внизу заявки</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
+    <section class="necessarily-block">
+        <div class="necessarily-block__wrapper row">
+            <h2 class="urgency-information__tittle necessarily-tittle">ОБЯЗАТЕЛЬНО!</h2>
+            <p class="necessarily-block__text">После оплаты нажать кнопку «Я оплатил»</p>
+            <button class="necessarily-block__btn">Я оплатил</button>
+        </div>
+    </section>
 </main>
 <footer></footer>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
