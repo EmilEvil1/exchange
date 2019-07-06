@@ -4,7 +4,7 @@
     if (currentUrl.match(regUrl)) {
         var applicationId = currentUrl.match(regUrl)[1];
         $.ajax({
-            url: 'http://localhost:8080/api/application',
+            url: '/api/application',
             data: {
                 applicationId: applicationId
             },

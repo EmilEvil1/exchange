@@ -5,7 +5,7 @@
         CREATE_APPLICATION: '/api/application'
     };
     $.ajax({
-        url: 'http://localhost:8080' + URLS.FETCH_CURRENCIES,
+        url: URLS.FETCH_CURRENCIES,
         headers: {
             'Access-Control-Allow-Origin': '*'
         }
@@ -193,7 +193,7 @@
         var request = getApplicationData();
         $("#preloader").show();
         $.ajax({
-            url: 'http://localhost:8080' + URLS.CREATE_APPLICATION,
+            url: URLS.CREATE_APPLICATION,
             method: 'POST',
             data: JSON.stringify(request),
             headers: {
