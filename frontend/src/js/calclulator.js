@@ -1,7 +1,11 @@
 (function($, window) {
     var currencies;
+    var URLS = {
+        FETCH_CURRENCIES: '/api/currencies',
+        CREATE_APPLICATION: '/api/application'
+    };
     $.ajax({
-        url: 'http://localhost:8080/api/currencies',
+        url: 'http://localhost:8080' + URLS.FETCH_CURRENCIES,
         headers: {
             'Access-Control-Allow-Origin': '*'
         }
@@ -282,6 +286,19 @@
 
     getResponse();
 
+    function getApplicationData() {
+        var request = {};
+        request.from = $('.calculator__btn--from').data('ticker');
+        request.to = $('.calculator__btn--to').data('ticker');
+        request.amountFrom = parseFloat($('.calculator__input--from').val());
+        request.amountTo = parseFloat($('.calculator__input--to').val());
+        request.fromDocumentPayment = $('.client-info')[0].val();
+        request.toDocumentPayment = $('.client-info')[2].val();
+        request.email = $('#email').val();
+        
+        return request;
+    }
+
     var numberMask = createNumberMask({
         prefix: '',
         suffix: '',
@@ -338,6 +355,19 @@
         if (!result) {
             return;
         }
+
+        var request = getApplicationData();
+        $("#preloader").show();
+        $.ajax({
+            url: 'http://localhost:8080' + URLS.CREATE_APPLICATION,
+            data: request,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            }
+        }).done(function (applicationId) {
+            window.location.href = '/application.html?applicationId=' + applicationId;
+        })
 
     });
 

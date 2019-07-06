@@ -1,4 +1,6 @@
-package com.fairpay.application;
+package com.fairpay.application.api;
+
+import java.util.Date;
 
 public class ApplicationResponseDTO {
   private String from;
@@ -6,6 +8,7 @@ public class ApplicationResponseDTO {
   private Double amountFrom;
   private Double amountTo;
   private String documentToPayment;
+  private Date createDate;
 
   public String getFrom() {
     return from;
@@ -29,6 +32,14 @@ public class ApplicationResponseDTO {
 
   public void setAmountFrom(Double amountFrom) {
     this.amountFrom = amountFrom;
+  }
+
+  public Date getCreateDate() {
+    return createDate;
+  }
+
+  public void setCreateDate(Date createDate) {
+    this.createDate = createDate;
   }
 
   public Double getAmountTo() {

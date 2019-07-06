@@ -1,4 +1,4 @@
-package com.fairpay.application;
+package com.fairpay.application.api;
 
 public class ApplicationRequestDTO {
   private String from;
@@ -6,6 +6,7 @@ public class ApplicationRequestDTO {
   private Double amountFrom;
   private Double amountTo;
   private String fromDocumentPayment;
+  private String toDocumentPayment;
   private String email;
   private String phone;
 
@@ -63,5 +64,13 @@ public class ApplicationRequestDTO {
 
   public void setPhone(String phone) {
     this.phone = phone;
+  }
+
+  public String getToDocumentPayment() {
+    return toDocumentPayment;
+  }
+
+  public void setToDocumentPayment(String toDocumentPayment) {
+    this.toDocumentPayment = toDocumentPayment;
   }
 }

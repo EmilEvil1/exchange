@@ -1,10 +1,11 @@
 package com.fairpay.application;
 
+import com.fairpay.application.api.ApplicationRequestDTO;
+import com.fairpay.application.api.ApplicationResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -17,7 +18,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     this.applicationDao = applicationDao;
   }
 
-  public void saveApplication(ApplicationRequestDTO request) {
+  public String saveApplication(ApplicationRequestDTO request) {
     ApplicationEntity application = new ApplicationEntity();
     UUID uuid = UUID.randomUUID();
 
@@ -27,13 +28,15 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     application.setAmountFrom(request.getAmountFrom());
     application.setAmountTo(request.getAmountTo());
     application.setFromDocumentPayment(request.getFromDocumentPayment());
+    application.setToDocumentPayment(request.getFromDocumentPayment());
     application.setEmail(request.getEmail());
     application.setPhone(request.getPhone());
     application.setCreateDate(new Date());
-    //TODO: get document payment from wallet table
+    //TODO: get system document payment
 //    application.setToDocumentPayment();
 
     applicationDao.save(application);
+    return uuid.toString();
   }
 
   public ApplicationResponseDTO fetchApplication(String applicationId) {
@@ -44,6 +47,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     responseDTO.setFrom(applicationEntity.getFrom());
     responseDTO.setTo(applicationEntity.getTo());
     responseDTO.setDocumentToPayment(applicationEntity.getToDocumentPayment());
+    responseDTO.setCreateDate(applicationEntity.getCreateDate());
     return responseDTO;
   }
 }

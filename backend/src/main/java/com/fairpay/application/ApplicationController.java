@@ -1,5 +1,7 @@
 package com.fairpay.application;
 
+import com.fairpay.application.api.ApplicationRequestDTO;
+import com.fairpay.application.api.ApplicationResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +17,8 @@ public class ApplicationController {
   }
 
   @PostMapping("/api/application")
-  public void createApplication(@RequestBody ApplicationRequestDTO request) {
-    applicationManager.saveApplication(request);
+  public String createApplication(@RequestBody ApplicationRequestDTO request) {
+    return applicationManager.saveApplication(request);
   }
 
   @GetMapping("/api/application")

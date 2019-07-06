@@ -16,6 +16,7 @@ public class ApplicationEntity {
   private Double amountTo;
   private String fromDocumentPayment;
   private String toDocumentPayment;
+  private String systemDocumentPayment;
   private Date createDate;
   private String email;
   private String phone;
@@ -54,6 +55,15 @@ public class ApplicationEntity {
   @Column(name = "to_document_payment")
   public String getToDocumentPayment() {
     return toDocumentPayment;
+  }
+
+  @Column(name = "system_document_payment")
+  public String getSystemDocumentPayment() {
+    return systemDocumentPayment;
+  }
+
+  public void setSystemDocumentPayment(String systemDocumentPayment) {
+    this.systemDocumentPayment = systemDocumentPayment;
   }
 
   @Column(name = "create_date")
