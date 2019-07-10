@@ -42,9 +42,8 @@
     border-radius: 50%;
     font-weight: bold;
 }
-.telegram::before {
+.social-link::before{
     content: '';
-    background-image: url('../svg/telegram.svg') ;
     background-size: 100%;
     background-repeat: no-repeat;
     background-color: white;
@@ -53,27 +52,14 @@
     margin-right: 10px;
     border-radius: 50%;
 }
+.telegram::before {
+    background-image: url('../svg/telegram.svg') ;
+}
 .e-mail::before {
-    content: '';
-    background-image: url('../svg/email.svg') ;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-color: white;
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
-    border-radius: 50%;  
+    background-image: url('../svg/email.svg') ; 
 }
 .number::before {
-    content: '';
     background-image: url('../svg/phone.svg') ;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-color: white;
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
-    border-radius: 50%; 
 }
 .personable-block {
     width: 100%;
