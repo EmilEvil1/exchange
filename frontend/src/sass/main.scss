@@ -1,17 +1,21 @@
 @import '../../node_modules/bootstrap/scss/bootstrap-grid.scss';
-@import './calculator';
 @import "./slick-theme";
 @import "./slick";
 @import "./guarantees";
 @import "./fields";
 @import "./application";
 @import "./contacts";
+@import './calculator';
 
 .main-content {
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 20px;
+    // font for tittles
+    // font-family: 'Encode Sans Condensed', sans-serif;
+
+    // font for text content
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
 }
 
 // header
@@ -33,11 +37,10 @@
     color: #453f37;
     margin: 0 15px;
     text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
     display: flex;
     align-items: center;
     border-radius: 50%;
+    font-weight: bold;
 }
 .telegram::before {
     content: '';
@@ -91,7 +94,7 @@
 }
 .menu-bar {
     height: 100px;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 .container.menu-wrapper {
     height: 100%;
@@ -117,22 +120,22 @@
     margin: auto 0;
 }
 .navigation-menu__menu-items {
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 .navigation-menu__menu-item {
     text-transform: uppercase;
-    width: 10%;
+    width: 15%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-weight: bold;
-    margin-right: 25px;
+    font-size: 20px;
 
     & a{
         color: #231f20;
@@ -155,7 +158,15 @@
     background-color: #474b4a;
     margin-top: 30px;
     position: relative;
+
+    &__wrapper {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+    }
 }
+
 .slider-text {
     display: none;
     text-align: center;
@@ -163,17 +174,12 @@
 }
 .slider-text.slick-slide{
     display: flex;
-    justify-content: center;
     height: 70px;
     align-items: center;
     color: white;
     outline: none;
-}
-.crawl-line__speaker {
-    position: absolute;
-    position: absolute;
-    top: 15px;
-    left: 14%;
+    font-size: 25px;
+    padding: 0 15px;
 }
 .rules-info {
     margin: 10px 0 40px;
