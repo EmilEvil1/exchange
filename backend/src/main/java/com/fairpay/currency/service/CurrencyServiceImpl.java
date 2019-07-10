@@ -76,8 +76,6 @@ public class CurrencyServiceImpl implements CurrencyService {
       currencyEntities.add(currencyEntity);
     }
 
-
-
     return currencyEntities.stream()
       .sorted(Comparator.comparingInt(CurrencyEntity::getPriority))
       .map(currencyEntity -> {
@@ -86,6 +84,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         currencyDTO.setRub(currencyEntity.getRub());
         currencyDTO.setUah(currencyEntity.getUah());
         currencyDTO.setTicker(currencyEntity.getTicker());
+        currencyDTO.setHoldType(currencyEntity.getHoldType());
         return currencyDTO;
       }).collect(Collectors.toList());
   }
