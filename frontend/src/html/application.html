@@ -34,11 +34,11 @@
             <nav class="navigation-menu">
                 <ul class="navigation-menu__menu-items list-unstyled">
                     <li class="navigation-menu__menu-item"><a href="/">Главная страница</a></li>
-					<li class="navigation-menu__menu-item"><a href="#info">Информация о проекте</a></li>
-					<li class="navigation-menu__menu-item"><a href="/rules.html">Правила</a></li>
-					<li class="navigation-menu__menu-item"><a href="#garanties">Гарантии</a></li>
-					<li class="navigation-menu__menu-item"><a href="#faq">F.A.Q.</a></li>
-					<li class="navigation-menu__menu-item"><a href="/contacts.html">Контакты</a></li>
+                    <li class="navigation-menu__menu-item"><a href="#info">Информация о проекте</a></li>
+                    <li class="navigation-menu__menu-item"><a href="/rules.html">Правила</a></li>
+                    <li class="navigation-menu__menu-item"><a href="/garanties.html">Гарантии</a></li>
+                    <li class="navigation-menu__menu-item"><a href="/faq.html">F.A.Q.</a></li>
+                    <li class="navigation-menu__menu-item"><a href="/contacts.html">Контакты</a></li>
                 </ul>
             </nav>
         </div>
@@ -51,7 +51,7 @@
             <p class="trade-info__caution-text">Пожалуйста, проверьте введенные Вами данные и следуйте по шагам указанным ниже.</p>
         </div>
     </section>
-    <section class="currency-exchange">
+    <section class="currency-exchange application-block">
         <div class="container calculator-wrapper">
             <div class="corner-left-top"></div>
                 <div class="currency-exchange__block row">
@@ -61,34 +61,33 @@
                                 <div class="steps__give-away steps-info col-lg-6 col-md-6">
                                     <div class="steps-info__wrapper">
                                         <div class="steps-info__tittle-wrapper">
-                                            <span class="calculator__got-massage">Отдам:</span>
+                                            <span class="calculator__got-message app-msg">Отдам:</span>
                                             <i class="arrow-up"></i>
                                         </div>
                                         <div class="payment-method">
-                                            <i class="payment-method__icon-bank--from payment-method__icon-bank sberbank"></i>
-                                            <span class="payment-method--from payment-method__payment-name">СбербанкRU</span>
-                                            <p class="calculator__reserve">Сумма:
-                                                <span class="payment-method__amount--from">
-                                                </span>
-                                                <span class="payment-method__ticker--from">
-                                                </span>
-                                            </p>
+                                            <div class="payment-method__wrapper">
+                                                <i class="payment-method__icon-bank--from payment-method__icon-bank sberbank"></i>
+                                                <span class="payment-method--from payment-method__payment-name">СбербанкRU</span>
+                                            
+                                                <div class="calculator__reserve app-reserve">Сумма:
+                                                    <span class="payment-method__amount--from"></span>
+                                                    <span class="payment-method__ticker--from"></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="steps__will-get steps-info col-lg-6 col-md-6">
                                     <div class="steps-info__wrapper">
                                         <div class="steps-info__tittle-wrapper">
-                                            <span class="calculator__got-massage">Получу:</span>
+                                            <span class="calculator__got-message app-msg">Получу:</span>
                                         </div>
                                         <div class="payment-method">
 											<i class="payment-method__icon-bank--to payment-method__icon-bank btc"></i>
                                             <span class="payment-method--to payment-method__payment-name">BitcoinBTC</span>
-                                            <p class="calculator__reserve">Сумма:
-                                                <span class="payment-method__amount--to">
-                                                </span>
-                                                <span class="payment-method__ticker--to">
-                                                </span>
+                                            <p class="calculator__reserve app-reserve">Сумма:
+                                                <span class="payment-method__amount--to"></span>
+                                                <span class="payment-method__ticker--to"></span>
                                             </p>
                                         </div>
                                     </div>
@@ -96,11 +95,11 @@
                             </div>
                         <div class="steps__status steps-block col-lg-6 col-md-6 row">
                             <div class="steps__status-info steps-info col-lg-6 col-md-6">
-                                <p class="calculator__got-massage">Статус:</p>
+                                <p class="calculator__got-message app-msg">Статус:</p>
                                 <p class="steps__status-text">Ожидается оплата</p>
                             </div>
                             <div class="steps__status-info steps-info col-lg-6 col-md-6">
-                                <p class="calculator__got-massage">Осталось:</p>
+                                <p class="calculator__got-message app-msg">Осталось:</p>
                                 <p class="steps__status-text">16 мин. 23 сек.</p>
                             </div>
                         </div>
