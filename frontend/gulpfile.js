@@ -233,7 +233,6 @@ var buildSVGs = function (done) {
 
 	// Optimize SVG files
 	return src(paths.svgs.input)
-		.pipe(svgmin())
 		.pipe(dest(paths.svgs.output));
 
 };
