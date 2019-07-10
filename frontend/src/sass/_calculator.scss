@@ -37,10 +37,11 @@
 }
 
 .arrow-up {
-    width: 10%;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     background: url('../svg/arrow-up.svg') no-repeat;
     margin-right: 10px;
+    background-size: contain;
 
 }
 .arrow-up.reversed {
@@ -99,12 +100,15 @@
     &__reserve,
     &__direction {
         font-size: 16px;
-        margin: 10px 0 20px;
+        margin: 15px 0;
         padding: 0 15px;
     }
     &__btn.client-info {
         width: 70%;
     }   
+}
+.calculator__got-massage.input-name {
+    font-size: 20px;
 }
 .calculator__btn--from:hover,
 .calculator__btn--to:hover {
