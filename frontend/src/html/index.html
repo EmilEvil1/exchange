@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<title>Fare Pay</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Roboto+Condensed&display=swap" rel="stylesheet">
 </head>
 
 <body class="main-content">
@@ -33,12 +33,12 @@
 			<div class="container menu-wrapper">
 				<nav class="navigation-menu">
 					<ul class="navigation-menu__menu-items list-unstyled">
-						<li class="navigation-menu__menu-item"><a href="#main">Главная страница</a></li>
+						<li class="navigation-menu__menu-item"><a href="/">Главная страница</a></li>
 						<li class="navigation-menu__menu-item"><a href="#info">Информация о проекте</a></li>
-						<li class="navigation-menu__menu-item"><a href="#rules">Правила</a></li>
-						<li class="navigation-menu__menu-item"><a href="#garanties">Гарантии</a></li>
-						<li class="navigation-menu__menu-item"><a href="#faq">F.A.Q.</a></li>
-						<li class="navigation-menu__menu-item"><a href="#contacts">Контакты</a></li>
+						<li class="navigation-menu__menu-item"><a href="/rules.html">Правила</a></li>
+						<li class="navigation-menu__menu-item"><a href="/garanties.html">Гарантии</a></li>
+						<li class="navigation-menu__menu-item"><a href="/faq.html">F.A.Q.</a></li>
+						<li class="navigation-menu__menu-item"><a href="/contacts.html">Контакты</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -46,15 +46,20 @@
 	</header>
 	<main class="main-content">
 		<section class="crawl-line">
-			<img class="crawl-line__speaker" src="../svg/speaker.svg" alt="Бегущая строка">
-			<div id="slickVertical" class="crawl-line__slider">
-				<span class="slider-text">...Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-				<span class="slider-text">...Test Test Test Test Test Test Test Test Test Test</span>
-				<span class="slider-text">...Hello World Hello World Hello World Hello World</span>
-				<span class="slider-text">...Got it Got it Got it Got it</span>
+			<div class="crawl-line__wrapper container">
+				<img class="crawl-line__speaker" src="../svg/speaker.svg" alt="Бегущая строка">
+				<div id="slickVertical" class="crawl-line__slider">
+					<span class="slider-text">Мы запускаем приложение для Andoid & IOS такого то числа</span>
+					<span class="slider-text">Мы приняли участие в конференции ''Тенденции международных переводов</span>
+					<span class="slider-text">Мы имплементировали функцию трекинга транзакции</span>
+					<span class="slider-text">Наша команда поучаствовала в Hartford Worldwide Hackaton</span>
+					<span class="slider-text">Мы оптимизировали скорость работы сервиса</span>
+					<span class="slider-text">Команда FarePay разрабатывает новый холодный кошелёк для хранения более 18 криптовалют</span>
+					<span class="slider-text">FarePay разрабатывает базу для заключения смарт- контрактов с клиентами </span>
+				</div>
 			</div>
 		</section>
-			<section class="rules-info">
+			<!-- <section class="rules-info">
 				<div class="rules-info__wrapper container">
 					<div class="rules-info__block row">
 						<p class="rules-info__text col-lg-12 col-md-12">Обмен во всех направлениях проходит в автоматическом режиме (без участия оператора) и 5-10 минут после оплаты!</p>
@@ -64,7 +69,7 @@
 						<p class="rules-info__text col-lg-12 col-md-12">Для создания заявки на обмен заполните все необходимые данные и перейдите в окно оплаты, система сделает перевод<br>автоматически после поступления вашего платежа</p>
 					</div>
 				</div>
-			</section>
+			</section> -->
 			<section class="currency-exchange">
 				<div class="container calculator-wrapper">
 					<h2 class="calculator-wrapper__title">Укажите валюту которую хотите обменять</h2>
@@ -134,7 +139,7 @@
 										<span class="confirmation-block__rate">0.00000179</span>
 										<span class="confirmation-block__to-name">BTC</span></div>
 									<button id="btn-exchange" class="confirmation-block__exchange-button">Обменять</button>
-									<p class="confirmation-block__agreement">Нажимая кнопку «обменять», Вы соглашаетесь с <a href="#" class="confirmation-block__ruls-link">правилами</a> обмена.</p>
+									<p class="confirmation-block__agreement">Нажимая кнопку «обменять», Вы соглашаетесь с <a href="/rules.html" class="confirmation-block__ruls-link">правилами</a> обмена.</p>
 								</div>
 							</div>
 						</div>
@@ -154,11 +159,11 @@
 								<div class="currency-exchange__input">
 									<div class="calculator__pre-tittle field-info" data-ticker="BTC">
 										<span class="calculator__got-massage client-pre_tittle">
-											<span class="client-pre-currency">Bitcoin</span>
+											<span class="client-pre-currency">Адрес</span>
 											кошелек для получения
 										</span>
 									</div>
-									<input class="crypto_address calculator__btn client-info" type="text" placeholder="Bitcoin кошелек">
+									<input class="crypto_address calculator__btn client-info" type="text" placeholder="Адрес кошелека">
 									<div class="error-msg">Адрес кошелька указан неверно</div>
 								</div>
 								<div class="currency-exchange__input">
