@@ -35,7 +35,7 @@ INSERT INTO currencies VALUES ("KCS", 67.4406317266, 29.232792, 21, "KuCoin Shar
 INSERT INTO currencies VALUES ("PAX", 64.2980005, 26.3523976, 19, "Paxos Standard Token", "ADDRESS");
 INSERT INTO currencies VALUES ("BCH", 26190.15260730, 10662.821574, 6, "Bitcoin Cash", "ADDRESS");
 INSERT INTO currencies VALUES("SBER", 1, 1, 24, "Сбербанк", "CARD_NUMBER");
-INSERT INTO currencies VALUES("YANDEX", 1, 1, 25, "Яндекс Деньки", "CARD_NUMBER");
+INSERT INTO currencies VALUES("YANDEX", 1, 1, 25, "Яндекс Деньги", "CARD_NUMBER");
 INSERT INTO currencies VALUES("TINKOFF", 1, 1, 26, "Тинькофф", "CARD_NUMBER");
 
 

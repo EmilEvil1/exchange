@@ -69,6 +69,10 @@
         padding-left: 10px;
         transition: .18s;
         cursor: pointer;
+
+        &.field-error {
+            border-color: #ea5454;
+        }
     }
     
     &__selector {

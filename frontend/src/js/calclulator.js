@@ -15,17 +15,23 @@
 
     function bindEvents() {
         $(".card_number").blur(function() {
-            validateCreditCard.call(this);
+            validateCreditCard($(this));
         });
 
         $(".crypto_address").blur(function() {
-            validateCryptoAddress.call(this);
+            validateCryptoAddress($(this));
         });
 
         $(".card_number, .crypto_address").focus(function() {
-            $(this).removeClass("field-error");
-            $(this).parent().find('.error-msg').hide();
-        })
+            resetError($(this));
+        });
+
+        $(".calculator__input--to,.calculator__input--from").focus(function() {
+            resetError($(".calculator__input--to"));
+            resetError($(".calculator__input--from"));
+        });
+
+        applyCreditCardMask(document.querySelectorAll('.card_number'))
     }
 
     function changeConfirmationBlock() {
@@ -51,7 +57,7 @@
         var compiledFrom = _.template(currencyFrom.holdType === 'CARD_NUMBER' ? cardNumberTemplate : cryptoAddressTemplate);
         var compiledTo = _.template(currencyTo.holdType === 'CARD_NUMBER' ? cardNumberTemplate : cryptoAddressTemplate);
 
-        $(".currency-exchange__input").first().html(compiledFrom(currencyFrom));
+        $(".currency-exchange__input:nth-child(1)").html(compiledFrom(currencyFrom));
         $(".currency-exchange__input:nth-child(3)").html(compiledTo(currencyTo));
 
         bindEvents()
@@ -65,7 +71,7 @@
                 "<div class=\"selector-currency__name\">"+ currency.name + "</div>" +
                 "</div>'");
 
-            if (index < 12) {
+            if (index < currencies.length / 2) {
                 $(".calculator__selector .selector__row-1").append(templateCurrency);
             } else {
                 $(".calculator__selector .selector__row-2").append(templateCurrency);
@@ -73,6 +79,8 @@
         });
 
         changeConfirmationBlock();
+
+        changeClientInfoBlock();
 
         $(".calculator__btn--to, .calculator__btn--from").click(function(e) {
             $(this).closest('.direction').find('.calculator__selector').toggle();
@@ -104,10 +112,11 @@
         });
 
         $(".calculator__input--from, .calculator__input--to").keyup(function(e) {
-            var currentAmount = $(this).val();
+            var val = $(this).val().replace(/,/g, '');
+            var currentAmount = parseFloat(val);
             var $inputTo = $('.calculator__input--to');
             var $inputFrom = $('.calculator__input--from');
-            if (!currentAmount) {
+            if (isNaN(currentAmount)) {
                 $inputTo.val('');
                 $inputFrom.val('');
                 return;
@@ -154,28 +163,33 @@
         })
     });
 
-    function validateCreditCard() {
-        if (!$(this)[0]) {
-            return true;
-        }
-        var result = $(this).validateCreditCard();
+    function applyCreditCardMask(fields) {
+        fields.forEach(function(field) {
+            vanillaTextMask.maskInput({
+                inputElement: field,
+                guide: false,
+                mask: [/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]
+            })
+        })
+    }
+
+    function validateCreditCard($field) {
+        var result = $field.validateCreditCard();
 
         if (!result.valid) {
-            $(this).addClass("field-error");
-            $(this).parent().find('.error-msg').show();
+            updateFieldWithError($field);
             return false;
         }
 
         return true;
     }
 
-    function validateCryptoAddress() {
-        var ticker = $(this).parent().find(".calculator__pre-tittle").data('ticker');
-        var address = $(this).val();
+    function validateCryptoAddress($field) {
+        var ticker = $field.parent().find(".calculator__pre-tittle").data('ticker');
+        var address = $field.val();
         var valid = WAValidator.validate(address, ticker);
         if (!valid) {
-            $(this).addClass("field-error");
-            $(this).parent().find('.error-msg').show();
+            updateFieldWithError($field)
             return false;
         }
 
@@ -183,23 +197,52 @@
     }
 
     function validateEmail() {
-        var email = $("#email").text();
+        var email = $("#email").val();
         var regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!email && !regEmail.test(email)) {
             $("#email").addClass("field-error");
             return false;
         }
-
         return true;
+    }
+
+    function validateCalculatorInputs() {
+        var $inputFrom = $(".calculator__input--from"),
+            $inputTo = $(".calculator__input--to");
+        if ($inputFrom.val() && $inputTo.val()) {
+            return true;
+        }
+        updateFieldWithError($inputTo);
+        updateFieldWithError($inputFrom);
+        return false;
+    }
+
+    function updateFieldWithError($field) {
+        $field.addClass("field-error");
+        $field.parent().find('.error-msg').show();
+    }
+
+    function resetError($field) {
+        $field.removeClass("field-error");
+        $field.parent().find('.error-msg').hide();
     }
 
     $("#btn-exchange").click(function(e) {
         e.preventDefault();
+        var result = false,
+            $fromPaymentDocument = $(".currency-exchange__input:nth-child(1)").find('input'),
+            $toPaymentDocument = $(".currency-exchange__input:nth-child(3)").find('input');
 
-        // var result = validateCreditCard() && validateCryptoAddress() && validateEmail();
-        // if (!result) {
-        //     return;
-        // }
+        result = validateCalculatorInputs();
+        result = result && ($fromPaymentDocument.hasClass('card_number') ?
+            validateCreditCard($fromPaymentDocument) : validateCryptoAddress($fromPaymentDocument));
+        result = result && ($toPaymentDocument.hasClass('card_number') ?
+                validateCreditCard($toPaymentDocument) : validateCryptoAddress($toPaymentDocument));
+        result = result && validateEmail();
+
+        if (!result) {
+            return;
+        }
 
         var request = getApplicationData();
         $("#preloader").show();
@@ -214,7 +257,6 @@
         }).done(function (applicationId) {
             window.location.href = '/application.html?applicationId=' + applicationId;
         })
-
     });
 
 
