@@ -1,5 +1,7 @@
-.currency-exchange {
+.currency-exchange.application-block {
     
+    height: 200px;
+
     &__block.row {
         height: 100%;
     }
@@ -21,7 +23,7 @@
     }
     &__tittle {
         margin-bottom: 0;
-        font-size: 32px;
+        font-size: 25px;
     }
 }
 .steps {
@@ -37,7 +39,6 @@
 }
 
 .steps-info {
-    height: 100%;
     padding: 30px;
 
     &__wrapper {
@@ -52,21 +53,33 @@
         justify-content: space-between;
     }
 }
-.calculator__got-massage {
-    font-size: 25px;
+.calculator__got-message.app-msg {
+    font-size: 20px;
     font-weight: bold;
     margin: 0;
+}
+.calculator__reserve.app-reserve {
+    margin:  0;
+    padding: 0;
+    width: 100%;
 }
 .steps-block {
     margin: 10px 0;
 }
 .payment-method {
     flex-wrap: wrap;
+
+    &__icon-bank {
+        height: 27px;
+        margin: 0 10px 0 0;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap; 
+    }
 }
-.payment-method__icon-bank {
-    height: 27px;
-    margin: 0 10px 0 0;
-}
+
 .arrow-up {
     transform: rotate(90deg);
 }
