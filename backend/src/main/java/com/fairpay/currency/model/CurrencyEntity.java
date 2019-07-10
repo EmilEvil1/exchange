@@ -1,9 +1,8 @@
 package com.fairpay.currency.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fairpay.currency.vo.HoldTypeEnum;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
@@ -11,7 +10,6 @@ import java.util.Objects;
 @Table(name = "currencies")
 public class CurrencyEntity {
 
-//  protected CurrencyEntity() {}
   public CurrencyEntity() {}
 
 
@@ -24,6 +22,8 @@ public class CurrencyEntity {
   private Integer priority;
 
   private String name;
+
+  private HoldTypeEnum holdType;
 
   @Id
   @NotEmpty
@@ -69,6 +69,16 @@ public class CurrencyEntity {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  @Enumerated(EnumType.STRING)
+  @Column
+  public HoldTypeEnum getHoldType() {
+    return holdType;
+  }
+
+  public void setHoldType(HoldTypeEnum holdType) {
+    this.holdType = holdType;
   }
 
   @Override

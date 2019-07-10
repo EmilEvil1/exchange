@@ -48,8 +48,8 @@
         var cardNumberTemplate = $("#card_number_template").html();
         var cryptoAddressTemplate = $("#crypto_address_template").html();
 
-        var compiledFrom = _.template(currencyFrom.paymentDocument === 'card' ? cardNumberTemplate : cryptoAddressTemplate);
-        var compiledTo = _.template(currencyTo.paymentDocument === 'card' ? cardNumberTemplate : cryptoAddressTemplate);
+        var compiledFrom = _.template(currencyFrom.holdType === 'CARD_NUMBER' ? cardNumberTemplate : cryptoAddressTemplate);
+        var compiledTo = _.template(currencyTo.holdType === 'CARD_NUMBER' ? cardNumberTemplate : cryptoAddressTemplate);
 
         $(".currency-exchange__input").first().html(compiledFrom(currencyFrom));
         $(".currency-exchange__input:nth-child(3)").html(compiledTo(currencyTo));
@@ -72,8 +72,18 @@
             }
         });
 
+        changeConfirmationBlock();
+
         $(".calculator__btn--to, .calculator__btn--from").click(function(e) {
             $(this).closest('.direction').find('.calculator__selector').toggle();
+        });
+
+        $(document).mouseup(function(e) {
+            var container = $(".calculator__selector");
+            // if the target of the click isn't the container nor a descendant of the container
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                container.hide();
+            }
         });
 
         $(".currencyItem").click(function(e) {
@@ -133,7 +143,8 @@
     var numberMask = createNumberMask({
         prefix: '',
         suffix: '',
-        allowDecimal: true
+        allowDecimal: true,
+        decimalLimit: 7
     });
 
     document.querySelectorAll('.calculator__input--from, .calculator__input--to').forEach(function(inputEl) {

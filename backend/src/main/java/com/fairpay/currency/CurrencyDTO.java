@@ -1,5 +1,7 @@
 package com.fairpay.currency;
 
+import com.fairpay.currency.model.CurrencyEntity;
+import com.fairpay.currency.vo.HoldTypeEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CurrencyDTO {
@@ -11,6 +13,8 @@ public class CurrencyDTO {
   private Float rub;
   @JsonProperty("uah")
   private Float uah;
+  @JsonProperty("holdType")
+  private HoldTypeEnum holdType;
 
   public String getTicker() {
     return ticker;
@@ -42,5 +46,13 @@ public class CurrencyDTO {
 
   public void setUah(Float uah) {
     this.uah = uah;
+  }
+
+  public HoldTypeEnum getHoldType() {
+    return holdType;
+  }
+
+  public void setHoldType(HoldTypeEnum holdType) {
+    this.holdType = holdType;
   }
 }
