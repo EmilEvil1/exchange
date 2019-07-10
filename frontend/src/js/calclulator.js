@@ -15,11 +15,11 @@
 
     function bindEvents() {
         $(".card_number").blur(function() {
-            validateCreditCard.call(this);
+            validateCreditCard($(this));
         });
 
         $(".crypto_address").blur(function() {
-            validateCryptoAddress.call(this);
+            validateCryptoAddress($(this));
         });
 
         $(".card_number, .crypto_address").focus(function() {
@@ -51,7 +51,7 @@
         var compiledFrom = _.template(currencyFrom.holdType === 'CARD_NUMBER' ? cardNumberTemplate : cryptoAddressTemplate);
         var compiledTo = _.template(currencyTo.holdType === 'CARD_NUMBER' ? cardNumberTemplate : cryptoAddressTemplate);
 
-        $(".currency-exchange__input").first().html(compiledFrom(currencyFrom));
+        $(".currency-exchange__input:nth-child(1)").html(compiledFrom(currencyFrom));
         $(".currency-exchange__input:nth-child(3)").html(compiledTo(currencyTo));
 
         bindEvents()
@@ -65,7 +65,7 @@
                 "<div class=\"selector-currency__name\">"+ currency.name + "</div>" +
                 "</div>'");
 
-            if (index < 12) {
+            if (index < currencies.length / 2) {
                 $(".calculator__selector .selector__row-1").append(templateCurrency);
             } else {
                 $(".calculator__selector .selector__row-2").append(templateCurrency);
@@ -73,6 +73,8 @@
         });
 
         changeConfirmationBlock();
+
+        changeClientInfoBlock();
 
         $(".calculator__btn--to, .calculator__btn--from").click(function(e) {
             $(this).closest('.direction').find('.calculator__selector').toggle();
@@ -104,7 +106,7 @@
         });
 
         $(".calculator__input--from, .calculator__input--to").keyup(function(e) {
-            var currentAmount = $(this).val();
+            var currentAmount = parseFloat($(this).val());
             var $inputTo = $('.calculator__input--to');
             var $inputFrom = $('.calculator__input--from');
             if (!currentAmount) {
@@ -154,28 +156,25 @@
         })
     });
 
-    function validateCreditCard() {
-        if (!$(this)[0]) {
-            return true;
-        }
-        var result = $(this).validateCreditCard();
+    function validateCreditCard($field) {
+        var result = $field.validateCreditCard();
 
         if (!result.valid) {
-            $(this).addClass("field-error");
-            $(this).parent().find('.error-msg').show();
+            $field.addClass("field-error");
+            $field.parent().find('.error-msg').show();
             return false;
         }
 
         return true;
     }
 
-    function validateCryptoAddress() {
-        var ticker = $(this).parent().find(".calculator__pre-tittle").data('ticker');
-        var address = $(this).val();
+    function validateCryptoAddress($field) {
+        var ticker = $field.parent().find(".calculator__pre-tittle").data('ticker');
+        var address = $field.val();
         var valid = WAValidator.validate(address, ticker);
         if (!valid) {
-            $(this).addClass("field-error");
-            $(this).parent().find('.error-msg').show();
+            $field.addClass("field-error");
+            $field.parent().find('.error-msg').show();
             return false;
         }
 
@@ -195,11 +194,19 @@
 
     $("#btn-exchange").click(function(e) {
         e.preventDefault();
+        var result = false,
+            $fromPaymentDocument = $(".currency-exchange__input:nth-child(1)").find('input'),
+            $toPaymentDocument = $(".currency-exchange__input:nth-child(3)").find('input');
 
-        // var result = validateCreditCard() && validateCryptoAddress() && validateEmail();
-        // if (!result) {
-        //     return;
-        // }
+
+        result = $fromPaymentDocument.hasClass('card_number') ? validateCreditCard($fromPaymentDocument) : validateCryptoAddress($fromPaymentDocument);
+        result = result && ($toPaymentDocument.hasClass('card_number') ?
+                validateCreditCard($toPaymentDocument) : validateCryptoAddress($toPaymentDocument));
+        result = result && validateEmail();
+
+        if (!result) {
+            return;
+        }
 
         var request = getApplicationData();
         $("#preloader").show();
