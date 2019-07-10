@@ -99,6 +99,7 @@
 										<div class="from__list"></div>
 										<div class="calculator__sum">
 											<input class="calculator__btn calculator__input--from calculator__btn--sum" type="text" placeholder="Введите сумму">
+											<div class="error-msg">Поле не заполнено</div>
 											<p class="calculator__reserve">Min: <span class="reserse__btn">1000</span> RUB</p>
 										</div>
 									</div>
@@ -126,6 +127,7 @@
 										<div class="to__list"></div>
 										<div class="calculator__sum">
 											<input class="calculator__btn calculator__input--to calculator__btn--discount" type="text" placeholder="Введите сумму">
+											<div class="error-msg">Поле не заполнено</div>
 											<p class="calculator__reserve">Скидка <span class="reserse__btn">0</span> %</p>
 										</div>
 									</div>
@@ -167,6 +169,7 @@
 									<div class="currency-exchange__input">
 										<div class="calculator__pre-tittle field-info"><span class="calculator__got-massage client-pre_tittle">Ваш E-mail</span></div>
 										<input id="email" class="calculator__btn client-info" type="text" placeholder="Например: user@gmail.com">
+										<div class="error-msg">Неверно введен почтовый вдресс</div>
 									</div>
 								</div>
 							</div>
@@ -257,11 +260,11 @@
 	<script id="crypto_address_template" type="text/template">
 		<div class="calculator__pre-tittle field-info" data-ticker="<%= ticker %>">
 			<span class="calculator__got-massage client-pre_tittle">
-			<span class="client-pre-currency"><%= name %></span>кошелек для получения
+			<span class="client-pre-currency"><%= name %></span> кошелек для получения
 			</span>
 		</div>
 		<input class="crypto_address calculator__btn client-info" type="text" placeholder="<%= name %> кошелек">
-		<div class="error-msg">Неверный адресс кошелька</div>
+		<div class="error-msg">Неверный адрес <%= name %> кошелька</div>
 	</script>
 	</body>
 
