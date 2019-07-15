@@ -40,10 +40,13 @@
         var rateFrom = currencies.find(cur => cur.ticker === tickerFrom).rub;
         var rateTo = currencies.find(cur => cur.ticker === tickerTo).rub;
         var rate = rateFrom/rateTo;
+        var min = 1000/rateFrom;
 
         $(".confirmation-block__from-name").text(tickerFrom);
         $(".confirmation-block__rate").text(rate.toFixed(6));
         $(".confirmation-block__to-name").text(tickerTo);
+        $(".sum-min").text(min.toFixed(2));
+        $(".min-currency").text(tickerFrom);
     }
 
     function changeClientInfoBlock() {
