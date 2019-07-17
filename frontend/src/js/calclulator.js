@@ -153,8 +153,8 @@
         var request = {};
         request.from = $('.calculator__btn--from').data('ticker');
         request.to = $('.calculator__btn--to').data('ticker');
-        request.amountFrom = parseFloat($('.calculator__input--from').val());
-        request.amountTo = parseFloat($('.calculator__input--to').val());
+        request.amountFrom = parseFloat($('.calculator__input--from').val().replace(/,/, ''));
+        request.amountTo = parseFloat($('.calculator__input--to').val().replace(/,/, ''));
         request.fromDocumentPayment = $('.client-info').first().val();
         request.toDocumentPayment = $('.client-info:nth-child(3)').val();
         request.email = $('#email').val();

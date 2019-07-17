@@ -16,6 +16,10 @@
             $(".payment-method__icon-bank--from").css("background-image", "url(./svg/" + application.from + ".svg)");
             $(".payment-method__icon-bank--to").css("background-image", "url(./svg/" + application.to + ".svg)");
 
+            $("#application-id").text(applicationId);
+            $('.urgency-information__money').text(application.amountFrom);
+            $('.urgency-information__currency').text(application.from);
+
             $(".payment-method__amount--from").text(application.amountFrom);
             $(".payment-method__ticker--from").text(application.from);
 
