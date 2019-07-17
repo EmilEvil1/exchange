@@ -66,6 +66,30 @@
         bindEvents()
     }
 
+    function changeInputSum($field) {
+        var val = $field.val().replace(/,/g, '');
+        var currentAmount = parseFloat(val);
+        var $inputTo = $('.calculator__input--to');
+        var $inputFrom = $('.calculator__input--from');
+        if (isNaN(currentAmount)) {
+            $inputTo.val('');
+            $inputFrom.val('');
+            return;
+        }
+
+        var tickerFrom = $('.calculator__btn--from').data('ticker');
+        var tickerTo = $('.calculator__btn--to').data('ticker');
+
+        var rateFrom = currencies.find(cur => cur.ticker === tickerFrom).rub;
+        var rateTo = currencies.find(cur => cur.ticker === tickerTo).rub;
+
+        if ($field.hasClass('calculator__input--from')) {
+            $inputTo.val((rateFrom/rateTo * currentAmount).toFixed(6))
+        } else {
+            $inputFrom.val((rateTo/rateFrom * currentAmount).toFixed(6))
+        }
+    }
+
     function handleResponse(response) {
         currencies = response;
         currencies.forEach(function(currency, index) {
@@ -111,31 +135,17 @@
 
             changeClientInfoBlock();
 
+            if ($(this).closest('.direction').find('.calculator__btn').hasClass('calculator__input--from')) {
+                changeInputSum($(".calculator__input--to"));
+            } else {
+                changeInputSum($(".calculator__input--from"));
+            }
+
             $(this).closest('.direction').find('.calculator__selector').toggle();
         });
 
         $(".calculator__input--from, .calculator__input--to").keyup(function(e) {
-            var val = $(this).val().replace(/,/g, '');
-            var currentAmount = parseFloat(val);
-            var $inputTo = $('.calculator__input--to');
-            var $inputFrom = $('.calculator__input--from');
-            if (isNaN(currentAmount)) {
-                $inputTo.val('');
-                $inputFrom.val('');
-                return;
-            }
-
-            var tickerFrom = $('.calculator__btn--from').data('ticker');
-            var tickerTo = $('.calculator__btn--to').data('ticker');
-
-            var rateFrom = currencies.find(cur => cur.ticker === tickerFrom).rub;
-            var rateTo = currencies.find(cur => cur.ticker === tickerTo).rub;
-
-            if ($(this).hasClass('calculator__input--from')) {
-                $inputTo.val((rateFrom/rateTo * currentAmount).toFixed(6))
-            } else {
-                $inputFrom.val((rateTo/rateFrom * currentAmount).toFixed(6))
-            }
+            changeInputSum($(this));
         });
     }
 
