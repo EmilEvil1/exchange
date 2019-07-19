@@ -7,6 +7,57 @@
 
     &__form-wrapper {
         position: relative;
-        height: 300px;
+        height: 450px;
+        margin-top: 30px;
     }
+
+    &__tittle {
+        text-align: center;
+        padding-top: 40px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f2b92b;;
+        width: 30%;
+        margin: auto;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80%;
+    }
+
+    &__inputs {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    &__feedback {
+        width: 85%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
+.calculator__btn.feedback-field {
+    width: 40%;
+    outline: none;
+}
+
+.contact-message {
+    width: 90%;
+    font-size: 16px;
+    border: 2px solid lightgrey;
+    border-radius: 20px;
+    height: 40%;
+    outline: none;
+    padding: 10px 15px;
+}
+.corner-right-bottom.contact-line,
+.corner-left-top.contact-line {
+    width: 260px;
 }

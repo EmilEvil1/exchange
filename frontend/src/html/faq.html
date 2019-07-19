@@ -1,10 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta charset="utf-8">
+		<title>Fair Pay</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Roboto+Condensed&display=swap" rel="stylesheet">
+	</head>
+	<body class="main-content">
+		<header class="top-content">
+			<div class="info-company container-fluid">
+				<div class="row">
+					<div class="info-company__social-links">
+						<a class="social-link telegram" href="">tg@test.com</a>
+						<a class="social-link e-mail" href="">test@crypt.com</a>
+						<a class="social-link number" href="">+1(222)333-44-55</a>
+					</div>
+				</div>
+			</div>
+			<div class="personable-block container-fluid">
+				<canvas class="cursor-pointer" style="width: 100%; height:100%;"></canvas>
+				<div class="container logo-wrapper" id="cursorPointer">
+					<div class="logo-block__wrapper">
+						<img class="main-logo" src="../svg/main-logo.svg" alt="Логотип">
+					</div>
+				</div>
+			</div>
+			<div class="menu-bar">
+				<div class="container menu-wrapper">
+					<nav class="navigation-menu">
+						<ul class="navigation-menu__menu-items list-unstyled">
+							<li class="navigation-menu__menu-item"><a href="/">Главная страница</a></li>
+							<li class="navigation-menu__menu-item"><a href="#info">Информация о проекте</a></li>
+							<li class="navigation-menu__menu-item"><a href="/rules.html">Правила</a></li>
+							<li class="navigation-menu__menu-item"><a href="#garanties">Гарантии</a></li>
+							<li class="navigation-menu__menu-item"><a href="/faq.html">F.A.Q.</a></li>
+							<li class="navigation-menu__menu-item"><a href="/contacts.html">Контакты</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+        </header>
+        <main>
+            <section class="crawl-line">
+                <div class="crawl-line__wrapper container">
+                    <img class="crawl-line__speaker" src="../svg/speaker.svg" alt="Бегущая строка">
+                    <div id="slickVertical" class="crawl-line__slider">
+                        <span class="slider-text">Мы запускаем приложение для Andoid & IOS такого то числа</span>
+                        <span class="slider-text">Мы приняли участие в конференции ''Тенденции международных переводов</span>
+                        <span class="slider-text">Мы имплементировали функцию трекинга транзакции</span>
+                        <span class="slider-text">Наша команда поучаствовала в Hartford Worldwide Hackaton</span>
+                        <span class="slider-text">Мы оптимизировали скорость работы сервиса</span>
+                        <span class="slider-text">Команда FairPay разрабатывает новый холодный кошелёк для хранения более 18 криптовалют</span>
+                        <span class="slider-text">FairPay разрабатывает базу для заключения смарт- контрактов с клиентами </span>
+                    </div>
+                </div>
+			</section>
+			<section class="faq">
+				<div class="faq__wrapper container">
+					<div class="faq__questions row">
+						<div class="faq__question col-lg-12 col-md-12">
 
-</body>
-</html>
+							<div class="faq__question-block">
+								<p class="faq__question-text exc">Как совершить обмен на вашем сайте?</p>
+								<div class="faq__answer" style="display: none">
+									<p class="faq__answer-text">Вам необходимо выбрать направление обмена и заполнить заявку на обмен. Нажать кнопку Обменять и следовать инструкциям, которые Вы увидите в окне подтверждения заявки на обмен. Если у Вас возникли вопросы в процессе обмена, пожалуйста, свяжитесь с оператором через чат онлайн помощи.</p>
+								</div>
+							</div>
+
+							<div class="faq__question-block">
+								<p class="faq__question-text mst">Я указал неверные реквизиты и средства не пришли, что делать?</p>
+								<div class="faq__answer" style="display: none">
+									<p class="faq__answer-text">К сожалению, мы не сможем вернуть ваши средства. Единственное что мы можем сделать, это сообщить реквизиты, куда ушли средства. Будьте внимательны при вводе данных!</p>
+								</div>
+							</div>
+
+							<div class="faq__question-block">
+								<p class="faq__question-text no-phone">Ко мне обратились через Skype и предложили провести обмен по выгодному курсу от Вашего имени. Это возможно?</p>
+								<div class="faq__answer" style="display: none">
+									<p class="faq__answer-text">Мы не производим обмены через Skype, телефон, почту и прочие средства связи. Любой обмен на нашем сервисе проводится по процедуре создания заявки на сайте, а любой контакт по заявке идет через Чат онлайн-помощи.</p>
+								</div>
+							</div>
+
+							<div class="faq__question-block">
+								<p class="faq__question-text loan">Возможно ли обменять сумму, которая больше чем та, что указана на сайте?</p>
+								<div class="faq__answer" style="display: none">
+									<p class="faq__answer-text">Да, возможно. Для этого, в рабочее время необходимо связаться с оператором через онлайн чат помощи и там обсудить детали обмена. Мы постараемся обеспечить свои резервы необходимыми средствами для Вашей операции. Также Вы можете оставить заявку на сайте на отслеживание резерва и когда мы будем располагать нужной Вам суммой, на почту придет уведомление.</p>
+								</div>
+							</div>
+
+							<div class="faq__question-block">
+								<p class="faq__question-text hour">Операция по Биткоину долго не подтверждается. Что это значит?</p>
+								<div class="faq__answer" style="display: none">
+									<p class="faq__answer-text">Переводы в системе биткоин могут долго быть в состоянии "Неподтвержденная транзакция". Чаще всего это происходит из-за того, что одна из операций долго не проходит. По правилам работы сети Биткоин такой проблемный перевод крепится к другому блоку и в дальнейшем идет по стандартной процедуре. Если этого не происходит, то в промежуток 1-7 дней средства возвращаются отправителю. Наш обменный сервис, к сожалению, никак не может повлиять на скорость обработки таких переводов. Если такой платеж задержался на продолжительное время, то после его зачисления либо возврата отправителю ситуация с заявкой будет разрешена путем ее завершения либо отмены с возвратом всех денежных обязательств каждой из сторон. Решение принимается в каждом случае отдельно.</p>
+								</div>
+							</div>
+							
+							<div class="faq__question-block">
+								<p class="faq__question-text mind">Возможно ли, отменить обмен, если заявка уже оплачена?</p>
+								<div class="faq__answer" style="display: none">
+									<p class="faq__answer-text">К сожалению, нет, если заявка была оплачена отказаться уже нельзя. При возникновении такой ситуации, Вы можете сделать обратную операцию, но в этом случае все комиссии покрываются за счет клиента.</p>
+								</div>
+							</div>
+
+						</div>
+
+						<!-- <div class="faq__question col-lg-12 col-md-12">
+							<div class="faq__question-text">Ко мне обратились через Skype и предложили провести обмен по выгодному курсу от Вашего имени. Это возможно?
+								<div class="faq__answer" style="display: none">
+									<p class="faq__answer-text">Мы не производим обмены через Skype, телефон, почту и прочие средства связи. Любой обмен на нашем сервисе проводится по процедуре создания заявки на сайте, а любой контакт по заявке идет через Чат онлайн-помощи.</p>
+								</div>
+							</div>
+						</div>  -->
+
+					</div>
+				</div>
+			</section>
+        </main>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function(){
+				$(".faq__question-block").click(function(){
+					$(this).find('.faq__answer').slideToggle("slow");
+					$(this).toggleClass("reverse-arrow");	
+				});
+			});
+		</script>
+        <script src="../js/wallet-address-validator.min.js"></script>
+        <script src="../js/stats.js"></script>
+        <script src="../js/main.js"></script>
+        <script src="../js/slick.min.js"></script>
+        <script src="../js/slowSlide.js"></script>
+        <script src="../js/sliderParametrs.js"></script>
+    </body>
+</html>        
