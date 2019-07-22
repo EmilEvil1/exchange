@@ -1,158 +1,143 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta charset="utf-8">
-    <title>Fare Pay</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Roboto+Condensed&display=swap" rel="stylesheet">
-</head>
-
-<body class="main-content">
-<header class="top-content">
-    <div class="info-company container-fluid">
-        <div class="row">
-            <div class="info-company__social-links">
-                <a class="social-link telegram" href="">tg@test.com</a>
-                <a class="social-link e-mail" href="">test@crypt.com</a>
-                <a class="social-link number" href="">+1(222)333-44-55</a>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="utf-8">
+        <title>Fair Pay</title>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Roboto+Condensed&display=swap" rel="stylesheet">
+    </head>
+    <body class="main-content">
+        <header class="top-content">
+            <div class="info-company container-fluid">
+                <div class="row">
+                    <div class="info-company__social-links">
+                        <a class="social-link telegram" href="">tg@test.com</a>
+                        <a class="social-link e-mail" href="">test@crypt.com</a>
+                        <a class="social-link number" href="">+1(222)333-44-55</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="personable-block container-fluid">
-        <canvas class="cursor-pointer" style="width: 100%; height:100%;"></canvas>
-        <div class="container logo-wrapper" id="cursorPointer">
-            <div class="logo-block__wrapper">
-                <img class="main-logo" src="../svg/main-logo.svg" alt="Логотип">
+            <div class="personable-block container-fluid">
+                <canvas class="cursor-pointer" style="width: 100%; height:100%;"></canvas>
+                <div class="container logo-wrapper" id="cursorPointer">
+                    <div class="logo-block__wrapper">
+                        <img class="main-logo" src="../svg/main-logo.svg" alt="Логотип">
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="menu-bar">
-        <div class="container menu-wrapper">
-            <nav class="navigation-menu">
-                <ul class="navigation-menu__menu-items list-unstyled">
-                    <li class="navigation-menu__menu-item"><a href="/">Главная страница</a></li>
-                    <li class="navigation-menu__menu-item"><a href="#info">Информация о проекте</a></li>
-                    <li class="navigation-menu__menu-item"><a href="/rules.html">Правила</a></li>
-                    <li class="navigation-menu__menu-item"><a href="/garanties.html">Гарантии</a></li>
-                    <li class="navigation-menu__menu-item"><a href="/faq.html">F.A.Q.</a></li>
-                    <li class="navigation-menu__menu-item"><a href="/contacts.html">Контакты</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</header>
-<main class="main-content">
-    <section class="trade-info">
-        <div class="trade-info__wrapper">
-            <h2 class="trade-info__tittle">Обмен № <span id="application-id"></span></h2>
-            <p class="trade-info__caution-text">Пожалуйста, проверьте введенные Вами данные и следуйте по шагам указанным ниже.</p>
-        </div>
-    </section>
-    <section class="currency-exchange application-block">
-        <div class="container calculator-wrapper">
-            <div class="corner-left-top"></div>
-                <div class="currency-exchange__block row">
-                    <div class="currency-exchange__give-get col-lg-12 col-md-12">
-                        <div class="currency-exchange__calculators steps row">
-                            <div class="steps__give-get steps-block col-lg-6 col-md-6 row">
-                                <div class="steps__give-away steps-info col-lg-6 col-md-6">
-                                    <div class="steps-info__wrapper">
-                                        <div class="steps-info__tittle-wrapper">
-                                            <span class="calculator__got-message app-msg">Отдам:</span>
-                                            <i class="arrow-up"></i>
+            <div class="menu-bar">
+                <div class="container menu-wrapper">
+                    <nav class="navigation-menu">
+                        <ul class="navigation-menu__menu-items list-unstyled">
+                            <li class="navigation-menu__menu-item"><a href="/">Главная страница</a></li>
+                            <li class="navigation-menu__menu-item"><a href="#info">Информация о проекте</a></li>
+                            <li class="navigation-menu__menu-item"><a href="/rules.html">Правила</a></li>
+                            <li class="navigation-menu__menu-item"><a href="#garanties">Гарантии</a></li>
+                            <li class="navigation-menu__menu-item"><a href="/faq.html">F.A.Q.</a></li>
+                            <li class="navigation-menu__menu-item"><a href="/contacts.html">Контакты</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <main class="main-content">
+            <section class="trade-info">
+                <div class="trade-info__wrapper">
+                    <h2 class="trade-info__tittle">Обмен № <span id="application-id"></span></h2>
+                    <p class="trade-info__caution-text">Пожалуйста, проверьте введенные Вами данные и следуйте по шагам указанным ниже.</p>
+                </div>
+            </section>
+            <section class="currency-exchange application-block">
+                <div class="container calculator-wrapper">
+                    <div class="corner-left-top"></div>
+                        <div class="currency-exchange__block row">
+                            <div class="currency-exchange__give-get col-lg-12 col-md-12">
+                                <div class="currency-exchange__calculators steps row">
+                                    <div class="steps__give-get steps-block col-lg-6 col-md-6 row">
+                                        <div class="steps__give-away steps-info col-lg-6 col-md-6">
+                                            <div class="steps-info__wrapper">
+                                                <div class="steps-info__tittle-wrapper">
+                                                    <span class="calculator__got-message app-msg">Отдам:</span>
+                                                    <i class="arrow-up"></i>
+                                                </div>
+                                                <div class="payment-method">
+                                                    <div class="payment-method__wrapper">
+                                                        <i class="payment-method__icon-bank--from payment-method__icon-bank sberbank"></i>
+                                                        <span class="payment-method--from payment-method__payment-name">СбербанкRU</span>
+
+                                                        <div class="calculator__reserve app-reserve">Сумма:
+                                                            <span class="payment-method__amount--from"></span>
+                                                            <span class="payment-method__ticker--from"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="payment-method">
-                                            <div class="payment-method__wrapper">
-                                                <i class="payment-method__icon-bank--from payment-method__icon-bank sberbank"></i>
-                                                <span class="payment-method--from payment-method__payment-name">СбербанкRU</span>
-                                            
-                                                <div class="calculator__reserve app-reserve">Сумма:
-                                                    <span class="payment-method__amount--from"></span>
-                                                    <span class="payment-method__ticker--from"></span>
+                                        <div class="steps__will-get steps-info col-lg-6 col-md-6">
+                                            <div class="steps-info__wrapper">
+                                                <div class="steps-info__tittle-wrapper">
+                                                    <span class="calculator__got-message app-msg">Получу:</span>
+                                                </div>
+                                                <div class="payment-method">
+                                                    <i class="payment-method__icon-bank--to payment-method__icon-bank btc"></i>
+                                                    <span class="payment-method--to payment-method__payment-name">BitcoinBTC</span>
+                                                    <p class="calculator__reserve app-reserve">Сумма:
+                                                        <span class="payment-method__amount--to"></span>
+                                                        <span class="payment-method__ticker--to"></span>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="steps__will-get steps-info col-lg-6 col-md-6">
-                                    <div class="steps-info__wrapper">
-                                        <div class="steps-info__tittle-wrapper">
-                                            <span class="calculator__got-message app-msg">Получу:</span>
-                                        </div>
-                                        <div class="payment-method">
-											<i class="payment-method__icon-bank--to payment-method__icon-bank btc"></i>
-                                            <span class="payment-method--to payment-method__payment-name">BitcoinBTC</span>
-                                            <p class="calculator__reserve app-reserve">Сумма:
-                                                <span class="payment-method__amount--to"></span>
-                                                <span class="payment-method__ticker--to"></span>
-                                            </p>
-                                        </div>
+                                <div class="steps__status steps-block col-lg-6 col-md-6 row">
+                                    <div class="steps__status-info steps-info col-lg-6 col-md-6">
+                                        <p class="calculator__got-message app-msg">Статус:</p>
+                                        <p class="steps__status-text">Ожидается оплата</p>
+                                    </div>
+                                    <div class="steps__status-info steps-info col-lg-6 col-md-6">
+                                        <p class="calculator__got-message app-msg">Осталось:</p>
+                                        <p class="left-time steps__status-text"></p>
                                     </div>
                                 </div>
                             </div>
-                        <div class="steps__status steps-block col-lg-6 col-md-6 row">
-                            <div class="steps__status-info steps-info col-lg-6 col-md-6">
-                                <p class="calculator__got-message app-msg">Статус:</p>
-                                <p class="steps__status-text">Ожидается оплата</p>
+                        </div>
+                    </div>
+                    <div class="corner-right-bottom"></div>
+                </div>
+            </section>
+            <section class="urgency-information">
+                <div class="urgency-information__wrapper container">
+                    <div class="urgency-information__detail-information container row">
+                        <h2 class="urgency-information__tittle">Для завершения создания заказа Вам необходимо:</h2>
+                        <div class="urgency-information__detail-info col-lg-6 col-md-6">
+                            <div class="urgency-information__detail-text">
+                                <p class="urgency-information__text"><span class="urgency-information__text-number">1.</span> Сделать перевод по реквезитам:</p>
+                                <p class="urgency-information__text text-row">Номер карты: <span class="urgency-information__card-number"></span></p>
+                                <p class="urgency-information__text text-row">На сумму <span class="urgency-information__money">1000</span> <span class="urgency-information__currency">RUB</span></p>
                             </div>
-                            <div class="steps__status-info steps-info col-lg-6 col-md-6">
-                                <p class="calculator__got-message app-msg">Осталось:</p>
-                                <p class="left-time steps__status-text"></p>
+                            <div class="urgency-information__detail-text">
+                                <p class="urgency-information__text"><span class="urgency-information__text-number">2.</span>Нажать кнопку "Я оплатил" внизу заявки</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="corner-right-bottom"></div>
-        </div>
-    </section>
-    <section class="urgency-information">
-        <div class="urgency-information__wrapper container">
-            <div class="urgency-information__detail-information container row">
-                <h2 class="urgency-information__tittle">Для завершения создания заказа Вам необходимо:</h2>
-                <div class="urgency-information__detail-info col-lg-6 col-md-6">
-                    <div class="urgency-information__detail-text">
-                        <p class="urgency-information__text"><span class="urgency-information__text-number">1.</span> Сделать перевод по реквезитам:</p>
-                        <p class="urgency-information__text text-row">Номер карты: <span class="urgency-information__card-number"></span></p>
-                        <p class="urgency-information__text text-row">На сумму <span class="urgency-information__money">1000</span> <span class="urgency-information__currency">RUB</span></p>
-                    </div>
-                    <div class="urgency-information__detail-text">
-                        <p class="urgency-information__text"><span class="urgency-information__text-number">2.</span>Нажать кнопку "Я оплатил" внизу заявки</p>
-                    </div>
+            </section>
+            <section class="necessarily-block">
+                <div class="necessarily-block__wrapper row">
+                    <h2 class="urgency-information__tittle necessarily-tittle">ОБЯЗАТЕЛЬНО!</h2>
+                    <p class="necessarily-block__text">После оплаты нажать кнопку «Я оплатил»</p>
+                    <button class="necessarily-block__btn">Я оплатил</button>
                 </div>
-            </div>
-        </div>
-    </section>
-    <section class="necessarily-block">
-        <div class="necessarily-block__wrapper row">
-            <h2 class="urgency-information__tittle necessarily-tittle">ОБЯЗАТЕЛЬНО!</h2>
-            <p class="necessarily-block__text">После оплаты нажать кнопку «Я оплатил»</p>
-            <button class="necessarily-block__btn">Я оплатил</button>
-        </div>
-    </section>
-</main>
-<footer></footer>
+            </section>
+        </main>
+        <footer></footer>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../js/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
-<script type="text/javascript" src="../js/moment-timer.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/application.js"></script>
-<script type="text/javascript" src="../js/slick.min.js"></script>
-<script>
-    $(function(){
-        $('#slickVertical').slick({
-            vertical: true,
-            verticalSwiping: true,
-            slidesToShow: 1,
-            arrows : false,
-            autoplay: true,
-        });
-    });
-</script>
 </body>
 
 </html>

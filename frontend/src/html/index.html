@@ -34,7 +34,7 @@
 							<li class="navigation-menu__menu-item"><a href="/">Главная страница</a></li>
 							<li class="navigation-menu__menu-item"><a href="#info">Информация о проекте</a></li>
 							<li class="navigation-menu__menu-item"><a href="/rules.html">Правила</a></li>
-							<li class="navigation-menu__menu-item"><a href="/garanties.html">Гарантии</a></li>
+							<li class="navigation-menu__menu-item"><a href="#garanties">Гарантии</a></li>
 							<li class="navigation-menu__menu-item"><a href="/faq.html">F.A.Q.</a></li>
 							<li class="navigation-menu__menu-item"><a href="/contacts.html">Контакты</a></li>
 						</ul>
@@ -178,7 +178,7 @@
 						<div class="corner-right-bottom"></div>
 					</div>
 				</section>
-				<section class="our-guarantees">
+				<section class="our-guarantees" id="garanties">
 					<div class="container our-guarantees__wrapper">
 						<div class="our-guarantees__lists row">
 							<h2 class="sections-tittle our-guarantees__tittle col-lg-12 col-md-12">Наши гарантии</h2>
@@ -222,35 +222,26 @@
 						</div>
 					</div>
 
-				</section>
-			</main>
+			</section>
+		</main>
 			<footer></footer>
-		<div id="preloader" style="display: none;">
+			<div id="preloader" style="display: none;">
 			<div id="preloader-container">
 				<div></div>
 			</div>
 		</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<script src="../js/underscore.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="../js/createNumberMask.js"></script>
-	<script type="text/javascript" src="../js/vanillaTextMask.js"></script>
-	<script type="text/javascript" src="../js/jquery.creditCardValidator.js"></script>
-	<script type="text/javascript" src="../js/wallet-address-validator.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+	<script src="../js/createNumberMask.js"></script>
+	<script src="../js/vanillaTextMask.js"></script>
+	<script src="../js/jquery.creditCardValidator.js"></script>
+	<script src="../js/wallet-address-validator.min.js"></script>
+	<script src="../js/stats.js"></script>
 	<script src="../js/main.js"></script>
 	<script src="../js/calclulator.js"></script>
 	<script src="../js/slick.min.js"></script>
-	<script>
-		$(function(){
-			$('#slickVertical').slick({
-				vertical: true,
-				verticalSwiping: true,
-				slidesToShow: 1,
-				arrows : false,
-				autoplay: true,
-				});
-					});
-	</script>
+	<script src="../js/slowSlide.js"></script>
+	<script src="../js/sliderParametrs.js"></script>
 	<script id="card_number_template" type="text/template">
 		<div class="calculator__pre-tittle field-info">
 			<span class="calculator__got-massage client-pre_tittle">Номер карты для оплаты</span>

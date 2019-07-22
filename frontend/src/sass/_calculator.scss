@@ -4,6 +4,7 @@
     border: 10px solid #f2b92b;
     width: 371px;
     height: 175px;
+    z-index: -1;
 }
 
 .corner-left-top {
@@ -22,7 +23,6 @@
     bottom: 0;
     border-left: none;
     border-top: none;
-    z-index: 0;
 }
 
 .calculator-wrapper {

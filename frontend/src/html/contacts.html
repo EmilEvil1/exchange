@@ -34,7 +34,7 @@
 						<li class="navigation-menu__menu-item"><a href="/">Главная страница</a></li>
 						<li class="navigation-menu__menu-item"><a href="#info">Информация о проекте</a></li>
 						<li class="navigation-menu__menu-item"><a href="/rules.html">Правила</a></li>
-						<li class="navigation-menu__menu-item"><a href="#garanties">Гарантии</a></li>
+						<li class="navigation-menu__menu-item"><a href="/index.html#garanties">Гарантии</a></li>
 						<li class="navigation-menu__menu-item"><a href="#faq">F.A.Q.</a></li>
 						<li class="navigation-menu__menu-item"><a href="/contacts.html">Контакты</a></li>
 					</ul>
@@ -60,13 +60,24 @@
 		<section class="contacts-infotmation">
 			<div class="contacts-infotmation__wrapper container">
 				<div class="contacts-infotmation__row row">
-						<h2 class="sections-tittle col-lg-12 col-md-12">Контакты</h2>
-						<p>Уважаемые пользователи, для оперативного решения вопроса Вы можете обратиться в наш круглосуточный онлайн-чат, и компетентные специалисты ответят на любые интересующие Вас вопросы</p>
-						<p>Также рекомендуем Вам ознакомиться с разделом "<a class="help-link" href="#">Помощь</a>", где вы сможете найти ответы на самые распространенные вопросы. Мы рады будем предоставить персональные условия обмена для наших постоянных клиентов с крупным оборотом средств, для этого свяэитесь, пожалуйста, с нами через форму ниже.</p>
-						<div class="contacts-infotmation__form-wrapper container col-lg-8 col-md-8">
-							<div class="corner-left-top"></div>
-							<div class="corner-right-bottom"></div>
+					<h2 class="sections-tittle col-lg-12 col-md-12">Контакты</h2>
+					<p style="font-size:20px">Уважаемые пользователи, для оперативного решения вопроса Вы можете обратиться в наш круглосуточный онлайн-чат, и компетентные специалисты ответят на любые интересующие Вас вопросы</p>
+					<p style="font-size:20px">Также рекомендуем Вам ознакомиться с разделом "<a class="help-link" href="#">Помощь</a>", где вы сможете найти ответы на самые распространенные вопросы. Мы рады будем предоставить персональные условия обмена для наших постоянных клиентов с крупным оборотом средств, для этого свяэитесь, пожалуйста, с нами через форму ниже.</p>
+					<div class="contacts-infotmation__form-wrapper container col-lg-8 col-md-8">
+						<div class="corner-left-top contact-line"></div>
+						<h2 class="contacts-infotmation__tittle">Напишите нам</h2>
+						<div class="contacts-infotmation__form">
+							<form id="contactForm" class="contacts-infotmation__feedback">
+								<div class="contacts-infotmation__inputs">
+									<input class="calculator__btn feedback-field" name="name" placeholder="Введите Ваше имя..." id="" value="" type="text"> 
+									<input class="calculator__btn feedback-field" name="e-mail" placeholder="Введите Ваш E-mail..." id="" value="" type="e-mail">  
+								</div>
+								<textarea class="contact-message" placeholder="Введите Ваше сообщение" name="comment" id="contactComment" tabindex=""></textarea>
+								<button class="confirmation-block__exchange-button">Отправить</button>
+							</form> 
 						</div>
+						<div class="corner-right-bottom contact-line"></div>
+					</div>
 				</div>
 			</div>
 
@@ -76,16 +87,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
 <script src="../js/main.js"></script>
 <script src="../js/slick.min.js"></script>
-<script>
-	$(function(){
-		$('#slickVertical').slick({
-			vertical: true,
-			verticalSwiping: true,
-			slidesToShow: 1,
-			arrows : false,
-			autoplay: true,
-			});
-	});
-	</script>
+<!-- <script src="../js/slowSlide.js"></script> -->
+<script src="../js/sliderParametrs.js"></script>
 </body>
 </html>
