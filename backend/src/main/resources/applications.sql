@@ -10,7 +10,7 @@ create table if not exists applications
 	amount_to float null,
 	from_document_payment varchar(100) null,
 	to_document_payment varchar(100) null,
-	create_date date null,
+	create_date DATETIME null,
 	email varchar(50) null,
 	phone varchar(20) null,
 	system_document_payment varchar(100) null,

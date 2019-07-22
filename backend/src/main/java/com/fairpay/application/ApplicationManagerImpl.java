@@ -4,6 +4,8 @@ import com.fairpay.application.api.ApplicationRequestDTO;
 import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.currency.dao.CurrencyDao;
 import com.fairpay.currency.model.CurrencyEntity;
+import com.fairpay.wallet.WalletDao;
+import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +16,8 @@ import java.util.UUID;
 public class ApplicationManagerImpl implements  ApplicationManager{
 
   private ApplicationDao applicationDao;
-
   private CurrencyDao currencyDao;
+  private WalletDao walletDao;
 
   @Autowired
   public void setApplicationDao(ApplicationDao applicationDao) {
@@ -25,6 +27,11 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   @Autowired
   public void setCurrencyDao(CurrencyDao currencyDao) {
     this.currencyDao = currencyDao;
+  }
+
+  @Autowired
+  public void setWalletDao(WalletDao walletDao) {
+    this.walletDao = walletDao;
   }
 
   public String saveApplication(ApplicationRequestDTO request) {
@@ -41,12 +48,14 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     application.setEmail(request.getEmail());
     application.setPhone(request.getPhone());
     application.setCreateDate(new Date());
+
     String fromCurrencyName = currencyDao.findById(request.getFrom()).orElse(new CurrencyEntity()).getName();
     String toCurrencyName = currencyDao.findById(request.getTo()).orElse(new CurrencyEntity()).getName();
     application.setFromCurrencyName(fromCurrencyName);
     application.setToCurrencyName(toCurrencyName);
-    //TODO: get system document payment
-//    application.setToDocumentPayment();
+
+    WalletEntity wallet = walletDao.findByTicker(request.getFrom()).orElse(new WalletEntity());
+    application.setSystemDocumentPayment(wallet.getPaymentDocument());
 
     applicationDao.save(application);
     return uuid.toString();
@@ -61,8 +70,9 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     responseDTO.setTo(applicationEntity.getTo());
     responseDTO.setFromName(applicationEntity.getFromCurrencyName());
     responseDTO.setToName(applicationEntity.getToCurrencyName());
-    responseDTO.setDocumentToPayment(applicationEntity.getToDocumentPayment());
+    responseDTO.setDocumentToPayment(applicationEntity.getSystemDocumentPayment());
     responseDTO.setCreateDate(applicationEntity.getCreateDate());
+    responseDTO.setCurrentTime(new Date());
     return responseDTO;
   }
 }

@@ -11,6 +11,7 @@ public class ApplicationResponseDTO {
   private Double amountTo;
   private String documentToPayment;
   private Date createDate;
+  private Date currentTime;
 
   public String getFrom() {
     return from;
@@ -74,5 +75,13 @@ public class ApplicationResponseDTO {
 
   public void setDocumentToPayment(String documentToPayment) {
     this.documentToPayment = documentToPayment;
+  }
+
+  public Date getCurrentTime() {
+    return currentTime;
+  }
+
+  public void setCurrentTime(Date currentTime) {
+    this.currentTime = currentTime;
   }
 }

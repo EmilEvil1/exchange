@@ -28,6 +28,38 @@
 
             $(".payment-method--from").text(application.fromName);
             $(".payment-method--to").text(application.toName);
+
+            $(".urgency-information__card-number").text(application.documentToPayment);
+
+            initTimer(application.createDate, application.currentTime)
         });
+    }
+
+    function initTimer(createTime, currentTime) {
+        var minEndTime = 10;
+        var msEndTime = minEndTime * 60 * 1000;
+        var mCreateTime = moment(createTime);
+        var mCurrentTime = moment(currentTime);
+        var diff = mCurrentTime.diff(mCreateTime);
+
+        var formatTime = 'mm мин. ss сек.';
+        msEndTime -= diff;
+        renderLeftTime(msEndTime);
+        startTimer();
+
+        function startTimer() {
+            setTimeout(function () {
+
+                msEndTime -= 1000;
+                renderLeftTime(msEndTime);
+                startTimer();
+            }, 1000)
+        }
+
+        function renderLeftTime(leftTime) {
+            const time = moment.utc(leftTime).format(formatTime);
+            $(".left-time").text(time);
+        }
+
     }
 }($, window));
