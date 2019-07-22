@@ -200,9 +200,13 @@
     function validateCryptoAddress($field) {
         var ticker = $field.parent().find(".calculator__pre-tittle").data('ticker');
         var address = $field.val();
-        var valid = WAValidator.validate(address, ticker);
+        var valid = true;
+        try {
+            valid = WAValidator.validate(address, ticker);
+        } catch (e) {
+        }
         if (!valid) {
-            updateFieldWithError($field)
+            updateFieldWithError($field);
             return false;
         }
 
