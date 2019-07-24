@@ -109,7 +109,20 @@
     }
     &__btn.client-info {
         width: 75%;
-    }   
+        cursor: auto;
+    }
+
+}
+.calculator__btn--discount,
+.calculator__btn--sum {
+    cursor: auto;
+}
+.calculator__btn--discount:focus-within,
+.calculator__btn--sum:focus-within {
+    border: 2px solid black;
+}
+.client-info:focus-within {
+    border: 2px solid black;
 }
 .calculator__got-massage.input-name {
     font-size: 20px;
