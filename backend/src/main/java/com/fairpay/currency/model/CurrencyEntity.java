@@ -4,6 +4,7 @@ import com.fairpay.currency.vo.HoldTypeEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity(name = "currencies")
@@ -15,15 +16,17 @@ public class CurrencyEntity {
 
   private String ticker;
 
-  private float rub;
+  private BigDecimal rub;
 
-  private float uah;
+  private BigDecimal uah;
 
   private Integer priority;
 
   private String name;
 
   private HoldTypeEnum holdType;
+
+  private BigDecimal reserves;
 
   @Id
   @NotEmpty
@@ -36,20 +39,20 @@ public class CurrencyEntity {
   }
 
   @Column
-  public float getRub() {
+  public BigDecimal getRub() {
     return rub;
   }
 
-  public void setRub(float rub) {
+  public void setRub(BigDecimal rub) {
     this.rub = rub;
   }
 
   @Column
-  public float getUah() {
+  public BigDecimal getUah() {
     return uah;
   }
 
-  public void setUah(float uah) {
+  public void setUah(BigDecimal uah) {
     this.uah = uah;
   }
 
@@ -79,6 +82,15 @@ public class CurrencyEntity {
 
   public void setHoldType(HoldTypeEnum holdType) {
     this.holdType = holdType;
+  }
+
+  @Column
+  public BigDecimal getReserves() {
+    return reserves;
+  }
+
+  public void setReserves(BigDecimal reserves) {
+    this.reserves = reserves;
   }
 
   @Override

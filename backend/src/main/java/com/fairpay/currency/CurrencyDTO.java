@@ -4,17 +4,29 @@ import com.fairpay.currency.model.CurrencyEntity;
 import com.fairpay.currency.vo.HoldTypeEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
+
 public class CurrencyDTO {
   @JsonProperty("ticker")
   private String ticker;
   @JsonProperty("name")
   private String name;
   @JsonProperty("rub")
-  private Float rub;
+  private BigDecimal rub;
   @JsonProperty("uah")
-  private Float uah;
+  private BigDecimal uah;
   @JsonProperty("holdType")
   private HoldTypeEnum holdType;
+  @JsonProperty("reserves")
+  private BigDecimal reserves;
+
+  public BigDecimal getReserves() {
+    return reserves;
+  }
+
+  public void setReserves(BigDecimal reserves) {
+    this.reserves = reserves;
+  }
 
   public String getTicker() {
     return ticker;
@@ -32,19 +44,19 @@ public class CurrencyDTO {
     this.name = name;
   }
 
-  public Float getRub() {
+  public BigDecimal getRub() {
     return rub;
   }
 
-  public void setRub(Float rub) {
+  public void setRub(BigDecimal rub) {
     this.rub = rub;
   }
 
-  public Float getUah() {
+  public BigDecimal getUah() {
     return uah;
   }
 
-  public void setUah(Float uah) {
+  public void setUah(BigDecimal uah) {
     this.uah = uah;
   }
 
