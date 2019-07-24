@@ -84,6 +84,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         currencyDTO.setRub(currencyEntity.getRub());
         currencyDTO.setUah(currencyEntity.getUah());
         currencyDTO.setTicker(currencyEntity.getTicker());
+        currencyDTO.setReserves(currencyEntity.getReserves());
         currencyDTO.setHoldType(currencyEntity.getHoldType());
         return currencyDTO;
       }).collect(Collectors.toList());
