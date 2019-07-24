@@ -116,7 +116,7 @@
 												</div>
 												<i class="arrow-icon"></i>
 											</div>
-											<p class="calculator__reserve">Резерв: <span class="reserse__btn">3.58339</span> BTC</p>
+											<p class="calculator__reserve">Резерв: <span class="reserve-sum reserse__btn"></span> <span class="reserve-ticker"></span></p>
 										</div>
 										<div class="calculator__selector selector-currency__dropdown-list">
 											<div class="row">
@@ -257,6 +257,12 @@
 		</div>
 		<input class="crypto_address calculator__btn client-info" type="text" placeholder="<%= name %> кошелек">
 		<div class="error-msg">Неверный адрес <%= name %> кошелька</div>
+	</script>
+	<script id="currency_item_template" type="text/template">
+		<div class='currencyItem' data-name="<%=currency.name%>" data-ticker="<%= currency.ticker %>" data-rub-rate="<%=currency.rub%>">
+			<div style="background-image: url(./svg/<%=currency.ticker.toLowerCase()%>.svg)" class="selector-currency__icon"></div>
+			<div class="selector-currency__name"><%=currency.name%></div>
+		</div>
 	</script>
 	</body>
 

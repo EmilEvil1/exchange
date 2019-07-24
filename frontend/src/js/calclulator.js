@@ -39,13 +39,17 @@
         var tickerTo = $(".calculator__btn--to").data('ticker');
         var rateFrom = currencies.find(cur => cur.ticker === tickerFrom).rub;
         var rateTo = currencies.find(cur => cur.ticker === tickerTo).rub;
+        var reserves = currencies.find(cur => cur.ticker === tickerTo).reserves;
         var rate = rateFrom/rateTo;
         var min = 1000/rateFrom;
+
 
         $(".confirmation-block__from-name").text(tickerFrom);
         $(".confirmation-block__rate").text(rate.toFixed(6));
         $(".confirmation-block__to-name").text(tickerTo);
         $(".sum-min").text(min.toFixed(2));
+        $(".reserve-sum").text(reserves);
+        $(".reserve-ticker").text(tickerTo);
         $(".min-currency").text(tickerFrom);
     }
 
@@ -93,15 +97,13 @@
     function handleResponse(response) {
         currencies = response;
         currencies.forEach(function(currency, index) {
-            var templateCurrency = $("<div class='currencyItem' data-name='" + currency.name + "' data-ticker='" + currency.ticker + "' data-rub-rate='" + currency.rub + "'>" +
-                "<div style='background-image: url(./svg/" + currency.ticker.toLowerCase() + ".svg)' class=\"selector-currency__icon\"></div>" +
-                "<div class=\"selector-currency__name\">"+ currency.name + "</div>" +
-                "</div>'");
+            var templateCurrency = $("#currency_item_template").html();
+            var compiledCurrency = _.template(templateCurrency);
 
             if (index < currencies.length / 2) {
-                $(".calculator__selector .selector__row-1").append(templateCurrency);
+                $(".calculator__selector .selector__row-1").append(compiledCurrency({ currency: currency }));
             } else {
-                $(".calculator__selector .selector__row-2").append(templateCurrency);
+                $(".calculator__selector .selector__row-2").append(compiledCurrency({ currency: currency }));
             }
         });
 
@@ -110,7 +112,8 @@
         changeClientInfoBlock();
 
         $(".calculator__btn--to, .calculator__btn--from").click(function(e) {
-            $(this).closest('.direction').find('.calculator__selector').toggle();
+            var $calculator = $(this).closest('.direction').find('.calculator__selector');
+            $calculator.toggle();
         });
 
         $(document).mouseup(function(e) {
@@ -166,7 +169,8 @@
         prefix: '',
         suffix: '',
         allowDecimal: true,
-        decimalLimit: 7
+        decimalLimit: 7,
+        integerLimit: 7
     });
 
     document.querySelectorAll('.calculator__input--from, .calculator__input--to').forEach(function(inputEl) {
