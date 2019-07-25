@@ -33,11 +33,15 @@ INSERT INTO currencies VALUES ("ADA", 5.33871090, 2.1426444, 10, "Cardano", "ADD
 INSERT INTO currencies VALUES ("HT", 184.51, 84.5769287, 20, "Huobi Token", "ADDRESS", 3563.566);
 INSERT INTO currencies VALUES ("WAVES", 154.415549435, 70.2502869, 17, "Waves", "ADDRESS", 674.366);
 INSERT INTO currencies VALUES ("KCS", 67.4406317266, 29.232792, 21, "KuCoin Shares", "ADDRESS", 3656.33);
-INSERT INTO currencies VALUES ("PAX", 64.2980005, 26.3523976, 19, "Paxos Standard Token", "ADDRESS", 3563.43);
+INSERT INTO currencies VALUES ("PAX", 64.2980005, 26.3523976, 19, "Paxos Token", "ADDRESS", 3563.43);
 INSERT INTO currencies VALUES ("BCH", 26190.15260730, 10662.821574, 6, "Bitcoin Cash", "ADDRESS", 6336.35);
 INSERT INTO currencies VALUES("SBER", 1, 1, 24, "Сбербанк", "CARD_NUMBER", 3563.345);
 INSERT INTO currencies VALUES("YANDEX", 1, 1, 25, "Яндекс Деньги", "CARD_NUMBER", 5635.356);
 INSERT INTO currencies VALUES("TINKOFF", 1, 1, 26, "Тинькофф", "CARD_NUMBER", 653.356);
+INSERT INTO currencies VALUES("ADVCASH", 1, 1, 27, "AdvcashRub", "CARD_NUMBER", 2455.45);
+INSERT INTO currencies VALUES("ALPHA", 1, 1, 28, "Альфа Банк", "CARD_NUMBER", 23455.45);
+INSERT INTO currencies VALUES("VTB", 1, 1, 29, "ВТБ Банк", "CARD_NUMBER", 645666.45);
+
 
 
 

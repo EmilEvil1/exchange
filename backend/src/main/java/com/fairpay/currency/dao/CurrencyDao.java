@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Optional;
 
 public interface CurrencyDao extends CrudRepository<CurrencyEntity, String> {
 
@@ -20,5 +20,7 @@ public interface CurrencyDao extends CrudRepository<CurrencyEntity, String> {
   @Modifying
   @Query("UPDATE currencies cur SET cur.uah=?1 where cur.ticker = ?2")
   void updateUahRate(BigDecimal uahRate, String ticker);
+
+  Optional<CurrencyEntity> findByTicker (String ticker);
 
 }

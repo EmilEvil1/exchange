@@ -9,6 +9,8 @@ import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.UUID;
 
@@ -18,6 +20,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   private ApplicationDao applicationDao;
   private CurrencyDao currencyDao;
   private WalletDao walletDao;
+  private ApplicationMailer applicationMailer;
 
   @Autowired
   public void setApplicationDao(ApplicationDao applicationDao) {
@@ -34,6 +37,12 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     this.walletDao = walletDao;
   }
 
+  @Autowired
+  public void setApplicationMailer(ApplicationMailer applicationMailer) {
+    this.applicationMailer = applicationMailer;
+  }
+
+
   public String saveApplication(ApplicationRequestDTO request) {
     ApplicationEntity application = new ApplicationEntity();
     UUID uuid = UUID.randomUUID();
@@ -42,7 +51,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     application.setFrom(request.getFrom());
     application.setTo(request.getTo());
     application.setAmountFrom(request.getAmountFrom());
-    application.setAmountTo(request.getAmountTo());
+    application.setAmountTo(calculateToAmount(request.getFrom(), request.getTo(), request.getAmountFrom()));
     application.setFromDocumentPayment(request.getFromDocumentPayment());
     application.setToDocumentPayment(request.getFromDocumentPayment());
     application.setEmail(request.getEmail());
@@ -74,5 +83,11 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     responseDTO.setCreateDate(applicationEntity.getCreateDate());
     responseDTO.setCurrentTime(new Date());
     return responseDTO;
+  }
+
+  private BigDecimal calculateToAmount(String fromTicker, String toTicker, BigDecimal fromAmout) {
+    CurrencyEntity fromCurrency = currencyDao.findByTicker(fromTicker).orElse(new CurrencyEntity());
+    CurrencyEntity toCurrency = currencyDao.findByTicker(toTicker).orElse(new CurrencyEntity());
+    return fromCurrency.getRub().divide(toCurrency.getRub(), 10, RoundingMode.HALF_UP).multiply(fromAmout);
   }
 }

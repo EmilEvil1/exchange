@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity(name = "applications")
@@ -12,8 +13,8 @@ public class ApplicationEntity {
   private String id;
   private String from;
   private String to;
-  private Double amountFrom;
-  private Double amountTo;
+  private BigDecimal amountFrom;
+  private BigDecimal amountTo;
   private String fromDocumentPayment;
   private String toDocumentPayment;
   private String systemDocumentPayment;
@@ -40,12 +41,12 @@ public class ApplicationEntity {
   }
 
   @Column(name = "amount_from")
-  public Double getAmountFrom() {
+  public BigDecimal getAmountFrom() {
     return amountFrom;
   }
 
   @Column(name = "amount_to")
-  public Double getAmountTo() {
+  public BigDecimal getAmountTo() {
     return amountTo;
   }
 
@@ -113,11 +114,11 @@ public class ApplicationEntity {
     this.to = to;
   }
 
-  public void setAmountFrom(Double amountFrom) {
+  public void setAmountFrom(BigDecimal amountFrom) {
     this.amountFrom = amountFrom;
   }
 
-  public void setAmountTo(Double amountTo) {
+  public void setAmountTo(BigDecimal amountTo) {
     this.amountTo = amountTo;
   }
 
@@ -139,5 +140,24 @@ public class ApplicationEntity {
 
   public void setPhone(String phone) {
     this.phone = phone;
+  }
+
+  @Override
+  public String toString() {
+    return "ApplicationEntity{" +
+      "id='" + id + '\'' +
+      ", from='" + from + '\'' +
+      ", to='" + to + '\'' +
+      ", amountFrom=" + amountFrom +
+      ", amountTo=" + amountTo +
+      ", fromDocumentPayment='" + fromDocumentPayment + '\'' +
+      ", toDocumentPayment='" + toDocumentPayment + '\'' +
+      ", systemDocumentPayment='" + systemDocumentPayment + '\'' +
+      ", fromCurrencyName='" + fromCurrencyName + '\'' +
+      ", toCurrencyName='" + toCurrencyName + '\'' +
+      ", createDate=" + createDate +
+      ", email='" + email + '\'' +
+      ", phone='" + phone + '\'' +
+      '}';
   }
 }

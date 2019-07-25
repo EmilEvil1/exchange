@@ -1,8 +1,9 @@
 (function($, window) {
     var regUrl = /application.html\?applicationId=(.+)/;
     var currentUrl = window.location.href;
+    var applicationId;
     if (currentUrl.match(regUrl)) {
-        var applicationId = currentUrl.match(regUrl)[1];
+        applicationId = currentUrl.match(regUrl)[1];
         $.ajax({
             url: '/api/application',
             data: {
@@ -60,6 +61,20 @@
             const time = moment.utc(leftTime).format(formatTime);
             $(".left-time").text(time);
         }
-
     }
+
+    $(".necessarily-block__btn").click(function() {
+        $.ajax({
+            url: '/api/application/pay',
+            data: {
+                applicationId: applicationId
+            },
+            method: 'POST',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        }).done(function() {
+            window.location.href = '/';
+        })
+    })
 }($, window));

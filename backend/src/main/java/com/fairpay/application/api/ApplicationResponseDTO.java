@@ -1,5 +1,6 @@
 package com.fairpay.application.api;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class ApplicationResponseDTO {
@@ -7,8 +8,8 @@ public class ApplicationResponseDTO {
   private String to;
   private String fromName;
   private String toName;
-  private Double amountFrom;
-  private Double amountTo;
+  private BigDecimal amountFrom;
+  private BigDecimal amountTo;
   private String documentToPayment;
   private Date createDate;
   private Date currentTime;
@@ -45,11 +46,11 @@ public class ApplicationResponseDTO {
     this.toName = toName;
   }
 
-  public Double getAmountFrom() {
+  public BigDecimal getAmountFrom() {
     return amountFrom;
   }
 
-  public void setAmountFrom(Double amountFrom) {
+  public void setAmountFrom(BigDecimal amountFrom) {
     this.amountFrom = amountFrom;
   }
 
@@ -61,11 +62,11 @@ public class ApplicationResponseDTO {
     this.createDate = createDate;
   }
 
-  public Double getAmountTo() {
+  public BigDecimal getAmountTo() {
     return amountTo;
   }
 
-  public void setAmountTo(Double amountTo) {
+  public void setAmountTo(BigDecimal amountTo) {
     this.amountTo = amountTo;
   }
 

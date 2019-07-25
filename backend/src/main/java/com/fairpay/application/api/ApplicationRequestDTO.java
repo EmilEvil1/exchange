@@ -1,10 +1,12 @@
 package com.fairpay.application.api;
 
+import java.math.BigDecimal;
+
 public class ApplicationRequestDTO {
   private String from;
   private String to;
-  private Double amountFrom;
-  private Double amountTo;
+  private BigDecimal amountFrom;
+  private BigDecimal amountTo;
   private String fromDocumentPayment;
   private String toDocumentPayment;
   private String email;
@@ -26,19 +28,19 @@ public class ApplicationRequestDTO {
     this.to = to;
   }
 
-  public Double getAmountFrom() {
+  public BigDecimal getAmountFrom() {
     return amountFrom;
   }
 
-  public void setAmountFrom(Double amountFrom) {
+  public void setAmountFrom(BigDecimal amountFrom) {
     this.amountFrom = amountFrom;
   }
 
-  public Double getAmountTo() {
+  public BigDecimal getAmountTo() {
     return amountTo;
   }
 
-  public void setAmountTo(Double amountTo) {
+  public void setAmountTo(BigDecimal amountTo) {
     this.amountTo = amountTo;
   }
 
