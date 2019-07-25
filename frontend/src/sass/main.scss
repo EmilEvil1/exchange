@@ -1,25 +1,20 @@
 @import '../../node_modules/bootstrap/scss/bootstrap-grid.scss';
+@import "./fonts";
 @import "./slick-theme";
 @import "./slick";
 @import "./guarantees";
-@import "./fields";
 @import "./application";
 @import "./contacts";
 @import "./calculator";
 @import "./adaptive";
 @import "./faq";
-// html{
-//     scroll-behavior: smooth;
-// }
+
+
 .main-content {
     margin: 0;
     padding: 0;
-    // font for tittles
-    // font-family: 'Encode Sans Condensed', sans-serif;
-
-    // font for text content
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 16px;
+    font-family: "DINPro-Medium", "sans-serif";
+    font-size: 20px;
     color: #282828;
 }
 
@@ -45,7 +40,6 @@
     display: flex;
     align-items: center;
     border-radius: 50%;
-    font-weight: bold;
 }
 .social-link::before{
     content: '';
@@ -118,6 +112,7 @@
     align-items: center;
 }
 .navigation-menu__menu-item {
+    
     text-transform: uppercase;
     width: 15%;
     height: 100%;
@@ -125,8 +120,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 28px;
+    line-height: 25px;
 
     & a{
         color: #231f20;
@@ -171,7 +166,7 @@ canvas {
     align-items: center;
     color: white;
     outline: none;
-    font-size: 25px;
+    font-size: 30px;
     padding: 0 15px;
 }
 .rules-info {
@@ -183,7 +178,6 @@ canvas {
 }
 .rules-info__text {
     font-size: 20px;
-    font-weight: bold;
     margin: 15px 0;
 }
 .currency-exchange {
@@ -253,7 +247,8 @@ canvas {
     border-top: 2px solid #f2b92b;
     border-bottom: 2px solid #f2b92b;
     padding: 20px 0;
-    font-size: 25px;
+    font-size: 30px;
+    font-weight: 400;
 }
 
 // footer
@@ -265,7 +260,7 @@ canvas {
 
     &__row {
         width: 100%;
-        padding: 40px 0;
+        padding: 40px 0 30px;
     }
 
 
@@ -285,7 +280,6 @@ canvas {
 
     &__slogan {
         color: #f3ba2f;
-        font-weight: bold;
     }
 
     &__menu-items {
@@ -303,7 +297,6 @@ canvas {
         color: white;
         text-decoration: none;
         text-transform: uppercase;
-        font-weight: bold;
         transition: 0.15s;
     }
 
@@ -318,7 +311,6 @@ canvas {
         display: flex;
         align-items: center;
         border-radius: 50%;
-        font-weight: bold;
         transition: 0.15s;
     }
 

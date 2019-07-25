@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<title>Fair Pay</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Roboto+Condensed&display=swap" rel="stylesheet">
+		<link rel="icon" href="../icons/favicon.png" sizes="16x16" type="image/png">
 	</head>
 	<body class="main-content">
 		<header class="top-content">
@@ -14,7 +14,7 @@
 				<div class="row">
 					<div class="info-company__social-links">
 						<a class="social-link telegram" href="">tg@test.com</a>
-						<a class="social-link e-mail" href="">test@crypt.com</a>
+						<a class="social-link e-mail" href="">faipay24@gmail.com</a>
 						<a class="social-link number" href="">+1(222)333-44-55</a>
 					</div>
 				</div>
@@ -105,18 +105,20 @@
 									</div>
 									<div class="to direction calculator__to col-lg-4 col-md-4">
 										<div class="calculator__title">
-											<div class="calculator__pre-tittle">
-												<i class="arrow-up reversed"></i>
-												<span class="calculator__got-massage input-name">Получу</span>
-											</div>
-											<div class="calculator__btn calculator__btn--to" data-ticker="BTC">
-												<div class="payment-method">
-													<i class="payment-method__icon-bank btc"></i>
-													<span class="payment-method__payment-name">BitcoinBTC</span>
+											<div class="calculator__title">
+												<div class="calculator__pre-tittle">
+													<i class="arrow-up reversed"></i>
+													<span class="calculator__got-massage input-name">Получу</span>
 												</div>
-												<i class="arrow-icon"></i>
-											</div>
-											<p class="calculator__reserve">Резерв: <span class="reserve-sum reserse__btn"></span> <span class="reserve-ticker"></span></p>
+												<div class="calculator__btn calculator__btn--to" data-ticker="BTC">
+													<div class="payment-method">
+														<i class="payment-method__icon-bank btc"></i>
+														<span class="payment-method__payment-name">BitcoinBTC</span>
+													</div>
+													<i class="arrow-icon"></i>
+												</div>
+												<p class="calculator__reserve">Резерв: <span class="reserve-sum reserse__btn"></span><span class="reserve-ticker"></span></p>
+											</div>					
 										</div>
 										<div class="calculator__selector selector-currency__dropdown-list">
 											<div class="row">
@@ -243,7 +245,7 @@
 						</div>
 						<div class="footer-information__social-links">
 							<a class="footer-information__social-link f-telegram" href="">tg@test.com</a>
-							<a class="footer-information__social-link f-email" href="">test@crypt.com</a>
+							<a class="footer-information__social-link f-email" href="">faipay24@gmail.com</a>
 							<a class="footer-information__social-link f-phone" href="">+1(222)333-44-55</a>
 						</div>
 						
@@ -277,6 +279,7 @@
 		<div class="error-msg">Карта введена неправильно</div>
 	</script>
 	<script id="crypto_address_template" type="text/template">
+		
 		<div class="calculator__pre-tittle field-info" data-ticker="<%= ticker %>">
 			<span class="calculator__got-massage client-pre_tittle">
 			<span class="client-pre-currency"><%= name %></span> кошелек для получения
@@ -286,10 +289,11 @@
 		<div class="error-msg">Неверный адрес <%= name %> кошелька</div>
 	</script>
 	<script id="currency_item_template" type="text/template">
-		<div class='currencyItem' data-name="<%=currency.name%>" data-ticker="<%= currency.ticker %>" data-rub-rate="<%=currency.rub%>">
+		<!-- attribute "disabled" -->
+		<a class='currencyItem' data-name="<%=currency.name%>" data-ticker="<%= currency.ticker %>" data-rub-rate="<%=currency.rub%>">
 			<div style="background-image: url(./svg/<%=currency.ticker.toLowerCase()%>.svg)" class="selector-currency__icon"></div>
 			<div class="selector-currency__name"><%=currency.name%></div>
-		</div>
+		</a>
 	</script>
 	</body>
 
