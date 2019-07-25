@@ -6,7 +6,6 @@
 		<meta charset="utf-8">
 		<title>Fair Pay</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Roboto+Condensed&display=swap" rel="stylesheet">
 	</head>
 	<body class="main-content">
 		<header class="top-content">
@@ -277,6 +276,7 @@
 		<div class="error-msg">Карта введена неправильно</div>
 	</script>
 	<script id="crypto_address_template" type="text/template">
+		
 		<div class="calculator__pre-tittle field-info" data-ticker="<%= ticker %>">
 			<span class="calculator__got-massage client-pre_tittle">
 			<span class="client-pre-currency"><%= name %></span> кошелек для получения
@@ -286,10 +286,11 @@
 		<div class="error-msg">Неверный адрес <%= name %> кошелька</div>
 	</script>
 	<script id="currency_item_template" type="text/template">
-		<div class='currencyItem' data-name="<%=currency.name%>" data-ticker="<%= currency.ticker %>" data-rub-rate="<%=currency.rub%>">
+
+		<a class='currencyItem' data-name="<%=currency.name%>" data-ticker="<%= currency.ticker %>" data-rub-rate="<%=currency.rub%>" disabled>
 			<div style="background-image: url(./svg/<%=currency.ticker.toLowerCase()%>.svg)" class="selector-currency__icon"></div>
 			<div class="selector-currency__name"><%=currency.name%></div>
-		</div>
+		</a>
 	</script>
 	</body>
 

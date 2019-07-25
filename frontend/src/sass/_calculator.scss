@@ -196,7 +196,6 @@
 
 .reserse__btn {
     color: #f2b92b;
-    font-weight: bold;
 }
 .payment-method {
     display: flex;
@@ -208,9 +207,6 @@
         height: 20px;
         background-size: cover;
         margin: 0 10px 0 5px;
-    }
-    &__payment-name {
-        font-weight: 400;
     }
 }
 .btc {
@@ -226,7 +222,6 @@
 }
 .client-pre_tittle {
     color: #282828;
-    font-weight: bold;
 }
 .confirmation-block{
     &__wrapper {
@@ -237,7 +232,6 @@
     &__course {
         text-transform: uppercase;
         color: #282828;
-        font-weight: bold;
         font-size: 25px;
         margin-bottom: 15px;
         
@@ -270,6 +264,12 @@ input[type="text"]:focus{outline: none;}
 .field-info {
     width: 75%;
     padding: 0 10px;
+}
+
+[disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: no-drop;
 }
 
 

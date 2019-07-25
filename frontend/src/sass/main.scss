@@ -14,7 +14,7 @@
 .main-content {
     margin: 0;
     padding: 0;
-    font-family: "DINPro-Medium", "system-ui";
+    font-family: "DINPro-Medium", "sans-serif";
     font-size: 16px;
     color: #282828;
 }
@@ -41,7 +41,7 @@
     display: flex;
     align-items: center;
     border-radius: 50%;
-    font-weight: bold;
+    font-family: "DINPro-Bold", "sans-serif";
 }
 .social-link::before{
     content: '';
@@ -114,6 +114,7 @@
     align-items: center;
 }
 .navigation-menu__menu-item {
+    
     text-transform: uppercase;
     width: 15%;
     height: 100%;
@@ -121,8 +122,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-weight: bold;
     font-size: 20px;
+    font-family: "DINPro-Bold", "sans-serif";
 
     & a{
         color: #231f20;
@@ -179,7 +180,6 @@ canvas {
 }
 .rules-info__text {
     font-size: 20px;
-    font-weight: bold;
     margin: 15px 0;
 }
 .currency-exchange {
@@ -281,7 +281,6 @@ canvas {
 
     &__slogan {
         color: #f3ba2f;
-        font-weight: bold;
     }
 
     &__menu-items {
@@ -299,7 +298,6 @@ canvas {
         color: white;
         text-decoration: none;
         text-transform: uppercase;
-        font-weight: bold;
         transition: 0.15s;
     }
 
@@ -314,7 +312,6 @@ canvas {
         display: flex;
         align-items: center;
         border-radius: 50%;
-        font-weight: bold;
         transition: 0.15s;
     }
 
