@@ -10,6 +10,7 @@ var settings = {
 	styles: true,
 	svgs: true,
 	copy: true,
+	fonts: true,
 	reload: true
 };
 
@@ -41,6 +42,10 @@ var paths = {
 	copyIcons: {
 		input: 'src/icons/*.png',
 		output: 'dist/icons'
+	},
+	copyFonts: {
+		input: 'src/fonts/**/*',
+		output: 'dist/fonts'
 	},
 	reload: './dist/',
 	
@@ -219,6 +224,7 @@ var buildStyles = function (done) {
 			discardComments: {
 				removeAll: true
 			}
+
 		}))
 		.pipe(header(banner.min, { package : package }))
 		.pipe(dest(paths.styles.output));
@@ -283,6 +289,19 @@ var startServer = function (done) {
 
 };
 
+// Fonts
+var copyFonts = function (done) {
+
+    // Make sure this feature is activated before running
+    if (!settings.fonts) return done();
+
+    // Copy static files
+    return src(paths.copyFonts.input)
+        .pipe(dest(paths.copyFonts.output));
+
+};
+
+
 // Reload the browser when files change
 var reloadBrowser = function (done) {
 	if (!settings.reload) return done();
@@ -311,7 +330,8 @@ exports.default = series(
 		buildStyles,
 		buildSVGs,
 		copyFiles,
-        copyIcons
+		copyIcons,
+		copyFonts
 	)
 );
 
