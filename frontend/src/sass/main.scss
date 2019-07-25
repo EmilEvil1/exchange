@@ -3,7 +3,6 @@
 @import "./slick-theme";
 @import "./slick";
 @import "./guarantees";
-@import "./fields";
 @import "./application";
 @import "./contacts";
 @import "./calculator";
@@ -15,7 +14,7 @@
     margin: 0;
     padding: 0;
     font-family: "DINPro-Medium", "sans-serif";
-    font-size: 16px;
+    font-size: 20px;
     color: #282828;
 }
 
@@ -41,7 +40,6 @@
     display: flex;
     align-items: center;
     border-radius: 50%;
-    font-family: "DINPro-Bold", "sans-serif";
 }
 .social-link::before{
     content: '';
@@ -122,8 +120,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 20px;
-    font-family: "DINPro-Bold", "sans-serif";
+    font-size: 28px;
+    line-height: 25px;
 
     & a{
         color: #231f20;
@@ -168,7 +166,7 @@ canvas {
     align-items: center;
     color: white;
     outline: none;
-    font-size: 25px;
+    font-size: 30px;
     padding: 0 15px;
 }
 .rules-info {
@@ -249,7 +247,8 @@ canvas {
     border-top: 2px solid #f2b92b;
     border-bottom: 2px solid #f2b92b;
     padding: 20px 0;
-    font-size: 25px;
+    font-size: 30px;
+    font-weight: 400;
 }
 
 // footer

@@ -104,18 +104,20 @@
 									</div>
 									<div class="to direction calculator__to col-lg-4 col-md-4">
 										<div class="calculator__title">
-											<div class="calculator__pre-tittle">
-												<i class="arrow-up reversed"></i>
-												<span class="calculator__got-massage input-name">Получу</span>
-											</div>
-											<div class="calculator__btn calculator__btn--to" data-ticker="BTC">
-												<div class="payment-method">
-													<i class="payment-method__icon-bank btc"></i>
-													<span class="payment-method__payment-name">BitcoinBTC</span>
+											<div class="calculator__title">
+												<div class="calculator__pre-tittle">
+													<i class="arrow-up reversed"></i>
+													<span class="calculator__got-massage input-name">Получу</span>
 												</div>
-												<i class="arrow-icon"></i>
-											</div>
-											<p class="calculator__reserve">Резерв: <span class="reserve-sum reserse__btn"></span> <span class="reserve-ticker"></span></p>
+												<div class="calculator__btn calculator__btn--to" data-ticker="BTC">
+													<div class="payment-method">
+														<i class="payment-method__icon-bank btc"></i>
+														<span class="payment-method__payment-name">BitcoinBTC</span>
+													</div>
+													<i class="arrow-icon"></i>
+												</div>
+												<p class="calculator__reserve">Резерв: <span class="reserve-sum reserse__btn"></span><span class="reserve-ticker"></span></p>
+											</div>					
 										</div>
 										<div class="calculator__selector selector-currency__dropdown-list">
 											<div class="row">
@@ -286,8 +288,8 @@
 		<div class="error-msg">Неверный адрес <%= name %> кошелька</div>
 	</script>
 	<script id="currency_item_template" type="text/template">
-
-		<a class='currencyItem' data-name="<%=currency.name%>" data-ticker="<%= currency.ticker %>" data-rub-rate="<%=currency.rub%>" disabled>
+		<!-- attribute "disabled" -->
+		<a class='currencyItem' data-name="<%=currency.name%>" data-ticker="<%= currency.ticker %>" data-rub-rate="<%=currency.rub%>">
 			<div style="background-image: url(./svg/<%=currency.ticker.toLowerCase()%>.svg)" class="selector-currency__icon"></div>
 			<div class="selector-currency__name"><%=currency.name%></div>
 		</a>

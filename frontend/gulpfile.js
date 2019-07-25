@@ -274,7 +274,7 @@ var startServer = function (done) {
 
 	// const routeOptions = url.parse('http://localhost:8080/');
 	// routeOptions.route = '/api';
-	const proxy = proxyMiddleware('/api', { target: 'http://localhost:8080/' })
+	const proxy = proxyMiddleware('/api', { target: 'http://www.fairpay24.com:8080' })
 
 	// Initialize BrowserSync
 	browserSync.init({
