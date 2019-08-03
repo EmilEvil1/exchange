@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta charset="utf-8">
+	<title>Статус транзакции</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed|Roboto+Condensed&display=swap" rel="stylesheet">
+</head>
+<body class="main-content">
+	<header class="top-content">
+		<div class="info-company container-fluid">
+			<div class="row">
+				<div class="info-company__social-links">
+					<a class="social-link telegram" href="">tg@test.com</a>
+					<a class="social-link e-mail" href="">fairpay24@gmail.com</a>
+					<a class="social-link number" href="">+1(222)333-44-55</a>
+				</div>
+			</div>
+		</div>
+		<div class="personable-block container-fluid">
+			<canvas class="cursor-pointer" style="width: 100%; height:100%;"></canvas>
+			<div class="container logo-wrapper" id="cursorPointer">
+				<div class="logo-block__wrapper">
+					<img class="main-logo" src="../svg/main-logo.svg" alt="Логотип">
+				</div>
+			</div>
+		</div>
+		<div class="menu-bar">
+			<div class="container menu-wrapper">
+				<nav class="navigation-menu">
+					<ul class="navigation-menu__menu-items list-unstyled">
+                        <li class="navigation-menu__menu-item"><a href="/">Главная страница</a></li>
+                        <li class="navigation-menu__menu-item"><a href="#info">Калькулятор обмена</a></li>
+                        <li class="navigation-menu__menu-item"><a href="/rules.html">Правила</a></li>
+                        <li class="navigation-menu__menu-item"><a href="#garanties">Гарантии</a></li>
+                        <li class="navigation-menu__menu-item"><a href="/faq.html">F.A.Q.</a></li>
+                        <li class="navigation-menu__menu-item"><a href="/contacts.html">Контакты</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<main class="main-content">
+        <section class="crawl-line">
+            <div class="crawl-line__wrapper container">
+                <img class="crawl-line__speaker" src="../svg/speaker.svg" alt="Бегущая строка">
+                <div id="slickVertical" class="crawl-line__slider">
+                    <span class="slider-text">Мы запускаем приложение для Andoid & IOS такого то числа</span>
+                    <span class="slider-text">Мы приняли участие в конференции ''Тенденции международных переводов</span>
+                    <span class="slider-text">Мы имплементировали функцию трекинга транзакции</span>
+                    <span class="slider-text">Наша команда поучаствовала в Hartford Worldwide Hackaton</span>
+                    <span class="slider-text">Мы оптимизировали скорость работы сервиса</span>
+                    <span class="slider-text">Команда FarePay разрабатывает новый холодный кошелёк для хранения более 18 криптовалют</span>
+                    <span class="slider-text">FarePay разрабатывает базу для заключения смарт- контрактов с клиентами </span>
+                </div>
+            </div>
+        </section>
+        <section class="transaction-status">
+            <div class="transaction-status__wrapper container">
+                <div class="transaction-status__row row">
+                    <h2 class="sections-tittle col-lg-12 col-md-12">Статус транзакции</h2>
+                    <div class="transaction-status__transaction-block col-lg-12 col-md-12">
+                        <div class="transaction-status__numeric-status">
+                            <div class="transaction-status__not-completed numeric-proccess">1</div>
+                            <i class="transaction-status__arrow"></i>
+                            <div class="transaction-status__not-completed numeric-proccess">2</div>
+                            <i class="transaction-status__arrow"></i>
+                            <div class="transaction-status__active-status numeric-proccess">3</div>
+                            <i class="transaction-status__arrow"></i>
+                            <div class="transaction-status__completed numeric-proccess">4</div>
+                            <i class="transaction-status__arrow"></i>
+                            <div class="transaction-status__completed numeric-proccess">5</div>
+                        </div>
+                        <div class="transaction-status__text-status">
+                            <div class="transaction-status__text"><span class="transaction-status__numbering-text">1</span> Ожидается получение средств.</div>
+                            <div class="transaction-status__text"><span class="transaction-status__numbering-text">2</span> Средства получены.</div>
+                            <div class="transaction-status__text"><span class="transaction-status__numbering-text active-text">3</span> Валидация платежных данных.</div>
+                            <div class="transaction-status__text"><span class="transaction-status__numbering-text">4</span> Обработка платежа.</div>
+                            <div class="transaction-status__text"><span class="transaction-status__numbering-text">5</span> Средства отправлены на счет получателя. </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+	</main>
+	<footer class="footer-information">
+			<div class="footer-information__wrapper container">
+				<div class="footer-information__row row">
+					<div class="footer-information__footer-logo col-lg-3 col-md-3">
+						<img class="footer-information__f-logo" src="../svg/footer-logo.svg" alt="footer-logo">
+						<span class="footer-information__slogan">НАДЕЖНО. ВСЕГДА. 24/7.</span>
+					</div>
+					<div class="footer-information__navigation-menu col-lg-9 col-md-9">
+						<div class="footer-information__menu">
+							<ul class="footer-information__menu-items list-unstyled">
+								<li class="footer-information__menu-item"><a class="footer-information__menu-link" href="/">Главная страница</a></li>
+								<li class="footer-information__menu-item"><a class="footer-information__menu-link" href="#info">Информация о проекте</a></li>
+								<li class="footer-information__menu-item"><a class="footer-information__menu-link" href="/rules.html">Правила</a></li>
+								<li class="footer-information__menu-item"><a class="footer-information__menu-link" href="#garanties">Гарантии</a></li>
+								<li class="footer-information__menu-item"><a class="footer-information__menu-link" href="/faq.html">F.A.Q.</a></li>
+								<li class="footer-information__menu-item"><a class="footer-information__menu-link" href="/contacts.html">Контакты</a></li>
+							</ul>
+						</div>
+						<div class="footer-information__social-links">
+							<a class="footer-information__social-link f-telegram" href="">tg@test.com</a>
+							<a class="footer-information__social-link f-email" href="">fairpay24@gmail.com</a>
+							<a class="footer-information__social-link f-phone" href="">+1(222)333-44-55</a>
+						</div>
+						
+					</div>
+					<span class="footer-information__ktz col-lg-12 col-md-12">POWERED BY KTZ <br> 2019</span>
+				</div>
+			</div>
+		</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/slick.min.js"></script>
+<script>
+	$(function(){
+		$('#slickVertical').slick({
+			vertical: true,
+			verticalSwiping: true,
+			slidesToShow: 1,
+			arrows : false,
+			autoplay: true,
+			});
+	});
+	</script>
+</body>
+</html>
