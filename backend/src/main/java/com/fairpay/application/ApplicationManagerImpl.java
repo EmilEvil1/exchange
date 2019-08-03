@@ -4,9 +4,11 @@ import com.fairpay.application.api.ApplicationRequestDTO;
 import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.currency.dao.CurrencyDao;
 import com.fairpay.currency.model.CurrencyEntity;
+import com.fairpay.moderatorBot.services.MessageSender;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -17,10 +19,15 @@ import java.util.UUID;
 @Component
 public class ApplicationManagerImpl implements  ApplicationManager{
 
+  private static final String MODERATOR_ID = "telegram.bot.moderator.chat.id";
+
   private ApplicationDao applicationDao;
   private CurrencyDao currencyDao;
   private WalletDao walletDao;
   private ApplicationMailer applicationMailer;
+  private ApplicationFormatter applicationFormatter;
+  private Environment environment;
+  private MessageSender messageSender;
 
   @Autowired
   public void setApplicationDao(ApplicationDao applicationDao) {
@@ -42,6 +49,20 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     this.applicationMailer = applicationMailer;
   }
 
+  @Autowired
+  public void setApplicationFormatter(ApplicationFormatter applicationFormatter) {
+    this.applicationFormatter = applicationFormatter;
+  }
+
+  @Autowired
+  public void setEnvironment(Environment environment) {
+    this.environment = environment;
+  }
+
+  @Autowired
+  public void setMessageSender(MessageSender messageSender) {
+    this.messageSender = messageSender;
+  }
 
   public String saveApplication(ApplicationRequestDTO request) {
     ApplicationEntity application = new ApplicationEntity();
@@ -83,6 +104,18 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     responseDTO.setCreateDate(applicationEntity.getCreateDate());
     responseDTO.setCurrentTime(new Date());
     return responseDTO;
+  }
+
+  public String notifyModerator(String applicationId) {
+    ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
+    applicationMailer.sendApplicationToModerator(application);
+
+    String applicationBotFormatting = applicationFormatter.formatApplicationForBot(application);
+    Long userId = Long.valueOf(environment.getProperty(ApplicationManagerImpl.MODERATOR_ID));
+
+    messageSender.send(userId, applicationBotFormatting);
+
+    return "success";
   }
 
   private BigDecimal calculateToAmount(String fromTicker, String toTicker, BigDecimal fromAmout) {

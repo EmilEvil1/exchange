@@ -17,12 +17,19 @@ public class ApplicationMailer {
   @Autowired
   private JavaMailSender emailSender;
 
+  private ApplicationFormatter applicationFormatter;
+
+  @Autowired
+  public void setApplicationFormatter(ApplicationFormatter applicationFormatter) {
+    this.applicationFormatter = applicationFormatter;
+  }
+
   public void sendApplicationToModerator(ApplicationEntity application) {
     String moderatorEmail = environment.getProperty(ApplicationMailer.MODERATOR_EMAIL);
     SimpleMailMessage message = new SimpleMailMessage();
     message.setTo(moderatorEmail);
     message.setSubject("New Application");
-    message.setText(application.toString());
+    message.setText(applicationFormatter.formatApplicationForMail(application));
     emailSender.send(message);
   }
 }

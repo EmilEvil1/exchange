@@ -65,13 +65,12 @@
 
     $(".necessarily-block__btn").click(function() {
         $.ajax({
-            url: '/api/application/pay',
-            data: {
-                applicationId: applicationId
-            },
+            url: '/api/pay',
+            data: JSON.stringify({ applicationId: applicationId }),
             method: 'POST',
             headers: {
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
             }
         }).done(function() {
             window.location.href = '/';

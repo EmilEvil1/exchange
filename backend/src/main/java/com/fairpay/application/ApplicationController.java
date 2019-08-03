@@ -1,5 +1,6 @@
 package com.fairpay.application;
 
+import com.fairpay.application.api.ApplicationPayRequestDTO;
 import com.fairpay.application.api.ApplicationRequestDTO;
 import com.fairpay.application.api.ApplicationResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,8 @@ public class ApplicationController {
     return applicationManager.fetchApplication(applicationId);
   }
 
-  @PostMapping("/api/application/pay")
-  public String payForApplication(String applicationId) {
-    ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
-    applicationMailer.sendApplicationToModerator(application);
-    return "success";
+  @PostMapping("/api/pay")
+  public String payForApplication(@RequestBody ApplicationPayRequestDTO request) {
+    return applicationManager.notifyModerator(request.getApplicationId());
   }
 }
