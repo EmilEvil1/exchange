@@ -112,8 +112,15 @@
         changeClientInfoBlock();
 
         $(".calculator__btn--to, .calculator__btn--from").click(function(e) {
-            var $calculator = $(this).closest('.direction').find('.calculator__selector');
-            $calculator.toggle();
+            var $calculator = $(this).closest('.direction').find('.calculator__selector').toggle();
+            if($calculator) {
+                $calculator.show();
+            }
+            else {
+                $calculator.hide();
+            }
+        
+
         });
 
         $(document).mouseup(function(e) {
