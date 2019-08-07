@@ -4,29 +4,20 @@ import com.fairpay.application.api.ApplicationPayRequestDTO;
 import com.fairpay.application.api.ApplicationRequestDTO;
 import com.fairpay.application.api.ApplicationResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
 public class ApplicationController {
 
   private ApplicationManager applicationManager;
-  private ApplicationDao applicationDao;
-  private ApplicationMailer applicationMailer;
-
-  @Autowired
-  public void setApplicationMailer(ApplicationMailer applicationMailer) {
-    this.applicationMailer = applicationMailer;
-  }
 
   @Autowired
   public void setApplicationManager(ApplicationManager applicationManager) {
     this.applicationManager = applicationManager;
-  }
-
-  @Autowired
-  public void setApplicationDao(ApplicationDao applicationDao) {
-    this.applicationDao = applicationDao;
   }
 
   @PostMapping("/api/application")

@@ -23,6 +23,7 @@ public class ApplicationEntity {
   private Date createDate;
   private String email;
   private String phone;
+  private ApplicationStatus status;
 
   @Id
   @Column
@@ -102,6 +103,11 @@ public class ApplicationEntity {
     return phone;
   }
 
+  @Column
+  public ApplicationStatus getStatus() {
+    return status;
+  }
+
   public void setId(String id) {
     this.id = id;
   }
@@ -140,6 +146,16 @@ public class ApplicationEntity {
 
   public void setPhone(String phone) {
     this.phone = phone;
+  }
+
+  public void setStatus(ApplicationStatus status) {
+    this.status = status;
+  }
+
+  public static enum ApplicationStatus {
+    UNPAID, PAYMENT_EXPECTED,
+    PAYMENT_RECEIVED, PAYMENT_VALIDATION,
+    PAYMENT_PROCESSING, PAYMENT_SENT
   }
 
   @Override

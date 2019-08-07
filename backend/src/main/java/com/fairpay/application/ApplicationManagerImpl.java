@@ -78,6 +78,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     application.setEmail(request.getEmail());
     application.setPhone(request.getPhone());
     application.setCreateDate(new Date());
+    application.setStatus(ApplicationEntity.ApplicationStatus.UNPAID);
 
     String fromCurrencyName = currencyDao.findById(request.getFrom()).orElse(new CurrencyEntity()).getName();
     String toCurrencyName = currencyDao.findById(request.getTo()).orElse(new CurrencyEntity()).getName();
@@ -111,9 +112,10 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     applicationMailer.sendApplicationToModerator(application);
 
     String applicationBotFormatting = applicationFormatter.formatApplicationForBot(application);
-    Long userId = Long.valueOf(environment.getProperty(ApplicationManagerImpl.MODERATOR_ID));
+    Long moderatorId = Long.valueOf(environment.getProperty(ApplicationManagerImpl.MODERATOR_ID));
 
-    messageSender.send(userId, applicationBotFormatting);
+    applicationDao.updateStatus(applicationId, ApplicationEntity.ApplicationStatus.PAYMENT_EXPECTED);
+    messageSender.send(moderatorId, applicationBotFormatting);
 
     return "success";
   }
