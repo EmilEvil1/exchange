@@ -6,6 +6,7 @@
 @import "./application";
 @import "./contacts";
 @import "./calculator";
+@import "./progress";
 @import "./adaptive";
 @import "./faq";
 
@@ -133,6 +134,10 @@
     border-top: 3px solid #eaba48;
     border-bottom: 3px solid #eaba48;
 }
+.active-item {
+    border-top: 3px solid #eaba48;
+    border-bottom: 3px solid #eaba48;
+}
 .cursor-pointer {
     position: absolute;
 }
@@ -144,7 +149,7 @@ canvas {
 .crawl-line {
     width: 100%;
     height: 70px;
-    background-color: #474b4a;
+    background-color: #282828;
     margin-top: 30px;
     position: relative;
 
@@ -255,12 +260,12 @@ canvas {
 
 .footer-information {
 
-    background-color: #474b4a;
+    background-color: #282828;
 
 
     &__row {
         width: 100%;
-        padding: 40px 0 30px;
+        padding: 30px 0;
     }
 
 
@@ -280,17 +285,18 @@ canvas {
 
     &__slogan {
         color: #f3ba2f;
+        width: 75%;
     }
 
     &__menu-items {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
     &__social-links {
         display: flex;
-        width: 55%;
-        justify-content: space-between;
+        width: 70%;
+        justify-content: space-around;
     }
 
     &__menu-link {

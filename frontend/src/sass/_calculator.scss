@@ -2,8 +2,8 @@
 
 .corner-common {
     border: 10px solid #f2b92b;
-    width: 371px;
-    height: 175px;
+    width: 350px;
+    height: 150px;
     z-index: -1;
 }
 
@@ -11,7 +11,7 @@
     @extend .corner-common;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 15px;
     border-right: none;
     border-bottom: none;
 }
@@ -19,7 +19,7 @@
 .corner-right-bottom {
     @extend .corner-common;
     position: absolute;
-    right: 0;
+    right: 15px;
     bottom: 0;
     border-left: none;
     border-top: none;
