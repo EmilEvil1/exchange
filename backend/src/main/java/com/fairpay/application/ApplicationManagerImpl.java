@@ -104,6 +104,8 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     responseDTO.setDocumentToPayment(applicationEntity.getSystemDocumentPayment());
     responseDTO.setCreateDate(applicationEntity.getCreateDate());
     responseDTO.setCurrentTime(new Date());
+    responseDTO.setStatus(applicationEntity.getStatus());
+
     return responseDTO;
   }
 
