@@ -9,4 +9,6 @@ public interface ApplicationManager {
   ApplicationResponseDTO fetchApplication(String applicationId);
 
   String notifyModerator(String applicationId);
+
+  void updateApplicationStatus(String applicationId, String status);
 }

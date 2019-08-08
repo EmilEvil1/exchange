@@ -120,6 +120,11 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     return "success";
   }
 
+  public void updateApplicationStatus(String applicationId, String status) {
+     ApplicationEntity.ApplicationStatus appStatus = ApplicationEntity.ApplicationStatus.valueOf(status);
+     applicationDao.updateStatus(applicationId, appStatus);
+  }
+
   private BigDecimal calculateToAmount(String fromTicker, String toTicker, BigDecimal fromAmout) {
     CurrencyEntity fromCurrency = currencyDao.findByTicker(fromTicker).orElse(new CurrencyEntity());
     CurrencyEntity toCurrency = currencyDao.findByTicker(toTicker).orElse(new CurrencyEntity());
