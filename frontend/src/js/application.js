@@ -73,7 +73,7 @@
                 'Content-Type': 'application/json'
             }
         }).done(function() {
-            window.location.href = '/';
+            window.location.href = '/progress.html?applicationId=' + applicationId;
         })
     })
 }($, window));
