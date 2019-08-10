@@ -1,5 +1,8 @@
 package com.fairpay.moderatorBot;
 
+import com.fairpay.moderatorBot.services.CallbackProcessing;
+import com.fairpay.moderatorBot.services.InlineKeyboardSender;
+import com.fairpay.moderatorBot.services.MessageSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +10,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
 public class ModeratorBot extends TelegramLongPollingBot {
@@ -21,9 +22,28 @@ public class ModeratorBot extends TelegramLongPollingBot {
 
   private Environment environment;
 
+  private MessageSender messageSender;
+  private InlineKeyboardSender keyboardSender;
+  private CallbackProcessing callbackProcessing;
+
   @Autowired
   public void setEnvironment(Environment environment) {
     this.environment = environment;
+  }
+
+  @Autowired
+  public void setMessageSender(MessageSender messageSender) {
+    this.messageSender = messageSender;
+  }
+
+  @Autowired
+  public void setKeyboardSender(InlineKeyboardSender keyboardSender) {
+    this.keyboardSender = keyboardSender;
+  }
+
+  @Autowired
+  public void setCallbackProcessing(CallbackProcessing callbackProcessing) {
+    this.callbackProcessing = callbackProcessing;
   }
 
   public ModeratorBot(DefaultBotOptions options) {
@@ -41,20 +61,11 @@ public class ModeratorBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
-    SendMessage message = new SendMessage();
-    message.setChatId(update.getMessage().getChatId());
-    message.setText("Hello world");
-    logger.info("Update {}", update.toString());
-    executeMsg(message);
+    if (update.getCallbackQuery() != null)
+      callbackProcessing.selectCallbackQuery(update.getCallbackQuery().getData());
+
   }
 
-  private void executeMsg(SendMessage message){
-    try {
-      execute(message);
-    } catch (TelegramApiException e) {
-      e.printStackTrace();
-    }
-  }
 
   @Override
   public String getBotUsername() {

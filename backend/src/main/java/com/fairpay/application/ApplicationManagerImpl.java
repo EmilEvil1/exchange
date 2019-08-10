@@ -4,7 +4,7 @@ import com.fairpay.application.api.ApplicationRequestDTO;
 import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.currency.dao.CurrencyDao;
 import com.fairpay.currency.model.CurrencyEntity;
-import com.fairpay.moderatorBot.services.MessageSender;
+import com.fairpay.moderatorBot.services.InlineKeyboardSender;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   private ApplicationMailer applicationMailer;
   private ApplicationFormatter applicationFormatter;
   private Environment environment;
-  private MessageSender messageSender;
+  private InlineKeyboardSender keyboardSender;
 
   @Autowired
   public void setApplicationDao(ApplicationDao applicationDao) {
@@ -60,8 +60,8 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   }
 
   @Autowired
-  public void setMessageSender(MessageSender messageSender) {
-    this.messageSender = messageSender;
+  public void setKeyboardSender(InlineKeyboardSender keyboardSender) {
+    this.keyboardSender = keyboardSender;
   }
 
   public String saveApplication(ApplicationRequestDTO request) {
@@ -114,10 +114,10 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     applicationMailer.sendApplicationToModerator(application);
 
     String applicationBotFormatting = applicationFormatter.formatApplicationForBot(application);
-    Long moderatorId = Long.valueOf(environment.getProperty(ApplicationManagerImpl.MODERATOR_ID));
+    String moderatorId = environment.getProperty(ApplicationManagerImpl.MODERATOR_ID);
 
     applicationDao.updateStatus(applicationId, ApplicationEntity.ApplicationStatus.PAYMENT_EXPECTED);
-    messageSender.send(moderatorId, applicationBotFormatting);
+    keyboardSender.sendInlineKeyboard(moderatorId, applicationBotFormatting, "Подтвердить платеж!");
 
     return "success";
   }

@@ -19,9 +19,17 @@ public class MessageSender {
     this.moderatorBot = moderatorBot;
   }
 
-  public void send(Long userId, String message) {
+  public void send(String userId, String message) {
     try {
       moderatorBot.execute(new SendMessage(userId, message));
+    } catch (TelegramApiException e) {
+      logger.error("Error in sending message to moderator", e);
+    }
+  }
+
+  void send(SendMessage message){
+    try {
+      moderatorBot.execute(message);
     } catch (TelegramApiException e) {
       logger.error("Error in sending message to moderator", e);
     }
