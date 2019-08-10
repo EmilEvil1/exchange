@@ -1,0 +1,23 @@
+.rules-information {
+
+    &__text-step {
+        background-color: lightgray;
+        border: 1px solid gray;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    &__text-title {
+        padding: 0 15px;
+        font-weight: 600;
+    }
+
+    &__text-info {
+        padding: 0 30px;
+    }
+
+}
+.respect {
+    text-align: center;
+}
