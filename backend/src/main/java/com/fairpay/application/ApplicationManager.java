@@ -10,5 +10,5 @@ public interface ApplicationManager {
 
   String notifyModerator(String applicationId);
 
-  void updateApplicationStatus(String applicationId, String status);
+  void goToNextStatus(String applicationId);
 }

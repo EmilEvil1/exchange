@@ -1,6 +1,6 @@
 package com.fairpay.moderatorBot;
 
-import com.fairpay.moderatorBot.services.CallbackProcessing;
+import com.fairpay.moderatorBot.services.CallbackHandler;
 import com.fairpay.moderatorBot.services.InlineKeyboardSender;
 import com.fairpay.moderatorBot.services.MessageSender;
 import org.slf4j.Logger;
@@ -24,7 +24,7 @@ public class ModeratorBot extends TelegramLongPollingBot {
 
   private MessageSender messageSender;
   private InlineKeyboardSender keyboardSender;
-  private CallbackProcessing callbackProcessing;
+  private CallbackHandler callbackHandler;
 
   @Autowired
   public void setEnvironment(Environment environment) {
@@ -32,7 +32,7 @@ public class ModeratorBot extends TelegramLongPollingBot {
   }
 
   @Autowired
-  public void setMessageSender(MessageSender messageSender) {
+  public void setMessageSenderImpl(MessageSender messageSender) {
     this.messageSender = messageSender;
   }
 
@@ -42,8 +42,8 @@ public class ModeratorBot extends TelegramLongPollingBot {
   }
 
   @Autowired
-  public void setCallbackProcessing(CallbackProcessing callbackProcessing) {
-    this.callbackProcessing = callbackProcessing;
+  public void setCallbackHandler(CallbackHandler callbackHandler) {
+    this.callbackHandler = callbackHandler;
   }
 
   public ModeratorBot(DefaultBotOptions options) {
@@ -61,9 +61,7 @@ public class ModeratorBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
-    if (update.getCallbackQuery() != null)
-      callbackProcessing.selectCallbackQuery(update.getCallbackQuery().getData());
-
+    callbackHandler.run(update.getCallbackQuery().getData());
   }
 
 

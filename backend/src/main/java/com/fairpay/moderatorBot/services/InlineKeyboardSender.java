@@ -1,5 +1,6 @@
 package com.fairpay.moderatorBot.services;
 
+import com.fairpay.application.ApplicationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -11,31 +12,37 @@ import java.util.List;
 
 @Service
 public class InlineKeyboardSender {
-    private MessageSender messageSender;
 
-    @Autowired
-    public void setMessageSender(MessageSender messageSender) {
-        this.messageSender = messageSender;
+    public InlineKeyboardMarkup getMarkup(ApplicationEntity applicationEntity){
+        ApplicationEntity.ApplicationStatus status = applicationEntity.getStatus();
+        String btnMessage = "";
+        switch (status) {
+            case PAYMENT_EXPECTED:
+                btnMessage = "Подтвердите поступление средств";
+                break;
+            case PAYMENT_RECEIVED:
+                btnMessage = "Подтвердите реквизиты платежа";
+                break;
+            case PAYMENT_VALIDATION:
+                btnMessage = "Процессинг платежа окончен.";
+                break;
+            case PAYMENT_PROCESSING:
+                btnMessage = "Средства отправлены клиенту.";
+                break;
+        }
+
+        return new InlineKeyboardMarkup().setKeyboard(getKeyboard(btnMessage, applicationEntity.getId()));
     }
 
-    public void sendInlineKeyboard(String userId, String messageText, String ButtonText){
-        SendMessage message = new SendMessage(userId, messageText).setReplyMarkup(getMarkup(ButtonText));
-        messageSender.send(message);
-    }
-
-    private InlineKeyboardMarkup getMarkup(String text){
-        return new InlineKeyboardMarkup().setKeyboard(getKeyboard(text));
-    }
-
-    private List<List<InlineKeyboardButton>> getKeyboard(String text){
+    private List<List<InlineKeyboardButton>> getKeyboard(String text, String applicationId){
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-        keyboard.add(getButtons(text));
+        keyboard.add(getButtons(text, applicationId));
         return keyboard;
     }
 
-    private List<InlineKeyboardButton> getButtons(String text){
+    private List<InlineKeyboardButton> getButtons(String text, String applicationId){
         List<InlineKeyboardButton> buttons = new ArrayList<>();
-        buttons.add(new InlineKeyboardButton().setText(text).setCallbackData(text));
+        buttons.add(new InlineKeyboardButton().setText(text).setCallbackData(applicationId));
         return buttons;
     }
 }

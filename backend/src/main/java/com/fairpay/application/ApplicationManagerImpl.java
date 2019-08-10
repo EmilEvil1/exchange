@@ -5,6 +5,7 @@ import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.currency.dao.CurrencyDao;
 import com.fairpay.currency.model.CurrencyEntity;
 import com.fairpay.moderatorBot.services.InlineKeyboardSender;
+import com.fairpay.moderatorBot.services.MessageSender;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   private ApplicationFormatter applicationFormatter;
   private Environment environment;
   private InlineKeyboardSender keyboardSender;
+  private MessageSender messageSender;
 
   @Autowired
   public void setApplicationDao(ApplicationDao applicationDao) {
@@ -62,6 +64,11 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   @Autowired
   public void setKeyboardSender(InlineKeyboardSender keyboardSender) {
     this.keyboardSender = keyboardSender;
+  }
+
+  @Autowired
+  public void setMessageSender(MessageSender messageSender) {
+    this.messageSender = messageSender;
   }
 
   public String saveApplication(ApplicationRequestDTO request) {
@@ -110,21 +117,30 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   }
 
   public String notifyModerator(String applicationId) {
+    applicationDao.updateStatus(applicationId, ApplicationEntity.ApplicationStatus.PAYMENT_EXPECTED);
+
     ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
     applicationMailer.sendApplicationToModerator(application);
 
-    String applicationBotFormatting = applicationFormatter.formatApplicationForBot(application);
-    String moderatorId = environment.getProperty(ApplicationManagerImpl.MODERATOR_ID);
-
-    applicationDao.updateStatus(applicationId, ApplicationEntity.ApplicationStatus.PAYMENT_EXPECTED);
-    keyboardSender.sendInlineKeyboard(moderatorId, applicationBotFormatting, "Подтвердить платеж!");
+    messageSender.send(application);
 
     return "success";
   }
 
-  public void updateApplicationStatus(String applicationId, String status) {
-     ApplicationEntity.ApplicationStatus appStatus = ApplicationEntity.ApplicationStatus.valueOf(status);
-     applicationDao.updateStatus(applicationId, appStatus);
+  public void goToNextStatus(String applicationId) {
+    ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
+    ApplicationEntity.ApplicationStatus status = getNextStatus(application.getStatus());
+    applicationDao.updateStatus(applicationId, status);
+  }
+
+  private ApplicationEntity.ApplicationStatus getNextStatus(ApplicationEntity.ApplicationStatus currentStatus) {
+    Integer currentStage = currentStatus.getStage();
+    for (ApplicationEntity.ApplicationStatus status : ApplicationEntity.ApplicationStatus.values()) {
+      if (currentStage + 1 == status.getStage()) {
+        return status;
+      }
+    }
+    return null;
   }
 
   private BigDecimal calculateToAmount(String fromTicker, String toTicker, BigDecimal fromAmout) {

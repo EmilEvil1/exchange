@@ -153,9 +153,19 @@ public class ApplicationEntity {
   }
 
   public static enum ApplicationStatus {
-    UNPAID, PAYMENT_EXPECTED,
-    PAYMENT_RECEIVED, PAYMENT_VALIDATION,
-    PAYMENT_PROCESSING, PAYMENT_SENT
+    UNPAID(0), PAYMENT_EXPECTED(1),
+    PAYMENT_RECEIVED(2), PAYMENT_VALIDATION(3),
+    PAYMENT_PROCESSING(4), PAYMENT_SENT(5);
+
+    private Integer stage;
+
+    public Integer getStage() {
+      return stage;
+    }
+
+    ApplicationStatus(Integer stage) {
+      this.stage = stage;
+    }
   }
 
   @Override
