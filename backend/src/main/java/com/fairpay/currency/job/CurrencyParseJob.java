@@ -33,6 +33,7 @@ public class CurrencyParseJob {
     this.currencyDao = currencyDao;
   }
 
+  // fixed delay read
   @Scheduled(fixedRate = 10000000)
   public void updateCurrencyRates() {
     List<CurrencyEntity> updatedCurrenciesList = new ArrayList<>();

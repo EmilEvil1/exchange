@@ -1,6 +1,6 @@
 package com.fairpay.currency.service;
 
-import com.fairpay.currency.CurrencyDTO;
+import com.fairpay.currency.api.CurrencyDTO;
 import com.fairpay.currency.dao.CurrencyDao;
 import com.fairpay.currency.model.CurrencyEntity;
 import com.fairpay.currency.vo.CoinmarketCurrenciesResponse;

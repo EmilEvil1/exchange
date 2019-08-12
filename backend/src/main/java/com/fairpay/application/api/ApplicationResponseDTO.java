@@ -1,5 +1,7 @@
 package com.fairpay.application.api;
 
+import com.fairpay.application.ApplicationEntity;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,6 +15,7 @@ public class ApplicationResponseDTO {
   private String documentToPayment;
   private Date createDate;
   private Date currentTime;
+  private ApplicationEntity.ApplicationStatus status;
 
   public String getFrom() {
     return from;
@@ -84,5 +87,13 @@ public class ApplicationResponseDTO {
 
   public void setCurrentTime(Date currentTime) {
     this.currentTime = currentTime;
+  }
+
+  public ApplicationEntity.ApplicationStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(ApplicationEntity.ApplicationStatus status) {
+    this.status = status;
   }
 }

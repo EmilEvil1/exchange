@@ -7,4 +7,8 @@ public interface ApplicationManager {
   String saveApplication(ApplicationRequestDTO applicationRequestDTO);
 
   ApplicationResponseDTO fetchApplication(String applicationId);
+
+  String notifyModerator(String applicationId);
+
+  void goToNextStatus(String applicationId);
 }

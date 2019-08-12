@@ -1,6 +1,5 @@
-package com.fairpay.currency;
+package com.fairpay.currency.api;
 
-import com.fairpay.currency.model.CurrencyEntity;
 import com.fairpay.currency.vo.HoldTypeEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

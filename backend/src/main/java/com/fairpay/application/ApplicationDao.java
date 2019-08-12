@@ -1,8 +1,14 @@
 package com.fairpay.application;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+public interface ApplicationDao extends JpaRepository<ApplicationEntity, String> {
 
-public interface ApplicationDao extends CrudRepository<ApplicationEntity, String> {
+  @Transactional
+  @Modifying
+  @Query("UPDATE applications app SET app.status = ?2 where app.id = ?1")
+  void updateStatus(String id, ApplicationEntity.ApplicationStatus status);
 }

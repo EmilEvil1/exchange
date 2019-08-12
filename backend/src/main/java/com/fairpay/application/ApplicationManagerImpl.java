@@ -4,9 +4,12 @@ import com.fairpay.application.api.ApplicationRequestDTO;
 import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.currency.dao.CurrencyDao;
 import com.fairpay.currency.model.CurrencyEntity;
+import com.fairpay.moderatorBot.services.InlineKeyboardSender;
+import com.fairpay.moderatorBot.services.MessageSender;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -17,10 +20,16 @@ import java.util.UUID;
 @Component
 public class ApplicationManagerImpl implements  ApplicationManager{
 
+  private static final String MODERATOR_ID = "telegram.bot.moderator.chat.id";
+
   private ApplicationDao applicationDao;
   private CurrencyDao currencyDao;
   private WalletDao walletDao;
   private ApplicationMailer applicationMailer;
+  private ApplicationFormatter applicationFormatter;
+  private Environment environment;
+  private InlineKeyboardSender keyboardSender;
+  private MessageSender messageSender;
 
   @Autowired
   public void setApplicationDao(ApplicationDao applicationDao) {
@@ -42,6 +51,25 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     this.applicationMailer = applicationMailer;
   }
 
+  @Autowired
+  public void setApplicationFormatter(ApplicationFormatter applicationFormatter) {
+    this.applicationFormatter = applicationFormatter;
+  }
+
+  @Autowired
+  public void setEnvironment(Environment environment) {
+    this.environment = environment;
+  }
+
+  @Autowired
+  public void setKeyboardSender(InlineKeyboardSender keyboardSender) {
+    this.keyboardSender = keyboardSender;
+  }
+
+  @Autowired
+  public void setMessageSender(MessageSender messageSender) {
+    this.messageSender = messageSender;
+  }
 
   public String saveApplication(ApplicationRequestDTO request) {
     ApplicationEntity application = new ApplicationEntity();
@@ -57,6 +85,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     application.setEmail(request.getEmail());
     application.setPhone(request.getPhone());
     application.setCreateDate(new Date());
+    application.setStatus(ApplicationEntity.ApplicationStatus.UNPAID);
 
     String fromCurrencyName = currencyDao.findById(request.getFrom()).orElse(new CurrencyEntity()).getName();
     String toCurrencyName = currencyDao.findById(request.getTo()).orElse(new CurrencyEntity()).getName();
@@ -82,7 +111,36 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     responseDTO.setDocumentToPayment(applicationEntity.getSystemDocumentPayment());
     responseDTO.setCreateDate(applicationEntity.getCreateDate());
     responseDTO.setCurrentTime(new Date());
+    responseDTO.setStatus(applicationEntity.getStatus());
+
     return responseDTO;
+  }
+
+  public String notifyModerator(String applicationId) {
+    applicationDao.updateStatus(applicationId, ApplicationEntity.ApplicationStatus.PAYMENT_EXPECTED);
+
+    ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
+    applicationMailer.sendApplicationToModerator(application);
+
+    messageSender.send(application);
+
+    return "success";
+  }
+
+  public void goToNextStatus(String applicationId) {
+    ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
+    ApplicationEntity.ApplicationStatus status = getNextStatus(application.getStatus());
+    applicationDao.updateStatus(applicationId, status);
+  }
+
+  private ApplicationEntity.ApplicationStatus getNextStatus(ApplicationEntity.ApplicationStatus currentStatus) {
+    Integer currentStage = currentStatus.getStage();
+    for (ApplicationEntity.ApplicationStatus status : ApplicationEntity.ApplicationStatus.values()) {
+      if (currentStage + 1 == status.getStage()) {
+        return status;
+      }
+    }
+    return null;
   }
 
   private BigDecimal calculateToAmount(String fromTicker, String toTicker, BigDecimal fromAmout) {

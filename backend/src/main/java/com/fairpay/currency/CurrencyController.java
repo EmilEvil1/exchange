@@ -1,13 +1,11 @@
 package com.fairpay.currency;
 
-import com.fairpay.currency.dao.CurrencyDao;
-import com.fairpay.currency.model.CurrencyEntity;
+import com.fairpay.currency.api.CurrencyDTO;
 import com.fairpay.currency.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
