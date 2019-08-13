@@ -11,10 +11,10 @@ import java.util.List;
 @RestController
 public class CurrencyController {
 
-  private CurrencyService currencyService;
+  private final CurrencyService currencyService;
 
   @Autowired
-  public void setCurrencyService(CurrencyService currencyService) {
+  public CurrencyController(CurrencyService currencyService) {
     this.currencyService = currencyService;
   }
 

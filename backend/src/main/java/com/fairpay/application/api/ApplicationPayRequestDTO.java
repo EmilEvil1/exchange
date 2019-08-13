@@ -1,13 +1,8 @@
 package com.fairpay.application.api;
 
+import lombok.Data;
+
+@Data
 public class ApplicationPayRequestDTO {
   private String applicationId;
-
-  public String getApplicationId() {
-    return applicationId;
-  }
-
-  public void setApplicationId(String applicationId) {
-    this.applicationId = applicationId;
-  }
 }

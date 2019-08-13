@@ -1,4 +1,4 @@
-package com.fairpay.moderatorBot.services;
+package com.fairpay.moderatorBot.services.interf;
 
 import com.fairpay.application.ApplicationEntity;
 

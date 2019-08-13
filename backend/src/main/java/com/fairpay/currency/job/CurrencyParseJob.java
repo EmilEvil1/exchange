@@ -5,36 +5,34 @@ import com.fairpay.currency.model.CurrencyEntity;
 import com.fairpay.currency.service.CurrencyService;
 import com.fairpay.currency.vo.CoinmarketCurrenciesResponse;
 import com.fairpay.currency.vo.CurrencyDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
+@Log4j2
 public class CurrencyParseJob {
 
-  private final static Logger log = LoggerFactory.getLogger(CurrencyParseJob.class);
   private static final String RUBLE_CODE = "RUB";
   private static final String HRYVNIA_CODE = "UAH";
   private List<CurrencyEntity> currentCurrencyEntities;
 
-  @Autowired
-  private CurrencyService currencyService;
-
-  private CurrencyDao currencyDao;
+  private final CurrencyService currencyService;
+  private final CurrencyDao currencyDao;
 
   @Autowired
-  public void setCurrencyDao(CurrencyDao currencyDao) {
+  public CurrencyParseJob(CurrencyService currencyService, CurrencyDao currencyDao) {
+    this.currencyService = currencyService;
     this.currencyDao = currencyDao;
   }
 
+
   // fixed delay read
-  @Scheduled(fixedRate = 10000000)
+  @Scheduled(fixedDelay = 10000000)
   public void updateCurrencyRates() {
     List<CurrencyEntity> updatedCurrenciesList = new ArrayList<>();
     CoinmarketCurrenciesResponse currenciesToRub = currencyService.getCryptoRatesAgainstCurrency(CurrencyParseJob.RUBLE_CODE);

@@ -2,8 +2,9 @@ package com.fairpay.moderatorBot.services;
 
 import com.fairpay.application.ApplicationEntity;
 import com.fairpay.moderatorBot.ModeratorBot;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fairpay.moderatorBot.services.InlineKeyboardSender;
+import com.fairpay.moderatorBot.services.interf.MessageSender;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -12,28 +13,23 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Service
+@Log4j2
 public class MessageSenderImpl implements MessageSender {
-  private final static Logger logger = LoggerFactory.getLogger(MessageSenderImpl.class);
 
-  private ModeratorBot moderatorBot;
-  private InlineKeyboardSender inlineKeyboardSender;
-  private Environment environment;
+  private final ModeratorBot moderatorBot;
+  private final InlineKeyboardSender inlineKeyboardSender;
+  private final Environment environment;
 
   @Autowired
-  public void setModeratorBot(ModeratorBot moderatorBot) {
+  public MessageSenderImpl(ModeratorBot moderatorBot,
+                           InlineKeyboardSender inlineKeyboardSender,
+                           Environment environment) {
     this.moderatorBot = moderatorBot;
-  }
-
-  @Autowired
-  public void setInlineKeyboardSender(InlineKeyboardSender inlineKeyboardSender) {
     this.inlineKeyboardSender = inlineKeyboardSender;
-  }
-
-  @Autowired
-  public void setEnvironment(Environment environment) {
     this.environment = environment;
   }
 
+  @Override
   public void send(ApplicationEntity application) {
     String userId = environment.getProperty("telegram.bot.moderator.id");
     InlineKeyboardMarkup markup = inlineKeyboardSender.getMarkup(application);
@@ -43,7 +39,7 @@ public class MessageSenderImpl implements MessageSender {
     try {
       moderatorBot.execute(sendMessage);
     } catch (TelegramApiException e) {
-      logger.error("Error occured during sending message to telegram", e);
+      log.error("Error occured during sending message to telegram", e);
     }
   }
 
@@ -52,7 +48,7 @@ public class MessageSenderImpl implements MessageSender {
     try {
       moderatorBot.execute(message);
     } catch (TelegramApiException e) {
-      logger.error("Error in sending message to moderator", e);
+      log.error("Error in sending message to moderator", e);
     }
   }
 }

@@ -1,20 +1,12 @@
 package com.fairpay.currency.vo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
+@Data
 public class RelativeCurrency {
-  @JsonProperty("price")
   protected BigDecimal price;
-
-  public BigDecimal getPrice() {
-    return price;
-  }
-
-  public void setPrice(BigDecimal price) {
-    this.price = price;
-  }
 
   @Override
   public String toString() {

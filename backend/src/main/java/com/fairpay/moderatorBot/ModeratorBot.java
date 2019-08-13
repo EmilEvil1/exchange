@@ -1,57 +1,34 @@
 package com.fairpay.moderatorBot;
 
-import com.fairpay.moderatorBot.services.CallbackHandler;
+import com.fairpay.moderatorBot.services.CallbackHandlerImpl;
 import com.fairpay.moderatorBot.services.InlineKeyboardSender;
-import com.fairpay.moderatorBot.services.MessageSender;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fairpay.moderatorBot.services.interf.MessageSender;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-@Component
+@Log4j2
 public class ModeratorBot extends TelegramLongPollingBot {
-
-  private static final Logger logger = LoggerFactory.getLogger(ModeratorBot.class);
-
   private static final String TOKEN = "telegram.notification.bot.token";
   private static final String USERNAME = "telegram.notification.bot.username";
 
-  private Environment environment;
+  private final Environment environment;
+  private final MessageSender messageSender;
+  private final InlineKeyboardSender keyboardSender;
+  private final CallbackHandlerImpl callbackHandlerImpl;
 
-  private MessageSender messageSender;
-  private InlineKeyboardSender keyboardSender;
-  private CallbackHandler callbackHandler;
-
-  @Autowired
-  public void setEnvironment(Environment environment) {
-    this.environment = environment;
-  }
-
-  @Autowired
-  public void setMessageSenderImpl(MessageSender messageSender) {
-    this.messageSender = messageSender;
-  }
-
-  @Autowired
-  public void setKeyboardSender(InlineKeyboardSender keyboardSender) {
-    this.keyboardSender = keyboardSender;
-  }
-
-  @Autowired
-  public void setCallbackHandler(CallbackHandler callbackHandler) {
-    this.callbackHandler = callbackHandler;
-  }
-
-  public ModeratorBot(DefaultBotOptions options) {
+  public ModeratorBot(DefaultBotOptions options,
+                      Environment environment,
+                      MessageSender messageSender,
+                      InlineKeyboardSender keyboardSender,
+                      CallbackHandlerImpl callbackHandlerImpl) {
     super(options);
-  }
-
-  public ModeratorBot() {
-
+    this.environment = environment;
+    this.messageSender = messageSender;
+    this.keyboardSender = keyboardSender;
+    this.callbackHandlerImpl = callbackHandlerImpl;
   }
 
   @Override
@@ -61,9 +38,8 @@ public class ModeratorBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
-    callbackHandler.run(update.getCallbackQuery().getData());
+    callbackHandlerImpl.run(update.getCallbackQuery().getData());
   }
-
 
   @Override
   public String getBotUsername() {

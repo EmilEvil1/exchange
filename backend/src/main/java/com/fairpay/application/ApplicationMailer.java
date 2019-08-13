@@ -9,27 +9,28 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApplicationMailer {
 
-  private final static String MODERATOR_EMAIL = "moderator.email";
+    private final static String MODERATOR_EMAIL = "moderator.email";
 
-  @Autowired
-  private Environment environment;
+    private final Environment environment;
 
-  @Autowired
-  private JavaMailSender emailSender;
+    private final JavaMailSender emailSender;
 
-  private ApplicationFormatter applicationFormatter;
+    private final ApplicationFormatter applicationFormatter;
 
-  @Autowired
-  public void setApplicationFormatter(ApplicationFormatter applicationFormatter) {
-    this.applicationFormatter = applicationFormatter;
-  }
+    public ApplicationMailer(Environment environment,
+                             JavaMailSender emailSender,
+                             ApplicationFormatter applicationFormatter) {
+        this.environment = environment;
+        this.emailSender = emailSender;
+        this.applicationFormatter = applicationFormatter;
+    }
 
-  public void sendApplicationToModerator(ApplicationEntity application) {
-    String moderatorEmail = environment.getProperty(ApplicationMailer.MODERATOR_EMAIL);
-    SimpleMailMessage message = new SimpleMailMessage();
-    message.setTo(moderatorEmail);
-    message.setSubject("New Application");
-    message.setText(applicationFormatter.formatApplicationForMail(application));
-    emailSender.send(message);
-  }
+    public void sendApplicationToModerator(ApplicationEntity application) {
+        String moderatorEmail = environment.getProperty(ApplicationMailer.MODERATOR_EMAIL);
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(moderatorEmail);
+        message.setSubject("New Application");
+        message.setText(applicationFormatter.formatApplicationForMail(application));
+        emailSender.send(message);
+    }
 }

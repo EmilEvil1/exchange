@@ -5,10 +5,9 @@ import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.currency.dao.CurrencyDao;
 import com.fairpay.currency.model.CurrencyEntity;
 import com.fairpay.moderatorBot.services.InlineKeyboardSender;
-import com.fairpay.moderatorBot.services.MessageSender;
+import com.fairpay.moderatorBot.services.interf.MessageSender;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -22,55 +21,34 @@ public class ApplicationManagerImpl implements  ApplicationManager{
 
   private static final String MODERATOR_ID = "telegram.bot.moderator.chat.id";
 
-  private ApplicationDao applicationDao;
-  private CurrencyDao currencyDao;
-  private WalletDao walletDao;
-  private ApplicationMailer applicationMailer;
-  private ApplicationFormatter applicationFormatter;
-  private Environment environment;
-  private InlineKeyboardSender keyboardSender;
-  private MessageSender messageSender;
+  private final ApplicationDao applicationDao;
+  private final CurrencyDao currencyDao;
+  private final WalletDao walletDao;
+  private final ApplicationMailer applicationMailer;
+  private final ApplicationFormatter applicationFormatter;
+  private final Environment environment;
+  private final InlineKeyboardSender keyboardSender;
+  private final MessageSender messageSender;
 
-  @Autowired
-  public void setApplicationDao(ApplicationDao applicationDao) {
+  public ApplicationManagerImpl(ApplicationDao applicationDao,
+                                CurrencyDao currencyDao,
+                                WalletDao walletDao,
+                                ApplicationMailer applicationMailer,
+                                ApplicationFormatter applicationFormatter,
+                                Environment environment,
+                                InlineKeyboardSender keyboardSender,
+                                MessageSender messageSender) {
     this.applicationDao = applicationDao;
-  }
-
-  @Autowired
-  public void setCurrencyDao(CurrencyDao currencyDao) {
     this.currencyDao = currencyDao;
-  }
-
-  @Autowired
-  public void setWalletDao(WalletDao walletDao) {
     this.walletDao = walletDao;
-  }
-
-  @Autowired
-  public void setApplicationMailer(ApplicationMailer applicationMailer) {
     this.applicationMailer = applicationMailer;
-  }
-
-  @Autowired
-  public void setApplicationFormatter(ApplicationFormatter applicationFormatter) {
     this.applicationFormatter = applicationFormatter;
-  }
-
-  @Autowired
-  public void setEnvironment(Environment environment) {
     this.environment = environment;
-  }
-
-  @Autowired
-  public void setKeyboardSender(InlineKeyboardSender keyboardSender) {
     this.keyboardSender = keyboardSender;
-  }
-
-  @Autowired
-  public void setMessageSender(MessageSender messageSender) {
     this.messageSender = messageSender;
   }
 
+  @Override
   public String saveApplication(ApplicationRequestDTO request) {
     ApplicationEntity application = new ApplicationEntity();
     UUID uuid = UUID.randomUUID();
@@ -99,6 +77,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     return uuid.toString();
   }
 
+  @Override
   public ApplicationResponseDTO fetchApplication(String applicationId) {
     ApplicationEntity applicationEntity = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
     ApplicationResponseDTO responseDTO = new ApplicationResponseDTO();
@@ -116,6 +95,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     return responseDTO;
   }
 
+  @Override
   public String notifyModerator(String applicationId) {
     applicationDao.updateStatus(applicationId, ApplicationEntity.ApplicationStatus.PAYMENT_EXPECTED);
 
@@ -127,6 +107,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     return "success";
   }
 
+  @Override
   public void goToNextStatus(String applicationId) {
     ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
     ApplicationEntity.ApplicationStatus status = getNextStatus(application.getStatus());
