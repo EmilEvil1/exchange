@@ -8,6 +8,8 @@ import com.fairpay.moderatorBot.services.InlineKeyboardSender;
 import com.fairpay.moderatorBot.services.interf.MessageSender;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ApplicationManagerImpl implements  ApplicationManager{
 
   private static final String MODERATOR_ID = "telegram.bot.moderator.chat.id";
@@ -29,24 +32,6 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   private final Environment environment;
   private final InlineKeyboardSender keyboardSender;
   private final MessageSender messageSender;
-
-  public ApplicationManagerImpl(ApplicationDao applicationDao,
-                                CurrencyDao currencyDao,
-                                WalletDao walletDao,
-                                ApplicationMailer applicationMailer,
-                                ApplicationFormatter applicationFormatter,
-                                Environment environment,
-                                InlineKeyboardSender keyboardSender,
-                                MessageSender messageSender) {
-    this.applicationDao = applicationDao;
-    this.currencyDao = currencyDao;
-    this.walletDao = walletDao;
-    this.applicationMailer = applicationMailer;
-    this.applicationFormatter = applicationFormatter;
-    this.environment = environment;
-    this.keyboardSender = keyboardSender;
-    this.messageSender = messageSender;
-  }
 
   @Override
   public String saveApplication(ApplicationRequestDTO request) {
