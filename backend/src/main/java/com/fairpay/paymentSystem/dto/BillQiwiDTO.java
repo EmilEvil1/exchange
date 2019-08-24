@@ -1,11 +1,11 @@
-package com.fairpay.wallet;
+package com.fairpay.paymentSystem.dto;
 
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class BillQiwiDTO {
+public class BillQiwiDTO extends AbstractPaymentRequest {
     private String phone = ""; //Номер телефона пользователя, на который выставляется счет (в международном формате)
     private String email = ""; //E-mail пользователя, куда будет отправлена ссылка для оплаты счета
     private String account = ""; //Идентификатор пользователя в системе мерчанта
