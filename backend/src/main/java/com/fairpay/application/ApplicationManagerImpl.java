@@ -4,13 +4,10 @@ import com.fairpay.application.api.ApplicationRequestDTO;
 import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.currency.dao.CurrencyDao;
 import com.fairpay.currency.model.CurrencyEntity;
-import com.fairpay.moderatorBot.services.InlineKeyboardSender;
 import com.fairpay.moderatorBot.services.interf.MessageSender;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -21,31 +18,20 @@ import java.util.UUID;
 @Component
 public class ApplicationManagerImpl implements  ApplicationManager{
 
-  private static final String MODERATOR_ID = "telegram.bot.moderator.chat.id";
-
   private final ApplicationDao applicationDao;
   private final CurrencyDao currencyDao;
   private final WalletDao walletDao;
   private final ApplicationMailer applicationMailer;
-  private final ApplicationFormatter applicationFormatter;
-  private final Environment environment;
-  private final InlineKeyboardSender keyboardSender;
   private MessageSender messageSender;
 
   public ApplicationManagerImpl(ApplicationDao applicationDao,
                                 CurrencyDao currencyDao,
                                 WalletDao walletDao,
-                                ApplicationMailer applicationMailer,
-                                ApplicationFormatter applicationFormatter,
-                                Environment environment,
-                                InlineKeyboardSender keyboardSender) {
+                                ApplicationMailer applicationMailer) {
     this.applicationDao = applicationDao;
     this.currencyDao = currencyDao;
     this.walletDao = walletDao;
     this.applicationMailer = applicationMailer;
-    this.applicationFormatter = applicationFormatter;
-    this.environment = environment;
-    this.keyboardSender = keyboardSender;
   }
 
   @Autowired
@@ -116,9 +102,6 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   public void goToNextStatus(String applicationId) {
     ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
     ApplicationEntity.ApplicationStatus status = getNextStatus(application.getStatus());
-    if (status == null) {
-
-    }
     applicationDao.updateStatus(applicationId, status);
   }
 
