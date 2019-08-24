@@ -29,6 +29,9 @@ public class InlineKeyboardSender {
             case PAYMENT_PROCESSING:
                 btnMessage = "Средства отправлены клиенту.";
                 break;
+            case PAYMENT_SENT:
+                btnMessage = "Окончание транзакции.";
+                break;
         }
 
         return new InlineKeyboardMarkup().setKeyboard(getKeyboard(btnMessage, applicationEntity.getId()));

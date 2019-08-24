@@ -11,16 +11,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class CallbackHandlerImpl implements CallbackHandler {
 
-    private final MessageSender messageSender;
+    private MessageSender messageSender;
     private final ApplicationManager applicationManager;
     private final ApplicationDao applicationDao;
 
     @Autowired
-    public CallbackHandlerImpl(MessageSender messageSender, ApplicationManager applicationManager, ApplicationDao applicationDao) {
-        this.messageSender = messageSender;
+    public CallbackHandlerImpl(ApplicationManager applicationManager, ApplicationDao applicationDao) {
         this.applicationManager = applicationManager;
         this.applicationDao = applicationDao;
     }
+
+
+    @Autowired
+    public void setMessageSender(MessageSender messageSender) {
+      this.messageSender = messageSender;
+    }
+
 
     @Override
     public void run(String callback){

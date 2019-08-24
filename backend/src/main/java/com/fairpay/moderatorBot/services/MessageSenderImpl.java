@@ -16,17 +16,20 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Log4j2
 public class MessageSenderImpl implements MessageSender {
 
-  private final ModeratorBot moderatorBot;
+  private ModeratorBot moderatorBot;
   private final InlineKeyboardSender inlineKeyboardSender;
   private final Environment environment;
 
   @Autowired
-  public MessageSenderImpl(ModeratorBot moderatorBot,
-                           InlineKeyboardSender inlineKeyboardSender,
+  public MessageSenderImpl(InlineKeyboardSender inlineKeyboardSender,
                            Environment environment) {
-    this.moderatorBot = moderatorBot;
     this.inlineKeyboardSender = inlineKeyboardSender;
     this.environment = environment;
+  }
+
+  @Autowired
+  public void setModeratorBot(ModeratorBot moderatorBot) {
+    this.moderatorBot = moderatorBot;
   }
 
   @Override

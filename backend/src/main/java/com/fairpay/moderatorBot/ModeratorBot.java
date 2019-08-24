@@ -1,8 +1,6 @@
 package com.fairpay.moderatorBot;
 
 import com.fairpay.moderatorBot.services.CallbackHandlerImpl;
-import com.fairpay.moderatorBot.services.InlineKeyboardSender;
-import com.fairpay.moderatorBot.services.interf.MessageSender;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.env.Environment;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
@@ -15,19 +13,13 @@ public class ModeratorBot extends TelegramLongPollingBot {
   private static final String USERNAME = "telegram.notification.bot.username";
 
   private final Environment environment;
-  private final MessageSender messageSender;
-  private final InlineKeyboardSender keyboardSender;
   private final CallbackHandlerImpl callbackHandlerImpl;
 
   public ModeratorBot(DefaultBotOptions options,
                       Environment environment,
-                      MessageSender messageSender,
-                      InlineKeyboardSender keyboardSender,
                       CallbackHandlerImpl callbackHandlerImpl) {
     super(options);
     this.environment = environment;
-    this.messageSender = messageSender;
-    this.keyboardSender = keyboardSender;
     this.callbackHandlerImpl = callbackHandlerImpl;
   }
 

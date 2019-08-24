@@ -1,5 +1,7 @@
 package com.fairpay.moderatorBot;
 
+import com.fairpay.common.Profiles;
+import com.fairpay.common.Properties;
 import com.fairpay.moderatorBot.services.CallbackHandlerImpl;
 import com.fairpay.moderatorBot.services.InlineKeyboardSender;
 import com.fairpay.moderatorBot.services.interf.MessageSender;
@@ -18,14 +20,18 @@ public class ModeratorBotConfiguration {
   @Bean
   @Autowired
   public ModeratorBot moderatorBot(Environment environment,
-                                   MessageSender messageSender,
-                                   InlineKeyboardSender keyboardSender,
                                    CallbackHandlerImpl callbackHandlerImpl) {
+
     DefaultBotOptions options = ApiContext.getInstance(DefaultBotOptions.class);
-    options.setProxyHost("127.0.0.1");
-    options.setProxyPort(9150);
-    options.setProxyType(DefaultBotOptions.ProxyType.SOCKS5);
+    String profile = environment.getProperty(Properties.profile);
+
+    if (Profiles.valueOf(profile) == Profiles.dev) {
+      options.setProxyHost("127.0.0.1");
+      options.setProxyPort(9150);
+      options.setProxyType(DefaultBotOptions.ProxyType.SOCKS5);
+    }
+
     log.info("Options were set");
-    return new ModeratorBot(options, environment, messageSender, keyboardSender, callbackHandlerImpl);
+    return new ModeratorBot(options, environment, callbackHandlerImpl);
   }
 }

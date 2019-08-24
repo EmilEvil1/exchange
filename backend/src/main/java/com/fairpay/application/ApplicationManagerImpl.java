@@ -8,6 +8,7 @@ import com.fairpay.moderatorBot.services.InlineKeyboardSender;
 import com.fairpay.moderatorBot.services.interf.MessageSender;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +29,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   private final ApplicationFormatter applicationFormatter;
   private final Environment environment;
   private final InlineKeyboardSender keyboardSender;
-  private final MessageSender messageSender;
+  private MessageSender messageSender;
 
   public ApplicationManagerImpl(ApplicationDao applicationDao,
                                 CurrencyDao currencyDao,
@@ -36,8 +37,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
                                 ApplicationMailer applicationMailer,
                                 ApplicationFormatter applicationFormatter,
                                 Environment environment,
-                                InlineKeyboardSender keyboardSender,
-                                MessageSender messageSender) {
+                                InlineKeyboardSender keyboardSender) {
     this.applicationDao = applicationDao;
     this.currencyDao = currencyDao;
     this.walletDao = walletDao;
@@ -45,6 +45,10 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     this.applicationFormatter = applicationFormatter;
     this.environment = environment;
     this.keyboardSender = keyboardSender;
+  }
+
+  @Autowired
+  public void setMessageSender(MessageSender messageSender) {
     this.messageSender = messageSender;
   }
 
@@ -111,6 +115,9 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   public void goToNextStatus(String applicationId) {
     ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
     ApplicationEntity.ApplicationStatus status = getNextStatus(application.getStatus());
+    if (status == null) {
+      
+    }
     applicationDao.updateStatus(applicationId, status);
   }
 
