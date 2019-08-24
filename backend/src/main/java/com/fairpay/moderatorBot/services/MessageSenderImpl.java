@@ -2,9 +2,7 @@ package com.fairpay.moderatorBot.services;
 
 import com.fairpay.application.ApplicationEntity;
 import com.fairpay.moderatorBot.ModeratorBot;
-import com.fairpay.moderatorBot.services.InlineKeyboardSender;
 import com.fairpay.moderatorBot.services.interf.MessageSender;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -15,7 +13,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Service
 @Log4j2
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MessageSenderImpl implements MessageSender {
 
   private ModeratorBot moderatorBot;

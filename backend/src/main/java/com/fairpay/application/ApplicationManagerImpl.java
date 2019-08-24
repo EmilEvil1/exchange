@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.UUID;
 
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ApplicationManagerImpl implements  ApplicationManager{
 
   private static final String MODERATOR_ID = "telegram.bot.moderator.chat.id";
