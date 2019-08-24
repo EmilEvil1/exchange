@@ -1,3 +1,5 @@
+import SocialLinks from "./SocialLinks";
+
 export Button from './Button';
 export Dropdown from './Dropdown';
 export Footer from './Footer';
@@ -8,3 +10,6 @@ export Main from './Main';
 export Pulse from './Pulse';
 export Select, {SelectField} from './Select';
 export SubHeader from './SubHeader';
+export Logo from './Logo';
+export Menu from './Menu';
+export SocialLinks from './SocialLinks';

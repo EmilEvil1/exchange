@@ -17,6 +17,7 @@ const getBlock = props => {
     return `
       display: flex;
       min-width: 100%;
+      background-color: #5b5b5b;
     `;
   }
   return 'display: inline-flex;';
@@ -31,7 +32,7 @@ const createDefaultColor = ({textColor}) => props => {
   }
   return `
     color: ${textColor};
-    background-color: ${colors.common.transparent};
+    background-color: #5b5b5b;
   
     ${!isActiveLink(props) && `
       :hover {
