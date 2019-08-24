@@ -9,6 +9,7 @@ import com.fairpay.moderatorBot.services.interf.MessageSender;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ApplicationManagerImpl implements  ApplicationManager{
 
   private static final String MODERATOR_ID = "telegram.bot.moderator.chat.id";
@@ -116,7 +118,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
     ApplicationEntity.ApplicationStatus status = getNextStatus(application.getStatus());
     if (status == null) {
-      
+
     }
     applicationDao.updateStatus(applicationId, status);
   }

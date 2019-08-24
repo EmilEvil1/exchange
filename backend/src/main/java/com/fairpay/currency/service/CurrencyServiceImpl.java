@@ -4,6 +4,7 @@ import com.fairpay.currency.api.CurrencyDTO;
 import com.fairpay.currency.dao.CurrencyDao;
 import com.fairpay.currency.model.CurrencyEntity;
 import com.fairpay.currency.vo.CoinmarketCurrenciesResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Log4j2
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CurrencyServiceImpl implements CurrencyService {
 
   private static String GET_CURRENCIES_URL = "/v1/cryptocurrency/listings/latest?start=1&limit=100&convert=";
@@ -30,15 +32,6 @@ public class CurrencyServiceImpl implements CurrencyService {
   private final RestTemplate restTemplate;
   private final Environment environment;
   private final CurrencyDao currencyDao;
-
-  @Autowired
-  public CurrencyServiceImpl(RestTemplate restTemplate,
-                             Environment environment,
-                             CurrencyDao currencyDao) {
-    this.restTemplate = restTemplate;
-    this.environment = environment;
-    this.currencyDao = currencyDao;
-  }
 
   @Override
   public CoinmarketCurrenciesResponse getCryptoRatesAgainstCurrency(String currency) {

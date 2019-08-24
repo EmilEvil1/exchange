@@ -5,6 +5,7 @@ import com.fairpay.currency.model.CurrencyEntity;
 import com.fairpay.currency.service.CurrencyService;
 import com.fairpay.currency.vo.CoinmarketCurrenciesResponse;
 import com.fairpay.currency.vo.CurrencyDTO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Component
 @Log4j2
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CurrencyParseJob {
 
   private static final String RUBLE_CODE = "RUB";
@@ -23,12 +25,6 @@ public class CurrencyParseJob {
 
   private final CurrencyService currencyService;
   private final CurrencyDao currencyDao;
-
-  @Autowired
-  public CurrencyParseJob(CurrencyService currencyService, CurrencyDao currencyDao) {
-    this.currencyService = currencyService;
-    this.currencyDao = currencyDao;
-  }
 
 
   // fixed delay read
