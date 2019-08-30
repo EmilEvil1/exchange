@@ -5,6 +5,7 @@ import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.currency.dao.CurrencyDao;
 import com.fairpay.currency.model.CurrencyEntity;
 import com.fairpay.moderatorBot.services.interf.MessageSender;
+import com.fairpay.paymentSystem.PaymentSystemManager;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +23,19 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   private final CurrencyDao currencyDao;
   private final WalletDao walletDao;
   private final ApplicationMailer applicationMailer;
+  private final PaymentSystemManager paymentSystemManager;
   private MessageSender messageSender;
 
   public ApplicationManagerImpl(ApplicationDao applicationDao,
                                 CurrencyDao currencyDao,
                                 WalletDao walletDao,
-                                ApplicationMailer applicationMailer) {
+                                ApplicationMailer applicationMailer,
+                                PaymentSystemManager paymentSystemManager) {
     this.applicationDao = applicationDao;
     this.currencyDao = currencyDao;
     this.walletDao = walletDao;
     this.applicationMailer = applicationMailer;
+    this.paymentSystemManager = paymentSystemManager;
   }
 
   @Autowired
@@ -94,6 +98,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     applicationMailer.sendApplicationToModerator(application);
 
     messageSender.send(application);
+    paymentSystemManager.sendPaymentRequest(application);
 
     return "success";
   }
