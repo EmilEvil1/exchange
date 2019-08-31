@@ -10,6 +10,9 @@ public class QiwiProvider extends AbstractProvider {
 
   public AbstractPaymentRequest createPaymentRequest(ApplicationEntity application) {
     BillQiwiDTO qiwiDTO = new BillQiwiDTO();
+    qiwiDTO.setPhone(application.getPhone());
+    qiwiDTO.setEmail(application.getEmail());
+
     return qiwiDTO;
   }
 
@@ -18,6 +21,6 @@ public class QiwiProvider extends AbstractProvider {
   }
 
   public String getCode() {
-    return "qiwi";
+    return "QIWI";
   }
 }

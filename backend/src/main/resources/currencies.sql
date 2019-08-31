@@ -41,6 +41,7 @@ INSERT INTO currencies VALUES("TINKOFF", 1, 1, 26, "Тинькофф", "CARD_NUM
 INSERT INTO currencies VALUES("ADVCASH", 1, 1, 27, "AdvcashRub", "CARD_NUMBER", 2455.45);
 INSERT INTO currencies VALUES("ALPHA", 1, 1, 28, "Альфа Банк", "CARD_NUMBER", 23455.45);
 INSERT INTO currencies VALUES("VTB", 1, 1, 29, "ВТБ Банк", "CARD_NUMBER", 645666.45);
+INSERT INTO currencies VALUES("QIWI", 1, 1, 30, "QIWI кошелек", "CARD_NUMBER", 43453.45);
 
 
 
