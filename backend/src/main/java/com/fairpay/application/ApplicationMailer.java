@@ -23,7 +23,7 @@ public class ApplicationMailer {
         String moderatorEmail = environment.getProperty(ApplicationMailer.MODERATOR_EMAIL);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(moderatorEmail);
-        message.setSubject("New Application");
+        message.setSubject("Новая заявка на обмен");
         message.setText(applicationFormatter.formatApplicationForMail(application));
         emailSender.send(message);
     }
