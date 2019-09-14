@@ -2,8 +2,11 @@ package com.fairpay.paymentSystem;
 
 import com.fairpay.application.ApplicationEntity;
 import com.fairpay.paymentSystem.dto.AbstractPaymentRequest;
+import com.fairpay.paymentSystem.dto.AbstractPaymentResponse;
 import com.fairpay.paymentSystem.providers.AbstractProvider;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,6 +40,9 @@ public class PaymentSystemManagerImpl implements PaymentSystemManager {
     String port = environment.getProperty(portPaymentSystem);
     String url = "http://localhost:" + port + providerFrom.getUrl();
 
-    restTemplate.put(url, requestFrom);
+    HttpHeaders httpHeaders = new HttpHeaders();
+    httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+
+    restTemplate.put(url, requestFrom, AbstractPaymentResponse.class);
   }
 }

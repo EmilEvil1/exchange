@@ -1,4 +1,4 @@
-package com.fairpay.currency.vo;
+package com.fairpay.currencies.coin.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

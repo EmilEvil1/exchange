@@ -1,4 +1,4 @@
-package com.fairpay.currency.vo;
+package com.fairpay.currencies.coin.vo;
 
 import lombok.Data;
 
@@ -15,7 +15,7 @@ public class CurrencyDTO {
 
   @Override
   public String toString() {
-    return "CurrencyDTO{" +
+    return "AbstractCurrencyDTO{" +
       "name='" + name + '\'' +
       ", symbol='" + symbol + '\'' +
       ", slug='" + slug + '\'' +

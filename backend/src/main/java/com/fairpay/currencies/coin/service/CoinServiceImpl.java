@@ -1,9 +1,9 @@
-package com.fairpay.currency.service;
+package com.fairpay.currencies.coin.service;
 
-import com.fairpay.currency.api.CurrencyDTO;
-import com.fairpay.currency.dao.CurrencyDao;
-import com.fairpay.currency.model.CurrencyEntity;
-import com.fairpay.currency.vo.CoinmarketCurrenciesResponse;
+import com.fairpay.currencies.api.AbstractCurrencyDTO;
+import com.fairpay.currencies.coin.dao.CoinDao;
+import com.fairpay.currencies.coin.model.CoinEntity;
+import com.fairpay.currencies.coin.vo.CoinmarketCurrenciesResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 @Log4j2
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class CurrencyServiceImpl implements CurrencyService {
+public class CoinServiceImpl implements CoinService {
 
   private static String GET_CURRENCIES_URL = "/v1/cryptocurrency/listings/latest?start=1&limit=100&convert=";
 
@@ -31,15 +31,14 @@ public class CurrencyServiceImpl implements CurrencyService {
 
   private final RestTemplate restTemplate;
   private final Environment environment;
-  private final CurrencyDao currencyDao;
 
   @Override
   public CoinmarketCurrenciesResponse getCryptoRatesAgainstCurrency(String currency) {
     HttpHeaders headers = new HttpHeaders();
     headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-    headers.add(CurrencyServiceImpl.API_KEY_HEADER, environment.getProperty(CurrencyServiceImpl.API_KEY));
+    headers.add(CoinServiceImpl.API_KEY_HEADER, environment.getProperty(CoinServiceImpl.API_KEY));
 
-    String url = environment.getProperty(CurrencyServiceImpl.HOST_KEY) + CurrencyServiceImpl.GET_CURRENCIES_URL + currency;
+    String url = environment.getProperty(CoinServiceImpl.HOST_KEY) + CoinServiceImpl.GET_CURRENCIES_URL + currency;
 
     log.info("Request with url " + url);
     HttpEntity<CoinmarketCurrenciesResponse> httpEntity = new HttpEntity(headers);
@@ -53,26 +52,5 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     return null;
-  }
-
-  @Override
-  public List<CurrencyDTO> getCurrenciesByPriority() {
-    List<CurrencyEntity> currencyEntities = new ArrayList<>();
-    for (CurrencyEntity currencyEntity : currencyDao.findAll()) {
-      currencyEntities.add(currencyEntity);
-    }
-
-    return currencyEntities.stream()
-      .sorted(Comparator.comparingInt(CurrencyEntity::getPriority))
-      .map(currencyEntity -> {
-        CurrencyDTO currencyDTO = new CurrencyDTO();
-        currencyDTO.setName(currencyEntity.getName());
-        currencyDTO.setRub(currencyEntity.getRub());
-        currencyDTO.setUah(currencyEntity.getUah());
-        currencyDTO.setTicker(currencyEntity.getTicker());
-        currencyDTO.setReserves(currencyEntity.getReserves());
-        currencyDTO.setHoldType(currencyEntity.getHoldType());
-        return currencyDTO;
-      }).collect(Collectors.toList());
   }
 }

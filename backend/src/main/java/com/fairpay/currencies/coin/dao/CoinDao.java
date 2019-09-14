@@ -1,26 +1,29 @@
-package com.fairpay.currency.dao;
+package com.fairpay.currencies.coin.dao;
 
-import com.fairpay.currency.model.CurrencyEntity;
+import com.fairpay.currencies.coin.model.CoinEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
-public interface CurrencyDao extends JpaRepository<CurrencyEntity, String> {
+public interface CoinDao extends JpaRepository<CoinEntity, String> {
 
   @Transactional
   @Modifying
-  @Query("UPDATE currencies cur SET cur.rub=?1 where cur.ticker = ?2")
+  @Query("UPDATE coins cur SET cur.rub=?1 where cur.ticker = ?2")
   void updateRubRate(BigDecimal rubRate, String ticker);
 
   @Transactional
   @Modifying
-  @Query("UPDATE currencies cur SET cur.uah=?1 where cur.ticker = ?2")
+  @Query("UPDATE coins cur SET cur.uah=?1 where cur.ticker = ?2")
   void updateUahRate(BigDecimal uahRate, String ticker);
 
-  Optional<CurrencyEntity> findByTicker (String ticker);
+  Optional<CoinEntity> findByTicker (String ticker);
+
+  List<CoinEntity> findAllByOrderByPriorityAsc();
 
 }
