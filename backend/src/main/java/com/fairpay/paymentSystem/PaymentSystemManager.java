@@ -1,6 +1,7 @@
 package com.fairpay.paymentSystem;
 
 import com.fairpay.application.ApplicationEntity;
+import com.fairpay.paymentSystem.api.AbstractPaymentResponse;
 
 public interface PaymentSystemManager {
   /**
@@ -8,5 +9,5 @@ public interface PaymentSystemManager {
    * and send it to the payment system
    * @param application
    */
-  void sendPaymentRequest(ApplicationEntity application);
+  AbstractPaymentResponse sendPaymentRequest(ApplicationEntity application);
 }

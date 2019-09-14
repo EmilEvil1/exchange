@@ -1,5 +1,6 @@
-package com.fairpay.paymentSystem.dto;
+package com.fairpay.paymentSystem.providers.qiwi.api;
 
+import com.fairpay.paymentSystem.api.AbstractPaymentRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,7 @@ import java.math.BigDecimal;
 
 @Component
 @Data
-public class BillQiwiDTO extends AbstractPaymentRequest {
+public class QiwiRequestDTO extends AbstractPaymentRequest {
 
     @JsonProperty("phone")
     private String phone = ""; //Номер телефона пользователя, на который выставляется счет (в международном формате)

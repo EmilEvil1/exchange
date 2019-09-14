@@ -1,4 +1,4 @@
-package com.fairpay.paymentSystem.dto;
+package com.fairpay.paymentSystem.api;
 
 import lombok.Data;
 
