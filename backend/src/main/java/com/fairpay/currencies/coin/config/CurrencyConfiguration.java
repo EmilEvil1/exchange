@@ -1,4 +1,4 @@
-package com.fairpay.currency.config;
+package com.fairpay.currencies.coin.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

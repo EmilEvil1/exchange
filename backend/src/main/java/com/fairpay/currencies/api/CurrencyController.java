@@ -2,7 +2,6 @@ package com.fairpay.currencies.api;
 
 import com.fairpay.currencies.CurrencyManager;
 import com.fairpay.currencies.coin.api.CoinDTO;
-import com.fairpay.currencies.coin.service.CoinService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
