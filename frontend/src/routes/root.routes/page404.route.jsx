@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button} from 'frontend/src/components';
-import {routeConnect, Route as RouteBase} from 'frontend/src/models/route';
-import * as S from 'frontend/src/styles';
-import hot from 'frontend/utils/hot';
+import {Button} from 'src/components';
+import {routeConnect, Route as RouteBase} from 'src/models/route';
+import * as S from 'src/styles';
+import hot from 'src/utils/hot';
 
 const staticData = {
   routeId: 'page404.root',

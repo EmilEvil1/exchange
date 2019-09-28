@@ -1,7 +1,7 @@
 import {takeEvery, delay} from 'redux-saga/effects';
 import {createActions, handleActions} from 'redux-actions';
-import {buildQuery} from 'frontend/utils/xhr';
-import truetype from 'frontend/utils/truetype';
+import {buildQuery} from 'src/utils/xhr';
+import truetype from 'src/utils/truetype';
 
 const appModel = () => {
   const namespace = 'app'
@@ -21,7 +21,7 @@ const appModel = () => {
 
   const utils = {
     resize() {
-      const {store} = require('frontend/src/redux/store');
+      const {store} = require('src/redux/store');
       const siteWrapper = document.querySelector('.site-wrapper');
       if (!siteWrapper) return null;
       let breakpoint;
@@ -62,7 +62,7 @@ const appModel = () => {
       utils.resize();
     },
     *historyPush({payload}) {
-      const {history} = require('frontend/src/redux/store');
+      const {history} = require('src/redux/store');
       if (truetype.isObject(payload)) {
         const {path, query} = payload;
         return yield history.push(`${payload.path}${buildQuery(query)}`);

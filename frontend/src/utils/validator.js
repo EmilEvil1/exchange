@@ -1,6 +1,6 @@
 import validatorjs from 'validatorjs';
 import set from 'lodash/set';
-import resources from 'frontend/src/i18n/resources';
+import resources from 'src/i18n/resources';
 
 validatorjs.setAttributeFormatter(() => '');
 validatorjs.register('phone/ru', v => {

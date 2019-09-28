@@ -4,7 +4,7 @@ import {
   SubHeader,
   Main,
   Footer,
-} from 'frontend/src/components';
+} from 'src/components';
 
 class Layout extends React.PureComponent {
   render() {

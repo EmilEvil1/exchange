@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
-import truetype from 'frontend/utils/truetype';
-import actions from 'frontend/src/redux/actions';
+import truetype from 'src/utils/truetype';
+import actions from 'src/redux/actions';
 import model from './model';
 
 const routeConnect = settings => Route => {

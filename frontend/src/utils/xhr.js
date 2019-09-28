@@ -1,5 +1,5 @@
-import truetype from 'frontend/utils/truetype';
-import jsonparse from 'frontend/utils/jsonparse';
+import truetype from 'src/utils/truetype';
+import jsonparse from 'src/utils/jsonparse';
 
 export const buildQuery = (object) => {
   const query = Object.entries(object).reduce((result, [k, v]) => {

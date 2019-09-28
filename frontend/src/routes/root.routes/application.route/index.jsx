@@ -1,13 +1,13 @@
 import React from 'react';
 import {withTranslation} from 'react-i18next';
-import hot from 'frontend/utils/hot';
-import {buildQuery} from 'frontend/utils/xhr';
-import restModel from 'frontend/src/models/rest/model';
-import actions from 'frontend/src/redux/actions';
-import {routeConnect, Route as RouteBase} from 'frontend/src/models/route';
-import {AdvantageCard, Step, ProgressCard} from 'frontend/src/components';
-import truetype from 'frontend/utils/truetype';
-import * as S from 'frontend/src/styles';
+import hot from 'src/utils/hot';
+import {buildQuery} from 'src/utils/xhr';
+import restModel from 'src/models/rest/model';
+import actions from 'src/redux/actions';
+import {routeConnect, Route as RouteBase} from 'src/models/route';
+import {AdvantageCard, Step, ProgressCard} from 'src/components';
+import truetype from 'src/utils/truetype';
+import * as S from 'src/styles';
 import types from './types';
 import * as CS from './style';
 

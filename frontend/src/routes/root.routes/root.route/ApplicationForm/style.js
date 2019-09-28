@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {colors} from 'frontend/src/styles';
+import {colors} from 'src/styles';
 
 export const Heading = styled.div`
   font-size: 30px;

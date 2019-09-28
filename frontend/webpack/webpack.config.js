@@ -1,13 +1,13 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import TerserPlugin from 'terser-webpack-plugin';
-import routing from 'frontend/webpack/routing.config';
-import mode from 'frontend/utils/mode';
+import mode from 'src/utils/mode';
+import routing from './routing.config';
 
 const config = merge([
   mode({
     development: {
-      devtool: mode({ development: 'cheap-module-eval-source-map' }),
+      devtool: mode({development: 'inline-source-map'}),
     },
   }),
   {
@@ -16,8 +16,7 @@ const config = merge([
     resolve: merge([
       {
         modules: [
-          routing.paths.frontend.utils.root,
-          routing.paths.frontend.src.root,
+          routing.paths.src.root,
           'node_modules'
         ],
         extensions: ['.js', '.jsx', '.json'],
@@ -26,12 +25,12 @@ const config = merge([
         development: {
           alias: {
             'react-dom': '@hot-loader/react-dom',
-            'frontend': routing.paths.frontend.root,
+            'src': routing.paths.src.root,
           },
         },
         production: {
           alias: {
-            'frontend': routing.paths.frontend.root,
+            'src': routing.paths.src.root,
           },
         },
       }),
@@ -42,26 +41,26 @@ const config = merge([
           'webpack-hot-middleware/client',
           'whatwg-fetch',
           '@babel/polyfill',
-          routing.paths.frontend.src.bundle,
+          routing.paths.src.bundle,
         ],
       },
       production: {
         bundle: [
           'whatwg-fetch',
           '@babel/polyfill',
-          routing.paths.frontend.src.bundle,
+          routing.paths.src.bundle,
         ],
       },
     }),
     output: mode({
       development: {
-        path: routing.paths.frontend.public.root,
+        path: routing.paths.public.root,
         filename: '[name].js',
         chunkFilename: '[name].chunk.js',
         publicPath: '/static/',
       },
       production: {
-        path: routing.paths.frontend.public.root,
+        path: routing.paths.public.root,
         filename: 'static/js/[name].min.js',
         chunkFilename: 'static/js/[name].chunk.min.js',
       },

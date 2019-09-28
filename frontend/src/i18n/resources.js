@@ -1,12 +1,12 @@
-import Notifier from 'frontend/src/models/notifier/i18n';
+import Notifier from 'src/models/notifier/i18n';
 
-import AdvantageCard from 'frontend/src/components/AdvantageCard/i18n';
-import Footer from 'frontend/src/components/Footer/i18n';
-import Header from 'frontend/src/components/Header/i18n';
-import ProgressCard from 'frontend/src/components/ProgressCard/i18n';
-import Select from 'frontend/src/components/Select/i18n';
+import AdvantageCard from 'src/components/AdvantageCard/i18n';
+import Footer from 'src/components/Footer/i18n';
+import Header from 'src/components/Header/i18n';
+import ProgressCard from 'src/components/ProgressCard/i18n';
+import Select from 'src/components/Select/i18n';
 
-import ApplicationForm from 'frontend/src/routes/root.routes/root.route/ApplicationForm/i18n';
+import ApplicationForm from 'src/routes/root.routes/root.route/ApplicationForm/i18n';
 
 const siteInfo = {
   en: {

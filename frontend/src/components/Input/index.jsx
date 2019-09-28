@@ -1,6 +1,6 @@
 // @flow
 import React, {PureComponent} from 'react';
-import formField from 'frontend/src/hocs/formField';
+import formField from 'src/hocs/formField';
 import NumberFormat from 'react-number-format';
 import * as S from './style';
 

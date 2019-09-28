@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {createPortal} from 'react-dom';
-import truetype from 'frontend/utils/truetype';
+import truetype from 'src/utils/truetype';
 
 class Portal extends React.PureComponent {
   static propTypes = {

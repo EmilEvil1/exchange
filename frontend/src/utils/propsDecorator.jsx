@@ -1,5 +1,5 @@
 import React from 'react';
-import truetype from 'frontend/utils/truetype';
+import truetype from 'src/utils/truetype';
 
 const propsDecorator = payload => Component => {
   const Content = props => {

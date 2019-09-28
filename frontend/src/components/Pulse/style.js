@@ -1,6 +1,6 @@
 import styled, {css} from 'styled-components';
 import Color from 'color';
-import {colors, mixins} from 'frontend/src/styles';
+import {colors, mixins} from 'src/styles';
 
 export const Root = styled.div`
   cursor: inherit;

@@ -4,11 +4,13 @@
   "description": "",
   "main": "webpack.config.babel.js",
   "scripts": {
-    "start": "cross-env NODE_PATH=. NODE_ENV=development babel-node frontend/webpack/server.config.js",
-    "build": "npm run scripts:sprite && npm run scripts:webpack && npm run scripts:copy",
-    "scripts:sprite": "cross-env NODE_PATH=. NODE_ENV=production babel-node frontend/webpack/sprite.script.js",
+    "start": "npm run scripts:sprite && npm run server",
+    "server": "cross-env NODE_PATH=. NODE_ENV=development babel-node webpack/server.config.js",
+    "build": "npm run scripts:index && npm run scripts:webpack && npm run scripts:copy",
+    "scripts:index": "cross-env NODE_PATH=. NODE_ENV=production babel-node webpack/index.script.js",
+    "scripts:sprite": "cross-env NODE_PATH=. NODE_ENV=production babel-node webpack/sprite.script.js",
     "scripts:webpack": "cross-env NODE_PATH=. NODE_ENV=production webpack",
-    "scripts:copy": "cross-env NODE_PATH=. NODE_ENV=production babel-node frontend/webpack/copy.script.js"
+    "scripts:copy": "cross-env NODE_PATH=. NODE_ENV=production babel-node webpack/copy.script.js"
   },
   "repository": {
     "type": "git",

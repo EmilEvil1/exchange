@@ -1,4 +1,4 @@
-import truetype from 'frontend/utils/truetype';
+import truetype from 'src/utils/truetype';
 
 const getDOMroot = () => {
   const body = document.querySelector('body');

@@ -3,10 +3,10 @@ import {createBrowserHistory} from 'history';
 import createSagaMiddleware from 'redux-saga';
 import {createLogger} from 'redux-logger';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import sagas from 'frontend/src/redux/sagas';
-import redusers from 'frontend/src/redux/redusers';
-import truetype from 'frontend/utils/truetype';
-import mode from 'frontend/utils/mode';
+import sagas from 'src/redux/sagas';
+import redusers from 'src/redux/redusers';
+import truetype from 'src/utils/truetype';
+import mode from 'src/utils/mode';
 
 export const history = createBrowserHistory();
 

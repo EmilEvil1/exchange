@@ -4,10 +4,10 @@ import webpack from 'webpack';
 import wabpackDevMiddleware from 'webpack-dev-middleware';
 import wabpackHotMiddleware from 'webpack-hot-middleware';
 import proxy from 'http-proxy-middleware';
-import webpackConfig from 'frontend/webpack/webpack.config';
-import routing from 'frontend/webpack/routing.config';
-import settings from 'frontend/webpack/settings.config';
-import sprite from 'frontend/src/sprite';
+import webpackConfig from './webpack.config';
+import routing from './routing.config';
+import settings from './settings.config';
+import sprite from 'src/sprite';
 
 const compiler = webpack(webpackConfig);
 const app = express();
@@ -19,7 +19,7 @@ app.use(wabpackDevMiddleware(compiler, {
   serverSideRender: true
 }));
 app.use(wabpackHotMiddleware(compiler));
-app.use('/static', express.static(routing.paths.frontend.public.static.root));
+app.use('/static', express.static(routing.paths.public.static.root));
 app.use('/rest', proxy({
   target: 'http://www.fairpay24.com:8080',
   changeOrigin: true,

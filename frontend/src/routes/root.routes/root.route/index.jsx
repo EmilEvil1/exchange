@@ -1,9 +1,9 @@
 import React from 'react';
 import {withTranslation} from 'react-i18next';
-import {routeConnect, Route as RouteBase} from 'frontend/src/models/route';
-import * as S from 'frontend/src/styles';
-import hot from 'frontend/utils/hot';
-import {AdvantageCard} from 'frontend/src/components';
+import {routeConnect, Route as RouteBase} from 'src/models/route';
+import * as S from 'src/styles';
+import hot from 'src/utils/hot';
+import {AdvantageCard} from 'src/components';
 import ApplicationForm from './ApplicationForm';
 import types from './types';
 

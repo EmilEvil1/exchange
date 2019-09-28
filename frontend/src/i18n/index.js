@@ -1,9 +1,9 @@
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
-import {store} from 'frontend/src/redux/store';
-import actions from 'frontend/src/redux/actions'
-import {DEFAULT_LANG} from 'frontend/src/constants';
-import validator from 'frontend/utils/validator';
+import {store} from 'src/redux/store';
+import actions from 'src/redux/actions'
+import {DEFAULT_LANG} from 'src/constants';
+import validator from 'src/utils/validator';
 import resources from './resources';
 
 i18n.use(initReactI18next).init({

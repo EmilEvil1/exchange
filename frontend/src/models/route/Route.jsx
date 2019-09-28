@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import actions from 'frontend/src/redux/actions';
-import truetype from 'frontend/utils/truetype';
+import actions from 'src/redux/actions';
+import truetype from 'src/utils/truetype';
 import types from './types';
 
 class Route extends React.Component {

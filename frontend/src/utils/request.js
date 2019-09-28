@@ -1,6 +1,6 @@
 import {call, put} from 'redux-saga/effects';
-import xhr from 'frontend/utils/xhr';
-// import actions from 'frontend/src/redux/actions';
+import xhr from 'src/utils/xhr';
+// import actions from 'src/redux/actions';
 
 const request = function* (options) {
   try {
