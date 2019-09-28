@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
+import CopyPlugin from 'copy-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import mode from 'src/utils/mode';
 import routing from './routing.config';
@@ -65,21 +66,27 @@ const config = merge([
         chunkFilename: 'static/js/[name].chunk.min.js',
       },
     }),
-    plugins: mode({
-      development: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.DefinePlugin({
-          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-          'process.env.PORT': JSON.stringify(process.env.PORT),
-        }),
-      ],
-      production: [
-        new webpack.DefinePlugin({
-          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-          'process.env.PORT': JSON.stringify(process.env.PORT),
-        }),
-      ],
-    }),
+    plugins: [
+      ...mode({
+        development: [
+          new webpack.HotModuleReplacementPlugin(),
+          new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            'process.env.PORT': JSON.stringify(process.env.PORT),
+          }),
+        ],
+        production: [
+          new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            'process.env.PORT': JSON.stringify(process.env.PORT),
+          }),
+        ],
+      }),
+      new CopyPlugin([{
+        from: routing.paths.src.fonts,
+        to: routing.paths.public.static.fonts,
+      }]),
+    ],
     module: {
       rules: [
         {
