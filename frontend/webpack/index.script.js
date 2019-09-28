@@ -35,7 +35,7 @@ fs.writeFileSync(index, `
       ${each(symbolsDir,/\.svg$/,(filepath) => fs.readFileSync(filepath, 'utf-8')).join('\n')}
     </svg>
     <div id="root" class="site-wrapper"></div>
-    <script type="text/javascript" src="/static/bundle.js"></script>
+    <script type="text/javascript" src="/static/js/bundle.min.js"></script>
   </body>
 </html>
 `.trim());
