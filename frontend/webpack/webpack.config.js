@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-import mode from '../src/utils/mode';
+import mode from 'src/utils/mode';
 import routing from './routing.config';
 
 const config = {
@@ -68,6 +68,9 @@ const config = {
     new CopyPlugin([{
       from: routing.paths.src.fonts,
       to: routing.paths.public.static.fonts,
+    }, {
+      from: routing.paths.src.favicon,
+      to: routing.paths.public.favicon,
     }]),
   ].filter(Boolean),
   module: {

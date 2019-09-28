@@ -36,8 +36,6 @@ node
 ### MAC OS ###
 .DS_Store
 
-### frontend ###
+### Build directory ###
 frontend/public
-
-### backend ###
 backend/src/main/resources/public

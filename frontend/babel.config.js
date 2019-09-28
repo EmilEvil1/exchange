@@ -4,9 +4,6 @@ module.exports = {
     '@babel/preset-react',
   ],
   plugins: [
-    ['babel-plugin-styled-components', {
-      'pure': true
-    }],
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-export-namespace-from',
@@ -15,7 +12,12 @@ module.exports = {
   ],
   env: {
     development: {
-      plugins: ['react-hot-loader/babel'],
+      plugins: [
+        'react-hot-loader/babel',
+        ['babel-plugin-styled-components', {
+          'pure': true
+        }],
+      ],
     },
   },
 };

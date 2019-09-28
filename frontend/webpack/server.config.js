@@ -18,19 +18,16 @@ app.use(wabpackDevMiddleware(compiler, {
   serverSideRender: true
 }));
 app.use(wabpackHotMiddleware(compiler));
+
 app.use('/static', express.static(routing.paths.public.static.root));
 app.use('/api', proxy({
   target: 'http://www.fairpay24.com:8080',
   changeOrigin: true,
-  // pathRewrite: {
-  //   '^/rest': '/api'
-  // },
 }));
 
 app.get('*', (req, res) => res.sendFile(routing.paths.public.index));
 
 const server = http.createServer(app);
-
 server.listen(app.get('port'), err => {
   if (err) {
     return console.log(err);

@@ -27,7 +27,8 @@ fsx.writeFileSync(routing.paths.public.index, `
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Exchange</title>
+      <title>Fair Pay</title>
+      <link rel="shortcut icon" href="favicon.ico">
   </head>
   <body>
     <svg xmlns="//www.w3.org/2000/svg" style="z-index:-99999;position:fixed;top:-99999px;left:-99999px;visibility:hidden;opacity:0;">
