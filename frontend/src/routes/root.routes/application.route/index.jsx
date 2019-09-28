@@ -47,7 +47,7 @@ class Route extends RouteBase {
   componentDidMount() {
     const {match: {params: {id}}} = this.props;
     this.props.restRequest({
-      endpoint: '/rest/application',
+      endpoint: '/api/application',
       payload: {
         applicationId: id,
       },

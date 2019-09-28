@@ -130,7 +130,7 @@ const restModel = () => {
         return yield put(actions.reset(null, meta));
       }
       const {error, result} = yield request({
-        endpoint: `/rest/${payload}/all`,
+        endpoint: `/api/${payload}/all`,
       });
       if (!(yield sagas.utils.getField(meta.fieldId))) {
         return null;

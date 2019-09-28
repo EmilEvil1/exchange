@@ -20,12 +20,12 @@ app.use(wabpackDevMiddleware(compiler, {
 }));
 app.use(wabpackHotMiddleware(compiler));
 app.use('/static', express.static(routing.paths.public.static.root));
-app.use('/rest', proxy({
+app.use('/api', proxy({
   target: 'http://www.fairpay24.com:8080',
   changeOrigin: true,
-  pathRewrite: {
-    '^/rest': '/api'
-  },
+  // pathRewrite: {
+  //   '^/rest': '/api'
+  // },
 }));
 
 app.get('*', (req, res) => res.send(`

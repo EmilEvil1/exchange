@@ -79,7 +79,7 @@ const reduxFormConfig = {
   form: staticData.formId,
   onSubmit: (values, dispatch) => {
     return dispatch(actions.rest.request({
-      endpoint: '/rest/application',
+      endpoint: '/api/application',
       method: 'POST',
       payload: values,
     }, {
@@ -124,7 +124,7 @@ class ApplicationForm extends React.Component {
   };
 
   componentDidMount() {
-    this.props.restRequest({endpoint: '/rest/currencies'}, {fieldId: 'currencies'});
+    this.props.restRequest({endpoint: '/api/currencies'}, {fieldId: 'currencies'});
   }
 
   componentDidUpdate(prevProps, prevState) {

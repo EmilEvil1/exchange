@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run scripts:sprite && npm run server",
     "server": "cross-env NODE_PATH=. NODE_ENV=development babel-node webpack/server.config.js",
-    "build": "npm run scripts:index && npm run scripts:webpack && npm run scripts:copy",
+    "build": "npm run scripts:clean && npm run scripts:index && npm run scripts:webpack && npm run scripts:copy",
+    "scripts:clean": "cross-env NODE_PATH=. NODE_ENV=production babel-node webpack/clean.script.js",
     "scripts:index": "cross-env NODE_PATH=. NODE_ENV=production babel-node webpack/index.script.js",
     "scripts:sprite": "cross-env NODE_PATH=. NODE_ENV=production babel-node webpack/sprite.script.js",
     "scripts:webpack": "cross-env NODE_PATH=. NODE_ENV=production webpack",
