@@ -1,8 +1,8 @@
-import appModel from 'src/models/app';
-import authModel from 'src/models/auth';
-import notifierModel from 'src/models/notifier';
-import restModel from 'src/models/rest';
-import routeModel from 'src/models/route';
+import appModel from 'src/models/app/model';
+import authModel from 'src/models/auth/model';
+import notifierModel from 'src/models/notifier/model';
+import restModel from 'src/models/rest/model';
+import routeModel from 'src/models/route/model';
 
 const actions = {
   [appModel.namespace]: appModel.actions,

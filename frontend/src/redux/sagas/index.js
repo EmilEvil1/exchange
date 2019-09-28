@@ -1,7 +1,7 @@
 import {fork} from 'redux-saga/effects';
 import appModel from 'src/models/app/model';
 import notifierModel from 'src/models/notifier/model';
-import restModel from 'src/models/rest';
+import restModel from 'src/models/rest/model';
 import routeModel from 'src/models/route/model';
 
 const sagas = function*() {

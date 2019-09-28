@@ -1,6 +1,7 @@
 import React from 'react';
 import {withTranslation} from 'react-i18next';
-import {routeConnect, Route as RouteBase} from 'src/models/route';
+import routeConnect from 'src/models/route/routeConnect';
+import RouteBase from 'src/models/route/Route';
 import * as S from 'src/styles';
 import hot from 'src/utils/hot';
 import {AdvantageCard} from 'src/components';

@@ -8,7 +8,7 @@ import {Button, InputField, FormatInputField, SelectField} from 'src/components'
 import actions from 'src/redux/actions'
 import validator from 'src/utils/validator';
 import {parseQuery} from 'src/utils/xhr';
-import restModel from 'src/models/rest';
+import restModel from 'src/models/rest/model';
 import parseFloatNumber from 'src/utils/parseFloatNumber';
 import * as S from 'src/styles';
 import {Step} from 'src/components';
