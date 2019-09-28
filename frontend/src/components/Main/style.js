@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as S from 'frontend/src/styles';
+import * as S from 'src/styles';
 
 export const Root = styled.main`
   display: flex;

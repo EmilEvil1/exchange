@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {colors, mixins} from 'frontend/src/styles';
+import {colors, mixins} from 'src/styles';
 
 export const Root = styled.div`
   padding-top: 20px;

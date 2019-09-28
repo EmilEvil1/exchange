@@ -1,6 +1,6 @@
 import React from 'react';
 import hash from 'object-hash';
-import * as S from 'frontend/src/styles';
+import * as S from 'src/styles';
 import types from './types';
 import * as CS from './style';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {css} from 'styled-components';
 import {createPortal} from 'react-dom'
-import truetype from 'frontend/utils/truetype';
+import truetype from 'src/utils/truetype';
 import types from './types';
 import * as CS from './style';
 

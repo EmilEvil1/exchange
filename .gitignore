@@ -32,3 +32,12 @@ node_modules/
 dist/
 target/
 node
+
+### MAC OS ###
+.DS_Store
+
+### frontend ###
+frontend/public
+
+### backend ###
+backend/src/main/resources/public

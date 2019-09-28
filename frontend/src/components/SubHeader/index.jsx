@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from 'frontend/src/components/Button';
-import * as S from 'frontend/src/styles';
+import Button from 'src/components/Button';
+import * as S from 'src/styles';
 import * as CS from './style';
 
 class SubHeader extends React.PureComponent {

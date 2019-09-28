@@ -1,7 +1,7 @@
 import React from 'react';
 import {withTranslation} from 'react-i18next'
-import formField from 'frontend/src/hocs/formField';
-import Dropdown from 'frontend/src/components/Dropdown';
+import formField from 'src/hocs/formField';
+import Dropdown from 'src/components/Dropdown';
 import * as CS from './style';
 import {unregisterField, registerField} from 'redux-form';
 

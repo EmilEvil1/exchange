@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {withTranslation} from 'react-i18next';
-import * as S from 'frontend/src/styles';
+import * as S from 'src/styles';
 import Button from '../Button';
 import Logo from '../Logo';
 import Link from '../Link';

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import * as S from 'frontend/src/styles';
-import {colors, mixins} from 'frontend/src/styles';
+import * as S from 'src/styles';
+import {colors, mixins} from 'src/styles';
 
 export const Text = styled(S.Text)`
   :after {

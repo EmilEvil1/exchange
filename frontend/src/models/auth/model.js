@@ -1,7 +1,7 @@
 import {select, put, delay, takeEvery, all} from 'redux-saga/effects';
 import {createActions, handleActions} from 'redux-actions';
 import get from 'lodash/get';
-import truetype from 'frontend/utils/truetype';
+import truetype from 'src/utils/truetype';
 
 const authModel = () => {
   const namespace = 'auth';

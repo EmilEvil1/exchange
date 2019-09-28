@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {withTranslation} from 'react-i18next';
-import * as S from 'frontend/src/styles';
+import * as S from 'src/styles';
 import FooterLogo from '../FooterLogo';
 import Link from '../Link';
 import types from './types';

@@ -1,8 +1,8 @@
 import {fork} from 'redux-saga/effects';
-import appModel from 'frontend/src/models/app/model';
-import notifierModel from 'frontend/src/models/notifier/model';
-import restModel from 'frontend/src/models/rest';
-import routeModel from 'frontend/src/models/route/model';
+import appModel from 'src/models/app/model';
+import notifierModel from 'src/models/notifier/model';
+import restModel from 'src/models/rest/model';
+import routeModel from 'src/models/route/model';
 
 const sagas = function*() {
   yield fork(appModel.saga);

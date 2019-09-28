@@ -1,9 +1,9 @@
 import {reducer as form} from 'redux-form';
-import appModel from 'frontend/src/models/app';
-import authModel from 'frontend/src/models/auth';
-import notifierModel from 'frontend/src/models/notifier';
-import restModel from 'frontend/src/models/rest';
-import routeModel from 'frontend/src/models/route';
+import appModel from 'src/models/app/model';
+import authModel from 'src/models/auth/model';
+import notifierModel from 'src/models/notifier/model';
+import restModel from 'src/models/rest/model';
+import routeModel from 'src/models/route/model';
 
 const reducers = {
   form,

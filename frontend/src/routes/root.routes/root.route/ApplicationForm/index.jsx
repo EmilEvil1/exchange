@@ -4,14 +4,14 @@ import {withTranslation} from 'react-i18next';
 import WAValidator from 'wallet-address-validator';
 import {connect} from 'react-redux';
 import {reduxForm, Form, Field, isPristine, isValid, getFormValues} from 'redux-form';
-import {Button, InputField, FormatInputField, SelectField} from 'frontend/src/components';
-import actions from 'frontend/src/redux/actions'
-import validator from 'frontend/utils/validator';
-import {parseQuery} from 'frontend/utils/xhr';
-import restModel from 'frontend/src/models/rest';
-import parseFloatNumber from 'frontend/utils/parseFloatNumber';
-import * as S from 'frontend/src/styles';
-import {Step} from 'frontend/src/components';
+import {Button, InputField, FormatInputField, SelectField} from 'src/components';
+import actions from 'src/redux/actions'
+import validator from 'src/utils/validator';
+import {parseQuery} from 'src/utils/xhr';
+import restModel from 'src/models/rest/model';
+import parseFloatNumber from 'src/utils/parseFloatNumber';
+import * as S from 'src/styles';
+import {Step} from 'src/components';
 import types from './types';
 import * as CS from './style';
 
@@ -79,7 +79,7 @@ const reduxFormConfig = {
   form: staticData.formId,
   onSubmit: (values, dispatch) => {
     return dispatch(actions.rest.request({
-      endpoint: '/rest/application',
+      endpoint: '/api/application',
       method: 'POST',
       payload: values,
     }, {
@@ -124,7 +124,7 @@ class ApplicationForm extends React.Component {
   };
 
   componentDidMount() {
-    this.props.restRequest({endpoint: '/rest/currencies'}, {fieldId: 'currencies'});
+    this.props.restRequest({endpoint: '/api/currencies'}, {fieldId: 'currencies'});
   }
 
   componentDidUpdate(prevProps, prevState) {

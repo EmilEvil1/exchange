@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import routes from 'frontend/src/routes';
+import routes from 'src/routes';
 import * as CS from './style';
 
 class Main extends React.PureComponent {

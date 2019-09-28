@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {colors, Grid} from 'frontend/src/styles';
+import {colors, Grid} from 'src/styles';
 import BaseIcon from '../Icon';
 
 export const Root = styled.header`

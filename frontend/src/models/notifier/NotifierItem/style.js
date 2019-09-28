@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Color from 'color';
-import {colors} from 'frontend/src/styles';
+import {colors} from 'src/styles';
 // import {Button as BaseButton} from 'src/components';
 
 const getRootStyle = (props) => {

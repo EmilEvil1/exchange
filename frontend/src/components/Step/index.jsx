@@ -1,6 +1,6 @@
 import React from 'react';
 import {Transition} from 'react-transition-group';
-import truetype from 'frontend/utils/truetype';
+import truetype from 'src/utils/truetype';
 import types from './types';
 import * as CS from './style';
 

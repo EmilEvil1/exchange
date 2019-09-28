@@ -1,10 +1,10 @@
 import {createActions, handleActions} from 'redux-actions';
 import {all, put, fork, take, cancel, select} from 'redux-saga/effects';
 import get from 'lodash/get';
-import notifierModel from 'frontend/src/models/notifier';
-import authModel from 'frontend/src/models/auth';
-import truetype from 'frontend/utils/truetype';
-import request from 'frontend/utils/request';
+import notifierModel from 'src/models/notifier/model';
+import authModel from 'src/models/auth/model';
+import truetype from 'src/utils/truetype';
+import request from 'src/utils/request';
 
 const restModel = () => {
   const namespace = 'rest';
@@ -130,7 +130,7 @@ const restModel = () => {
         return yield put(actions.reset(null, meta));
       }
       const {error, result} = yield request({
-        endpoint: `/rest/${payload}/all`,
+        endpoint: `/api/${payload}/all`,
       });
       if (!(yield sagas.utils.getField(meta.fieldId))) {
         return null;

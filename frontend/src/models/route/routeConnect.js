@@ -1,39 +1,35 @@
 import {connect} from 'react-redux';
-import truetype from 'frontend/utils/truetype';
-import actions from 'frontend/src/redux/actions';
+import truetype from 'src/utils/truetype';
+import actions from 'src/redux/actions';
 import model from './model';
 
 const routeConnect = settings => Route => {
   const {
     routeId,
-    mapStateToProps: SMapStateToProps,
-    mapDispatchToProps: SMapDispatchToProps,
-    mergeProps: SMergeProps,
+    mapStateToProps,
+    mapDispatchToProps,
+    mergeProps,
   } = settings;
-
-  const mapStateToProps = (state, ownProps) => {
+  const routeMapStateToProps = (state, ownProps) => {
     const routeState = state[model.namespace][routeId];
-
     if (truetype.isUndefined(routeState)) {
       return {
-        mapStateToProps: truetype.isFunction(SMapStateToProps) ? SMapStateToProps(state, ownProps) : undefined,
+        default: truetype.isFunction(mapStateToProps) ? mapStateToProps(state, ownProps) : undefined,
         routeState: model.utils.createRouteState(routeId),
       };
     }
-
     return {
-      mapStateToProps: truetype.isFunction(SMapStateToProps) ? SMapStateToProps(state, ownProps) : undefined,
+      default: truetype.isFunction(mapStateToProps) ? mapStateToProps(state, ownProps) : undefined,
       routeState,
     };
   };
-
-  const mapDispatchToProps = (dispatch, ownProps) => ({
-    mapDispatchToProps: (() => {
-      if (truetype.isFunction(SMapDispatchToProps)) {
-        return SMapDispatchToProps(dispatch, ownProps);
+  const routeMapDispatchToProps = (dispatch, ownProps) => ({
+    default: (() => {
+      if (truetype.isFunction(mapDispatchToProps)) {
+        return mapDispatchToProps(dispatch, ownProps);
       }
-      if (truetype.isObject(SMapDispatchToProps)) {
-        return Object.entries(SMapDispatchToProps).reduce((result, [key, action]) => ({
+      if (truetype.isObject(mapDispatchToProps)) {
+        return Object.entries(mapDispatchToProps).reduce((result, [key, action]) => ({
           ...result,
           [key]: (...args) => dispatch(action(...args)),
         }), {});
@@ -45,23 +41,21 @@ const routeConnect = settings => Route => {
       destroy: (payload, meta) => dispatch(actions.route.destroy(payload, {...meta, routeId})),
     },
   });
-
-  const mergeProps = (mappedProps, dispatchedProps, ownProps) => {
-    if (truetype.isFunction(SMergeProps)) {
-      return SMergeProps(mappedProps, dispatchedProps, ownProps);
+  const routeMergeProps = (mapState, mapDispatch, ownProps) => {
+    if (truetype.isFunction(mergeProps)) {
+      return mergeProps(mapState, mapDispatch, ownProps);
     }
     return {
       ...ownProps,
-      ...mappedProps.mapStateToProps,
-      ...dispatchedProps.mapDispatchToProps,
+      ...mapState.default,
+      ...mapDispatch.default,
       route: {
-        state: mappedProps.routeState,
-        actions: dispatchedProps.routeActions,
+        state: mapState.routeState,
+        actions: mapDispatch.routeActions,
       }
     };
   };
-
-  return connect(mapStateToProps, mapDispatchToProps, mergeProps)(Route);
+  return connect(routeMapStateToProps, routeMapDispatchToProps, routeMergeProps)(Route);
 };
 
 export default routeConnect;

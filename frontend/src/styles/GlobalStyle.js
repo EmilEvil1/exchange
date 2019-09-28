@@ -2,8 +2,8 @@ import {createGlobalStyle} from 'styled-components'
 import * as mixins from './mixins';
 import * as fonts from './fonts';
 import colors from './colors';
-import {GlobalStyles as NotifierGlobalStyles} from 'frontend/src/models/notifier/Notifier/style';
-import {GlobalStyles as DropdownGlobalStyles} from 'frontend/src/components/Dropdown/style';
+import {GlobalStyles as NotifierGlobalStyles} from 'src/models/notifier/Notifier/style';
+import {GlobalStyles as DropdownGlobalStyles} from 'src/components/Dropdown/style';
 
 const GlobalStyle = createGlobalStyle`
   ${fonts.fontFace}
