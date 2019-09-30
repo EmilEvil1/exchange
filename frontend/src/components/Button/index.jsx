@@ -1,6 +1,6 @@
 import React from 'react';
 import {withRouter, Link, NavLink} from 'react-router-dom';
-// import Pulse from 'src/components/Pulse';
+// import Pulse from '../Pulse';
 import types from './types';
 import * as CS from './style';
 

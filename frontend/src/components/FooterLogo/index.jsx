@@ -5,10 +5,7 @@ import types from './types';
 import * as CS from './style';
 
 const FooterLogo = React.memo(({t}) => (
-  <CS.Root
-    exact
-    to="/"
-  >
+  <CS.Root exact to="/" as={NavLink}>
     <CS.Icon name="icon-logo" />
     <CS.Tagline>
       {t('siteInfo:tagline')}

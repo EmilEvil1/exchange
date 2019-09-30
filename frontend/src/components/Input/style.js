@@ -40,8 +40,8 @@ const getStyleLabel = ({value, $isInvalid}) => {
     return `
       ~ ${Label} {
         top: 33px;
-        left: 19px;
-        right: 19px;
+        left: 17px;
+        right: 17px;
         color: ${colors.Input.Label.isInvalidColor};
         ${mixins.font({size: '20px', weight: '500'})}
       }
@@ -61,8 +61,8 @@ const getStyleLabel = ({value, $isInvalid}) => {
   return `
     ~ ${Label} {
       top: 33px;
-      left: 19px;
-      right: 19px;
+      left: 17px;
+      right: 17px;
       color: ${colors.Input.Label.color};
       ${mixins.font({size: '20px', weight: '500'})}
     }
@@ -116,7 +116,7 @@ export const Input = styled.input`
   height: 50px;
   border-width: 1px;
   border-style: solid;
-  padding: 0 18px;
+  padding: 0 16px;
   border-radius: 6px;
   transition: border-color 200ms linear, background-color 200ms linear, box-shadow 200ms linear;
   ${getStyleInput}

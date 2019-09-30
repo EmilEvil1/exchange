@@ -1,19 +1,15 @@
-import truetype from './truetype';
-
 const getScroll = () => {
-  if (!truetype.isFalse(window.pageYOffset)) {
+  if (window.pageYOffset) {
     return {
       scrollTop: window.pageYOffset,
-      scrollLeft: window.pageXOffset
+      scrollLeft: window.pageXOffset,
     };
   }
-  const Element = (document.documentElement.clientHeight
-    ? document.documentElement
-    : document.body);
+  const elem = document.documentElement.clientHeight ? document.documentElement : document.body;
   return {
-    scrollTop: Element.scrollTop,
-    scrollLeft: Element.scrollLeft
+    scrollTop: elem.scrollTop,
+    scrollLeft: elem.scrollLeft,
   };
-}
+};
 
 export default getScroll;

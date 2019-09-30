@@ -74,7 +74,7 @@ class Header extends React.PureComponent {
                       $size="small"
                       $textSize="18px"
                       $textWeight="500">
-                      {t('common:button.signIn')}
+                      {t('button:signIn')}
                     </Button>
                   </S.Grid.Item>
                   <S.Grid.Item>
@@ -87,7 +87,7 @@ class Header extends React.PureComponent {
                       $size="small"
                       $textSize="18px"
                       $textWeight="500">
-                      {t('common:button.signUp')}
+                      {t('button:signUp')}
                     </Button>
                   </S.Grid.Item>
                   <CS.HeaderNetworks $alignItems="center">

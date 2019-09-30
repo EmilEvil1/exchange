@@ -74,12 +74,12 @@ class Footer extends React.PureComponent {
                       $textSize="15px"
                       $textWeight="700"
                       $color="white"
-                      href={t('common:siteInfo.tgChannel.href')}
+                      href={t('siteInfo:tgChannel.href')}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <CS.Icon name="icon-tg" />
-                      {t('common:siteInfo.tgChannel.name')}
+                      {t('siteInfo:tgChannel.name')}
                     </Link>
                   </S.Grid.Item>
                   <S.Grid.Item>
@@ -87,10 +87,10 @@ class Footer extends React.PureComponent {
                       $textSize="15px"
                       $textWeight="700"
                       $color="white"
-                      href={`mailto:${t('common:siteInfo.email')}`}
+                      href={`mailto:${t('siteInfo:email')}`}
                     >
                       <CS.Icon name="icon-mail" />
-                      {t('common:siteInfo.email')}
+                      {t('siteInfo:email')}
                     </Link>
                   </S.Grid.Item>
                   <S.Grid.Item>
@@ -98,16 +98,16 @@ class Footer extends React.PureComponent {
                       $textSize="15px"
                       $textWeight="700"
                       $color="white"
-                      href={`tel:${t('common:siteInfo.phone')}`}
+                      href={`tel:${t('siteInfo:phone')}`}
                     >
                       <CS.Icon name="icon-phone" />
-                      {t('common:siteInfo.phone')}
+                      {t('siteInfo:phone')}
                     </Link>
                   </S.Grid.Item>
                 </S.Grid.Container>
               </S.Grid.Item>
               <S.Grid.Item $xs={12} $justifyContent="center">
-                <CS.PoweredBy>{t('common:siteInfo.poweredBy')}</CS.PoweredBy>
+                <CS.PoweredBy>{t('siteInfo:poweredBy')}</CS.PoweredBy>
               </S.Grid.Item>
             </S.Grid.Container>
           </S.Container>

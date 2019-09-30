@@ -10,8 +10,8 @@ app.set('port', settings.server.port);
 
 app.use('/static', express.static(routing.paths.public.static.root));
 app.use('/api', proxy({
-  target: 'http://www.fairpay24.com:8080',
-  changeOrigin: true,
+  target: 'http://www.fairpay24.com',
+  changeOrigin: true
 }));
 
 app.get('*', (req, res) => res.sendFile(routing.paths.public.index));

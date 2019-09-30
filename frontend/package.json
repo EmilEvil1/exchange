@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.babel.js",
   "scripts": {
-    "start": "npm run scripts:index && npm run server",
+    "start": "npm run scripts:clean && npm run scripts:index && npm run server",
     "server": "cross-env NODE_PATH=. NODE_ENV=development babel-node webpack/server.config.js",
     "server:prod": "cross-env NODE_PATH=. NODE_ENV=production babel-node webpack/server.prod.config.js",
     "build": "npm run scripts:clean && npm run scripts:index && npm run scripts:webpack && npm run scripts:copy",

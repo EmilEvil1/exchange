@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon-dai" viewBox="0 0 24 24">
+    <title>icon-dai</title>
+    <circle fill="#282828" cx="12" cy="12" r="12"></circle>
+    <path fill="#f3ba2f" d="M12,3.54,20.49,12,12,20.53,3.51,12Z"></path>
+    <path fill="#dba326" d="M12,14.81,3.5,12,12,3.54,20.5,12Z"></path>
+    <path fill="#282828" d="M6.46,11.48h3.88L12,9.64l1.85,1.84h3.88L12,5.29Z"></path>
+    <path fill="#f3ba2f" opacity="0.4" d="M12,20.53v-17L20.49,12,12,20.53Z"></path>
+</svg>

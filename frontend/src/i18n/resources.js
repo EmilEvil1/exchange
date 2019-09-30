@@ -1,3 +1,4 @@
+import merge from 'lodash/merge';
 import Notifier from 'src/models/notifier/i18n';
 
 import AdvantageCard from 'src/components/AdvantageCard/i18n';
@@ -9,12 +10,6 @@ import Select from 'src/components/Select/i18n';
 import ApplicationForm from 'src/routes/root.routes/root.route/ApplicationForm/i18n';
 
 const siteInfo = {
-  en: {
-    tagline: 'RELIABLE. ALWAYS. 24/7.',
-  },
-  ru: {
-    tagline: 'НАДЕЖНО. ВСЕГДА. 24/7.',
-  },
   common: {
     tgChannel: {
       name: 'tg@smbdsmbd',
@@ -24,29 +19,113 @@ const siteInfo = {
     phone: '+7 800 6696969',
     poweredBy: 'POWERED BY KTZ',
   },
+  ru: {
+    tagline: 'НАДЕЖНО. ВСЕГДА. 24/7.',
+  },
+  en: {
+    tagline: 'RELIABLE. ALWAYS. 24/7.',
+  },
+};
+
+const currency = {
+  common: {
+    ticker: {
+      BTC: 'Bitcoin',
+      ETH: 'Ethereum',
+      XRP: 'Ripple',
+      USDT: 'Tether',
+      LTC: 'Litecoin',
+      BCH: 'Bitcoin Cash',
+      EOS: 'EOS',
+      BNB: 'Binance Coin',
+      TRX: 'TRON',
+      ADA: 'Cardano',
+      XLM: 'Stellar',
+      XMR: 'Monero',
+      DASH: 'Dash',
+      ETC: 'Ethereum Classic',
+      ZEC: 'Zcash',
+      BAT: 'Basic Attention Token',
+      WAVES: 'Waves',
+      USDC: 'USD Coin',
+      PAX: 'Paxos Token',
+      HT: 'Huobi Token',
+      KCS: 'KuCoin Shares',
+      ZRX: '0x',
+      ENJ: 'Enjin Coin',
+      ADVCASH: 'AdvcashRub',
+    },
+  },
+  ru: {
+    holdType: {
+      address: 'Номер кошелька',
+      cardNumber: 'Номер карты',
+    },
+    ticker: {
+      SBER: 'Сбербанк',
+      YANDEX: 'Яндекс Деньги',
+      TINKOFF: 'Тинькофф',
+      ALPHA: 'Альфа Банк',
+      VTB: 'ВТБ Банк',
+    },
+  },
+  en: {
+    holdType: {
+      address: 'Wallet number',
+      cardNumber: 'Card number',
+    },
+    ticker: {
+      SBER: 'Sberbank',
+      YANDEX: 'Yandex money',
+      TINKOFF: 'Tinkoff',
+      ALPHA: 'Alfa bank',
+      VTB: 'VTB bank',
+    },
+  },
+};
+
+const button = {
+  ru: {
+    back: 'Назад',
+    next: 'Далее',
+    submit: 'Отправить',
+    cancel: 'Отменить',
+    exit: 'Выход',
+    close: 'Закрыть',
+    collapse: 'Свернуть',
+    confirm: 'Подтвердить',
+    signIn: 'Вход',
+    signUp: 'Регистрация',
+  },
+  en: {
+    back: 'Back',
+    next: 'Next',
+    submit: 'Submit',
+    cancel: 'Cancel',
+    exit: 'Exit',
+    close: 'Close',
+    collapse: 'Collapse',
+    confirm: 'Confirm',
+    signIn: 'Sign in',
+    signUp: 'Sign up',
+  },
+};
+
+const validator = {
+  ru: {
+    required: 'Поле обязательно для заполнения.',
+  },
+  en: {
+    required: 'The field is required.',
+  },
 };
 
 export default {
   ru: {
-    siteInfo: siteInfo.ru,
-    common: {
-      siteInfo: siteInfo.common,
-      button: {
-        back: 'Назад',
-        next: 'Далее',
-        submit: 'Отправить',
-        cancel: 'Отменить',
-        exit: 'Выход',
-        close: 'Закрыть',
-        collapse: 'Свернуть',
-        confirm: 'Подтвердить',
-        signIn: 'Вход',
-        signUp: 'Регистрация',
-      },
-    },
-    validator: {
-      required: 'Поле обязательно для заполнения.',
-    },
+    siteInfo: merge({}, siteInfo.common, siteInfo.ru),
+    currency: merge({}, currency.common, currency.ru),
+    button: button.ru,
+    validator: validator.ru,
     // models
     Notifier: Notifier.ru,
 
@@ -61,25 +140,10 @@ export default {
     ApplicationForm: ApplicationForm.ru,
   },
   en: {
-    siteInfo: siteInfo.en,
-    common: {
-      siteInfo: siteInfo.common,
-      button: {
-        back: 'Back',
-        next: 'Next',
-        submit: 'Submit',
-        cancel: 'Cancel',
-        exit: 'Exit',
-        close: 'Close',
-        collapse: 'Collapse',
-        confirm: 'Confirm',
-        signIn: 'Sign in',
-        signUp: 'Sign up',
-      },
-    },
-    validator: {
-      required: 'The field is required.',
-    },
+    siteInfo: merge({}, siteInfo.common, siteInfo.en),
+    currency: merge({}, currency.common, currency.en),
+    button: button.en,
+    validator: validator.en,
     // models
     Notifier: Notifier.en,
 

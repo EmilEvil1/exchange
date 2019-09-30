@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'src/components/Button';
+import Button from '../Button';
 import * as S from 'src/styles';
 import * as CS from './style';
 

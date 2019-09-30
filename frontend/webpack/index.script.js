@@ -2,7 +2,7 @@ import fsx from 'fs-extra';
 import {resolve} from 'path';
 import routing from './routing.config';
 
-const symbolsDir = resolve(__dirname, '../src/sprite/symbols');
+const symbolsDir = resolve(__dirname, '../src/symbols');
 
 const eachFiles = (path, test, callback) => {
   if (!fsx.existsSync(path)){
@@ -32,7 +32,7 @@ fsx.writeFileSync(routing.paths.public.index, `
   </head>
   <body>
     <svg xmlns="//www.w3.org/2000/svg" style="z-index:-99999;position:fixed;top:-99999px;left:-99999px;visibility:hidden;opacity:0;">
-      ${eachFiles(symbolsDir,/\.svg$/,(filepath) => fsx.readFileSync(filepath, 'utf-8')).join('\n')}
+      ${eachFiles(symbolsDir,/\.svg$/,(filepath) => fsx.readFileSync(filepath, 'utf-8').replace('<svg xmlns="http://www.w3.org/2000/svg"', '<symbol').replace('</svg', '</symbol')).join('\n')}
     </svg>
     <div id="root" class="site-wrapper"></div>
     <script type="text/javascript" src="/static/js/bundle.min.js"></script>

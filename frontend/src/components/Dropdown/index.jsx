@@ -1,52 +1,60 @@
-import React from 'react';
-import {css} from 'styled-components';
-import {createPortal} from 'react-dom'
-import truetype from 'src/utils/truetype';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
+import {createPortal} from 'react-dom';
+import domNodeIsChild from 'src/utils/domNodeIsChild';
 import types from './types';
 import * as CS from './style';
 
-class Dropdown extends React.PureComponent {
+class Dropdown extends PureComponent {
   static propTypes = types.propTypes;
 
   static defaultProps = types.defaultProps;
 
-  state = {
-    style: {},
+  className = {
+    root: 'dropdown',
+    root$hidden: `${this.className}_hidden`,
   };
 
   constructor(props) {
     super(props);
     this.dropdown = document.createElement('div');
-    this.dropdown.className = 'dropdown dropdown_hidden';
+    this.dropdown.className = `${this.className.root} ${this.className.root$hidden}`;
   }
 
   componentDidMount() {
     window.addEventListener('resize', this.getPosition);
     window.addEventListener('scroll', this.getPosition);
+
+    if (this.props.closeAction.externalClick) {
+      window.addEventListener('click', this.handleDocumentClick);
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.getPosition);
     window.removeEventListener('scroll', this.getPosition);
-    this.close({removeAfter: 0});
+
+    this.handleClose({removeAfter: 0});
+
+    if (this.props.closeAction.externalClick) {
+      window.removeEventListener('click', this.handleDocumentClick);
+    }
   }
 
-  open = ({showAfter}) => {
-    const {style} = this.state;
-    if (!truetype.isFalse(style)) this.dropdown.style = style;
-    if (truetype.isFalse(style)) this.dropdown.removeAttribute('style');
+  handleOpen = ({showAfter}) => {
     if (!this.dropdown.closest('body')) {
       this.getPosition();
       document.querySelector('body').append(this.dropdown);
       setTimeout(() => {
-        this.dropdown.classList.remove('dropdown_hidden');
+        this.dropdown.className = this.className.root;
       }, showAfter);
     }
   };
 
-  close = ({removeAfter}) => {
+  handleClose = ({removeAfter}) => {
     if (this.dropdown.closest('body')) {
-      this.dropdown.classList.add('dropdown_hidden');
+      this.dropdown.className = '';
+
       if (removeAfter === 0) {
         this.dropdown.removeAttribute('style');
         this.dropdown.remove();
@@ -59,37 +67,64 @@ class Dropdown extends React.PureComponent {
     }
   };
 
+  handleDocumentClick = e => {
+    const {anchorRef, isOpen} = this.props;
+
+    if (!isOpen) {
+      return null;
+    }
+
+    if (
+        e.target === this.dropdown ||
+        domNodeIsChild(this.dropdown, e.target) ||
+        e.target === anchorRef.current ||
+        domNodeIsChild(anchorRef.current, e.target)
+    ) {
+      return null;
+    }
+
+    if (this.props.onHide !== undefined) {
+      return this.props.onHide();
+    }
+
+    return null;
+  };
+
   getPosition = () => {
     const {
       anchorRef: {current: anchorRef},
-      position,
       width,
+      maxHeight,
     } = this.props;
-    if (!truetype.isElement(anchorRef)) {
-      return null;
+
+    if (!anchorRef) {
+      return;
     }
+
     const rect = anchorRef.getBoundingClientRect();
-    return this.setState({
-      style: `
-        top: ${rect.y + rect.height}px;
-        left: ${rect.x}px;
-        ${width === 'auto' ? `width: ${rect.width}px;` : 0}
-      `.replace(/\s/g, ''),
-    });
+
+    this.dropdown.style = `
+      top: ${rect.y + rect.height}px;
+      left: ${rect.x}px;
+      ${width === 'auto' ? `width: ${rect.width}px;` : 0}
+      ${maxHeight !== undefined ? `max-height: ${maxHeight};` : ''}
+    `.replace(/\s/g, '');
   };
 
   render() {
-    const {isOpen, onMouseEnter, onMouseLeave, children} = this.props;
+    const {className, isOpen, onMouseEnter, onMouseLeave, children} = this.props;
 
     if (isOpen) {
-      this.open({showAfter: 200});
+      this.handleOpen({showAfter: 200});
     } else {
-      this.close({removeAfter: 200});
+      this.handleClose({removeAfter: 200});
     }
 
     return createPortal(
-        <CS.Root onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>{children}</CS.Root>,
-        this.dropdown
+      <CS.Root className={className} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        {children}
+      </CS.Root>,
+      this.dropdown
     );
   }
 }

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import {colors, mixins} from 'src/styles';
-import BaseDropdown from '../Dropdown';
-import BaseIcon from '../Icon';
 
 export const Root = styled.div`
   padding-top: 20px;
@@ -54,7 +52,7 @@ export const Control = styled.div`
   height: 50px;
   border-width: 1px;
   border-style: solid;
-  padding: 0 48px 0 16px;
+  padding: 0 16px;
   border-radius: 6px;
   transition: border-color 200ms linear,
     background-color 200ms linear,
@@ -63,27 +61,18 @@ export const Control = styled.div`
   ${mixins.font({size: '20px', weight: '500'})}
 `;
 
-export const Icon = styled(BaseIcon)`
-  position: absolute;
-  color: #000;
-  ${mixins.pushCV}
-  right: 16px;
-  width: 18px;
-  height: 18px;
-`;
-
-export const Value = styled.div`
+export const Selected = styled.div`
   position: absolute;
   ${mixins.pushCV}
-  left: 17px;
-  right: 49px;
+  left: 19px;
+  right: 19px;
   pointer-events: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
-export const Options = styled(BaseDropdown)`
+export const Options = styled.div`
   margin-top: 2px !important;
   background-color: ${colors.common.white};
   border-width: 1px;
@@ -92,8 +81,15 @@ export const Options = styled(BaseDropdown)`
   border-color: ${colors.common.gray};
   max-height: 200px;
   overflow-y: auto;
-  overflow-x: hidden;
   box-shadow: 0 0 6px 0 ${colors.common.gray};
 `;
 
-export const Option = styled.div``;
+export const Option = styled.div`
+  padding: 8px;
+  transition: background-color 200ms linear;
+  
+  :hover {
+    cursor: pointer;
+    background-color: ${colors.common.gray};
+  }
+`;

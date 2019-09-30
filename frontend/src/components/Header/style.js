@@ -11,7 +11,8 @@ export const Root = styled.header`
 `;
 
 export const Logo = styled(Grid.Item)`
-  margin-right: 30px;
+  padding-top: 0!important;
+  padding-bottom: 0!important;
 `;
 
 export const HeaderNetworks = styled(Grid.Item)`

@@ -10,20 +10,20 @@ const formField = (Component, defaultProps) => {
 
     const id = hash({form: meta.form, name: input.name});
 
-    const $isInvalid = meta.touched && !!meta.error;
+    const isInvalid = meta.touched && !!meta.error;
 
     const componentProps = {
       ...ownProps,
       ...input,
       id,
-      $isInvalid,
+      $isInvalid: isInvalid,
     };
 
     return (
         <S.FormItem>
           <Component {...componentProps} />
           {isEnabledShowError && (
-            <CS.Error $isInvalid={$isInvalid}>{meta.error}</CS.Error>
+            <CS.Error $isInvalid={isInvalid}>{meta.error}</CS.Error>
           )}
         </S.FormItem>
     );

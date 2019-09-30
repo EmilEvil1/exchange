@@ -4,14 +4,13 @@ import {withTranslation} from 'react-i18next';
 import WAValidator from 'wallet-address-validator';
 import {connect} from 'react-redux';
 import {reduxForm, Form, Field, isPristine, isValid, getFormValues} from 'redux-form';
-import {Button, InputField, FormatInputField, SelectField} from 'src/components';
+import {Button, InputField, FormatInputField, SelectField, Step} from 'src/components';
 import actions from 'src/redux/actions'
 import validator from 'src/utils/validator';
 import {parseQuery} from 'src/utils/xhr';
 import restModel from 'src/models/rest/model';
 import parseFloatNumber from 'src/utils/parseFloatNumber';
 import * as S from 'src/styles';
-import {Step} from 'src/components';
 import types from './types';
 import * as CS from './style';
 
@@ -224,11 +223,18 @@ class ApplicationForm extends React.Component {
                 <S.Grid.Item $xs={12} $sm={6}>
                   <Field
                     name="from"
+                    label="test"
                     component={SelectField}
                     options={currencies.map(item => ({
                       value: item.ticker,
                       label: item.name,
                     }))}
+                    renderValue={({state: selectState}) => (
+                      <CS.SelectValue>
+                        <CS.Icon name={`icon-${selectState.value.toLowerCase()}`} />
+                        <CS.SelectedText>{t(`currency:ticker.${selectState.value}`)}</CS.SelectedText>
+                      </CS.SelectValue>
+                    )}
                   />
                 </S.Grid.Item>
                 <S.Grid.Item $xs={12}>
@@ -261,11 +267,18 @@ class ApplicationForm extends React.Component {
                 <S.Grid.Item $xs={12} $sm={6}>
                   <Field
                     name="to"
+                    label="test"
                     component={SelectField}
                     options={currencies.map(item => ({
                       value: item.ticker,
                       label: item.name,
                     }))}
+                    renderValue={({state: selectState}) => (
+                      <CS.SelectValue>
+                        <CS.Icon name={`icon-${selectState.value.toLowerCase()}`} />
+                        <CS.SelectedText>{t(`currency:ticker.${selectState.value}`)}</CS.SelectedText>
+                      </CS.SelectValue>
+                    )}
                   />
                 </S.Grid.Item>
 
@@ -290,7 +303,7 @@ class ApplicationForm extends React.Component {
                 $variant="contained"
                 $color="yellow"
                 onClick={this.handleSetStep(1)}>
-                {t('common:button.next')}
+                {t('button:next')}
               </Button>
             </S.Grid.Item>
           </S.Grid.Container>
@@ -337,7 +350,7 @@ class ApplicationForm extends React.Component {
                 type="button"
                 $variant="contained"
                 onClick={this.handleSetStep(0)}>
-                {t('common:button.back')}
+                {t('button:back')}
               </Button>
             </S.Grid.Item>
             <S.Grid.Item>
@@ -349,7 +362,7 @@ class ApplicationForm extends React.Component {
                 $variant="contained"
                 $color="yellow"
                 onClick={this.handleSetStep(2)}>
-                {t('common:button.next')}
+                {t('button:next')}
               </Button>
             </S.Grid.Item>
           </S.Grid.Container>
@@ -388,7 +401,7 @@ class ApplicationForm extends React.Component {
                 type="button"
                 $variant="contained"
                 onClick={this.handleSetStep(1)}>
-                {t('common:button.back')}
+                {t('button:back')}
               </Button>
             </S.Grid.Item>
             <S.Grid.Item>
@@ -400,7 +413,7 @@ class ApplicationForm extends React.Component {
                   $variant="contained"
                   // disabled={isDisabledSubmit}
                   $color="yellow">
-                {t('common:button.confirm')}
+                {t('button:confirm')}
               </Button>
             </S.Grid.Item>
           </S.Grid.Container>

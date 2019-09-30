@@ -44,19 +44,12 @@ const config = {
       ],
     },
   }),
-  output: mode({
-    production: {
-      path: routing.paths.public.root,
-      filename: 'static/js/[name].min.js',
-      chunkFilename: 'static/js/[name].chunk.min.js',
-    },
-    development: {
-      path: routing.paths.public.root,
-      filename: '[name].js',
-      chunkFilename: '[name].chunk.js',
-      publicPath: '/static/',
-    },
-  }),
+  output: {
+    path: routing.paths.public.root,
+    filename: 'static/js/[name].min.js',
+    chunkFilename: 'static/js/[name].chunk.min.js',
+    publicPath: '/',
+  },
   plugins: [
     mode({
       development: new webpack.HotModuleReplacementPlugin(),

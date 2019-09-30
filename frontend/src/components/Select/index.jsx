@@ -1,169 +1,111 @@
 import React from 'react';
 import {withTranslation} from 'react-i18next'
 import formField from 'src/hocs/formField';
-import Dropdown from 'src/components/Dropdown';
+import truetype from 'src/utils/truetype';
+import Dropdown from '../Dropdown';
+import types from './types';
 import * as CS from './style';
-import {unregisterField, registerField} from 'redux-form';
 
 @withTranslation()
 class Select extends React.PureComponent {
-  static defaultProps = {
-    closeAction: {
-      change: true,
-      externalClick: true,
-      blur: true,
-    },
-  };
+  static propTypes = types.propTypes;
+
+  static defaultProps = types.defaultProps;
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextState = {};
+    if (nextProps.value !== undefined) {
+      nextState.value = nextProps.value;
+    }
+    return nextState;
+  }
 
   dropdownRef = React.createRef();
 
   rootRef = React.createRef();
 
   state = {
+    value: null,
     isOpen: false,
-    isLockClose: false,
-    disabledCloseActionBlur: false,
   };
 
-  componentDidMount() {
-    const {closeAction} = this.props;
-    if (closeAction.externalClick) {
-      window.addEventListener('click', this.handleDocumentClick);
+  setValue = (value) => {
+    if (this.props.onChange !== undefined && this.props.value !== undefined) {
+      return this.props.onChange(value);
     }
-  }
-
-  componentWillUnmount() {
-    const {closeAction} = this.props;
-    if (closeAction.externalClick) {
-      window.removeEventListener('click', this.handleDocumentClick);
-    }
-  }
-
-  handleDocumentClick = (e) => {
-    const {isOpen} = this.state;
-    if (!isOpen) {
-      return null;
-    }
-    const result = [];
-    const {current: dropdownRef} = this.dropdownRef;
-    const {current: rootRef} = this.rootRef;
-
-    result.push(e.target === rootRef);
-    result.push(e.target.closest('.dropdown') === dropdownRef.dropdown)
-
-    if (result.every(res => !res)) {
-      return this.setState({isOpen: false});
-    }
-  }
-
-  handleOptionClick = value => {
-    const {onChange, closeAction} = this.props;
-    return () => {
-      if (closeAction.change) {
-        this.setState({isOpen: false});
+    return this.setState({value}, () => {
+      if (this.props.onChange === undefined) {
+        return null;
       }
-      return onChange(value);
-    };
+      return this.props.onChange(value);
+    });
   };
 
-  getControllHandlers() {
-    const {onFocus, onBlur, closeAction} = this.props;
-    const {disabledCloseActionBlur} = this.state;
-    return {
-      onChange: () => {},
-      onFocus: (e) => {
-        if (onFocus !== undefined) {
-          onFocus(e);
-        }
-        return this.setState({isOpen: true});
-      },
-      onBlur: (e) => {
-        if (!closeAction.blur || disabledCloseActionBlur) {
-          return null;
-        }
-        if (onBlur !== undefined) {
-          onBlur(e);
-        }
-        return this.setState({isOpen: false});
-      },
-    };
-  }
+  handleOptionClick = () => {};
 
-  getValue() {
-    return '';
-  }
+  handleControlClick = () => this.setState(prevState => ({isOpen: !prevState.isOpen}));
 
-  getSelected() {
-    const {options, value, t} = this.props;
-    const selected = options.find(item => item.value === value);
-    if (selected !== undefined) {
-      return selected.label;
+  renderValue() {
+    if (this.props.renderValue !== undefined) {
+      return (
+        <CS.Value>
+          {this.props.renderValue({
+            props: this.props,
+            state: this.state
+          })}
+        </CS.Value>
+      );
     }
-    return t('Select:notSelected');
-  }
-
-  handleDropdownMouseEnter = () => {
-    const {closeAction} = this.props;
-    if (!closeAction.blur) {
-      return null;
-    }
-    return this.setState({disabledCloseActionBlur: true});
-  }
-
-  handleDropdownMouseLeave = () => {
-    const {closeAction} = this.props;
-    if (!closeAction.blur) {
-      return null;
-    }
-    return this.setState({disabledCloseActionBlur: false});
+    const {value} = this.state;
+    return (
+      <CS.Value>{JSON.stringify(value)}</CS.Value>
+    );
   }
 
   renderOptions() {
-    const {value, options: optionsProp, t} = this.props;
     const {isOpen} = this.state;
-    const options = [{value: null, label: t('Select:notSelected')}, ...optionsProp].filter(item => item.value !== value);
-    if (Array.isArray(options) && options.length > 0) {
-      return (
-        <Dropdown
-          isOpen={isOpen}
-          anchorRef={this.rootRef}
-          ref={this.dropdownRef}
-          onMouseEnter={this.handleDropdownMouseEnter}
-          onMouseLeave={this.handleDropdownMouseLeave}
-        >
-          <CS.Options>
-            {options.map(({label, value, ...option}, i) => (
-              <CS.Option
-                {...option}
-                onClick={this.handleOptionClick(value)}
-                key={i}>
-                {label}
-              </CS.Option>
-            ))}
-          </CS.Options>
-        </Dropdown>
-      );
+    if (this.props.renderOptions !== undefined) {
+      <CS.Options
+        isOpen={isOpen}
+        anchorRef={this.rootRef}
+        ref={this.dropdownRef}>
+        {this.props.renderOptions({
+          props: this.props,
+          state: this.state,
+          handleOptionClick: this.handleOptionClick
+        })}
+      </CS.Options>
     }
-    return null;
+    const {options} = this.props;
+    return (
+      <CS.Options
+        isOpen={isOpen}
+        anchorRef={this.rootRef}
+        ref={this.dropdownRef}>
+        {options.map((option, index) => (
+          <CS.Option
+            onClick={this.handleOptionClick(option)}
+            disabled={option.disabled}
+            key={index}>
+            {option.label}
+          </CS.Option>
+        ))}
+      </CS.Options>
+    )
   }
 
   render() {
-    const {id, label, ...controllProps} = this.props;
-    // TODO label
     return (
       <>
         <CS.Root ref={this.rootRef}>
-          <CS.Control
-            tabIndex="0"
-            {...this.props}
-            {...this.getControllHandlers()}
-          >
-            <CS.Selected>{this.getSelected()}</CS.Selected>
+          <CS.Control tabIndex="0" onClick={this.handleControlClick}>
+            {this.renderValue()}
+            <CS.Icon name="icon-chevron-down" />
           </CS.Control>
         </CS.Root>
         {this.renderOptions()}
       </>
-    )
+    );
   }
 }
 
