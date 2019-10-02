@@ -31,6 +31,15 @@ public class ApplicationEntity {
   private Date createDate;
   private ApplicationStatus status;
 
+  /**
+   * UNPAID - user hasn't sent money to our bank account yet
+   * PAYMENT_EXPECTED - user has clicked on "Pay" button,
+   * but our system hasn't verified his transaction yet
+   * PAYMENT_RECEIVED - our system has checked that transaction was success
+   * PAYMENT_VALIDATION - status for manual handling. when moderator manually handles and validates transaction
+   * PAYMENT_PROCESSING - system handles sending money to user
+   * PAYMENT_SENT - our system sent money to user
+   */
 
   public enum ApplicationStatus {
     UNPAID(0), PAYMENT_EXPECTED(1),

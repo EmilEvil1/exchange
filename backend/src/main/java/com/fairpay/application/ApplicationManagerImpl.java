@@ -5,7 +5,6 @@ import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.currencies.coin.dao.CoinDao;
 import com.fairpay.currencies.coin.model.CoinEntity;
 import com.fairpay.moderatorBot.services.interf.MessageSender;
-import com.fairpay.paymentSystem.PaymentSystemManager;
 import com.fairpay.wallet.WalletDao;
 import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +22,16 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   private final CoinDao coinDao;
   private final WalletDao walletDao;
   private final ApplicationMailer applicationMailer;
-  private final PaymentSystemManager paymentSystemManager;
   private MessageSender messageSender;
 
   public ApplicationManagerImpl(ApplicationDao applicationDao,
                                 CoinDao coinDao,
                                 WalletDao walletDao,
-                                ApplicationMailer applicationMailer,
-                                PaymentSystemManager paymentSystemManager) {
+                                ApplicationMailer applicationMailer) {
     this.applicationDao = applicationDao;
     this.coinDao = coinDao;
     this.walletDao = walletDao;
     this.applicationMailer = applicationMailer;
-    this.paymentSystemManager = paymentSystemManager;
   }
 
   @Autowired
@@ -80,9 +76,9 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     responseDTO.setAmountTo(applicationEntity.getAmountTo());
     responseDTO.setFrom(applicationEntity.getFrom());
     responseDTO.setTo(applicationEntity.getTo());
-    responseDTO.setFromName(applicationEntity.getFromCurrencyName());
-    responseDTO.setToName(applicationEntity.getToCurrencyName());
-    responseDTO.setDocumentToPayment(applicationEntity.getSystemDocumentPayment());
+    responseDTO.setFromDocumentPayment(applicationEntity.getFromDocumentPayment());
+    responseDTO.setToDocumentPayment(applicationEntity.getToDocumentPayment());
+    responseDTO.setSystemDocumentPayment(applicationEntity.getSystemDocumentPayment());
     responseDTO.setCreateDate(applicationEntity.getCreateDate());
     responseDTO.setCurrentTime(new Date());
     responseDTO.setStatus(applicationEntity.getStatus());
@@ -98,7 +94,6 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     applicationMailer.sendApplicationToModerator(application);
 
     messageSender.send(application);
-    paymentSystemManager.sendPaymentRequest(application);
 
     return "success";
   }
