@@ -31,5 +31,4 @@ HELP.md
 node_modules/
 dist/
 target/
-public/
 node
