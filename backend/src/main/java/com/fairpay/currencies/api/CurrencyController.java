@@ -6,23 +6,22 @@ import com.fairpay.currencies.coin.service.CoinService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/api/currencies")
+@RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CurrencyController {
 
-  private final CoinService coinService;
   private final CurrencyManager currencyManager;
 
-  @GetMapping
+  @GetMapping(("/api/currencies"))
   public CurrenciesDTO fetchCurrencies() {
     return currencyManager.fetchAllCurrencies();
   }
 
-  @GetMapping
-  public CoinDTO fetchCoinByTicker(@RequestParam String ticker) {
+  @GetMapping("/api/currencies/{ticker}")
+  public CoinDTO fetchCoinByTicker(@PathVariable String ticker) {
     return currencyManager.fetchCoinByTicker(ticker);
   }
 

@@ -104,6 +104,11 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   }
 
   @Override
+  public void processPayment(String applicationId) {
+
+  }
+
+  @Override
   public void goToNextStatus(String applicationId) {
     ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
     ApplicationEntity.ApplicationStatus status = getNextStatus(application.getStatus());
@@ -121,8 +126,8 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   }
 
   private BigDecimal calculateToAmount(String fromTicker, String toTicker, BigDecimal fromAmout) {
-    CoinEntity fromCurrency = coinDao.findByTicker(fromTicker).orElse(new CoinEntity());
-    CoinEntity toCurrency = coinDao.findByTicker(toTicker).orElse(new CoinEntity());
+    CoinEntity fromCurrency = coinDao.findByCode(fromTicker).orElse(new CoinEntity());
+    CoinEntity toCurrency = coinDao.findByCode(toTicker).orElse(new CoinEntity());
     return fromCurrency.getRub().divide(toCurrency.getRub(), 10, RoundingMode.HALF_UP).multiply(fromAmout);
   }
 }

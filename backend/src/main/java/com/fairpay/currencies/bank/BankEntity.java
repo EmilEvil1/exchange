@@ -9,7 +9,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 
-@Entity(name = "bank")
+@Entity(name = "banks")
 @DiscriminatorValue("BK")
 @Data
 @ToString

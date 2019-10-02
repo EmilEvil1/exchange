@@ -14,15 +14,15 @@ public interface CoinDao extends JpaRepository<CoinEntity, String> {
 
   @Transactional
   @Modifying
-  @Query("UPDATE coins cur SET cur.rub=?1 where cur.ticker = ?2")
+  @Query("UPDATE coins cur SET cur.rub=?1 where cur.code = ?2")
   void updateRubRate(BigDecimal rubRate, String ticker);
 
   @Transactional
   @Modifying
-  @Query("UPDATE coins cur SET cur.uah=?1 where cur.ticker = ?2")
+  @Query("UPDATE coins cur SET cur.uah=?1 where cur.code = ?2")
   void updateUahRate(BigDecimal uahRate, String ticker);
 
-  Optional<CoinEntity> findByTicker (String ticker);
+  Optional<CoinEntity> findByCode(String code);
 
   List<CoinEntity> findAllByOrderByPriorityAsc();
 

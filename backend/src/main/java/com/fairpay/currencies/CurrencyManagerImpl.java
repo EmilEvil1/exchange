@@ -31,7 +31,7 @@ public class CurrencyManagerImpl implements CurrencyManager {
 
   @Override
   public CoinDTO fetchCoinByTicker(String code) {
-    CoinEntity coin = coinDao.findByTicker(code).orElse(new CoinEntity());
+    CoinEntity coin = coinDao.findByCode(code).orElse(new CoinEntity());
     return currencyTransformer.transformCoin(coin);
   }
 }
