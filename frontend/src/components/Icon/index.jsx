@@ -9,15 +9,6 @@ class Icon extends React.PureComponent {
 
   render() {
     const {className, name} = this.props;
-    const isBurger = name === 'burger';
-    if (isBurger) {
-      const {isActiveBurger} = this.props;
-      return (
-        <CS.BurgerRoot className={className}>
-          <CS.Burger isActiveBurger={isActiveBurger} />
-        </CS.BurgerRoot>
-      );
-    }
     return (
       <CS.Root className={className} name={name}>
         <use xlinkHref={`#${name}`} />

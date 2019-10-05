@@ -1,11 +1,23 @@
 import styled from 'styled-components';
 import {colors} from 'src/styles';
 import {Icon as BaseIcon} from 'src/components';
+import {Option as BaseOption} from 'src/components/Select/style';
 
 export const Heading = styled.div`
   font-size: 30px;
   font-weight: 500;
   margin-bottom: 20px;
+`;
+
+export const SelectOption = styled(BaseOption)`
+  display: flex;
+  align-items: center;
+`;
+
+export const SelectText = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const SelectValue = styled.div`

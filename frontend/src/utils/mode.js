@@ -10,4 +10,7 @@ const mode = (payload) => {
   }
 }
 
+mode.isProduction = () => process.env.NODE_ENV === 'production';
+mode.isDevelopment = () => process.env.NODE_ENV === 'development';
+
 export default mode;

@@ -7,7 +7,7 @@ import {reduxForm, Form, Field, isPristine, isValid, getFormValues} from 'redux-
 import {Button, InputField, FormatInputField, SelectField, Step} from 'src/components';
 import actions from 'src/redux/actions'
 import validator from 'src/utils/validator';
-import {parseQuery} from 'src/utils/xhr';
+import {parseQueryString} from 'src/utils/xhr';
 import restModel from 'src/models/rest/model';
 import parseFloatNumber from 'src/utils/parseFloatNumber';
 import * as S from 'src/styles';
@@ -42,16 +42,17 @@ const getSelectedCurrencies = props => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const query = parseQuery(ownProps.location.search);
+  const currenciesIsReceived = restModel.utils.restIsReceived('currencies')(state);
+  const currencies = restModel.utils.restContent('currencies', [])(state);
+  const query = parseQueryString(ownProps.location.search);
+  const stepId = Number(query.stepId) || 0;
   const formValues = getFormValues(staticData.formId)(state) || {};
-  const isDisabledForm = false;
-  const isDisabledSubmit = isDisabledForm || true;
+  const isDisabledForm = !currenciesIsReceived;
+  const isDisabledSubmit = isDisabledForm || true; // todo
   return {
-    currenciesIsLoading: restModel.utils.restIsLoading('currencies')(state),
-    currenciesIsFail: restModel.utils.restIsFail('currencies')(state),
-    currenciesIsReceived: restModel.utils.restIsReceived('currencies')(state),
-    currencies: restModel.utils.restContent('currencies', [])(state),
-    stepId: Number(query.stepId) || 0,
+    currenciesIsReceived,
+    currencies,
+    stepId,
     initialValues: {
       from: query.from || 'SBER',
       to: query.to || 'BTC',
@@ -177,8 +178,6 @@ class ApplicationForm extends React.Component {
 
   render() {
     const {
-      currenciesIsLoading,
-      currenciesIsFail,
       currenciesIsReceived,
       currencies,
       formValues,
@@ -187,9 +186,87 @@ class ApplicationForm extends React.Component {
       handleSubmit,
       t
     } = this.props;
-
     const {stepId} = this.state;
-
+    const amountFromProps = (() => {
+      if (!currenciesIsReceived) {
+        return undefined;
+      }
+      const {from, to} = getSelectedCurrencies(this.props);
+      if (from.holdType === staticData.currency.holdType.address) {
+        const amountFromMax = to.reserves / from.rub;
+        return {
+          onChange: value => {
+            this.props.change('amountTo', parseFloatNumber({fixed: 2})(
+              parseFloatNumber({
+                max: amountFromMax,
+                fixed: 10,
+              })(value) * from.rub)
+            );
+          },
+          parse: parseFloatNumber({
+            max: amountFromMax,
+            fixed: 10,
+          }),
+        };
+      }
+      if (from.holdType === staticData.currency.holdType.cardNumber) {
+        const amountFromMax = to.rub * to.reserves;
+        return {
+          onChange: value => {
+            this.props.change('amountTo', parseFloatNumber({fixed: 10})(
+              parseFloatNumber({
+                max: amountFromMax,
+                fixed: 2,
+              })(value) / to.rub
+            ));
+          },
+          parse: parseFloatNumber({
+            max: amountFromMax,
+            fixed: 2,
+          }),
+        };
+      }
+      return undefined;
+    })();
+    const amountToProps = (() => {
+      if (!currenciesIsReceived) {
+        return undefined;
+      }
+      const {from, to} = getSelectedCurrencies(this.props);
+      if (to.holdType === staticData.currency.holdType.address) {
+        return {
+          onChange: value => {
+            // this.props.change('amountFrom', parseFloatNumber({fixed: 2})(
+            //   parseFloatNumber({
+            //     max: to.reserves,
+            //     fixed: 10,
+            //   })(value)
+            // ));
+          },
+          parse: parseFloatNumber({
+            max: to.reserves,
+            fixed: 10,
+          }),
+        };
+      }
+      if (to.holdType === staticData.currency.holdType.cardNumber) {
+        return {
+          onChange: value => {
+            // this.props.change('amountFrom', parseFloatNumber({fixed: 10})(
+            //   parseFloatNumber({
+            //     max: to.reserves,
+            //     fixed: 2,
+            //   })(value)
+            // ));
+          },
+          parse: parseFloatNumber({
+            max: to.reserves,
+            fixed: 2,
+          }),
+        };
+      }
+      return undefined;
+    })();
     return (
       <Form onSubmit={handleSubmit}>
         {this.renderHiddenFields()}
@@ -208,16 +285,7 @@ class ApplicationForm extends React.Component {
                     name="amountFrom"
                     label={t('ApplicationForm:formField.amountFrom.label')}
                     component={InputField}
-                    onChange={(e) => {
-                      const {value} = e.target;
-                      const {to} = getSelectedCurrencies(this.props);
-                      const amountToNext = value / to.rub;
-                      // if (amountToNextValue > to.reserves) {
-                      //
-                      // }
-                      return this.props.change('amountTo', amountToNext);
-                    }}
-                    // parse={parseFloatNumber({max: 200000, fixed: 2})}
+                    {...amountFromProps}
                   />
                 </S.Grid.Item>
                 <S.Grid.Item $xs={12} $sm={6}>
@@ -229,6 +297,13 @@ class ApplicationForm extends React.Component {
                       value: item.ticker,
                       label: item.name,
                     }))}
+                    renderOptions={({props, handleOptionClick}) =>
+                      props.options.map((option, index) => (
+                        <CS.SelectOption onClick={handleOptionClick(option)}>
+                          <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
+                          <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
+                        </CS.SelectOption>
+                      ))}
                     renderValue={({state: selectState}) => (
                       <CS.SelectValue>
                         <CS.Icon name={`icon-${selectState.value.toLowerCase()}`} />
@@ -256,12 +331,7 @@ class ApplicationForm extends React.Component {
                     name="amountTo"
                     label={t('ApplicationForm:formField.amountTo.label')}
                     component={InputField}
-                    // onChange={(e) => {
-                    //   const {value} = e.target;
-                    //   console.log(value);
-                    //   // const {}
-                    // }}
-                    // parse={parseFloatNumber({max: 200000, fixed: 10})}
+                    {...amountToProps}
                   />
                 </S.Grid.Item>
                 <S.Grid.Item $xs={12} $sm={6}>
@@ -273,6 +343,13 @@ class ApplicationForm extends React.Component {
                       value: item.ticker,
                       label: item.name,
                     }))}
+                    renderOptions={({props, handleOptionClick}) =>
+                      props.options.map((option, index) => (
+                        <CS.SelectOption onClick={handleOptionClick(option)}>
+                          <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
+                          <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
+                        </CS.SelectOption>
+                      ))}
                     renderValue={({state: selectState}) => (
                       <CS.SelectValue>
                         <CS.Icon name={`icon-${selectState.value.toLowerCase()}`} />

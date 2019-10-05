@@ -96,7 +96,7 @@ class Header extends React.PureComponent {
                         <Link
                           $textColor="white"
                           $color="opacity"
-                          href="https://yandex.ru"
+                          href={t('siteInfo:tgChannel.href')}
                           target="_blank"
                           rel="noopener noreferrer">
                           <CS.Icon name="icon-tg" />
@@ -106,9 +106,7 @@ class Header extends React.PureComponent {
                         <Link
                           $textColor="white"
                           $color="opacity"
-                          href="https://yandex.ru"
-                          target="_blank"
-                          rel="noopener noreferrer">
+                          href={`mailto:${t('siteInfo:email')}`}>
                           <CS.Icon name="icon-mail" />
                         </Link>
                       </S.Grid.Item>
@@ -116,9 +114,7 @@ class Header extends React.PureComponent {
                         <Link
                           $textColor="white"
                           $color="opacity"
-                          href="https://yandex.ru"
-                          target="_blank"
-                          rel="noopener noreferrer">
+                          href={`tel:${t('siteInfo:phone')}`}>
                           <CS.Icon name="icon-phone" />
                         </Link>
                       </S.Grid.Item>

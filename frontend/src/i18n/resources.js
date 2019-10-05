@@ -11,9 +11,10 @@ import ApplicationForm from 'src/routes/root.routes/root.route/ApplicationForm/i
 
 const siteInfo = {
   common: {
+    name: 'Fairpay',
     tgChannel: {
       name: 'tg@smbdsmbd',
-      href: '',
+      href: 'https://ttttt.me/ktznews',
     },
     email: 'fairpay24@gmail.com',
     phone: '+7 800 6696969',

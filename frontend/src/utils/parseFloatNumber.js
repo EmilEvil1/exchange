@@ -1,33 +1,29 @@
-// @flow
-// interface ISettings {
-//   max: number | void;
-//   min: number | void;
-//   maxLength: number | void;
-//   prevValue: string | void;
-// }
-
-// const defaultSettings: ISettings = {
 const defaultSettings = {
   min: 0,
 };
 
-// const parseFloatNumber = (payloadSettings: ISettings | void): Function => {
 const parseFloatNumber = payloadSettings => {
   const settings = {...defaultSettings, ...payloadSettings};
   if (settings.maxLength !== undefined && settings.maxLength <= 0) {
     throw new Error('maxLength must be greater than 0');
   }
-  // return (value: string): string => {
   return value => {
-    // TODO
-    let result = value.replace(/\D/, '');
+    let result = String(value).replace(/\D/, '');
+    const dotIndex = String(value).split('').findIndex(symbol => symbol === '.');
+
+    if (dotIndex > 0) {
+      result = result.split('')
+      result.splice(dotIndex, 0, '.');
+      result = result.join('');
+    }
+
     result = result.replace(/^0\d/, result.charAt(1));
 
-    if (settings.max !== undefined && Number(result) >= settings.max) {
+    if (settings.max !== undefined && Number(result) > settings.max) {
       result = String(settings.max);
     }
 
-    if (settings.min !== undefined && Number(result) <= settings.min) {
+    if (settings.min !== undefined && Number(result) < settings.min) {
       result = String(settings.min);
     }
 
@@ -37,6 +33,13 @@ const parseFloatNumber = payloadSettings => {
 
     if (result.length === 0) {
       result = String(settings.min);
+    }
+
+    {
+      const [a, b] = result.split('.');
+      if (b !== undefined && settings.fixed !== undefined) {
+        result = `${a}.${b.substring(0, settings.fixed)}`;
+      }
     }
 
     return result;

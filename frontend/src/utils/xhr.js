@@ -1,63 +1,16 @@
+import queryString from 'query-string';
 import truetype from 'src/utils/truetype';
 import jsonparse from 'src/utils/jsonparse';
 
-export const buildQuery = (object) => {
-  const query = Object.entries(object).reduce((result, [k, v]) => {
-    if ((truetype.isString(v) && (!v || v === 'notSelected')) || truetype.isNull(v) || truetype.isUndefined(v)) {
-      return result;
-    }
-
-    const key = encodeURIComponent(k);
-
-    if (Array.isArray(v)) {
-      const values = v.filter(value => (truetype.isString(value) && (!value || v === 'notSelected')) || truetype.isNull(value) || truetype.isUndefined(value));
-
-      if (values.length > 0) {
-        return [
-          ...result,
-          ...values.map(value => `${key}=${encodeURIComponent(value)}`),
-        ];
-      }
-
-      return result;
-    }
-
-    return [...result, `${key}=${encodeURIComponent(v)}`];
-  }, []);
-
-  if (query.length > 0) {
-    return `?${query.join('&')}`;
+export const buildQueryString = (object) => {
+  const result = queryString.stringify(object);
+  if (result.length > 0) {
+    return `?${result}`;
   }
-
   return '';
 };
 
-export const parseQuery = (string) =>
-  (string.charAt(0) === '?' ? string.substring(1) : string).split('&').reduce((result, item) => {
-    const [k, v] = item.split('=');
-
-    const key = decodeURIComponent(k);
-    const value = decodeURIComponent(v);
-
-    if (Array.isArray(result[key])) {
-      return {
-        ...result,
-        [key]: [...result[key], value],
-      };
-    }
-
-    if (result[key] !== undefined) {
-      return {
-        ...result,
-        [key]: [result[key], value],
-      };
-    }
-
-    return {
-      ...result,
-      [key]: value,
-    };
-  }, {});
+export const parseQueryString = (string) => queryString.parse(string);
 
 const xhr = settings => {
   const {endpoint, method = 'GET', payload, token} = settings;
@@ -74,7 +27,7 @@ const xhr = settings => {
     fetchSettings.options.headers.authorization = `Bearer ${token}`;
   }
   if (method === 'GET' && !truetype.isUndefined(payload)) {
-    fetchSettings.endpoint = `${fetchSettings.endpoint}${buildQuery(payload)}`;
+    fetchSettings.endpoint = `${fetchSettings.endpoint}${buildQueryString(payload)}`;
   }
   if (method === 'POST' && !truetype.isUndefined(payload)) {
     if (!(payload instanceof FormData)) {

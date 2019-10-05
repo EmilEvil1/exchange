@@ -33,8 +33,7 @@ class Footer extends React.PureComponent {
                       $textDecoration="none"
                       $textSize="15px"
                       $textWeight="700"
-                      $color="white"
-                    >
+                      $color="white">
                       {t('Footer:link.exchange')}
                     </Link>
                   </S.Grid.Item>
@@ -47,8 +46,7 @@ class Footer extends React.PureComponent {
                       $textDecoration="none"
                       $textSize="15px"
                       $textWeight="700"
-                      $color="white"
-                    >
+                      $color="white">
                       {t('Footer:link.regulations')}
                     </Link>
                   </S.Grid.Item>
@@ -61,8 +59,7 @@ class Footer extends React.PureComponent {
                       $textDecoration="none"
                       $textSize="15px"
                       $textWeight="700"
-                      $color="white"
-                    >
+                      $color="white">
                       {t('Footer:link.support')}
                     </Link>
                   </S.Grid.Item>
@@ -76,8 +73,7 @@ class Footer extends React.PureComponent {
                       $color="white"
                       href={t('siteInfo:tgChannel.href')}
                       target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                      rel="noopener noreferrer">
                       <CS.Icon name="icon-tg" />
                       {t('siteInfo:tgChannel.name')}
                     </Link>
@@ -87,8 +83,7 @@ class Footer extends React.PureComponent {
                       $textSize="15px"
                       $textWeight="700"
                       $color="white"
-                      href={`mailto:${t('siteInfo:email')}`}
-                    >
+                      href={`mailto:${t('siteInfo:email')}`}>
                       <CS.Icon name="icon-mail" />
                       {t('siteInfo:email')}
                     </Link>
@@ -98,8 +93,7 @@ class Footer extends React.PureComponent {
                       $textSize="15px"
                       $textWeight="700"
                       $color="white"
-                      href={`tel:${t('siteInfo:phone')}`}
-                    >
+                      href={`tel:${t('siteInfo:phone')}`}>
                       <CS.Icon name="icon-phone" />
                       {t('siteInfo:phone')}
                     </Link>

@@ -25,7 +25,8 @@ export const Label = styled.div`
 `;
 
 const getStyleLabel = ({value, $isInvalid}) => {
-  if ($isInvalid && value.length > 0) {
+  const isNotEmpty = String(value).length > 0;
+  if ($isInvalid && isNotEmpty) {
     return `
       ~ ${Label} {
         top: 0px;
@@ -47,7 +48,7 @@ const getStyleLabel = ({value, $isInvalid}) => {
       }
     `;
   }
-  if (value.length > 0) {
+  if (isNotEmpty) {
     return `
       ~ ${Label} {
         top: 0px;

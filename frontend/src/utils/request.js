@@ -1,6 +1,5 @@
 import {call, put} from 'redux-saga/effects';
 import xhr from 'src/utils/xhr';
-// import actions from 'src/redux/actions';
 
 const request = function* (options) {
   try {
@@ -8,7 +7,7 @@ const request = function* (options) {
     return {result};
   } catch (error) {
     if (error.status === 401) {
-      // yield put(actions.auth.accessDenied());
+      yield put({type: 'auth/accessDenied'});
     }
     return {error};
   }

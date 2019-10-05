@@ -12,7 +12,7 @@ class Dropdown extends PureComponent {
 
   className = {
     root: 'dropdown',
-    root$hidden: `${this.className}_hidden`,
+    root$hidden: 'dropdown_hidden',
   };
 
   constructor(props) {
@@ -53,7 +53,7 @@ class Dropdown extends PureComponent {
 
   handleClose = ({removeAfter}) => {
     if (this.dropdown.closest('body')) {
-      this.dropdown.className = '';
+      this.dropdown.className = `${this.className.root} ${this.className.root$hidden}`;
 
       if (removeAfter === 0) {
         this.dropdown.removeAttribute('style');

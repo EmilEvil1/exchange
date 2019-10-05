@@ -25,7 +25,7 @@ app.use('/api', proxy({
   changeOrigin: true
 }));
 
-app.get('*', (req, res) => res.sendFile(routing.paths.public.index));
+app.get('*', (req, res) => res.sendFile(routing.paths.public.index, {headers: {'content-type': 'text/html'}}));
 
 const server = http.createServer(app);
 server.listen(app.get('port'), err => {

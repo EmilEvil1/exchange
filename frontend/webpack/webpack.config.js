@@ -1,3 +1,4 @@
+import {resolve} from 'path';
 import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
@@ -51,13 +52,11 @@ const config = {
     publicPath: '/',
   },
   plugins: [
-    mode({
-      development: new webpack.HotModuleReplacementPlugin(),
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.PORT': JSON.stringify(process.env.PORT),
     }),
+    new webpack.ContextReplacementPlugin(/moment[\\\/]lang$/, /^\.\/(en-gb|ru)$/),
     new CopyPlugin([{
       from: routing.paths.src.fonts,
       to: routing.paths.public.static.fonts,
@@ -65,13 +64,22 @@ const config = {
       from: routing.paths.src.favicon,
       to: routing.paths.public.favicon,
     }]),
+    mode.isDevelopment() && new webpack.HotModuleReplacementPlugin(),
   ].filter(Boolean),
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        loader: 'babel-loader',
+      },
+      // {
+      //   test: /\./,
+      //   loader: 'raw-loader',
+      // },
+      {
+        test: /\.(jpe?g|png|gif|svg|ico)$/i,
+        loader: 'file-loader',
       },
     ],
   },

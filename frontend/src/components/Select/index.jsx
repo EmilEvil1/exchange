@@ -10,8 +10,6 @@ import * as CS from './style';
 class Select extends React.PureComponent {
   static propTypes = types.propTypes;
 
-  static defaultProps = types.defaultProps;
-
   static getDerivedStateFromProps(nextProps, prevState) {
     const nextState = {};
     if (nextProps.value !== undefined) {
@@ -29,7 +27,10 @@ class Select extends React.PureComponent {
     isOpen: false,
   };
 
-  setValue = (value) => {
+  setValue = value => {
+    if (value === this.state.value) {
+      return null;
+    }
     if (this.props.onChange !== undefined && this.props.value !== undefined) {
       return this.props.onChange(value);
     }
@@ -41,7 +42,7 @@ class Select extends React.PureComponent {
     });
   };
 
-  handleOptionClick = () => {};
+  handleOptionClick = option => () => this.setValue(option.value);
 
   handleControlClick = () => this.setState(prevState => ({isOpen: !prevState.isOpen}));
 
@@ -65,16 +66,18 @@ class Select extends React.PureComponent {
   renderOptions() {
     const {isOpen} = this.state;
     if (this.props.renderOptions !== undefined) {
-      <CS.Options
-        isOpen={isOpen}
-        anchorRef={this.rootRef}
-        ref={this.dropdownRef}>
-        {this.props.renderOptions({
-          props: this.props,
-          state: this.state,
-          handleOptionClick: this.handleOptionClick
-        })}
-      </CS.Options>
+      return (
+        <CS.Options
+          isOpen={isOpen}
+          anchorRef={this.rootRef}
+          ref={this.dropdownRef}>
+          {this.props.renderOptions({
+            props: this.props,
+            state: this.state,
+            handleOptionClick: this.handleOptionClick
+          })}
+        </CS.Options>
+      )
     }
     const {options} = this.props;
     return (
@@ -95,9 +98,10 @@ class Select extends React.PureComponent {
   }
 
   render() {
+    const {isOpen} = this.state;
     return (
       <>
-        <CS.Root ref={this.rootRef}>
+        <CS.Root ref={this.rootRef} $isOpen={isOpen}>
           <CS.Control tabIndex="0" onClick={this.handleControlClick}>
             {this.renderValue()}
             <CS.Icon name="icon-chevron-down" />

@@ -1,6 +1,6 @@
 import {takeEvery, delay} from 'redux-saga/effects';
 import {createActions, handleActions} from 'redux-actions';
-import {buildQuery} from 'src/utils/xhr';
+import {buildQueryString} from 'src/utils/xhr';
 import truetype from 'src/utils/truetype';
 
 const appModel = () => {
@@ -65,7 +65,7 @@ const appModel = () => {
       const {history} = require('src/redux/store');
       if (truetype.isObject(payload)) {
         const {path, query} = payload;
-        return yield history.push(`${payload.path}${buildQuery(query)}`);
+        return yield history.push(`${payload.path}${buildQueryString(query)}`);
       }
       if (truetype.isString(payload)) {
         return yield history.push(payload);

@@ -1,11 +1,8 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
+import Color from 'color';
 import {colors, mixins} from 'src/styles';
 import BaseDropdown from '../Dropdown';
 import BaseIcon from '../Icon';
-
-export const Root = styled.div`
-  padding-top: 20px;
-`;
 
 const getControlStyle = ({disabled, $isInvalid}) => {
   if (disabled) {
@@ -65,11 +62,12 @@ export const Control = styled.div`
 
 export const Icon = styled(BaseIcon)`
   position: absolute;
-  color: #000;
-  ${mixins.pushCV}
+  top: 50%;
+  color: ${colors.common.black};
   right: 16px;
   width: 18px;
   height: 18px;
+  transition: transform 200ms linear;
 `;
 
 export const Value = styled.div`
@@ -96,4 +94,33 @@ export const Options = styled(BaseDropdown)`
   box-shadow: 0 0 6px 0 ${colors.common.gray};
 `;
 
-export const Option = styled.div``;
+export const Option = styled.div`
+  padding: 8px 16px;
+  ${mixins.font({size: '16px', weight: 500})}
+  transition: background-color 200ms linear;
+  
+  :hover {
+    cursor: pointer;
+    background-color: #fcf0d1;
+  }
+`;
+
+const getRootStyle = props => {
+  if (props.$isOpen) {
+    return `
+      ${Icon} {
+        transform: translate(0, -50%) rotate(180deg);
+      }
+    `;
+  }
+  return `
+    ${Icon} {
+      transform: translate(0, -50%);
+    }
+  `;
+};
+
+export const Root = styled.div`
+  padding-top: 20px;
+  ${getRootStyle}
+`;
