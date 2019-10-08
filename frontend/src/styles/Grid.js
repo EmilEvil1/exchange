@@ -61,6 +61,17 @@ const get$spacing = props => {
   `;
 };
 
+const getContainerItemStyle = props => {
+  if (props.$flexFlow !== undefined && props.$flexFlow.includes('column')) {
+    return `
+      ${Item} {
+        width: 100%;
+      }
+    `;
+  }
+  return undefined;
+};
+
 export const Container = styled.div`
   display: flex;
   ${get$flexFlow}
@@ -69,6 +80,7 @@ export const Container = styled.div`
   ${get$alignItems}
   ${get$alignContent}
   ${get$spacing}
+  ${getContainerItemStyle}
 `;
 
 const get$xs$sm$md = props => {

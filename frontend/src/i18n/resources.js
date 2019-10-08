@@ -8,13 +8,15 @@ import ProgressCard from 'src/components/ProgressCard/i18n';
 import Select from 'src/components/Select/i18n';
 
 import ApplicationForm from 'src/routes/root.routes/root.route/ApplicationForm/i18n';
+import SignInForm from 'src/routes/root.routes/signIn.route/SignInForm/i18n';
+import SignUpForm from 'src/routes/root.routes/signUp.route/SignUpForm/i18n';
 
 const siteInfo = {
   common: {
     name: 'Fairpay',
     tgChannel: {
       name: 'tg@smbdsmbd',
-      href: 'https://ttttt.me/ktznews',
+      href: 'https://teleg.run/ktznews',
     },
     email: 'fairpay24@gmail.com',
     phone: '+7 800 6696969',
@@ -96,7 +98,10 @@ const button = {
     collapse: 'Свернуть',
     confirm: 'Подтвердить',
     signIn: 'Вход',
+    signIn1: 'Войти',
     signUp: 'Регистрация',
+    signUp1: 'Создать учетную запись',
+    forgotYouPassword: 'Забыли пароль?',
   },
   en: {
     back: 'Back',
@@ -109,14 +114,18 @@ const button = {
     confirm: 'Confirm',
     signIn: 'Sign in',
     signUp: 'Sign up',
+    signUp1: 'Create an account',
+    forgotYouPassword: 'Forgot your password?',
   },
 };
 
 const validator = {
   ru: {
+    invalidPasswordFormat: 'Неверный формат пароля',
     required: 'Поле обязательно для заполнения.',
   },
   en: {
+    invalidPasswordFormat: 'Invalid password format',
     required: 'The field is required.',
   },
 };
@@ -139,6 +148,8 @@ export default {
 
     // other
     ApplicationForm: ApplicationForm.ru,
+    SignInForm: SignInForm.ru,
+    SignUpForm: SignUpForm.ru,
   },
   en: {
     siteInfo: merge({}, siteInfo.common, siteInfo.en),
@@ -157,5 +168,7 @@ export default {
 
     // other
     ApplicationForm: ApplicationForm.en,
+    SignInForm: SignInForm.en,
+    SignUpForm: SignUpForm.en,
   },
 };

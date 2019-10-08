@@ -1,8 +1,25 @@
 import styled, {css} from 'styled-components';
 import {mixins, colors} from 'src/styles';
+import BaseIcon from '../Icon';
 
 export const Root = styled.div`
   padding-top: 20px;
+`;
+
+const getIconFill = props => {
+  if (props.$isInvalid) {
+    return colors.Input.Icon.isInvalidFill;
+  }
+  return colors.Input.Icon.fill;
+};
+
+export const Icon = styled(BaseIcon)`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 35px;
+  left: 17px;
+  fill: ${getIconFill};
 `;
 
 export const Label = styled.div`
@@ -24,7 +41,7 @@ export const Label = styled.div`
   }
 `;
 
-const getStyleLabel = ({value, $isInvalid}) => {
+const getStyleLabel = ({value, $isInvalid, $hasIcon}) => {
   const isNotEmpty = String(value).length > 0;
   if ($isInvalid && isNotEmpty) {
     return `
@@ -41,7 +58,7 @@ const getStyleLabel = ({value, $isInvalid}) => {
     return `
       ~ ${Label} {
         top: 33px;
-        left: 17px;
+        left: ${$hasIcon ? '53px' : '17px'};
         right: 17px;
         color: ${colors.Input.Label.isInvalidColor};
         ${mixins.font({size: '20px', weight: '500'})}
@@ -62,7 +79,7 @@ const getStyleLabel = ({value, $isInvalid}) => {
   return `
     ~ ${Label} {
       top: 33px;
-      left: 17px;
+      left: ${$hasIcon ? '53px' : '17px'};
       right: 17px;
       color: ${colors.Input.Label.color};
       ${mixins.font({size: '20px', weight: '500'})}
@@ -110,6 +127,13 @@ const getStyleInput = ({disabled, $isInvalid}) => {
   `;
 };
 
+const getInputPadding = props => {
+  if (props.$hasIcon) {
+    return '0 16px 0 52px';
+  }
+  return '0 16px';
+};
+
 export const Input = styled.input`
   display: block;
   width: 100%;
@@ -117,7 +141,7 @@ export const Input = styled.input`
   height: 50px;
   border-width: 1px;
   border-style: solid;
-  padding: 0 16px;
+  padding: ${getInputPadding};
   border-radius: 6px;
   transition: border-color 200ms linear, background-color 200ms linear, box-shadow 200ms linear;
   ${getStyleInput}

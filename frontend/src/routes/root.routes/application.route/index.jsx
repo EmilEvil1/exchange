@@ -94,7 +94,7 @@ class Route extends RouteBase {
                     <CS.PaperDecore $topLeft />
                     <CS.PaperDecore $bottomRight />
                     <CS.Text
-                      $textSize="25px"
+                      $textSize="24px"
                       $textAlign="center"
                       $textWeight="500"
                       $margin="0 0 16px 0"

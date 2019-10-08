@@ -2,7 +2,7 @@
 import React, {PureComponent} from 'react';
 import formField from 'src/hocs/formField';
 import NumberFormat from 'react-number-format';
-import * as S from './style';
+import * as CS from './style';
 import types from './types';
 
 class Input extends PureComponent {
@@ -20,7 +20,8 @@ class Input extends PureComponent {
     value: '',
   };
 
-  setValue = value => {
+  handleChange = (e) => {
+    const {value} = e.target;
     if (value === this.state.value) {
       return null;
     }
@@ -35,28 +36,19 @@ class Input extends PureComponent {
     });
   };
 
-  handleChange = e => {
-    const {value} = e.target;
-    return this.setValue(value);
-  };
-
-  handleBlur = () => {
-    const {value} = this.state;
-    return this.setValue(value);
-  };
-
   render() {
-    const {id, label, ...inputProps} = this.props;
-    const {value} = this.state;
+    const {icon, label, ...inputProps} = this.props;
+    const hasIcon = icon !== undefined;
     return (
-      <S.Root>
-        <S.Input id={id} {...inputProps} value={value} onChange={this.handleChange} onBlur={this.handleBlur} />
+      <CS.Root>
+        <CS.Input {...inputProps} onChange={this.handleChange} $hasIcon={hasIcon} />
+        {hasIcon && <CS.Icon name={icon} $isInvalid={inputProps.$isInvalid} />}
         {label !== undefined && (
-          <S.Label>
-            <label htmlFor={id}>{label}</label>
-          </S.Label>
+          <CS.Label $hasIcon={hasIcon}>
+            <label htmlFor={inputProps.id}>{label}</label>
+          </CS.Label>
         )}
-      </S.Root>
+      </CS.Root>
     );
   }
 }

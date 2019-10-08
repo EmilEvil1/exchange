@@ -18,6 +18,11 @@ export default colors => ({
   focusBoxShadowColor: Color(colors.primary).alpha(0.3).string(),
   focusBorderColor: colors.primary,
 
+  Icon: {
+    fill: '#606060',
+    isInvalidFill: colors.common.red,
+  },
+
   Label: {
     isInvalidColor: colors.common.red,
     isInvalidColorNotEmpty: colors.common.red,

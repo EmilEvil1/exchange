@@ -8,6 +8,16 @@ const routes = [
     component: root.root,
   },
   {
+    path: '/sign-in',
+    exact: true,
+    component: root.signIn,
+  },
+  {
+    path: '/sign-up',
+    exact: true,
+    component: root.signUp,
+  },
+  {
     path: '/application/:id',
     exact: true,
     component: root.application,

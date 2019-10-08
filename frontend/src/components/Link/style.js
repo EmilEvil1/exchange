@@ -58,8 +58,34 @@ const getRootStyles = (props) => {
         }
       `;
     }
-    case 'yellow': {
-      return undefined;
+    case 'primary': {
+      return `
+        transition: color 200ms linear;
+        ${!props.disabled && `
+          color: ${colors.primary};
+          :hover {
+            cursor: pointer;
+            color: ${Color(colors.primary).lighten(0.1).string()};
+          }
+          :focus {
+            color: ${Color(colors.primary).lighten(0.1).string()};
+          }
+          :active {
+            color: ${colors.primary};
+          }
+          &.active {
+            cursor: default;
+            pointer-events: none;
+            color: ${colors.primary};
+          }
+        `}
+        ${props.disabled && `
+          pointer-events: none;
+          :hover {
+            cursor: not-allowed;
+          }
+        `}
+      `;
     }
     default: {
       return undefined;

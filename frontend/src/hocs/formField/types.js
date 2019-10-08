@@ -14,5 +14,6 @@ export default {
   },
   defaultProps: {
     isEnabledShowError: true,
+    isEnabledSubmitFailed: false,
   },
 };

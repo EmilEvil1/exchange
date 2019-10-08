@@ -1,5 +1,6 @@
 export AdvantageCard from './AdvantageCard';
 export Button from './Button';
+export Checkbox, {CheckboxField} from './Checkbox';
 export Dropdown from './Dropdown';
 export Footer from './Footer';
 export FooterLogo from './FooterLogo';

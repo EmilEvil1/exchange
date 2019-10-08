@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {withTranslation} from 'react-i18next';
 import WAValidator from 'wallet-address-validator';
 import {connect} from 'react-redux';
-import {reduxForm, Form, Field, isPristine, isValid, getFormValues} from 'redux-form';
+import {getFormValues, reduxForm, Form, Field} from 'redux-form';
 import {Button, InputField, FormatInputField, SelectField, Step} from 'src/components';
 import actions from 'src/redux/actions'
 import validator from 'src/utils/validator';
@@ -252,12 +252,12 @@ class ApplicationForm extends React.Component {
       if (to.holdType === staticData.currency.holdType.cardNumber) {
         return {
           onChange: value => {
-            // this.props.change('amountFrom', parseFloatNumber({fixed: 10})(
-            //   parseFloatNumber({
-            //     max: to.reserves,
-            //     fixed: 2,
-            //   })(value)
-            // ));
+            this.props.change('amountFrom', parseFloatNumber({fixed: 10})(
+              parseFloatNumber({
+                max: to.reserves,
+                fixed: 2,
+              })(value)
+            ));
           },
           parse: parseFloatNumber({
             max: to.reserves,
@@ -358,7 +358,6 @@ class ApplicationForm extends React.Component {
                     )}
                   />
                 </S.Grid.Item>
-
                 <S.Grid.Item $xs={12}>
                   <Field
                     type="text"
@@ -373,9 +372,6 @@ class ApplicationForm extends React.Component {
           <S.Grid.Container $justifyContent="flex-end">
             <S.Grid.Item>
               <Button
-                $textSize="20px"
-                $textTransform="uppercase"
-                $textWeight="500"
                 type="button"
                 $variant="contained"
                 $color="yellow"
@@ -421,9 +417,6 @@ class ApplicationForm extends React.Component {
           <S.Grid.Container $justifyContent="flex-end">
             <S.Grid.Item>
               <Button
-                $textSize="20px"
-                $textTransform="uppercase"
-                $textWeight="500"
                 type="button"
                 $variant="contained"
                 onClick={this.handleSetStep(0)}>
@@ -432,9 +425,6 @@ class ApplicationForm extends React.Component {
             </S.Grid.Item>
             <S.Grid.Item>
               <Button
-                $textSize="20px"
-                $textTransform="uppercase"
-                $textWeight="500"
                 type="button"
                 $variant="contained"
                 $color="yellow"
@@ -472,9 +462,6 @@ class ApplicationForm extends React.Component {
           <S.Grid.Container $justifyContent="flex-end">
             <S.Grid.Item>
               <Button
-                $textSize="20px"
-                $textTransform="uppercase"
-                $textWeight="500"
                 type="button"
                 $variant="contained"
                 onClick={this.handleSetStep(1)}>
@@ -483,13 +470,10 @@ class ApplicationForm extends React.Component {
             </S.Grid.Item>
             <S.Grid.Item>
               <Button
-                  $textSize="20px"
-                  $textTransform="uppercase"
-                  $textWeight="500"
-                  type="submit"
-                  $variant="contained"
-                  // disabled={isDisabledSubmit}
-                  $color="yellow">
+                type="submit"
+                $variant="contained"
+                $color="yellow"
+                disabled={isDisabledSubmit}>
                 {t('button:confirm')}
               </Button>
             </S.Grid.Item>

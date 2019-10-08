@@ -6,26 +6,22 @@ import * as CS from './style';
 
 const formField = (Component, defaultProps) => {
   const NextComponent = React.memo((props) => {
-    const {input, meta, isEnabledShowError, ...ownProps} = {...props, ...defaultProps};
-
+    const {input, meta, isEnabledShowError, isEnabledSubmitFailed, ...ownProps} = {...props, ...defaultProps};
     const id = hash({form: meta.form, name: input.name});
-
-    const isInvalid = meta.touched && !!meta.error;
-
+    const isInvalid = meta.touched && !!meta.error && (isEnabledSubmitFailed ? meta.submitFailed : true);
     const componentProps = {
       ...ownProps,
       ...input,
       id,
       $isInvalid: isInvalid,
     };
-
     return (
-        <S.FormItem>
-          <Component {...componentProps} />
-          {isEnabledShowError && (
-            <CS.Error $isInvalid={isInvalid}>{meta.error}</CS.Error>
-          )}
-        </S.FormItem>
+      <S.FormItem>
+        <Component {...componentProps} />
+        {isEnabledShowError && (
+          <CS.Error $isInvalid={isInvalid}>{meta.error}</CS.Error>
+        )}
+      </S.FormItem>
     );
   });
 

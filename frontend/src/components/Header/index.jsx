@@ -2,9 +2,9 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {withTranslation} from 'react-i18next';
 import * as S from 'src/styles';
-import Button from '../Button';
 import Logo from '../Logo';
 import Link from '../Link';
+import Button from '../Button';
 import types from './types';
 import * as CS from './style';
 
@@ -71,9 +71,9 @@ class Header extends React.PureComponent {
                       to="/sign-in"
                       $variant="contained"
                       $color="blackOnBlack"
-                      $size="small"
-                      $textSize="18px"
-                      $textWeight="500">
+                      $fontSize="18px"
+                      $textTransform="none"
+                      $padding="4px 12px">
                       {t('button:signIn')}
                     </Button>
                   </S.Grid.Item>
@@ -84,9 +84,9 @@ class Header extends React.PureComponent {
                       to="/sign-up"
                       $variant="contained"
                       $color="yellow"
-                      $size="small"
-                      $textSize="18px"
-                      $textWeight="500">
+                      $fontSize="18px"
+                      $textTransform="none"
+                      $padding="4px 12px">
                       {t('button:signUp')}
                     </Button>
                   </S.Grid.Item>
