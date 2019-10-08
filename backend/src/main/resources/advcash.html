@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body  onLoad="document.getElementById('startrunning').click();">
+<!--Fragment of HTML page with the payment request form-->
+<form id="submitForm" method="POST" action="https://wallet.advcash.com/sci/"><input type="hidden" name="ac_account_email"
+                                                                    value="email@example.com"> <input type="hidden"
+                                                                                                      name="ac_sci_name"
+                                                                                                      value="My Shop">
+    <input type="hidden" name="ac_amount" value="123.45"> <input type="hidden" name="ac_currency" value="USD"> <input
+            type="hidden" name="ac_order_id" value="123456"> <input type="hidden" name="ac_sign"
+                                                                    value="36b4c9ad29b61d1c5996e3ef1a3af0c3194e19713613b6bf26a9b905b8019225">
+    <input type="hidden" name="ac_comments" value="Payment for audio system. Model #12345">
+    <!-- Merchant custom fields --> <input type="hidden" name="operation_id" value="234235436"> <input type="hidden"
+                                                                                                       name="login" value="denis">
+    <button id="startrunning" type="submit">sddds</button>
+</form> <!--Fragment of HTML page with the payment request form-->
+</body>
+</html>
