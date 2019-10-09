@@ -25,10 +25,10 @@ const mapStateToProps = state => {
 
 const reduxFormConfig = {
   form: staticData.formId,
-  validate: values => {
+  validate: (values, {t}) => {
     const rules = {
       username: 'required|login|min:3|max:50',
-      password: 'required|min:8|max:32',
+      password: 'required',
     };
     if (truetype.isString(values.username) && values.username.includes('@')) {
       rules.username = 'required|email|max:50';

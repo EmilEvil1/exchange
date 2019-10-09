@@ -26,7 +26,6 @@ export const Icon = styled(BaseIcon)`
 `;
 
 export const ControlLabel = styled.label`
-  user-select: none;
   flex-shrink: 1;
   cursor: pointer;
   ${mixins.font({

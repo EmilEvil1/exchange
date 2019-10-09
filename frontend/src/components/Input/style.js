@@ -6,7 +6,7 @@ export const Root = styled.div`
   padding-top: 20px;
 `;
 
-const getIconFill = props => {
+const getIconColor = props => {
   if (props.$isInvalid) {
     return colors.Input.Icon.isInvalidFill;
   }
@@ -19,7 +19,7 @@ export const Icon = styled(BaseIcon)`
   height: 20px;
   top: 35px;
   left: 17px;
-  fill: ${getIconFill};
+  color: ${getIconColor};
 `;
 
 export const Label = styled.div`
@@ -36,7 +36,6 @@ export const Label = styled.div`
     font-size 200ms linear;
   
   > label {
-    cursor: pointer;
     pointer-events: auto;
   }
 `;
@@ -51,6 +50,10 @@ const getStyleLabel = ({value, $isInvalid, $hasIcon}) => {
         right: 0px;
         color: ${colors.Input.Label.isInvalidColorNotEmpty};
         ${mixins.font({size: '14px', weight: '500'})}
+        
+        > label {
+          cursor: pointer;
+        }
       }
     `;
   }
@@ -62,6 +65,11 @@ const getStyleLabel = ({value, $isInvalid, $hasIcon}) => {
         right: 17px;
         color: ${colors.Input.Label.isInvalidColor};
         ${mixins.font({size: '20px', weight: '500'})}
+        
+        > label {
+          user-select: none;
+          cursor: text;
+        }
       }
     `;
   }
@@ -73,6 +81,10 @@ const getStyleLabel = ({value, $isInvalid, $hasIcon}) => {
         right: 0px;
         color: ${colors.Input.Label.colorNotEmpty};
         ${mixins.font({size: '14px', weight: '500'})}
+        
+        > label {
+          cursor: pointer;
+        }
       }
     `;
   }
@@ -83,6 +95,11 @@ const getStyleLabel = ({value, $isInvalid, $hasIcon}) => {
       right: 17px;
       color: ${colors.Input.Label.color};
       ${mixins.font({size: '20px', weight: '500'})}
+      
+      > label {
+        user-select: none;
+        cursor: text;
+      }
     }
   `;
 };

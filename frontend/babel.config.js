@@ -1,6 +1,16 @@
 module.exports = {
   presets: [
-    '@babel/preset-env',
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          browsers: ['last 10 versions', 'safari >= 8', 'ie >= 10'],
+        },
+        corejs: 3,
+        useBuiltIns: 'entry',
+        debug: false,
+      },
+    ],
     '@babel/preset-react',
   ],
   plugins: [
@@ -14,9 +24,12 @@ module.exports = {
     development: {
       plugins: [
         'react-hot-loader/babel',
-        ['babel-plugin-styled-components', {
-          'pure': true
-        }],
+        [
+          'babel-plugin-styled-components',
+          {
+            pure: true,
+          },
+        ],
       ],
     },
   },
