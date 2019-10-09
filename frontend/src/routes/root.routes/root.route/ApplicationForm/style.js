@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {colors} from 'src/styles';
-import {Icon as BaseIcon} from 'src/components';
+import BaseIcon from 'src/components/Icon';
 import {Option as BaseOption} from 'src/components/Select/style';
 
 export const Heading = styled.div`

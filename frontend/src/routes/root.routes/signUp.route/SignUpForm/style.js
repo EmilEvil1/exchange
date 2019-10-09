@@ -54,7 +54,7 @@ export const RuleText = styled.div`
 `;
 
 export const Rule = styled.div`
-  flex: 0 0 20%;
+  flex: 0 0 25%;
   text-align: center;
   
   > ${RuleView} {

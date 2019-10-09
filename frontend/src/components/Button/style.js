@@ -12,7 +12,9 @@ const getRootContainedStyles = props => {
   }
   const baseContained = `
     border: none;
-    transition: background-color 200ms linear, border-color 200ms linear, color 200ms linear;
+    transition: background-color 200ms linear,
+      border-color 200ms linear,
+      color 200ms linear;
     padding: ${props.$padding !== undefined ? props.$padding : '8px 28px'};
     border-radius: 4px;
     font-size: ${props.$fontSize !== undefined ? props.$fontSize : '20px'};

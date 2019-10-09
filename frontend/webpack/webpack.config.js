@@ -6,7 +6,7 @@ import mode from 'src/utils/mode';
 import routing from './routing.config';
 
 const config = {
-  name: 'Webpack config',
+  name: 'webpack config',
   mode: process.env.NODE_ENV,
   devtool: mode({
     production: false,
@@ -58,6 +58,9 @@ const config = {
     }),
     new webpack.ContextReplacementPlugin(/moment[\\\/]lang$/, /^\.\/(en-gb|ru)$/),
     new CopyPlugin([{
+      from: routing.paths.src.docs,
+      to: routing.paths.public.static.docs,
+    }, {
       from: routing.paths.src.fonts,
       to: routing.paths.public.static.fonts,
     }, {
@@ -83,18 +86,16 @@ const config = {
       },
     ],
   },
-  optimization: mode({
-    production: {
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          cache: true,
-          parallel: true,
-          sourceMap: true,
-        }),
-      ],
-    },
-  })
+  optimization: {
+    minimize: mode.isProduction(),
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true,
+      }),
+    ],
+  }
 };
 
 export default config;

@@ -136,6 +136,7 @@ export default {
     currency: merge({}, currency.common, currency.ru),
     button: button.ru,
     validator: validator.ru,
+
     // models
     Notifier: Notifier.ru,
 
@@ -156,6 +157,7 @@ export default {
     currency: merge({}, currency.common, currency.en),
     button: button.en,
     validator: validator.en,
+
     // models
     Notifier: Notifier.en,
 

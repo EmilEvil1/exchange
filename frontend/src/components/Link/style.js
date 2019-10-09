@@ -95,5 +95,6 @@ const getRootStyles = (props) => {
 
 export const Root = styled.a`
   ${mixins.text}
+  display: inline-block;
   ${getRootStyles}
 `;

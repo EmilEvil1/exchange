@@ -18,4 +18,3 @@ export ProgressCard from './ProgressCard';
 export Pulse from './Pulse';
 export Select, {SelectField} from './Select';
 export Step from './Step';
-export SubHeader from './SubHeader';

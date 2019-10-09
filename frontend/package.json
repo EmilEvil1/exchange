@@ -10,7 +10,7 @@
     "build": "npm run scripts:clean && npm run scripts:index && npm run scripts:webpack && npm run scripts:copy",
     "scripts:clean": "cross-env NODE_PATH=. NODE_ENV=production babel-node webpack/clean.script.js",
     "scripts:index": "cross-env NODE_PATH=. NODE_ENV=production babel-node webpack/index.script.js",
-    "scripts:webpack": "cross-env NODE_PATH=. NODE_ENV=development webpack",
+    "scripts:webpack": "cross-env NODE_PATH=. NODE_ENV=production webpack",
     "scripts:copy": "cross-env NODE_PATH=. NODE_ENV=production babel-node webpack/copy.script.js"
   },
   "repository": {
@@ -76,7 +76,7 @@
     "redux-form": "^8.2.5",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.3",
-    "styled-components": "^4.3.2",
+    "styled-components": "^4.4.0",
     "validatorjs": "^3.15.1",
     "wallet-address-validator": "^0.2.4",
     "whatwg-fetch": "^3.0.0"

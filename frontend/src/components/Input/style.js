@@ -143,7 +143,9 @@ export const Input = styled.input`
   border-style: solid;
   padding: ${getInputPadding};
   border-radius: 6px;
-  transition: border-color 200ms linear, background-color 200ms linear, box-shadow 200ms linear;
+  transition: border-color 200ms linear,
+    background-color 200ms linear,
+    box-shadow 200ms linear;
   ${getStyleInput}
   ${getStyleLabel}
   ${mixins.font({size: '20px', weight: '500'})}

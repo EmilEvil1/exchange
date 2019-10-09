@@ -4,7 +4,13 @@ import {withTranslation} from 'react-i18next';
 import WAValidator from 'wallet-address-validator';
 import {connect} from 'react-redux';
 import {getFormValues, reduxForm, Form, Field} from 'redux-form';
-import {Button, InputField, FormatInputField, SelectField, Step} from 'src/components';
+import {
+  Button,
+  InputField,
+  FormatInputField,
+  SelectField,
+  Step,
+} from 'src/components';
 import actions from 'src/redux/actions'
 import validator from 'src/utils/validator';
 import {parseQueryString} from 'src/utils/xhr';
@@ -299,7 +305,7 @@ class ApplicationForm extends React.Component {
                     }))}
                     renderOptions={({props, handleOptionClick}) =>
                       props.options.map((option, index) => (
-                        <CS.SelectOption onClick={handleOptionClick(option)}>
+                        <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
                           <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
                           <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
                         </CS.SelectOption>
@@ -345,7 +351,7 @@ class ApplicationForm extends React.Component {
                     }))}
                     renderOptions={({props, handleOptionClick}) =>
                       props.options.map((option, index) => (
-                        <CS.SelectOption onClick={handleOptionClick(option)}>
+                        <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
                           <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
                           <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
                         </CS.SelectOption>

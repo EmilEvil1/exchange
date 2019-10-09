@@ -1,9 +1,10 @@
-const stopPropagation = callback => e => {
-  e.stopPropagation();
-  if (callback === undefined) {
-    return () => {};
-  }
-  return callback(e)
+const stopPropagation = e => {
+  return e.stopPropagation();
+};
+
+stopPropagation.call = callback => e => {
+  stopPropagation(e);
+  return callback();
 };
 
 export default stopPropagation;

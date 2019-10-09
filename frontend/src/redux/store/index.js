@@ -13,9 +13,7 @@ export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [
-  mode({
-    development: createLogger({ collapsed: true }),
-  }),
+  mode.isDevelopment() && createLogger({collapsed: true}),
   sagaMiddleware
 ].filter(Boolean);
 

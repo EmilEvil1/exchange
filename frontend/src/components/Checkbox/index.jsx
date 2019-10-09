@@ -6,27 +6,43 @@ import * as CS from './style';
 class Checkbox extends React.PureComponent {
   static propTypes = types.propTypes;
 
-  handleChange = (e) => {
-    const {value} = e.target;
-    if (value === this.state.value) {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextState = {};
+    if (nextProps.value !== undefined) {
+      nextState.value = nextProps.value;
+    }
+    return nextState;
+  }
+
+  state = {
+    value: false,
+  };
+
+  handleChange = () => {
+    if (this.props.disabled) {
       return null;
     }
+    const {value} = this.state;
     if (this.props.onChange !== undefined && this.props.value !== undefined) {
-      return this.props.onChange(value);
+      return this.props.onChange(!value);
     }
-    return this.setState({value}, () => {
+    return this.setState({value: !value}, () => {
       if (this.props.onChange === undefined) {
         return null;
       }
-      return this.props.onChange(value);
+      return this.props.onChange(!value);
     });
   };
 
   render() {
-    const {controlLabel} = this.props;
+    const {id, controlLabel, disabled, $isInvalid} = this.props;
+    const {value} = this.state;
     return (
-      <CS.Root>
-        <CS.Control tabIndex="0" onClick={this.handleChange}>{controlLabel}</CS.Control>
+      <CS.Root $value={value} $disabled={disabled} $isInvalid={$isInvalid}>
+        <CS.Control id={id} tabIndex="0" onClick={this.handleChange}>
+          <CS.Icon name="icon-ok" />
+        </CS.Control>
+        <CS.ControlLabel htmlFor={id} onClick={this.handleChange}>{controlLabel}</CS.ControlLabel>
       </CS.Root>
     );
   }

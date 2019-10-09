@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import {withTranslation} from 'react-i18next';
+import {withTranslation, Trans} from 'react-i18next';
 import {connect} from 'react-redux';
 import {reduxForm, getFormValues, Form, Field} from 'redux-form';
 import set from 'lodash/set';
@@ -8,6 +8,7 @@ import * as S from 'src/styles';
 import {InputField, CheckboxField, Button, Link} from 'src/components';
 import validator from 'src/utils/validator';
 import {PASSWORD_RULES} from 'src/constants';
+import stopPropagation from 'src/utils/stopPropagation';
 import types from './types';
 import * as CS from './style';
 
@@ -60,10 +61,17 @@ const reduxFormConfig = {
     if (values && result.password === undefined && !Object.entries(checkPassword(values.password)).every(([,v]) => v)) {
       result.password = t('validator:invalidPasswordFormat');
     }
+    if (values && !values.test1) {
+      result.test1 = t('validator:required');
+    }
     return result;
   },
   onSubmit: () => {
     alert('test');
+  },
+  initialValues: {
+    test1: false,
+    test2: true,
   },
 }
 
@@ -95,6 +103,7 @@ class SignUpForm extends React.PureComponent {
           isEnabledSubmitFailed
           icon="icon-message"
           autoComplete="off"
+          autoFocus
           disabled={isDisabledForm}
         />
         <Field
@@ -108,8 +117,8 @@ class SignUpForm extends React.PureComponent {
           disabled={isDisabledForm}
         />
         <CS.Rules>
-          {PASSWORD_RULES.map(rule => (
-            <CS.Rule $isValid={checkPasswordResult[rule.id]} $isInvalid={submitFailed && !checkPasswordResult[rule.id]}>
+          {PASSWORD_RULES.map((rule, index) => (
+            <CS.Rule $isValid={checkPasswordResult[rule.id]} $isInvalid={submitFailed && !checkPasswordResult[rule.id]} key={index}>
               <CS.RuleView>{t(`SignUpForm:rules.${rule.id}.view`)}</CS.RuleView>
               <CS.RuleText>{t(`SignUpForm:rules.${rule.id}.text`).toLowerCase()}</CS.RuleText>
             </CS.Rule>
@@ -120,7 +129,11 @@ class SignUpForm extends React.PureComponent {
           <S.Grid.Item>
             <Field
               name="test1"
-              controlLabel={t('SignUpForm:formField.test1.controlLabel')}
+              controlLabel={(
+                <Trans i18nKey="SignUpForm:formField.test1.controlLabel">
+                  <Link onClick={stopPropagation} $color="primary" href="/static/docs/agreement.pdf" rel="noopener noreferrer" target="_blank" />
+                </Trans>
+              )}
               component={CheckboxField}
               isEnabledSubmitFailed
               disabled={isDisabledForm}

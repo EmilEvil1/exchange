@@ -14,10 +14,6 @@ export const PASSWORD_RULES = [
     regExp: /[0-9]/,
   },
   {
-    id: 'specialCharacter',
-    regExp: /[!@#\$%\^\&*\)\(+=._-]/,
-  },
-  {
     id: 'length',
     boolean: value => value.length > 8 && value.length < 32,
   },

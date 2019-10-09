@@ -55,7 +55,7 @@ class Input extends PureComponent {
 
 export default Input;
 
-export const InputField = formField(Input);
+export const InputField = formField(Input, {isEnabledLabel: false});
 
 export const FormatInput = ({numberFormat, numberMask, ...props}) => (
   <NumberFormat {...props} format={numberFormat} mask={numberMask} customInput={Input} />

@@ -1,5 +1,3 @@
-import {AdvantageCard} from '../index';
-
 export default {
   ru: {
     first: {

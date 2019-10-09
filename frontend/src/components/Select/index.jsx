@@ -115,4 +115,4 @@ class Select extends React.PureComponent {
 
 export default Select;
 
-export const SelectField = formField(Select);
+export const SelectField = formField(Select, {isEnabledLabel: false});

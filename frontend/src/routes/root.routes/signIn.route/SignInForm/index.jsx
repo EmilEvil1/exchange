@@ -27,7 +27,7 @@ const reduxFormConfig = {
   form: staticData.formId,
   validate: values => {
     const rules = {
-      username: 'required|min:3|max:50',
+      username: 'required|login|min:3|max:50',
       password: 'required|min:8|max:32',
     };
     if (truetype.isString(values.username) && values.username.includes('@')) {
@@ -66,6 +66,7 @@ class SignInForm extends React.PureComponent {
           isEnabledSubmitFailed
           icon="icon-user"
           autoComplete="off"
+          autoFocus
           disabled={isDisabledForm}
         />
         <Field
