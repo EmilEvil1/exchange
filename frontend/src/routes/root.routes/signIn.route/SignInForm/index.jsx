@@ -64,7 +64,7 @@ class SignInForm extends React.PureComponent {
           label={t('SignInForm:formField.username.label')}
           component={InputField}
           isEnabledSubmitFailed
-          icon="icon-user"
+          beforeIcon="icon-user"
           autoComplete="off"
           autoFocus
           disabled={isDisabledForm}
@@ -75,7 +75,7 @@ class SignInForm extends React.PureComponent {
           label={t('SignInForm:formField.password.label')}
           component={InputField}
           isEnabledSubmitFailed
-          icon="icon-lock"
+          beforeIcon="icon-lock"
           autoComplete="off"
           disabled={isDisabledForm}
         />

@@ -17,10 +17,11 @@ class Input extends PureComponent {
   }
 
   state = {
-    value: '',
+    value: this.props.value || '',
+    type: this.props.type || 'text',
   };
 
-  handleChange = (e) => {
+  handleChange = e => {
     const {value} = e.target;
     if (value === this.state.value) {
       return null;
@@ -36,17 +37,25 @@ class Input extends PureComponent {
     });
   };
 
+  handleTogglePasswordType = () => this.setState(prevState => ({type: prevState.type === 'password' ? 'text' : 'password'}));
+
   render() {
-    const {icon, label, ...inputProps} = this.props;
-    const hasIcon = icon !== undefined;
+    const {beforeIcon, label, ...inputProps} = this.props;
+    const {type} = this.state;
+    const hasBeforeIcon = beforeIcon !== undefined;
+    const isRenderPasswordEye = inputProps.type === 'password';
+    const passwordEyeIcon = type === 'password' ? 'icon-eye-lock' : 'icon-eye';
     return (
       <CS.Root>
-        <CS.Input {...inputProps} onChange={this.handleChange} $hasIcon={hasIcon} />
-        {hasIcon && <CS.Icon name={icon} $isInvalid={inputProps.$isInvalid} />}
+        <CS.Input {...inputProps} type={type} onChange={this.handleChange} $hasBeforeIcon={hasBeforeIcon} $isRenderPasswordEye={isRenderPasswordEye} />
+        {hasBeforeIcon && <CS.Icon name={beforeIcon} $isInvalid={inputProps.$isInvalid} $beforeIcon />}
         {label !== undefined && (
-          <CS.Label $hasIcon={hasIcon}>
+          <CS.Label $hasBeforeIcon={hasBeforeIcon}>
             <label htmlFor={inputProps.id}>{label}</label>
           </CS.Label>
+        )}
+        {isRenderPasswordEye && (
+          <CS.Icon name={passwordEyeIcon} $passwordEyeIcon onClick={this.handleTogglePasswordType} />
         )}
       </CS.Root>
     );

@@ -18,7 +18,11 @@ export const Icon = styled(BaseIcon)`
   width: 20px;
   height: 20px;
   top: 35px;
-  left: 17px;
+  ${props => props.$beforeIcon && 'left: 17px;'}
+  ${props => props.$passwordEyeIcon && `
+    right: 17px;
+    cursor: pointer;
+  `}
   color: ${getIconColor};
 `;
 
@@ -40,7 +44,7 @@ export const Label = styled.div`
   }
 `;
 
-const getStyleLabel = ({value, $isInvalid, $hasIcon}) => {
+const getStyleLabel = ({value, $isInvalid, $hasBeforeIcon}) => {
   const isNotEmpty = String(value).length > 0;
   if ($isInvalid && isNotEmpty) {
     return `
@@ -61,7 +65,7 @@ const getStyleLabel = ({value, $isInvalid, $hasIcon}) => {
     return `
       ~ ${Label} {
         top: 33px;
-        left: ${$hasIcon ? '53px' : '17px'};
+        left: ${$hasBeforeIcon ? '53px' : '17px'};
         right: 17px;
         color: ${colors.Input.Label.isInvalidColor};
         ${mixins.font({size: '20px', weight: '500'})}
@@ -91,7 +95,7 @@ const getStyleLabel = ({value, $isInvalid, $hasIcon}) => {
   return `
     ~ ${Label} {
       top: 33px;
-      left: ${$hasIcon ? '53px' : '17px'};
+      left: ${$hasBeforeIcon ? '53px' : '17px'};
       right: 17px;
       color: ${colors.Input.Label.color};
       ${mixins.font({size: '20px', weight: '500'})}
@@ -145,8 +149,8 @@ const getStyleInput = ({disabled, $isInvalid}) => {
 };
 
 const getInputPadding = props => {
-  if (props.$hasIcon) {
-    return '0 16px 0 52px';
+  if (props.$hasBeforeIcon || props.$isRenderPasswordEye) {
+    return `0 ${props.$isRenderPasswordEye ? '52px' : '16px'} 0 ${props.$hasBeforeIcon ? '52px' : '16px'}`;
   }
   return '0 16px';
 };

@@ -101,7 +101,7 @@ class SignUpForm extends React.PureComponent {
           label={t('SignUpForm:formField.email.label')}
           component={InputField}
           isEnabledSubmitFailed
-          icon="icon-message"
+          beforeIcon="icon-message"
           autoComplete="off"
           autoFocus
           disabled={isDisabledForm}
@@ -112,7 +112,7 @@ class SignUpForm extends React.PureComponent {
           label={t('SignUpForm:formField.password.label')}
           component={InputField}
           isEnabledSubmitFailed
-          icon="icon-lock"
+          beforeIcon="icon-lock"
           autoComplete="off"
           disabled={isDisabledForm}
         />
