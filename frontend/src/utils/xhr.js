@@ -2,7 +2,7 @@ import queryString from 'query-string';
 import truetype from 'src/utils/truetype';
 import jsonparse from 'src/utils/jsonparse';
 
-export const buildQueryString = (object) => {
+export const buildQueryString = object => {
   const result = queryString.stringify(object);
   if (result.length > 0) {
     return `?${result}`;
@@ -10,7 +10,7 @@ export const buildQueryString = (object) => {
   return '';
 };
 
-export const parseQueryString = (string) => queryString.parse(string);
+export const parseQueryString = string => queryString.parse(string);
 
 const xhr = settings => {
   const {endpoint, method = 'GET', payload, token} = settings;

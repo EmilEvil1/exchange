@@ -10,7 +10,9 @@ import * as CS from './style';
 class Select extends React.PureComponent {
   static propTypes = types.propTypes;
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static defaultProps = types.defaultProps;
+
+  static getDerivedStateFromProps(nextProps) {
     const nextState = {};
     if (nextProps.value !== undefined) {
       nextState.value = nextProps.value;
@@ -25,6 +27,11 @@ class Select extends React.PureComponent {
   state = {
     value: null,
     isOpen: false,
+  };
+
+  getOptions() {
+    const {options, t} = this.props;
+    return [{label: t('Select:notSelected'), value: null}, ...options];
   };
 
   setValue = value => {
@@ -42,9 +49,18 @@ class Select extends React.PureComponent {
     });
   };
 
-  handleOptionClick = option => () => this.setValue(option.value);
+  handleOptionClick = option => () => {
+    const {hideActions} = this.props;
+    if (hideActions.selectOnChange) {
+      this.handleHideOptions();
+    }
+    console.log('test-111', option);
+    return this.setValue(option.value);
+  };
 
   handleControlClick = () => this.setState(prevState => ({isOpen: !prevState.isOpen}));
+
+  handleHideOptions = () => this.setState({isOpen: false});
 
   renderValue() {
     if (this.props.renderValue !== undefined) {
@@ -64,28 +80,30 @@ class Select extends React.PureComponent {
   }
 
   renderOptions() {
+    const {hideActions} = this.props;
     const {isOpen} = this.state;
     if (this.props.renderOptions !== undefined) {
       return (
         <CS.Options
           isOpen={isOpen}
           anchorRef={this.rootRef}
-          ref={this.dropdownRef}>
+          ref={this.dropdownRef}
+          onHide={this.handleHideOptions}
+          hideActions={hideActions}>
           {this.props.renderOptions({
-            props: this.props,
+            props: {...this.props, options: this.getOptions()},
             state: this.state,
             handleOptionClick: this.handleOptionClick
           })}
         </CS.Options>
-      )
+      );
     }
-    const {options} = this.props;
     return (
       <CS.Options
         isOpen={isOpen}
         anchorRef={this.rootRef}
         ref={this.dropdownRef}>
-        {options.map((option, index) => (
+        {this.getOptions().map((option, index) => (
           <CS.Option
             onClick={this.handleOptionClick(option)}
             disabled={option.disabled}
@@ -94,7 +112,7 @@ class Select extends React.PureComponent {
           </CS.Option>
         ))}
       </CS.Options>
-    )
+    );
   }
 
   render() {

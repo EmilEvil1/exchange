@@ -8,7 +8,7 @@ import types from './types';
 class Input extends PureComponent {
   static propTypes = types.propTypes;
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps) {
     const nextState = {};
     if (nextProps.value !== undefined) {
       nextState.value = nextProps.value;

@@ -1,4 +1,4 @@
-(function (arr) {
+((arr) => {
   arr.forEach(function (item) {
     if (item.hasOwnProperty('closest')) {
       return;
@@ -18,7 +18,7 @@
     });
   });
 })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-(function (arr) {
+((arr) => {
   arr.forEach(function (item) {
     if (item.hasOwnProperty('append')) {
       return;
@@ -39,7 +39,7 @@
     });
   });
 })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-(function (arr) {
+((arr) => {
   arr.forEach(function (item) {
     if (item.hasOwnProperty('prepend')) {
       return;
@@ -62,7 +62,7 @@
     });
   });
 })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-(function (arr) {
+((arr) => {
   arr.forEach(function (item) {
     if (item.hasOwnProperty('before')) {
       return;
@@ -83,7 +83,7 @@
     });
   });
 })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
-(function (arr) {
+((arr) => {
   arr.forEach(function (item) {
     if (item.hasOwnProperty('after')) {
       return;
@@ -104,7 +104,7 @@
     });
   });
 })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
-(function (arr) {
+((arr) => {
   arr.forEach(function (item) {
     if (item.hasOwnProperty('remove')) {
       return;
@@ -122,30 +122,34 @@
     });
   });
 })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
-(function (arr) {
-  function ReplaceWithPolyfill() {
-    'use-strict';
-    var parent = this.parentNode, i = arguments.length, currentNode;
-    if (!parent) return;
-    if (!i)
-      parent.removeChild(this);
-    while (i--) {
-      currentNode = arguments[i];
-      if (typeof currentNode !== 'object'){
-        currentNode = this.ownerDocument.createTextNode(currentNode);
-      } else if (currentNode.parentNode){
-        currentNode.parentNode.removeChild(currentNode);
-      }
-      if (!i)
-        parent.replaceChild(currentNode, this);
-      else
-        parent.insertBefore(currentNode, this.previousSibling);
-    }
-  }
+((arr) => {
   arr.forEach(function (item) {
     if (item.hasOwnProperty('replaceWith')) {
       return;
     }
-    item.replaceWith = ReplaceWithPolyfill;
+    Object.defineProperty(item, 'replaceWith', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function replaceWith() {
+        'use-strict';
+        var parent = this.parentNode, i = arguments.length, currentNode;
+        if (!parent) return;
+        if (!i)
+          parent.removeChild(this);
+        while (i--) {
+          currentNode = arguments[i];
+          if (typeof currentNode !== 'object'){
+            currentNode = this.ownerDocument.createTextNode(currentNode);
+          } else if (currentNode.parentNode){
+            currentNode.parentNode.removeChild(currentNode);
+          }
+          if (!i)
+            parent.replaceChild(currentNode, this);
+          else
+            parent.insertBefore(currentNode, this.previousSibling);
+        }
+      }
+    });
   });
 })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);

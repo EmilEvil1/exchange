@@ -60,8 +60,8 @@ const mapStateToProps = (state, ownProps) => {
     currencies,
     stepId,
     initialValues: {
-      from: query.from || 'SBER',
-      to: query.to || 'BTC',
+      from: query.from === undefined ? 'SBER' : query.from,
+      to: query.to === undefined ? 'BTC' : query.to,
       amountFrom: query.amountFrom || '0',
       amountTo: query.amountTo || '0',
       fromDocumentPayment: query.fromDocumentPayment,
@@ -83,21 +83,18 @@ const mapDispatchToProps = {
 
 const reduxFormConfig = {
   form: staticData.formId,
-  onSubmit: (values, dispatch) => {
-    return dispatch(actions.rest.request({
+  onSubmit: (values, dispatch, ownProps) =>
+    ownProps.restRequest({
       endpoint: '/api/application',
       method: 'POST',
       payload: values,
     }, {
       fieldId: 'submit',
-      onSuccess(result) {
-        dispatch(actions.app.historyPush(`/application/${result.payload}`));
+      onSuccess: (result) => {
+        ownProps.historyPush(`/application/${result.payload}`);
       },
-      onFail(error) {
-
-      }
-    }));
-  },
+      onFail: (error) => {}
+    }),
   validate: (values, {t}) => {
     const rules = {
       from: 'required',
@@ -193,11 +190,11 @@ class ApplicationForm extends React.Component {
       t
     } = this.props;
     const {stepId} = this.state;
+    const {from, to} = getSelectedCurrencies(this.props);
     const amountFromProps = (() => {
-      if (!currenciesIsReceived) {
+      if (!currenciesIsReceived || !from || !to) {
         return undefined;
       }
-      const {from, to} = getSelectedCurrencies(this.props);
       if (from.holdType === staticData.currency.holdType.address) {
         const amountFromMax = to.reserves / from.rub;
         return {
@@ -235,10 +232,9 @@ class ApplicationForm extends React.Component {
       return undefined;
     })();
     const amountToProps = (() => {
-      if (!currenciesIsReceived) {
+      if (!currenciesIsReceived || !from || !to) {
         return undefined;
       }
-      const {from, to} = getSelectedCurrencies(this.props);
       if (to.holdType === staticData.currency.holdType.address) {
         return {
           onChange: value => {
@@ -299,23 +295,49 @@ class ApplicationForm extends React.Component {
                     name="from"
                     label="test"
                     component={SelectField}
+                    onChange={() => {
+                      this.props.change('to', null);
+                      this.props.change('amountFrom', '0');
+                      this.props.change('amountTo', '0');
+                    }}
                     options={currencies.map(item => ({
                       value: item.ticker,
                       label: item.name,
                     }))}
                     renderOptions={({props, handleOptionClick}) =>
-                      props.options.map((option, index) => (
-                        <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
-                          <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
-                          <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
-                        </CS.SelectOption>
-                      ))}
-                    renderValue={({state: selectState}) => (
-                      <CS.SelectValue>
-                        <CS.Icon name={`icon-${selectState.value.toLowerCase()}`} />
-                        <CS.SelectedText>{t(`currency:ticker.${selectState.value}`)}</CS.SelectedText>
-                      </CS.SelectValue>
-                    )}
+                      props.options.map((option, index) => {
+                        if (option.value === null) {
+                          return (
+                            <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
+                              <CS.Icon name="icon-null" />
+                              <CS.SelectText>{option.label}</CS.SelectText>
+                            </CS.SelectOption>
+                          );
+                        }
+                        return (
+                          <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
+                            <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
+                            <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
+                          </CS.SelectOption>
+                        );
+                      })}
+                    renderValue={({state: selectState}) => {
+                      console.log(selectState);
+                      if (selectState.value === null) {
+                        return (
+                          <CS.SelectValue>
+                            <CS.Icon name="icon-null" />
+                            <CS.SelectedText>{selectState.label}</CS.SelectedText>
+                          </CS.SelectValue>
+                        );
+                      }
+                      return (
+                        <CS.SelectValue>
+                          <CS.Icon name={`icon-${selectState.value.toLowerCase()}`} />
+                          <CS.SelectedText>{t(`currency:ticker.${selectState.value}`)}</CS.SelectedText>
+                        </CS.SelectValue>
+                      );
+                    }}
                   />
                 </S.Grid.Item>
                 <S.Grid.Item $xs={12}>
@@ -349,19 +371,45 @@ class ApplicationForm extends React.Component {
                       value: item.ticker,
                       label: item.name,
                     }))}
+                    onChange={() => {
+                      this.props.change('from', null);
+                      this.props.change('amountFrom', '0');
+                      this.props.change('amountTo', '0');
+                    }}
                     renderOptions={({props, handleOptionClick}) =>
-                      props.options.map((option, index) => (
-                        <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
-                          <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
-                          <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
-                        </CS.SelectOption>
-                      ))}
-                    renderValue={({state: selectState}) => (
-                      <CS.SelectValue>
-                        <CS.Icon name={`icon-${selectState.value.toLowerCase()}`} />
-                        <CS.SelectedText>{t(`currency:ticker.${selectState.value}`)}</CS.SelectedText>
-                      </CS.SelectValue>
-                    )}
+                      props.options.map((option, index) => {
+                        if (option.value === null) {
+                          return (
+                            <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
+                              <CS.Icon name="icon-null" />
+                              <CS.SelectText>{option.label}</CS.SelectText>
+                            </CS.SelectOption>
+                          );
+                        }
+                        return (
+                          <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
+                            <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
+                            <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
+                          </CS.SelectOption>
+                        );
+                      })}
+                    renderValue={({state: selectState}) => {
+                      console.log(selectState);
+                      if (selectState.value === null) {
+                        return (
+                          <CS.SelectValue>
+                            <CS.Icon name="icon-null" />
+                            <CS.SelectedText>{selectState.label}</CS.SelectedText>
+                          </CS.SelectValue>
+                        );
+                      }
+                      return (
+                        <CS.SelectValue>
+                          <CS.Icon name={`icon-${selectState.value.toLowerCase()}`} />
+                          <CS.SelectedText>{t(`currency:ticker.${selectState.value}`)}</CS.SelectedText>
+                        </CS.SelectValue>
+                      );
+                    }}
                   />
                 </S.Grid.Item>
                 <S.Grid.Item $xs={12}>
