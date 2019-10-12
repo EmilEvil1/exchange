@@ -54,18 +54,19 @@ const mapStateToProps = (state, ownProps) => {
   const stepId = Number(query.stepId) || 0;
   const formValues = getFormValues(staticData.formId)(state) || {};
   const isDisabledForm = !currenciesIsReceived;
-  const isDisabledSubmit = isDisabledForm || true; // todo
+  const isDisabledSubmit = isDisabledForm || false; // todo
   return {
     currenciesIsReceived,
     currencies,
     stepId,
     initialValues: {
-      from: query.from || 'SBER',
-      to: query.to || 'BTC',
+      from: query.from === undefined ? 'SBER' : query.from,
+      to: query.to === undefined ? 'BTC' : query.to,
       amountFrom: query.amountFrom || '0',
       amountTo: query.amountTo || '0',
       fromDocumentPayment: query.fromDocumentPayment,
       toDocumentPayment: query.toDocumentPayment,
+      name: query.name,
       email: query.email,
       phone: query.phone,
     },
@@ -81,36 +82,45 @@ const mapDispatchToProps = {
   restReset: actions.rest.reset,
 };
 
+const onSubmit = (values, dispatch, ownProps) =>
+  ownProps.restRequest({
+    endpoint: '/api/application',
+    method: 'POST',
+    payload: values,
+  }, {
+    fieldId: 'submit',
+    onSuccess: (result) => {
+      ownProps.historyPush(`/application/${result.payload}`);
+    },
+    onFail: (error) => {}
+  });
+
+const validate = (values, {t}) => {
+  const rules = {
+    amountFrom: 'required',
+    from: 'required',
+    amountTo: 'required',
+    to: 'required',
+    fromDocumentPayment: 'required',
+    toDocumentPayment: 'required',
+    name: 'required|humanName|max:50',
+    email: 'required|email|max:50',
+    phone: 'required|phone/ru',
+  };
+  const result = validator(values, rules);
+  if (values && !values.from) {
+    result.from = t('validator:required');
+  }
+  if (values && !values.to) {
+    result.to = t('validator:required');
+  }
+  return result;
+};
+
 const reduxFormConfig = {
   form: staticData.formId,
-  onSubmit: (values, dispatch) => {
-    return dispatch(actions.rest.request({
-      endpoint: '/api/application',
-      method: 'POST',
-      payload: values,
-    }, {
-      fieldId: 'submit',
-      onSuccess(result) {
-        dispatch(actions.app.historyPush(`/application/${result.payload}`));
-      },
-      onFail(error) {
-
-      }
-    }));
-  },
-  validate: (values, {t}) => {
-    const rules = {
-      from: 'required',
-      to: 'required',
-      amountFrom: 'required',
-      amountTo: 'required',
-      fromDocumentPayment: 'required',
-      toDocumentPayment: 'required',
-      email: 'required|email',
-      phone: 'required|phone/ru',
-    };
-    return validator(values, rules);
-  },
+  onSubmit,
+  validate,
 };
 
 @withRouter
@@ -146,6 +156,22 @@ class ApplicationForm extends React.Component {
         }
       });
     }
+
+    const step0IsValid = this.isValidStep(0);
+    const step1IsValid = this.isValidStep(1);
+
+    if (
+      !step0IsValid &&
+      this.state.stepId !== 0
+    ) {
+      this.setState({stepId: 0});
+    } else if (
+      step0IsValid &&
+      !step1IsValid &&
+      this.state.stepId !== 1
+    ) {
+      this.setState({stepId: 1});
+    }
   }
 
   componentWillUnmount() {
@@ -173,13 +199,32 @@ class ApplicationForm extends React.Component {
         )}
         {stepId !== 1 && (
           <>
+            <Field name="name" component="input" hidden />
             <Field name="email" component="input" hidden />
             <Field name="phone" component="input" hidden />
           </>
         )}
-        {stepId !== 2 && null}
       </>
     );
+  }
+
+  isValidStep(stepId) {
+    const {formValues} = this.props;
+    const result = validate(formValues, this.props);
+    if (stepId === 0) {
+      return !result.from &&
+        !result.to &&
+        !result.amountFrom &&
+        !result.amountTo &&
+        !result.fromDocumentPayment &&
+        !result.toDocumentPayment;
+    }
+    if (stepId === 1) {
+      return !result.name &&
+        !result.email &&
+        !result.phone;
+    }
+    return true;
   }
 
   render() {
@@ -193,11 +238,13 @@ class ApplicationForm extends React.Component {
       t
     } = this.props;
     const {stepId} = this.state;
+    const {from, to} = getSelectedCurrencies(this.props);
     const amountFromProps = (() => {
-      if (!currenciesIsReceived) {
-        return undefined;
+      if (!currenciesIsReceived || !from || !to) {
+        return {
+          disabled: true,
+        };
       }
-      const {from, to} = getSelectedCurrencies(this.props);
       if (from.holdType === staticData.currency.holdType.address) {
         const amountFromMax = to.reserves / from.rub;
         return {
@@ -232,16 +279,20 @@ class ApplicationForm extends React.Component {
           }),
         };
       }
-      return undefined;
+      return {
+        disabled: true,
+      };
     })();
     const amountToProps = (() => {
-      if (!currenciesIsReceived) {
-        return undefined;
+      if (!currenciesIsReceived || !from || !to) {
+        return {
+          disabled: true,
+        };
       }
-      const {from, to} = getSelectedCurrencies(this.props);
       if (to.holdType === staticData.currency.holdType.address) {
         return {
           onChange: value => {
+            // TODO
             // this.props.change('amountFrom', parseFloatNumber({fixed: 2})(
             //   parseFloatNumber({
             //     max: to.reserves,
@@ -271,7 +322,9 @@ class ApplicationForm extends React.Component {
           }),
         };
       }
-      return undefined;
+      return {
+        disabled: true,
+      };
     })();
     return (
       <Form onSubmit={handleSubmit}>
@@ -299,23 +352,54 @@ class ApplicationForm extends React.Component {
                     name="from"
                     label="test"
                     component={SelectField}
+                    onChange={value => {
+                      const nextFrom = currencies.find(currency => currency.ticker === value);
+                      if (nextFrom !== undefined && to !== undefined && nextFrom.holdType === to.holdType) {
+                        this.props.change('to', null);
+                      }
+                      this.props.change('amountFrom', '0');
+                      this.props.change('amountTo', '0');
+                    }}
                     options={currencies.map(item => ({
                       value: item.ticker,
                       label: item.name,
                     }))}
-                    renderOptions={({props, handleOptionClick}) =>
-                      props.options.map((option, index) => (
-                        <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
-                          <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
-                          <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
-                        </CS.SelectOption>
-                      ))}
-                    renderValue={({state: selectState}) => (
-                      <CS.SelectValue>
-                        <CS.Icon name={`icon-${selectState.value.toLowerCase()}`} />
-                        <CS.SelectedText>{t(`currency:ticker.${selectState.value}`)}</CS.SelectedText>
-                      </CS.SelectValue>
-                    )}
+                    renderOptions={({options, handleOptionClick}) =>
+                      options.map((option, index) => {
+                        if (option.value === null) {
+                          return (
+                            <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
+                              <CS.Icon name="icon-null" />
+                              <CS.SelectText>{option.label}</CS.SelectText>
+                            </CS.SelectOption>
+                          );
+                        }
+                        return (
+                          <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
+                            <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
+                            <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
+                          </CS.SelectOption>
+                        );
+                      })}
+                    renderValue={({selected}) => {
+                      if (selected === undefined) {
+                        return null;
+                      }
+                      if (selected.value === null) {
+                        return (
+                          <CS.SelectValue>
+                            <CS.Icon name="icon-null" />
+                            <CS.SelectedText>{selected.label}</CS.SelectedText>
+                          </CS.SelectValue>
+                        );
+                      }
+                      return (
+                        <CS.SelectValue>
+                          <CS.Icon name={`icon-${selected.value.toLowerCase()}`} />
+                          <CS.SelectedText>{t(`currency:ticker.${selected.value}`)}</CS.SelectedText>
+                        </CS.SelectValue>
+                      );
+                    }}
                   />
                 </S.Grid.Item>
                 <S.Grid.Item $xs={12}>
@@ -349,19 +433,50 @@ class ApplicationForm extends React.Component {
                       value: item.ticker,
                       label: item.name,
                     }))}
-                    renderOptions={({props, handleOptionClick}) =>
-                      props.options.map((option, index) => (
-                        <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
-                          <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
-                          <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
-                        </CS.SelectOption>
-                      ))}
-                    renderValue={({state: selectState}) => (
-                      <CS.SelectValue>
-                        <CS.Icon name={`icon-${selectState.value.toLowerCase()}`} />
-                        <CS.SelectedText>{t(`currency:ticker.${selectState.value}`)}</CS.SelectedText>
-                      </CS.SelectValue>
-                    )}
+                    onChange={value => {
+                      const nextTo = currencies.find(currency => currency.ticker === value);
+                      if (from !== undefined && nextTo !== undefined && from.holdType === nextTo.holdType) {
+                        this.props.change('from', null);
+                      }
+                      this.props.change('amountFrom', '0');
+                      this.props.change('amountTo', '0');
+                    }}
+                    renderOptions={({options, handleOptionClick}) =>
+                      options.map((option, index) => {
+                        if (option.value === null) {
+                          return (
+                            <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
+                              <CS.Icon name="icon-null" />
+                              <CS.SelectText>{option.label}</CS.SelectText>
+                            </CS.SelectOption>
+                          );
+                        }
+                        return (
+                          <CS.SelectOption onClick={handleOptionClick(option)} key={index}>
+                            <CS.Icon name={`icon-${option.value.toLowerCase()}`} />
+                            <CS.SelectText>{t(`currency:ticker.${option.value}`)}</CS.SelectText>
+                          </CS.SelectOption>
+                        );
+                      })}
+                    renderValue={({selected}) => {
+                      if (selected === undefined) {
+                        return null;
+                      }
+                      if (selected.value === null) {
+                        return (
+                          <CS.SelectValue>
+                            <CS.Icon name="icon-null" />
+                            <CS.SelectedText>{selected.label}</CS.SelectedText>
+                          </CS.SelectValue>
+                        );
+                      }
+                      return (
+                        <CS.SelectValue>
+                          <CS.Icon name={`icon-${selected.value.toLowerCase()}`} />
+                          <CS.SelectedText>{t(`currency:ticker.${selected.value}`)}</CS.SelectedText>
+                        </CS.SelectValue>
+                      );
+                    }}
                   />
                 </S.Grid.Item>
                 <S.Grid.Item $xs={12}>
@@ -381,7 +496,8 @@ class ApplicationForm extends React.Component {
                 type="button"
                 $variant="contained"
                 $color="yellow"
-                onClick={this.handleSetStep(1)}>
+                onClick={this.handleSetStep(1)}
+                disabled={!this.isValidStep(0)}>
                 {t('button:next')}
               </Button>
             </S.Grid.Item>
@@ -434,7 +550,8 @@ class ApplicationForm extends React.Component {
                 type="button"
                 $variant="contained"
                 $color="yellow"
-                onClick={this.handleSetStep(2)}>
+                onClick={this.handleSetStep(2)}
+                disabled={!this.isValidStep(1)}>
                 {t('button:next')}
               </Button>
             </S.Grid.Item>

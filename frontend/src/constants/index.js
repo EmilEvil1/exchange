@@ -3,11 +3,11 @@ export const DEFAULT_LANG = 'ru';
 export const PASSWORD_RULES = [
   {
     id: 'lowercase',
-    regExp: /[a-z]/,
+    regExp: /[a-zа-я]/,
   },
   {
     id: 'uppercase',
-    regExp: /[A-Z]/,
+    regExp: /[A-ZА-Я]/,
   },
   {
     id: 'number',

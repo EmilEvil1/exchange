@@ -8,7 +8,7 @@ const parseFloatNumber = payloadSettings => {
     throw new Error('maxLength must be greater than 0');
   }
   return value => {
-    let result = String(value).replace(/\D/, '');
+    let result = String(value).replace(/\D/, '').replace(/\D/, '');
     const dotIndex = String(value).split('').findIndex(symbol => symbol === '.');
 
     if (dotIndex > 0) {

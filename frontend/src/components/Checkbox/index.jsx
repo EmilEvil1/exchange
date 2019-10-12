@@ -6,7 +6,7 @@ import * as CS from './style';
 class Checkbox extends React.PureComponent {
   static propTypes = types.propTypes;
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps) {
     const nextState = {};
     if (nextProps.value !== undefined) {
       nextState.value = nextProps.value;

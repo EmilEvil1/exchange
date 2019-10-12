@@ -8,7 +8,7 @@ import types from './types';
 class Input extends PureComponent {
   static propTypes = types.propTypes;
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps) {
     const nextState = {};
     if (nextProps.value !== undefined) {
       nextState.value = nextProps.value;
@@ -47,7 +47,13 @@ class Input extends PureComponent {
     const passwordEyeIcon = type === 'password' ? 'icon-eye-lock' : 'icon-eye';
     return (
       <CS.Root>
-        <CS.Input {...inputProps} type={type} onChange={this.handleChange} $hasBeforeIcon={hasBeforeIcon} $isRenderPasswordEye={isRenderPasswordEye} />
+        <CS.Input
+          {...inputProps}
+          type={type}
+          onChange={this.props.isFormatInput ? this.props.onChange : this.handleChange}
+          $hasBeforeIcon={hasBeforeIcon}
+          $isRenderPasswordEye={isRenderPasswordEye}
+        />
         {hasBeforeIcon && <CS.Icon name={beforeIcon} $isInvalid={inputProps.$isInvalid} $beforeIcon />}
         {label !== undefined && (
           <CS.Label $hasBeforeIcon={hasBeforeIcon}>
@@ -67,7 +73,7 @@ export default Input;
 export const InputField = formField(Input, {isEnabledLabel: false});
 
 export const FormatInput = ({numberFormat, numberMask, ...props}) => (
-  <NumberFormat {...props} format={numberFormat} mask={numberMask} customInput={Input} />
+  <NumberFormat {...props} format={numberFormat} mask={numberMask} customInput={Input} isFormatInput />
 );
 
-export const FormatInputField = formField(FormatInput);
+export const FormatInputField = formField(FormatInput, {isEnabledLabel: false});

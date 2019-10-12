@@ -10,22 +10,35 @@ class Dropdown extends PureComponent {
 
   static defaultProps = types.defaultProps;
 
+  static getDerivedStateFromProps(nextProps) {
+    const nextState = {};
+    if (nextProps.isOpen !== undefined) {
+      nextState.isOpen = nextProps.isOpen;
+    }
+    return nextState;
+  }
+
   className = {
     root: 'dropdown',
-    root$hidden: 'dropdown_hidden',
+    root_hidden: 'dropdown_hidden',
+  };
+
+  state = {
+    isOpen: false,
   };
 
   constructor(props) {
     super(props);
     this.dropdown = document.createElement('div');
-    this.dropdown.className = `${this.className.root} ${this.className.root$hidden}`;
+    this.dropdown.className = `${this.className.root} ${this.className.root_hidden}`;
+    this.getPosition = this.getPosition.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('resize', this.getPosition);
     window.addEventListener('scroll', this.getPosition);
 
-    if (this.props.closeAction.externalClick) {
+    if (this.props.closeAction.documentClick) {
       window.addEventListener('click', this.handleDocumentClick);
     }
   }
@@ -36,9 +49,30 @@ class Dropdown extends PureComponent {
 
     this.handleClose({removeAfter: 0});
 
-    if (this.props.closeAction.externalClick) {
+    if (this.props.closeAction.documentClick) {
       window.removeEventListener('click', this.handleDocumentClick);
     }
+  }
+
+  getPosition() {
+    const {
+      anchorRef: {current: anchorRef},
+      width,
+      maxHeight,
+    } = this.props;
+
+    if (!anchorRef) {
+      return;
+    }
+
+    const rect = anchorRef.getBoundingClientRect();
+
+    this.dropdown.style = `
+      top: ${rect.y + rect.height}px;
+      left: ${rect.x}px;
+      ${width === 'auto' ? `width: ${rect.width}px;` : 0}
+      ${maxHeight !== undefined ? `max-height: ${maxHeight};` : ''}
+    `.replace(/\s/g, '');
   }
 
   handleOpen = ({showAfter}) => {
@@ -53,7 +87,7 @@ class Dropdown extends PureComponent {
 
   handleClose = ({removeAfter}) => {
     if (this.dropdown.closest('body')) {
-      this.dropdown.className = `${this.className.root} ${this.className.root$hidden}`;
+      this.dropdown.className = `${this.className.root} ${this.className.root_hidden}`;
 
       if (removeAfter === 0) {
         this.dropdown.removeAttribute('style');
@@ -75,44 +109,29 @@ class Dropdown extends PureComponent {
     }
 
     if (
-        e.target === this.dropdown ||
-        domNodeIsChild(this.dropdown, e.target) ||
-        e.target === anchorRef.current ||
-        domNodeIsChild(anchorRef.current, e.target)
+      e.target === this.dropdown ||
+      domNodeIsChild(this.dropdown, e.target) ||
+      e.target === anchorRef.current ||
+      domNodeIsChild(anchorRef.current, e.target)
     ) {
       return null;
     }
 
-    if (this.props.onHide !== undefined) {
+    if (this.props.onHide !== undefined && this.props.isOpen !== undefined) {
       return this.props.onHide();
     }
 
-    return null;
-  };
-
-  getPosition = () => {
-    const {
-      anchorRef: {current: anchorRef},
-      width,
-      maxHeight,
-    } = this.props;
-
-    if (!anchorRef) {
-      return;
-    }
-
-    const rect = anchorRef.getBoundingClientRect();
-
-    this.dropdown.style = `
-      top: ${rect.y + rect.height}px;
-      left: ${rect.x}px;
-      ${width === 'auto' ? `width: ${rect.width}px;` : 0}
-      ${maxHeight !== undefined ? `max-height: ${maxHeight};` : ''}
-    `.replace(/\s/g, '');
+    return this.setState({isOpen: false}, () => {
+      if (this.props.onHide === undefined) {
+        return null;
+      }
+      return this.props.onHide();
+    });
   };
 
   render() {
-    const {className, isOpen, onMouseEnter, onMouseLeave, children} = this.props;
+    const {className, onMouseEnter, onMouseLeave, children} = this.props;
+    const {isOpen} = this.state;
 
     if (isOpen) {
       this.handleOpen({showAfter: 200});
