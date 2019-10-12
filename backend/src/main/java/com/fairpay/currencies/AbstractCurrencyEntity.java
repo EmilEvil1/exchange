@@ -20,4 +20,7 @@ public class AbstractCurrencyEntity {
   private int priority;
 
   private BigDecimal reserves;
+
+  @Column(name = "payment_document")
+  private String paymentDocument;
 }
