@@ -3,13 +3,15 @@ import set from 'lodash/set';
 import resources from 'src/i18n/resources';
 
 validatorjs.setAttributeFormatter(() => '');
+validatorjs.register('humanName', v => /^[А-Яа-яa-zA-Z ]*$/.exec(v) &&
+  !/ $/.exec(v) &&
+  !/^ /.exec(v) && !/^ $/.exec(v));
 validatorjs.register('name', v => {
   if (/ /.exec(v)) {
     return false;
   }
   return /^[А-Яа-яёЁa-zA-Z0-9\s]*$/.exec(v);
 });
-validatorjs.register('humanName', v => /^[А-Яа-яёЁa-zA-Z_-]*$/.exec(v));
 validatorjs.register('login', v => {
   if (/ /.exec(v)) {
     return false;

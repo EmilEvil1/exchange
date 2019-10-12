@@ -15,7 +15,11 @@ class Select extends React.PureComponent {
   static getDerivedStateFromProps(nextProps) {
     const nextState = {};
     if (nextProps.value !== undefined) {
-      nextState.value = nextProps.value;
+      if (nextProps.value === '') {
+        nextState.value = null;
+      } else {
+        nextState.value = nextProps.value;
+      }
     }
     return nextState;
   }
@@ -33,6 +37,12 @@ class Select extends React.PureComponent {
     const {options, t} = this.props;
     return [{label: t('Select:notSelected'), value: null}, ...options];
   };
+
+  getSelected() {
+    const {value} = this.state;
+    const selected = this.getOptions().find(option => option.value === value);
+    return selected;
+  }
 
   setValue = value => {
     if (value === this.state.value) {
@@ -54,7 +64,6 @@ class Select extends React.PureComponent {
     if (hideActions.selectOnChange) {
       this.handleHideOptions();
     }
-    console.log('test-111', option);
     return this.setValue(option.value);
   };
 
@@ -68,7 +77,9 @@ class Select extends React.PureComponent {
         <CS.Value>
           {this.props.renderValue({
             props: this.props,
-            state: this.state
+            state: this.state,
+            options: this.getOptions(),
+            selected: this.getSelected(),
           })}
         </CS.Value>
       );
@@ -91,8 +102,10 @@ class Select extends React.PureComponent {
           onHide={this.handleHideOptions}
           hideActions={hideActions}>
           {this.props.renderOptions({
-            props: {...this.props, options: this.getOptions()},
+            props: this.props,
             state: this.state,
+            options: this.getOptions(),
+            selected: this.getSelected(),
             handleOptionClick: this.handleOptionClick
           })}
         </CS.Options>
@@ -116,7 +129,7 @@ class Select extends React.PureComponent {
   }
 
   render() {
-    const {isOpen} = this.state;
+    const {value, isOpen} = this.state;
     return (
       <>
         <CS.Root ref={this.rootRef} $isOpen={isOpen}>

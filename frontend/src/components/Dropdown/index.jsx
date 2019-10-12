@@ -102,14 +102,11 @@ class Dropdown extends PureComponent {
   };
 
   handleDocumentClick = e => {
-    console.log('test-1');
     const {anchorRef, isOpen} = this.props;
 
     if (!isOpen) {
       return null;
     }
-
-    console.log('test-2');
 
     if (
       e.target === this.dropdown ||
@@ -120,13 +117,9 @@ class Dropdown extends PureComponent {
       return null;
     }
 
-    console.log('test-3');
-
     if (this.props.onHide !== undefined && this.props.isOpen !== undefined) {
       return this.props.onHide();
     }
-
-    console.log('test-4');
 
     return this.setState({isOpen: false}, () => {
       if (this.props.onHide === undefined) {
