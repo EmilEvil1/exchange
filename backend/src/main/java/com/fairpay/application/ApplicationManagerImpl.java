@@ -5,8 +5,6 @@ import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.currencies.coin.dao.CoinDao;
 import com.fairpay.currencies.coin.model.CoinEntity;
 import com.fairpay.moderatorBot.services.interf.MessageSender;
-import com.fairpay.wallet.WalletDao;
-import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,17 +18,14 @@ public class ApplicationManagerImpl implements  ApplicationManager{
 
   private final ApplicationDao applicationDao;
   private final CoinDao coinDao;
-  private final WalletDao walletDao;
   private final ApplicationMailer applicationMailer;
   private MessageSender messageSender;
 
   public ApplicationManagerImpl(ApplicationDao applicationDao,
                                 CoinDao coinDao,
-                                WalletDao walletDao,
                                 ApplicationMailer applicationMailer) {
     this.applicationDao = applicationDao;
     this.coinDao = coinDao;
-    this.walletDao = walletDao;
     this.applicationMailer = applicationMailer;
   }
 
@@ -56,13 +51,13 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     application.setCreateDate(new Date());
     application.setStatus(ApplicationEntity.ApplicationStatus.UNPAID);
 
-    String fromCurrencyName = coinDao.findById(request.getFrom()).orElse(new CoinEntity()).getName();
-    String toCurrencyName = coinDao.findById(request.getTo()).orElse(new CoinEntity()).getName();
-    application.setFromCurrencyName(fromCurrencyName);
-    application.setToCurrencyName(toCurrencyName);
+    CoinEntity fromCurrency = coinDao.findById(request.getFrom()).get();
+    CoinEntity toCurrency = coinDao.findById(request.getTo()).get();
 
-    WalletEntity wallet = walletDao.findByTicker(request.getFrom()).orElse(new WalletEntity());
-    application.setSystemDocumentPayment(wallet.getPaymentDocument());
+    application.setFromCurrencyName(fromCurrency.getName());
+    application.setToCurrencyName(toCurrency.getName());
+    application.setFromSystemDocumentPayment(fromCurrency.getPaymentDocument());
+    application.setToSystemDocumentPayment(toCurrency.getPaymentDocument());
 
     applicationDao.save(application);
     return uuid.toString();
@@ -78,7 +73,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     responseDTO.setTo(applicationEntity.getTo());
     responseDTO.setFromDocumentPayment(applicationEntity.getFromDocumentPayment());
     responseDTO.setToDocumentPayment(applicationEntity.getToDocumentPayment());
-    responseDTO.setSystemDocumentPayment(applicationEntity.getSystemDocumentPayment());
+    responseDTO.setSystemDocumentPayment(applicationEntity.getFromSystemDocumentPayment());
     responseDTO.setCreateDate(applicationEntity.getCreateDate());
     responseDTO.setCurrentTime(new Date());
     responseDTO.setStatus(applicationEntity.getStatus());
