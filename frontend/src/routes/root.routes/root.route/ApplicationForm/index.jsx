@@ -566,8 +566,21 @@ class ApplicationForm extends React.Component {
             <S.Grid.Container $flexFlow="row wrap">
               {staticData.resultMap.map((name, index) => {
                 const value = formValues[name];
-                if (value === undefined) {
+                if (!value) {
                   return null;
+                }
+                if (['amountFrom', 'amountTo'].includes(name)) {
+                  const iconName = currenciesIsReceived ? `icon-${name === 'amountFrom' ? from.ticker.toLowerCase() : to.ticker.toLowerCase()}` : '';
+                  const ticker = currenciesIsReceived ? name === 'amountFrom' ? from.ticker : to.ticker : '';
+                  return (
+                    <S.Grid.Item $xs={12} $sm={6} key={index}>
+                      <S.Text
+                        $textSize="23px"
+                        $textWeight="500">
+                        {`${t(`ApplicationForm:resultMap.${name}`)}:`} <CS.Icon name={iconName} $result /> {value} {ticker}
+                      </S.Text>
+                    </S.Grid.Item>
+                  );
                 }
                 return (
                   <S.Grid.Item $xs={12} $sm={6} key={index}>
