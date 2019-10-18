@@ -20,7 +20,6 @@ const formField = (Component, defaultProps) => {
     };
     const id = hash({form: meta.form, name: input.name});
     const isInvalid = meta.touched && !!meta.error && (isEnabledSubmitFailed ? meta.submitFailed : true);
-    console.log(input.name, meta.touched)
     const isRenderHeader = isEnabledLabel && label !== undefined;
     const componentProps = {
       ...ownProps,
