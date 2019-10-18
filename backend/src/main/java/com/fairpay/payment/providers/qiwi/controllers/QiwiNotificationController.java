@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-@RestController("/qiwi/notification")
+@RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Log4j2
 public class QiwiNotificationController {
@@ -24,10 +24,8 @@ public class QiwiNotificationController {
     private final ApplicationEventPublisher eventPublisher;
 
 
-
-
-    @PostMapping
-        public ResponseEntity<?> getNotificationByBillStatus(@RequestBody QiwiResponse qiwiResponse, HttpServletRequest request) {
+    @PostMapping("/qiwi/notification")
+    public ResponseEntity<?> getNotificationByBillStatus(@RequestBody QiwiResponse qiwiResponse, HttpServletRequest request) {
         if(log.isDebugEnabled()) {
             log.debug("received payment confirmation", qiwiResponse);
         }

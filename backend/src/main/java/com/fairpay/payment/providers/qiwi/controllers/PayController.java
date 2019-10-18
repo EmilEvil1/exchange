@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URISyntaxException;
 
-@RestController("/rest/v1/qiwi/payment")
+@RestController
 public class PayController {
     private final com.fairpay.payment.providers.qiwi.service.interf.IBillProcessingService IBillProcessingService;
 
@@ -20,7 +20,7 @@ public class PayController {
         this.IBillProcessingService = IBillProcessingService;
     }
 
-    @PutMapping
+    @PutMapping("/rest/v1/qiwi/payment")
     @JsonView(Views.Response.payUrl.class)
     public ResponseEntity<?> requestOfPayment (@RequestBody BillQiwiDTO billQiwiDTO) throws URISyntaxException {
        return IBillProcessingService.createPayUrl(billQiwiDTO);
