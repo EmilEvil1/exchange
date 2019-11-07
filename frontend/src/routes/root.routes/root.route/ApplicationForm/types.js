@@ -8,11 +8,7 @@ export default {
     currenciesIsLoading: PropTypes.bool.isRequired,
     currenciesIsFail: PropTypes.bool.isRequired,
     currenciesIsReceived: PropTypes.bool.isRequired,
-    currencies: PropTypes.shape({
-      banks: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.instanceOf(undefined)]),
-      coins: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.instanceOf(undefined)]),
-    }).isRequired,
-    allCurrencies: PropTypes.arrayOf(PropTypes.object).isRequired,
+    currencies: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     historyPush: PropTypes.func.isRequired,
     restRequest: PropTypes.func.isRequired,
     restReset: PropTypes.func.isRequired,

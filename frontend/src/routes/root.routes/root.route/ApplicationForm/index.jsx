@@ -40,20 +40,16 @@ const staticData = {
 };
 
 const getSelectedCurrencies = props => {
-  const {formValues, allCurrencies} = props;
+  const {formValues, currencies} = props;
   return {
-    from: allCurrencies.find(item => item.ticker === formValues.from),
-    to: allCurrencies.find(item => item.ticker === formValues.to)
+    from: currencies.find(item => item.ticker === formValues.from),
+    to: currencies.find(item => item.ticker === formValues.to)
   };
 }
 
 const mapStateToProps = (state, ownProps) => {
   const currenciesIsReceived = restModel.utils.restIsReceived('currencies')(state);
-  const currencies = restModel.utils.restContent('currencies', {})(state);
-  const allCurrencies = [
-    ...(Array.isArray(currencies.coins) ? currencies.coins : []),
-    ...(Array.isArray(currencies.banks) ? currencies.banks : []),
-  ];
+  const currencies = restModel.utils.restContent('currencies', [])(state);
   const query = parseQueryString(ownProps.location.search);
   const stepId = Number(query.stepId) || 0;
   const formValues = getFormValues(staticData.formId)(state) || {};
@@ -62,7 +58,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currenciesIsReceived,
     currencies,
-    allCurrencies,
     stepId,
     initialValues: {
       from: query.from === undefined ? 'SBER' : query.from,
@@ -235,7 +230,7 @@ class ApplicationForm extends React.Component {
   render() {
     const {
       currenciesIsReceived,
-      allCurrencies,
+      currencies,
       formValues,
       isDisabledForm,
       isDisabledSubmit,
@@ -358,14 +353,14 @@ class ApplicationForm extends React.Component {
                     label="test"
                     component={SelectField}
                     onChange={value => {
-                      const nextFrom = allCurrencies.find(currency => currency.ticker === value);
+                      const nextFrom = currencies.find(currency => currency.ticker === value);
                       if (nextFrom !== undefined && to !== undefined && nextFrom.holdType === to.holdType) {
                         this.props.change('to', null);
                       }
                       this.props.change('amountFrom', '0');
                       this.props.change('amountTo', '0');
                     }}
-                    options={allCurrencies.map(item => ({
+                    options={currencies.map(item => ({
                       value: item.ticker,
                       label: item.name,
                     }))}
@@ -434,12 +429,12 @@ class ApplicationForm extends React.Component {
                     name="to"
                     label="test"
                     component={SelectField}
-                    options={allCurrencies.map(item => ({
+                    options={currencies.map(item => ({
                       value: item.ticker,
                       label: item.name,
                     }))}
                     onChange={value => {
-                      const nextTo = allCurrencies.find(currency => currency.ticker === value);
+                      const nextTo = currencies.find(currency => currency.ticker === value);
                       if (from !== undefined && nextTo !== undefined && from.holdType === nextTo.holdType) {
                         this.props.change('from', null);
                       }

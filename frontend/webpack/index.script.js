@@ -31,7 +31,7 @@ fsx.writeFileSync(routing.paths.public.index, `
       <link rel="shortcut icon" href="favicon.ico">
   </head>
   <body>
-    <svg xmlns="https://www.w3.org/2000/svg" style="z-index:-99999;position:fixed;top:-99999px;left:-99999px;visibility:hidden;opacity:0;">
+    <svg xmlns="//www.w3.org/2000/svg" style="z-index:-99999;position:fixed;top:-99999px;left:-99999px;visibility:hidden;opacity:0;">
       ${eachFiles(symbolsDir,/\.svg$/,(filepath) => fsx.readFileSync(filepath, 'utf-8').replace('<svg xmlns="http://www.w3.org/2000/svg"', '<symbol').replace('</svg', '</symbol')).join('\n')}
     </svg>
     <div id="root" class="site-wrapper"></div>
