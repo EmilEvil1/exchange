@@ -2,6 +2,7 @@ import merge from 'lodash/merge';
 import Notifier from 'src/models/notifier/i18n';
 
 import AdvantageCard from 'src/components/AdvantageCard/i18n';
+import Button from 'src/components/Button/i18n';
 import Footer from 'src/components/Footer/i18n';
 import Header from 'src/components/Header/i18n';
 import ProgressCard from 'src/components/ProgressCard/i18n';
@@ -87,38 +88,6 @@ const currency = {
   },
 };
 
-const button = {
-  ru: {
-    back: 'Назад',
-    next: 'Далее',
-    submit: 'Отправить',
-    cancel: 'Отменить',
-    exit: 'Выход',
-    close: 'Закрыть',
-    collapse: 'Свернуть',
-    confirm: 'Подтвердить',
-    signIn: 'Вход',
-    signIn1: 'Войти',
-    signUp: 'Регистрация',
-    signUp1: 'Создать учетную запись',
-    forgotYouPassword: 'Забыли пароль?',
-  },
-  en: {
-    back: 'Back',
-    next: 'Next',
-    submit: 'Submit',
-    cancel: 'Cancel',
-    exit: 'Exit',
-    close: 'Close',
-    collapse: 'Collapse',
-    confirm: 'Confirm',
-    signIn: 'Sign in',
-    signUp: 'Sign up',
-    signUp1: 'Create an account',
-    forgotYouPassword: 'Forgot your password?',
-  },
-};
-
 const validator = {
   ru: {
     invalidPasswordFormat: 'Неверный формат пароля',
@@ -134,7 +103,6 @@ export default {
   ru: {
     siteInfo: merge({}, siteInfo.common, siteInfo.ru),
     currency: merge({}, currency.common, currency.ru),
-    button: button.ru,
     validator: validator.ru,
 
     // models
@@ -142,6 +110,7 @@ export default {
 
     // components
     AdvantageCard: AdvantageCard.ru,
+    Button: Button.ru,
     Footer: Footer.ru,
     Header: Header.ru,
     ProgressCard: ProgressCard.ru,
@@ -155,7 +124,6 @@ export default {
   en: {
     siteInfo: merge({}, siteInfo.common, siteInfo.en),
     currency: merge({}, currency.common, currency.en),
-    button: button.en,
     validator: validator.en,
 
     // models
@@ -163,6 +131,7 @@ export default {
 
     // components
     AdvantageCard: AdvantageCard.en,
+    Button: Button.en,
     Footer: Footer.en,
     Header: Header.en,
     ProgressCard: ProgressCard.en,

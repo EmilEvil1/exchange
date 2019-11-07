@@ -4,6 +4,7 @@ import {withTranslation} from 'react-i18next';
 import WAValidator from 'wallet-address-validator';
 import {connect} from 'react-redux';
 import {getFormValues, reduxForm, Form, Field} from 'redux-form';
+import isEmpty from 'lodash/isEmpty';
 import {
   Button,
   InputField,
@@ -45,7 +46,7 @@ const getSelectedCurrencies = props => {
     from: currencies.find(item => item.ticker === formValues.from),
     to: currencies.find(item => item.ticker === formValues.to)
   };
-}
+};
 
 const mapStateToProps = (state, ownProps) => {
   const currenciesIsReceived = restModel.utils.restIsReceived('currencies')(state);
@@ -157,20 +158,22 @@ class ApplicationForm extends React.Component {
       });
     }
 
-    const step0IsValid = this.isValidStep(0);
-    const step1IsValid = this.isValidStep(1);
+    const nextState = {};
 
     if (
-      !step0IsValid &&
-      this.state.stepId !== 0
+      !this.isValidStep(0) &&
+      this.state.stepId > 0
     ) {
-      this.setState({stepId: 0});
+      nextState.stepId = 0;
     } else if (
-      step0IsValid &&
-      !step1IsValid &&
-      this.state.stepId !== 1
+      !this.isValidStep(1) &&
+      this.state.stepId > 1
     ) {
-      this.setState({stepId: 1});
+      nextState.stepId = 1;
+    }
+
+    if (!isEmpty(nextState)) {
+      this.setState(nextState);
     }
   }
 
@@ -251,15 +254,16 @@ class ApplicationForm extends React.Component {
           onChange: value => {
             this.props.change('amountTo', parseFloatNumber({fixed: 2})(
               parseFloatNumber({
-                max: amountFromMax,
-                fixed: 10,
-              })(value) * from.rub)
-            );
+                max: to.reserves,
+                fixed: 2,
+              })(value * from.rub)
+            ));
           },
           parse: parseFloatNumber({
             max: amountFromMax,
             fixed: 10,
           }),
+          disabled: isDisabledForm,
         };
       }
       if (from.holdType === staticData.currency.holdType.cardNumber) {
@@ -268,15 +272,16 @@ class ApplicationForm extends React.Component {
           onChange: value => {
             this.props.change('amountTo', parseFloatNumber({fixed: 10})(
               parseFloatNumber({
-                max: amountFromMax,
-                fixed: 2,
-              })(value) / to.rub
+                max: to.reserves,
+                fixed: 10,
+              })(value / to.rub)
             ));
           },
           parse: parseFloatNumber({
             max: amountFromMax,
             fixed: 2,
           }),
+          disabled: isDisabledForm,
         };
       }
       return {
@@ -292,18 +297,18 @@ class ApplicationForm extends React.Component {
       if (to.holdType === staticData.currency.holdType.address) {
         return {
           onChange: value => {
-            // TODO
-            // this.props.change('amountFrom', parseFloatNumber({fixed: 2})(
-            //   parseFloatNumber({
-            //     max: to.reserves,
-            //     fixed: 10,
-            //   })(value)
-            // ));
+            this.props.change('amountFrom', parseFloatNumber({fixed: 2})(
+              parseFloatNumber({
+                max: to.reserves,
+                fixed: 10
+              })(value) * to.rub
+            ));
           },
           parse: parseFloatNumber({
             max: to.reserves,
-            fixed: 10,
+            fixed: 10
           }),
+          disabled: isDisabledForm,
         };
       }
       if (to.holdType === staticData.currency.holdType.cardNumber) {
@@ -312,14 +317,15 @@ class ApplicationForm extends React.Component {
             this.props.change('amountFrom', parseFloatNumber({fixed: 10})(
               parseFloatNumber({
                 max: to.reserves,
-                fixed: 2,
-              })(value)
+                fixed: 2
+              })(value) / from.rub
             ));
           },
           parse: parseFloatNumber({
             max: to.reserves,
             fixed: 2,
           }),
+          disabled: isDisabledForm,
         };
       }
       return {
@@ -400,6 +406,7 @@ class ApplicationForm extends React.Component {
                         </CS.SelectValue>
                       );
                     }}
+                    disabled={isDisabledForm}
                   />
                 </S.Grid.Item>
                 <S.Grid.Item $xs={12}>
@@ -408,6 +415,7 @@ class ApplicationForm extends React.Component {
                     name="fromDocumentPayment"
                     label={t('ApplicationForm:formField.fromDocumentPayment.label.address')}
                     component={InputField}
+                    disabled={isDisabledForm}
                   />
                 </S.Grid.Item>
               </S.Grid.Container>
@@ -477,6 +485,7 @@ class ApplicationForm extends React.Component {
                         </CS.SelectValue>
                       );
                     }}
+                    disabled={isDisabledForm}
                   />
                 </S.Grid.Item>
                 <S.Grid.Item $xs={12}>
@@ -485,6 +494,7 @@ class ApplicationForm extends React.Component {
                     name="toDocumentPayment"
                     label={t('ApplicationForm:formField.toDocumentPayment.label.address')}
                     component={InputField}
+                    disabled={isDisabledForm}
                   />
                 </S.Grid.Item>
               </S.Grid.Container>
@@ -497,8 +507,8 @@ class ApplicationForm extends React.Component {
                 $variant="contained"
                 $color="yellow"
                 onClick={this.handleSetStep(1)}
-                disabled={!this.isValidStep(0)}>
-                {t('button:next')}
+                disabled={isDisabledForm || !this.isValidStep(0)}>
+                {t('Button:next')}
               </Button>
             </S.Grid.Item>
           </S.Grid.Container>
@@ -515,6 +525,7 @@ class ApplicationForm extends React.Component {
                 name="name"
                 label={t('ApplicationForm:formField.name.label')}
                 component={InputField}
+                disabled={isDisabledForm}
               />
             </S.Grid.Item>
             <S.Grid.Item $xs={12} $sm={6}>
@@ -523,6 +534,7 @@ class ApplicationForm extends React.Component {
                 name="email"
                 label={t('ApplicationForm:formField.email.label')}
                 component={InputField}
+                disabled={isDisabledForm}
               />
             </S.Grid.Item>
             <S.Grid.Item $xs={12} $sm={6}>
@@ -533,6 +545,7 @@ class ApplicationForm extends React.Component {
                 component={FormatInputField}
                 numberFormat="+7 (###) ###-####"
                 numberMask="_"
+                disabled={isDisabledForm}
               />
             </S.Grid.Item>
           </S.Grid.Container>
@@ -541,8 +554,9 @@ class ApplicationForm extends React.Component {
               <Button
                 type="button"
                 $variant="contained"
-                onClick={this.handleSetStep(0)}>
-                {t('button:back')}
+                onClick={this.handleSetStep(0)}
+                disabled={isDisabledForm}>
+                {t('Button:back')}
               </Button>
             </S.Grid.Item>
             <S.Grid.Item>
@@ -551,8 +565,8 @@ class ApplicationForm extends React.Component {
                 $variant="contained"
                 $color="yellow"
                 onClick={this.handleSetStep(2)}
-                disabled={!this.isValidStep(1)}>
-                {t('button:next')}
+                disabled={isDisabledForm || !this.isValidStep(1)}>
+                {t('Button:next')}
               </Button>
             </S.Grid.Item>
           </S.Grid.Container>
@@ -570,8 +584,8 @@ class ApplicationForm extends React.Component {
                   return null;
                 }
                 if (['amountFrom', 'amountTo'].includes(name)) {
-                  const iconName = currenciesIsReceived ? `icon-${name === 'amountFrom' ? from.ticker.toLowerCase() : to.ticker.toLowerCase()}` : '';
-                  const ticker = currenciesIsReceived ? name === 'amountFrom' ? from.ticker : to.ticker : '';
+                  const iconName = currenciesIsReceived && !!from && !!to ? `icon-${name === 'amountFrom' ? from.ticker.toLowerCase() : to.ticker.toLowerCase()}` : '';
+                  const ticker = currenciesIsReceived && !!from && !!to ? name === 'amountFrom' ? from.ticker : to.ticker : '';
                   return (
                     <S.Grid.Item $xs={12} $sm={6} key={index}>
                       <S.Text
@@ -600,8 +614,9 @@ class ApplicationForm extends React.Component {
               <Button
                 type="button"
                 $variant="contained"
-                onClick={this.handleSetStep(1)}>
-                {t('button:back')}
+                onClick={this.handleSetStep(1)}
+                disabled={isDisabledForm}>
+                {t('Button:back')}
               </Button>
             </S.Grid.Item>
             <S.Grid.Item>
@@ -610,7 +625,7 @@ class ApplicationForm extends React.Component {
                 $variant="contained"
                 $color="yellow"
                 disabled={isDisabledSubmit}>
-                {t('button:confirm')}
+                {t('Button:confirm')}
               </Button>
             </S.Grid.Item>
           </S.Grid.Container>

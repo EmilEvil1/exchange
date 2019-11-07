@@ -50,7 +50,7 @@ class NotifierItem extends Component {
           <S.Header>
             {isRenderTitle && <S.Title>{title || t(`notifier:type.${type}`)}</S.Title>}
             {/*<S.Button type="button" onClick={this.handleHideNotification}>*/}
-            {/*  {t('button:close')}*/}
+            {/*  {t('Button:close')}*/}
             {/*</S.Button>*/}
           </S.Header>
           <S.Message>{message}</S.Message>
