@@ -51,16 +51,8 @@ const mapStateToProps = (state, ownProps) => {
   const currenciesIsReceived = restModel.utils.restIsReceived('currencies')(state);
   const currencies = restModel.utils.restContent('currencies', {})(state);
   const allCurrencies = [
-    ...(Array.isArray(currencies.coins) ?
-      currencies.coins.map(item => ({
-        ...item,
-        holdType: staticData.currency.holdType.address,
-      })) : []),
-    ...(Array.isArray(currencies.banks) ?
-      currencies.banks.map(item => ({
-        ...item,
-        holdType: staticData.currency.holdType.cardNumber,
-      })) : []),
+    ...(Array.isArray(currencies.coins) ? currencies.coins : []),
+    ...(Array.isArray(currencies.banks) ? currencies.banks : []),
   ];
   const query = parseQueryString(ownProps.location.search);
   const stepId = Number(query.stepId) || 0;
@@ -579,7 +571,7 @@ class ApplicationForm extends React.Component {
             <S.Grid.Container $flexFlow="row wrap">
               {staticData.resultMap.map((name, index) => {
                 const value = formValues[name];
-                if (!value || !from || !to) {
+                if (!value) {
                   return null;
                 }
                 if (['amountFrom', 'amountTo'].includes(name)) {
