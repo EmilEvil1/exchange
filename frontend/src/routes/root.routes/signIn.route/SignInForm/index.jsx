@@ -87,7 +87,7 @@ class SignInForm extends React.PureComponent {
               $color="yellow"
               $fullWidth
               disabled={isDisabledSubmit}>
-              {t('button:signIn1')}
+              {t('Button:signIn1')}
             </Button>
           </S.Grid.Item>
           <S.Grid.Item>
@@ -98,7 +98,7 @@ class SignInForm extends React.PureComponent {
               $variant="contained"
               $color="blackOnBlack"
               $fullWidth>
-              {t('button:signUp')}
+              {t('Button:signUp')}
             </Button>
           </S.Grid.Item>
         </S.Grid.Container>
@@ -113,7 +113,7 @@ class SignInForm extends React.PureComponent {
               $textDecoration="underline"
               $textSize="15px"
               $color="gray">
-              {t('button:forgotYouPassword')}
+              {t('Button:forgotYouPassword')}
             </Link>
           </S.Grid.Item>
         </S.Grid.Container>

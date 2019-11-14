@@ -157,7 +157,7 @@ class SignUpForm extends React.PureComponent {
               $color="yellow"
               $fullWidth
               disabled={isDisabledSubmit}>
-              {t('button:signUp1')}
+              {t('Button:signUp1')}
             </Button>
           </S.Grid.Item>
         </S.Grid.Container>

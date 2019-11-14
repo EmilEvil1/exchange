@@ -8,6 +8,8 @@ public interface ApplicationManager {
 
   ApplicationResponseDTO fetchApplication(String applicationId);
 
+  void processPayment(String applicationId);
+
   String notifyModerator(String applicationId);
 
   void goToNextStatus(String applicationId);
