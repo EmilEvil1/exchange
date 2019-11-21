@@ -38,8 +38,6 @@ create table if not exists currencies
 
 INSERT INTO currencies (code, rub, uah, priority, name, reserves, payment_document, CR_TYPE) VALUES ("BTC", 511665.68456210656, 211298.22603978924, 1, "Bitcoin", 234.45, "3GoZBF4zVGZyK1GD8i8Uga1eQ49BYWt5i9", "CN");
 INSERT INTO currencies (code, rub, uah, priority, name, reserves, payment_document, CR_TYPE) VALUES ("ETH", 16414.782178023637, 6636.385305424678, 2, "Ethereum", 453.345, "3GoZBF4zVGZyK1GD8i8Uga1eQ49BYWt5i9", "CN");
-INSERT INTO currencies (code, rub, uah, priority, name, reserves, payment_document, CR_TYPE) VALUES ("ETH", 16414.782178023637, 6636.385305424678, 2, "Ethereum", 453.345, "3GoZBF4zVGZyK1GD8i8Uga1eQ49BYWt5i9", "CN");
-INSERT INTO currencies (code, rub, uah, priority, name, reserves, payment_document, CR_TYPE) VALUES ("ETH", 16414.782178023637, 6636.385305424678, 2, "Ethereum", 453.345, "3GoZBF4zVGZyK1GD8i8Uga1eQ49BYWt5i9", "CN");
 INSERT INTO currencies (code, rub, uah, priority, name, reserves, payment_document, CR_TYPE) VALUES ("XRP", 25.31023206157998, 10.13758981, 3, "Ripple", 43.456, "3GoZBF4zVGZyK1GD8i8Uga1eQ49BYWt5i9", "CN");
 INSERT INTO currencies (code, rub, uah, priority, name, reserves, payment_document, CR_TYPE) VALUES ("EOS", 404.8853725124554, 167.63386258, 7, "EOS", 654.356, "3GoZBF4zVGZyK1GD8i8Uga1eQ49BYWt5i9", "CN");
 INSERT INTO currencies (code, rub, uah, priority, name, reserves, payment_document, CR_TYPE) VALUES ("LTC", 5871.685987116676, 2667.763838, 5, "Litecoin", 564.356, "3GoZBF4zVGZyK1GD8i8Uga1eQ49BYWt5i9", "CN");

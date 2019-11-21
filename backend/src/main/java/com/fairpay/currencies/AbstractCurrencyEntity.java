@@ -23,4 +23,10 @@ public class AbstractCurrencyEntity {
 
   @Column(name = "payment_document")
   private String paymentDocument;
+
+  @Column(name = "provider_code")
+  private String providerCode;
+
+  @Column(name = "active")
+  private Boolean isActive;
 }

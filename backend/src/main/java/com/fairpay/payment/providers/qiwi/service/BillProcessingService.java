@@ -47,7 +47,7 @@ public class BillProcessingService implements IBillProcessingService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> createPayUrl(BillQiwiDTO paymentRequest) throws URISyntaxException {
+    public String createPayUrl(BillQiwiDTO paymentRequest) throws URISyntaxException {
         if(log.isDebugEnabled()) {
             log.debug("creating pay", paymentRequest);
         }
@@ -55,9 +55,8 @@ public class BillProcessingService implements IBillProcessingService {
         CreateBillInfo createBillInfo;
         createBillInfo = utils.buildBillInfo(paymentRequest);
         response = client.createBill(createBillInfo);
-        paymentRequest.setPayUrl(response.getPayUrl());
         IBillService.createBillByBillResponse(response, paymentRequest);
-        return ResponseEntity.ok(paymentRequest);
+        return response.getPayUrl();
     }
 
     @Override

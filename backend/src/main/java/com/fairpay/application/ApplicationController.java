@@ -4,6 +4,7 @@ import com.fairpay.application.api.ApplicationPayRequestDTO;
 import com.fairpay.application.api.ApplicationRequestDTO;
 import com.fairpay.application.api.ApplicationResponseDTO;
 import com.fairpay.payment.PaymentManager;
+import com.fairpay.payment.vo.PaymentResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +31,7 @@ public class ApplicationController {
   }
 
   @PostMapping("/api/pay")
-  public String payForApplication(@RequestBody ApplicationPayRequestDTO request) {
-    paymentManager.processUserPayment(request.getApplicationId());
-    return "ok";
+  public PaymentResponseDTO payForApplication(@RequestBody ApplicationPayRequestDTO request) {
+    return paymentManager.processUserPayment(request.getApplicationId());
   }
 }

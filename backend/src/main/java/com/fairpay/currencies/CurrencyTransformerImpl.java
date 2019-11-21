@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CurrencyTransformerImpl {
@@ -18,13 +19,11 @@ public class CurrencyTransformerImpl {
     List<CoinDTO> coinsDTO = new ArrayList<>();
     List<BankDTO> banksDTO = new ArrayList<>();
 
-    for (CoinEntity coin : coinList) {
-      coinsDTO.add(transformCoin(coin));
-    }
+    coinsDTO = coinList.stream().filter(CoinEntity::getIsActive)
+      .map(coin -> transformCoin(coin)).collect(Collectors.toList());
 
-    for (BankEntity bank : bankList) {
-      banksDTO.add(createBankDTO(bank));
-    }
+    banksDTO = bankList.stream().filter(BankEntity::getIsActive)
+      .map(bank -> createBankDTO(bank)).collect(Collectors.toList());
 
     CurrenciesDTO currenciesDTO = new CurrenciesDTO();
     currenciesDTO.setBanks(banksDTO);
