@@ -1,7 +1,8 @@
 export default {
   en: {
     validator: {
-      invalidWalletAddress: 'Invalid wallet address {{ticker}}',
+      invalidWalletAddress: 'Invalid wallet address {{ticker}}.',
+      required: 'The field is required.',
     }
   },
   ru: {
@@ -79,7 +80,8 @@ export default {
       phone: 'Ваш телефон',
     },
     validator: {
-      invalidWalletAddress: 'Неверный адрес кошелька {{ticker}}',
+      invalidWalletAddress: 'Неверный адрес кошелька {{ticker}}.',
+      required: 'Поле обязательно для заполнения.',
     },
   },
 };

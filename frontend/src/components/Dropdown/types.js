@@ -1,5 +1,9 @@
 import PropTypes from 'prop-types';
 
+export const hideActions = {
+  documentClick: PropTypes.bool,
+};
+
 export default {
   propTypes: {
     className: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(undefined)]),
@@ -12,11 +16,12 @@ export default {
     onMouseEnter: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(undefined)]),
     onMouseLeave: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(undefined)]),
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.instanceOf(undefined)]),
+    closeAction: PropTypes.shape(hideActions),
   },
   defaultProps: {
     isOpen: false,
     closeAction: {
-      externalClick: true,
+      documentClick: true,
     },
     width: 'auto',
   },

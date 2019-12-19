@@ -6,26 +6,41 @@ import * as CS from './style';
 
 const formField = (Component, defaultProps) => {
   const NextComponent = React.memo((props) => {
-    const {input, meta, isEnabledShowError, ...ownProps} = {...props, ...defaultProps};
-
+    const {
+      input,
+      meta,
+      isEnabledLabel,
+      isEnabledShowError,
+      isEnabledSubmitFailed,
+      label,
+      ...ownProps
+    } = {
+      ...props,
+      ...defaultProps,
+    };
     const id = hash({form: meta.form, name: input.name});
-
-    const isInvalid = meta.touched && !!meta.error;
-
+    const isInvalid = meta.touched && !!meta.error && (isEnabledSubmitFailed ? meta.submitFailed : true);
+    console.log(input.name, meta.touched)
+    const isRenderHeader = isEnabledLabel && label !== undefined;
     const componentProps = {
       ...ownProps,
       ...input,
       id,
+      label: isEnabledLabel ? undefined : label,
       $isInvalid: isInvalid,
     };
-
     return (
-        <S.FormItem>
-          <Component {...componentProps} />
-          {isEnabledShowError && (
-            <CS.Error $isInvalid={isInvalid}>{meta.error}</CS.Error>
-          )}
-        </S.FormItem>
+      <S.FormItem>
+        {isRenderHeader && (
+          <CS.Header>
+            {label !== undefined && <CS.Label htmlFor={id}>{label}</CS.Label>}
+          </CS.Header>
+        )}
+        <Component {...componentProps} />
+        {isEnabledShowError && (
+          <CS.Error $isInvalid={isInvalid}>{meta.error}</CS.Error>
+        )}
+      </S.FormItem>
     );
   });
 

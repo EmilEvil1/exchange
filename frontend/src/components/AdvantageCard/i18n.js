@@ -1,5 +1,3 @@
-import {AdvantageCard} from '../index';
-
 export default {
   ru: {
     first: {
@@ -9,7 +7,7 @@ export default {
     },
     second: {
       iconName: 'icon-growth-chart',
-      value: '5488+7672+25$',
+      value: '$25000',
       text: 'СУММАРНЫЙ ОБЪЕМ СДЕЛОК С FAIRPAY',
     },
     third: {

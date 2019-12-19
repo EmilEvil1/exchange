@@ -70,16 +70,16 @@ const restModel = () => {
   const takeLatestRequest = (() => {
     const tasks = {};
     return (pattern, saga, ...args) =>
-        fork(function*() {
-          while (true) {
-            const action = yield take(pattern);
-            const {fieldId} = action.meta;
-            if (tasks[fieldId]) {
-              yield cancel(tasks[fieldId]);
-            }
-            tasks[fieldId] = yield fork(saga, ...args, action);
+      fork(function*() {
+        while (true) {
+          const action = yield take(pattern);
+          const {fieldId} = action.meta;
+          if (tasks[fieldId]) {
+            yield cancel(tasks[fieldId]);
           }
-        });
+          tasks[fieldId] = yield fork(saga, ...args, action);
+        }
+      });
   })();
 
   const sagas = {

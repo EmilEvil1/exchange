@@ -2,11 +2,9 @@ package com.fairpay.application;
 
 import com.fairpay.application.api.ApplicationRequestDTO;
 import com.fairpay.application.api.ApplicationResponseDTO;
-import com.fairpay.currency.dao.CurrencyDao;
-import com.fairpay.currency.model.CurrencyEntity;
+import com.fairpay.currencies.coin.dao.CoinDao;
+import com.fairpay.currencies.coin.model.CoinEntity;
 import com.fairpay.moderatorBot.services.interf.MessageSender;
-import com.fairpay.wallet.WalletDao;
-import com.fairpay.wallet.WalletEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,18 +17,15 @@ import java.util.UUID;
 public class ApplicationManagerImpl implements  ApplicationManager{
 
   private final ApplicationDao applicationDao;
-  private final CurrencyDao currencyDao;
-  private final WalletDao walletDao;
+  private final CoinDao coinDao;
   private final ApplicationMailer applicationMailer;
   private MessageSender messageSender;
 
   public ApplicationManagerImpl(ApplicationDao applicationDao,
-                                CurrencyDao currencyDao,
-                                WalletDao walletDao,
+                                CoinDao coinDao,
                                 ApplicationMailer applicationMailer) {
     this.applicationDao = applicationDao;
-    this.currencyDao = currencyDao;
-    this.walletDao = walletDao;
+    this.coinDao = coinDao;
     this.applicationMailer = applicationMailer;
   }
 
@@ -56,13 +51,13 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     application.setCreateDate(new Date());
     application.setStatus(ApplicationEntity.ApplicationStatus.UNPAID);
 
-    String fromCurrencyName = currencyDao.findById(request.getFrom()).orElse(new CurrencyEntity()).getName();
-    String toCurrencyName = currencyDao.findById(request.getTo()).orElse(new CurrencyEntity()).getName();
-    application.setFromCurrencyName(fromCurrencyName);
-    application.setToCurrencyName(toCurrencyName);
+    CoinEntity fromCurrency = coinDao.findById(request.getFrom()).get();
+    CoinEntity toCurrency = coinDao.findById(request.getTo()).get();
 
-    WalletEntity wallet = walletDao.findByTicker(request.getFrom()).orElse(new WalletEntity());
-    application.setSystemDocumentPayment(wallet.getPaymentDocument());
+    application.setFromCurrencyName(fromCurrency.getName());
+    application.setToCurrencyName(toCurrency.getName());
+    application.setFromSystemDocumentPayment(fromCurrency.getPaymentDocument());
+    application.setToSystemDocumentPayment(toCurrency.getPaymentDocument());
 
     applicationDao.save(application);
     return uuid.toString();
@@ -76,9 +71,9 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     responseDTO.setAmountTo(applicationEntity.getAmountTo());
     responseDTO.setFrom(applicationEntity.getFrom());
     responseDTO.setTo(applicationEntity.getTo());
-    responseDTO.setFromName(applicationEntity.getFromCurrencyName());
-    responseDTO.setToName(applicationEntity.getToCurrencyName());
-    responseDTO.setDocumentToPayment(applicationEntity.getSystemDocumentPayment());
+    responseDTO.setFromDocumentPayment(applicationEntity.getFromDocumentPayment());
+    responseDTO.setToDocumentPayment(applicationEntity.getToDocumentPayment());
+    responseDTO.setSystemDocumentPayment(applicationEntity.getFromSystemDocumentPayment());
     responseDTO.setCreateDate(applicationEntity.getCreateDate());
     responseDTO.setCurrentTime(new Date());
     responseDTO.setStatus(applicationEntity.getStatus());
@@ -99,6 +94,11 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   }
 
   @Override
+  public void processPayment(String applicationId) {
+
+  }
+
+  @Override
   public void goToNextStatus(String applicationId) {
     ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
     ApplicationEntity.ApplicationStatus status = getNextStatus(application.getStatus());
@@ -116,8 +116,8 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   }
 
   private BigDecimal calculateToAmount(String fromTicker, String toTicker, BigDecimal fromAmout) {
-    CurrencyEntity fromCurrency = currencyDao.findByTicker(fromTicker).orElse(new CurrencyEntity());
-    CurrencyEntity toCurrency = currencyDao.findByTicker(toTicker).orElse(new CurrencyEntity());
+    CoinEntity fromCurrency = coinDao.findByCode(fromTicker).orElse(new CoinEntity());
+    CoinEntity toCurrency = coinDao.findByCode(toTicker).orElse(new CoinEntity());
     return fromCurrency.getRub().divide(toCurrency.getRub(), 10, RoundingMode.HALF_UP).multiply(fromAmout);
   }
 }

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {colors, Grid} from 'src/styles';
 import BaseIcon from '../Icon';
+import BaseButton from '../Button';
 
 export const Root = styled.header`
   display: flex;

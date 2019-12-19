@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 
 export default {
   propTypes: {
+    isEnabledLabel: PropTypes.bool,
     isEnabledShowError: PropTypes.bool,
+    isEnabledSubmitFailed: PropTypes.bool,
     input: PropTypes.shape({
       name: PropTypes.string.isRequired,
     }).isRequired,
@@ -13,6 +15,8 @@ export default {
     }).isRequired,
   },
   defaultProps: {
+    isEnabledLabel: true,
     isEnabledShowError: true,
+    isEnabledSubmitFailed: false,
   },
 };

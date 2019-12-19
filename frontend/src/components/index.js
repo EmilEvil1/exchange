@@ -1,5 +1,6 @@
 export AdvantageCard from './AdvantageCard';
 export Button from './Button';
+export Checkbox, {CheckboxField} from './Checkbox';
 export Dropdown from './Dropdown';
 export Footer from './Footer';
 export FooterLogo from './FooterLogo';
@@ -17,4 +18,3 @@ export ProgressCard from './ProgressCard';
 export Pulse from './Pulse';
 export Select, {SelectField} from './Select';
 export Step from './Step';
-export SubHeader from './SubHeader';

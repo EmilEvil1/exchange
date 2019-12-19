@@ -8,9 +8,9 @@ class Icon extends React.PureComponent {
   static defaultProps = types.defaultProps;
 
   render() {
-    const {className, name} = this.props;
+    const {className, name, ...ownProps} = this.props;
     return (
-      <CS.Root className={className} name={name}>
+      <CS.Root className={className} {...ownProps}>
         <use xlinkHref={`#${name}`} />
       </CS.Root>
     );

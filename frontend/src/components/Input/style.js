@@ -1,8 +1,29 @@
 import styled, {css} from 'styled-components';
 import {mixins, colors} from 'src/styles';
+import BaseIcon from '../Icon';
 
 export const Root = styled.div`
   padding-top: 20px;
+`;
+
+const getIconColor = props => {
+  if (props.$isInvalid) {
+    return colors.Input.Icon.isInvalidFill;
+  }
+  return colors.Input.Icon.fill;
+};
+
+export const Icon = styled(BaseIcon)`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 35px;
+  ${props => props.$beforeIcon && 'left: 17px;'}
+  ${props => props.$passwordEyeIcon && `
+    right: 17px;
+    cursor: pointer;
+  `}
+  color: ${getIconColor};
 `;
 
 export const Label = styled.div`
@@ -19,12 +40,11 @@ export const Label = styled.div`
     font-size 200ms linear;
   
   > label {
-    cursor: pointer;
     pointer-events: auto;
   }
 `;
 
-const getStyleLabel = ({value, $isInvalid}) => {
+const getStyleLabel = ({value, $isInvalid, $hasBeforeIcon}) => {
   const isNotEmpty = String(value).length > 0;
   if ($isInvalid && isNotEmpty) {
     return `
@@ -34,6 +54,10 @@ const getStyleLabel = ({value, $isInvalid}) => {
         right: 0px;
         color: ${colors.Input.Label.isInvalidColorNotEmpty};
         ${mixins.font({size: '14px', weight: '500'})}
+        
+        > label {
+          cursor: pointer;
+        }
       }
     `;
   }
@@ -41,10 +65,15 @@ const getStyleLabel = ({value, $isInvalid}) => {
     return `
       ~ ${Label} {
         top: 33px;
-        left: 17px;
+        left: ${$hasBeforeIcon ? '53px' : '17px'};
         right: 17px;
         color: ${colors.Input.Label.isInvalidColor};
         ${mixins.font({size: '20px', weight: '500'})}
+        
+        > label {
+          user-select: none;
+          cursor: text;
+        }
       }
     `;
   }
@@ -56,16 +85,25 @@ const getStyleLabel = ({value, $isInvalid}) => {
         right: 0px;
         color: ${colors.Input.Label.colorNotEmpty};
         ${mixins.font({size: '14px', weight: '500'})}
+        
+        > label {
+          cursor: pointer;
+        }
       }
     `;
   }
   return `
     ~ ${Label} {
       top: 33px;
-      left: 17px;
+      left: ${$hasBeforeIcon ? '53px' : '17px'};
       right: 17px;
       color: ${colors.Input.Label.color};
       ${mixins.font({size: '20px', weight: '500'})}
+      
+      > label {
+        user-select: none;
+        cursor: text;
+      }
     }
   `;
 };
@@ -110,6 +148,13 @@ const getStyleInput = ({disabled, $isInvalid}) => {
   `;
 };
 
+const getInputPadding = props => {
+  if (props.$hasBeforeIcon || props.$isRenderPasswordEye) {
+    return `0 ${props.$isRenderPasswordEye ? '52px' : '16px'} 0 ${props.$hasBeforeIcon ? '52px' : '16px'}`;
+  }
+  return '0 16px';
+};
+
 export const Input = styled.input`
   display: block;
   width: 100%;
@@ -117,9 +162,11 @@ export const Input = styled.input`
   height: 50px;
   border-width: 1px;
   border-style: solid;
-  padding: 0 16px;
+  padding: ${getInputPadding};
   border-radius: 6px;
-  transition: border-color 200ms linear, background-color 200ms linear, box-shadow 200ms linear;
+  transition: border-color 200ms linear,
+    background-color 200ms linear,
+    box-shadow 200ms linear;
   ${getStyleInput}
   ${getStyleLabel}
   ${mixins.font({size: '20px', weight: '500'})}

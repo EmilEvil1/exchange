@@ -35,7 +35,7 @@ fsx.writeFileSync(routing.paths.public.index, `
       ${eachFiles(symbolsDir,/\.svg$/,(filepath) => fsx.readFileSync(filepath, 'utf-8').replace('<svg xmlns="http://www.w3.org/2000/svg"', '<symbol').replace('</svg', '</symbol')).join('\n')}
     </svg>
     <div id="root" class="site-wrapper"></div>
-    <script type="text/javascript" src="/static/js/bundle.min.js"></script>
+    <script type="text/javascript" src="/static/js/bundle.min.js?v=${Date.now()}"></script>
   </body>
 </html>
 `.trim());

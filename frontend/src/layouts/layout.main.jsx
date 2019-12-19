@@ -1,9 +1,8 @@
 import React from 'react';
 import {
-  Header,
-  SubHeader,
-  Main,
   Footer,
+  Header,
+  Main,
 } from 'src/components';
 
 class Layout extends React.PureComponent {
@@ -11,7 +10,6 @@ class Layout extends React.PureComponent {
     return (
       <>
         <Header />
-        {/*<SubHeader />*/}
         <Main />
         <Footer />
       </>
