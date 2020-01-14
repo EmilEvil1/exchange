@@ -1,0 +1,5 @@
+// The request body is provided in place
+GET http://localhost:8081/api/currencies
+Content-Type: application/json
+
+###

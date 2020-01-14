@@ -1,8 +1,5 @@
 package com.fairpay.currencies.coin.service;
 
-import com.fairpay.currencies.api.AbstractCurrencyDTO;
-import com.fairpay.currencies.coin.dao.CoinDao;
-import com.fairpay.currencies.coin.model.CoinEntity;
 import com.fairpay.currencies.coin.vo.CoinmarketCurrenciesResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -11,11 +8,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Log4j2

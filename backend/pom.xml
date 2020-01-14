@@ -17,6 +17,10 @@
         <java.version>11</java.version>
     </properties>
 
+    <modules>
+        <module>../payments</module>
+    </modules>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -69,7 +73,7 @@
 <!--        PAYMENTS      -->
         <dependency>
             <groupId>com.qiwi</groupId>
-            <artifactId>bill-payments-java-sdk</artifactId>
+            <artifactId>bill-com.fairpay.payments-java-sdk</artifactId>
             <version>1.4.0</version>
         </dependency>
         <dependency>

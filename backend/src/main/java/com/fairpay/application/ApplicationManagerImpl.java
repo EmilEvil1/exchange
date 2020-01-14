@@ -19,7 +19,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
   private final ApplicationDao applicationDao;
   private final CoinDao coinDao;
   private final ApplicationMailer applicationMailer;
-  private MessageSender messageSender;
+//  private MessageSender messageSender;
 
   public ApplicationManagerImpl(ApplicationDao applicationDao,
                                 CoinDao coinDao,
@@ -29,10 +29,10 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     this.applicationMailer = applicationMailer;
   }
 
-  @Autowired
-  public void setMessageSender(MessageSender messageSender) {
-    this.messageSender = messageSender;
-  }
+//  @Autowired
+//  public void setMessageSender(MessageSender messageSender) {
+//    this.messageSender = messageSender;
+//  }
 
   @Override
   public String saveApplication(ApplicationRequestDTO request) {
@@ -88,7 +88,7 @@ public class ApplicationManagerImpl implements  ApplicationManager{
     ApplicationEntity application = applicationDao.findById(applicationId).orElse(new ApplicationEntity());
     applicationMailer.sendApplicationToModerator(application);
 
-    messageSender.send(application);
+//    messageSender.send(application);
 
     return "success";
   }

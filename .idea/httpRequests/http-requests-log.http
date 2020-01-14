@@ -1,0 +1,14 @@
+GET http://localhost:8081/api/currencies
+Content-Type: application/json
+
+<> 2020-01-14T095359.200.json
+
+###
+
+GET http://localhost:8081/api/currencies
+Content-Type: application/json
+
+<> 2020-01-14T093302.200.json
+
+###
+

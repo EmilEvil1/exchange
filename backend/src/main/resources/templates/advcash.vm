@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body  onLoad="document.getElementById('startrunning').click();">
+<!--Fragment of HTML page with the payment request form-->
+<form id="submitForm" method="POST" action="https://wallet.advcash.com/sci/advcash.vm">
+    <input type="hidden" name="ac_account_email" value='$data.get('account')'> //номер счета магазина
+    <input type="hidden" name="ac_sci_name" value='$data.get('name')'> //Название магазина
+    <input type="hidden" name="ac_amount" value='$data.get('amount')'> //Сумма перевода
+    <input type="hidden" name="ac_currency" value='$data.get('currency')'> //Валюта в которой оплачивается
+    <input type="hidden" name="ac_order_id" value='$data.get('orderId')'> //Уникальный номер операции
+    <input type="hidden" name="ac_sign" value='$data.get('sign')'> //Подтверждение что это действительно продавец
+    <button id="startrunning" type="submit">empty</button>
+</form> <!--Fragment of HTML page with the payment request form-->
+</body>
+</html>

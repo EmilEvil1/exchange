@@ -20,7 +20,7 @@ import org.telegram.telegrambots.ApiContextInitializer;
 public class FairpayApplication {
 
   public static void main(String[] args) {
-    ApiContextInitializer.init();
+//    ApiContextInitializer.init();
     SpringApplication.run(FairpayApplication.class, args);
   }
 
