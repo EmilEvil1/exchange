@@ -3,7 +3,7 @@ package com.fairpay.application;
 import com.fairpay.application.api.ApplicationPayRequestDTO;
 import com.fairpay.application.api.ApplicationRequestDTO;
 import com.fairpay.application.api.ApplicationResponseDTO;
-import com.fairpay.payment.PaymentManager;
+import com.fairpay.paymentSystems.PaymentManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
