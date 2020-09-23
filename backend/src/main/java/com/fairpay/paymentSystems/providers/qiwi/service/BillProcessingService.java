@@ -1,5 +1,6 @@
 package com.fairpay.paymentSystems.providers.qiwi.service;
 
+import com.fairpay.common.FairpayLogicException;
 import com.fairpay.paymentSystems.providers.configs.ApplicationConfigs;
 import com.fairpay.paymentSystems.providers.error.QiwiUpdateStatusException;
 import com.fairpay.paymentSystems.providers.qiwi.controllers.QiwiResponse;
@@ -37,17 +38,18 @@ public class BillProcessingService implements IBillProcessingService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> createPayUrl(BillQiwiDTO paymentRequest) throws URISyntaxException {
-        if(log.isDebugEnabled()) {
-            log.debug("creating pay", paymentRequest);
-        }
+    public String createPayUrl(BillQiwiDTO paymentRequest) {
+        log.debug("creating url for qiwi", paymentRequest);
         BillResponse response;
         CreateBillInfo createBillInfo;
         createBillInfo = utils.buildBillInfo(paymentRequest);
-        response = client.createBill(createBillInfo);
-        paymentRequest.setPayUrl(response.getPayUrl());
-        IBillService.createBillByBillResponse(response, paymentRequest);
-        return ResponseEntity.ok(paymentRequest);
+        try {
+            response = client.createBill(createBillInfo);
+        } catch (URISyntaxException e) {
+            log.error("Error in creating billing url for", e);
+            throw new FairpayLogicException("Error in creating billing url for");
+        }
+        return response.getPayUrl();
     }
 
     @Override

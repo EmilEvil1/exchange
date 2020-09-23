@@ -112,6 +112,17 @@ INSERT INTO wallets (payment_document, ticker) VALUES("4111 1111 1111 1111", "SB
 INSERT INTO wallets (payment_document, ticker) VALUES("4111 1111 1111 1111", "YANDEX");
 INSERT INTO wallets (payment_document, ticker) VALUES("4111 1111 1111 1111", "TINKOFF");
 
+create table if not exists payment_systems
+(
+	code varchar(40) not null
+		constraint payment_systems_pk
+			primary key,
+	name varchar(100),
+	type varchar(10)
+);
+
+
+
 
 
 

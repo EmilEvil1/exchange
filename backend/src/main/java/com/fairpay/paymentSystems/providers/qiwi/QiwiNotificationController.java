@@ -1,7 +1,8 @@
-package com.fairpay.paymentSystems.providers.qiwi.controllers;
+package com.fairpay.paymentSystems.providers.qiwi;
 
 import com.fairpay.paymentSystems.providers.listeners.OnBillCompleteEvent;
 import com.fairpay.paymentSystems.providers.misc.ResponseQiwi;
+import com.fairpay.paymentSystems.providers.qiwi.controllers.QiwiResponse;
 import com.fairpay.paymentSystems.providers.qiwi.model.BillQiwi;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -22,13 +23,12 @@ public class QiwiNotificationController {
 
     private final com.fairpay.paymentSystems.providers.qiwi.service.interf.IBillProcessingService IBillProcessingService;
     private final ApplicationEventPublisher eventPublisher;
+    private final
 
 
     @PostMapping("/qiwi/notification")
     public ResponseEntity<?> getNotificationByBillStatus(@RequestBody QiwiResponse qiwiResponse, HttpServletRequest request) {
-        if(log.isDebugEnabled()) {
-            log.debug("received payment confirmation", qiwiResponse);
-        }
+        log.debug("received payment confirmation", qiwiResponse);
         try {
             BillQiwi billQiwi = IBillProcessingService.updateBillStatus(qiwiResponse, request);
             eventPublisher.publishEvent(new OnBillCompleteEvent(billQiwi));

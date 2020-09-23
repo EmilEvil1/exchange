@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.URISyntaxException;
 
 public interface IBillProcessingService {
-    ResponseEntity<?> createPayUrl(BillQiwiDTO paymentRequest) throws URISyntaxException;
+    String createPayUrl(BillQiwiDTO paymentRequest);
 
     BillQiwi updateBillStatus(QiwiResponse response, HttpServletRequest httpServletResponse) throws NotFoundException;
 }

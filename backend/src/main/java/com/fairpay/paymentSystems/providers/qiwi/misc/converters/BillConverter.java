@@ -21,9 +21,6 @@ public class BillConverter {
         billQiwi.setAmount(response.getAmount().getValue());
         billQiwi.setStatus(response.getStatus().getValue().getValue());
         billQiwi.setSiteId(response.getSiteId());
-        billQiwi.setCryptoAmount(paymentRequest.getCryptoAmount());
-        billQiwi.setCryptoCurrency(paymentRequest.getCryptoCurrency());
-        billQiwi.setWallet(paymentRequest.getWallet());
         return billQiwi;
     }
 }

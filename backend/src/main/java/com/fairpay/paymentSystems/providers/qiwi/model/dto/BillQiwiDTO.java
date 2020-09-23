@@ -14,10 +14,7 @@ public class BillQiwiDTO {
     private String account = UUID.randomUUID().toString(); //Идентификатор пользователя в системе мерчанта
     private String comment = ""; //Комментарий к счету
     private BigDecimal amount; //Сумма счета, округленная до 2 знаков после запятой в меньшую сторону
-    private BigDecimal cryptoAmount; //Количество запрашиваемой криптовалюты валюты
-    private String cryptoCurrency; //название криптовалюты
-    private String currency; //Валюта счета (Alpha-3 ISO 4217 код)
-    private String wallet; //криптокошелек куда производить перевод.
+    private String currency = "RUB"; //Валюта счета (Alpha-3 ISO 4217 код)
     @JsonView(Views.Response.payUrl.class)
     private String payUrl; //Ссылка на созданную платежную форму
 }

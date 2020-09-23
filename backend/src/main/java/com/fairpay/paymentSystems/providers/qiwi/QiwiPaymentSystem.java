@@ -7,10 +7,13 @@ import com.fairpay.paymentSystems.providers.PaymentWithdrawMessage;
 import com.fairpay.paymentSystems.providers.qiwi.model.dto.BillQiwiDTO;
 import com.fairpay.paymentSystems.providers.qiwi.service.interf.IBillProcessingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 /**
  * @author dsorokin on 28.07.2020
  */
+@Service
 public class QiwiPaymentSystem extends AbstractPaymentSystem implements IndirectPaymentSystem {
 
 	private final IBillProcessingService billProcessingService;
@@ -28,7 +31,14 @@ public class QiwiPaymentSystem extends AbstractPaymentSystem implements Indirect
 	@Override
 	public String generatePaymentLink(PaymentWithdrawMessage paymentInfo) {
 		BillQiwiDTO qiwiDTO = new BillQiwiDTO();
-//		qiwiDTO.s
-		return billProcessingService.
+		qiwiDTO.setAmount(paymentInfo.getAmountWithdraw());
+		qiwiDTO.setEmail(paymentInfo.getEmail());
+		qiwiDTO.setPhone(paymentInfo.getPhone());
+		return billProcessingService.createPayUrl(qiwiDTO);
+	}
+
+	@Override
+	public Boolean supports(String code) {
+		return "QIWI".equals(code);
 	}
 }
